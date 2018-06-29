@@ -17,6 +17,12 @@ public class MessageService {
 	@Autowired SqlSession sqlSession;
 	
 	MessageInter inter  = null;
+
+	public void main() {
+		
+		logger.info("MessageService 접속");
+		
+	}
 	
 	
 }

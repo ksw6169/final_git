@@ -18,6 +18,11 @@ public class BoardService {
 	BoardInter inter  = null;
 	
 	String photo = null;
+
+	public void main() {
+		logger.info("BoardService 접속");
+		
+	}
 	
 	
 }

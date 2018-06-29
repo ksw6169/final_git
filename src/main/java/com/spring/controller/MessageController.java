@@ -24,6 +24,9 @@ public class MessageController {
 	@RequestMapping(value = "/m", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		
+		logger.info("Message 컨트롤러 접속");
+		
+		service.main();
 		return "home";
 	}
 	

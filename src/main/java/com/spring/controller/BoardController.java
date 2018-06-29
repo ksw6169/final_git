@@ -20,7 +20,10 @@ public class BoardController {
 	//main페이지 접속
 	@RequestMapping(value = "/b", method = RequestMethod.GET)
 	public String home() {
-
+		logger.info("Board 컨트롤러 접속");
+		logger.info("test");
+		
+		service.main();
 		
 		return "home";
 	}
