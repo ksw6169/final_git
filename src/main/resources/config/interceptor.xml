@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+
+		
+	<!-- 인터셉터 그룹 -->
+	<mvc:interceptors>
+		<!-- 단일 인터셉터 -->
+		<mvc:interceptor>
+			<!-- 인터셉터 할 요청 : /list 로 왔을 경우-->
+			<mvc:mapping path="/"/>
+			
+			<!-- 인터셉터 한 내용에 대한 클래스 매핑 -->
+			<bean class="com.spring.service.LoginCheck"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+</beans>

@@ -22,6 +22,26 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.spring.controller" />
+	<context:component-scan base-package="com.spring.service" />
+	
+	<!-- mybatis 설정 -->
+	<beans:import resource="classpath:config/mybatis.xml"/>
+	
+	<!-- 트랜잭션 설정 -->
+	<beans:import resource="classpath:config/transactional.xml"/>
+	
+	<!-- 파일 첨부 설정 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- Encoding 설정 -->
+		<beans:property name="defaultEncoding" value="UTF-8"/>
+		<!-- upload Maximum 업로드 제한 바이드 단위-->
+		<beans:property name="maxUploadSize" value="10000000"/>
+		<!-- in memory Maximum 버퍼사이즈 -->
+		<beans:property name="maxInMemorySize" value="10000000"/>
+	</beans:bean>
+	
+	<!-- 인터셉터설정 -->
+	<beans:import resource="classpath:config/interceptor.xml"/>
 	
 	
 	

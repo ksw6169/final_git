@@ -11,8 +11,20 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.spring.controller">
+	<logger name="com.spring">
 		<level value="info" />
+	</logger>
+	
+	<!-- SQL LOGGER additivity를 설정하지않으면 콘솔에 두번 찍힌다-->
+	<logger name="jdbc.sqltiming" additivity="false">
+		<level value="info" />
+		<appender-ref ref="console"/>
+	</logger>
+	
+	<!-- jdbc-connection -->
+	<logger name="jdbc.connection" additivity="false">
+		<level value="info" />
+		<appender-ref ref="console"/>
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
