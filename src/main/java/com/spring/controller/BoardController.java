@@ -22,6 +22,7 @@ public class BoardController {
 	public String home() {
 		logger.info("Board 컨트롤러 접속");
 		logger.info("test");
+		logger.info("test랍니다");
 		
 		service.main();
 		
