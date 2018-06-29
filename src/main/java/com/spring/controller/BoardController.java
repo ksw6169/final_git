@@ -21,6 +21,7 @@ public class BoardController {
 	@RequestMapping(value = "/b", method = RequestMethod.GET)
 	public String home() {
 		logger.info("Board 컨트롤러 접속");
+		logger.info("test");
 		
 		service.main();
 		
