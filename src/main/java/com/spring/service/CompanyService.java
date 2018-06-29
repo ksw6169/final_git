@@ -16,6 +16,11 @@ public class CompanyService {
 	@Autowired SqlSession sqlSession;
 	
 	CompanyInter inter  = null;
+
+	public void main() {
+		logger.info("CompanyService 접속");
+		
+	}
 	
 	
 }

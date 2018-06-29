@@ -17,6 +17,12 @@ public class MemberService {
 	MemberInter inter  = null;
 	
 	String photo = null;
+
+	public void main() {
+		
+		logger.info("MemberService 접속");
+		
+	}
 	
 	
 }

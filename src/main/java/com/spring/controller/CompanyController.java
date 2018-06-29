@@ -23,6 +23,9 @@ public class CompanyController {
 	//main페이지 접속
 	@RequestMapping(value = "/c", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
+		logger.info("Company 컨트롤러 접속");
+		
+		service.main();
 		
 		return "home";
 	}
