@@ -27,7 +27,21 @@ public class MemberController {
 		
 		service.main();
 		
-		return "home";
+		return "main";
+	}
+	
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	public String menuber(Locale locale, Model model) {
+		logger.info("menubar test");
+		
+		return "main";
+	}
+	
+	@RequestMapping(value = "/loginForm", method = RequestMethod.GET)
+	public String loginForm(Locale locale, Model model) {
+		logger.info("loginForm test");
+		
+		return "login";
 	}
 	
 }

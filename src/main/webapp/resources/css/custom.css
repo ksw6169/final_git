@@ -1,0 +1,37 @@
+@font-face{
+  font-family:'NanumGothic';
+  src:url("../fonts/NanumGothic.eot");
+  src:local("☺"),url("../fonts/NanumGothic.woff") format("woff");
+}
+
+@font-face{
+  font-family:'bareun';
+  src:url("../fonts/bareun.woff");
+  src:local("☺"),url("../fonts/bareun.woff") format("woff");
+}
+
+@font-face{
+  font-family:'fallB';
+  src:url("../fonts/fallB.woff");
+  src:local("☺"),url("../fonts/fallB.woff") format("woff");
+}
+
+@font-face{
+  font-family:'fallM';
+  src:url("../fonts/fallM.woff");
+  src:local("☺"),url("../fonts/fallM.woff") format("woff");
+}
+
+@font-face{
+  font-family:'NanumB';
+  src:url("../fonts/NanumSquareB.woff");
+  src:local("☺"),url("../fonts/NanumSquareB.woff") format("woff");
+}
+
+@font-face{
+  font-family:'NanumL';
+  src:url("../fonts/NanumSquareL.woff");
+  src:local("☺"),url("../fonts/NanumSquareL.woff") format("woff");
+}
+
+body { font-family: "Helvetica Neue", Helvetica, Arial,"NanumGothic",  sans-serif; }
