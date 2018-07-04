@@ -67,6 +67,7 @@
 				background: #121F27;
 				text-align: center;
 				height: 450px;
+				margin-top: 20px;
 			}
 
 			.comment {

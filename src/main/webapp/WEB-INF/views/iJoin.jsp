@@ -93,7 +93,7 @@
 	    <jsp:include page="menubar.jsp" flush="false"/>
 
 		<div class="col-md-4 col-md-offset-4">
-	        <form>
+	        <form action="" method="">
 	            <div class="login_group">    
 	                <h1 class="content">[인턴(비직장인 회원) 회원가입]</h1>
 	                <!-- 아이디 입력 -->
