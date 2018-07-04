@@ -10,13 +10,14 @@
 		
       
 		<style>
-        button { width: 120px; height: 40px; background-color: #FF8000; border: none; vertical-align: middle; color:#fff; font-family: "fallB"; text-align: center; display: inline-block; font-size: 12px; }    
+        .btn { width: 120px; height: 40px; background-color: #FF8000; border: none; vertical-align: middle; color:#fff; font-family: "fallB"; text-align: center; display: inline-block; font-size: 12px; }    
         button:hover { color: #121F27; }
         /* board_detail css */
         .content { font-family: "bareun"; text-align: center; margin-bottom: 50px; }
         th { font-family: "fallM"; text-align: center; background: #121F27; color: white; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; }
         td { font-family: "NanumM"; text-align: center; background: #121F27; color: white; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; }
-        select {
+        .table>tbody>tr>th { text-align: center; }
+        .category {
          width: 100%; /* 원하는 너비설정 */ 
          padding-left: 46.5%;
 		 height: 50px;
@@ -59,7 +60,7 @@
                 <table class="table">
                      <tr>
                        
-						   <select name="category">
+						   <select class="category" style="margin-bottom: 0px;">
 						      <option value="">카테고리</option>
 							  <option value="잡담">&nbsp;&nbsp;잡담</option>
 							  <option value="이직" selected="selected">&nbsp;&nbsp;이직</option>
@@ -69,7 +70,7 @@
                      </tr>
                      <tr>
                        <th>제목</th>
-                       <td class="subject"><textarea class="form-control subject" rows="1">입사한지 3개월.. 이직해도 될까요?</textarea></td>
+                       <td class="subject"><textarea class="form-control subject" rows="1" style="padding-bottom: 11px;">입사한지 3개월.. 이직해도 될까요?</textarea></td>
                      </tr>
                      <tr>
                        <th colspan="2">내용</th>
