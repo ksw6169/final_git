@@ -264,6 +264,10 @@ public class MemberController {
 		return "sendMlist";
 	}
 	
-	
+	@RequestMapping(value = "/checkPW", method = RequestMethod.GET)
+	public String checkPW(Locale locale, Model model) {
+		
+		return "checkPW";
+	}
 	
 }
