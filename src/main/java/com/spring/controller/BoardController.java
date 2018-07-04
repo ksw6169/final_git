@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.spring.service.BoardService;
 
 
+
 @Controller
 public class BoardController {
 	
@@ -26,7 +27,7 @@ public class BoardController {
 		
 		service.main();
 		
-		return "home";
+		return "main";
 	}
 	
 }

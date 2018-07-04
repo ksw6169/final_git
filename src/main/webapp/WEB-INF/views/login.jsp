@@ -7,16 +7,6 @@
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
    	 	<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	    <script src="./resources/js/bootstrap.min.js"></script>
-	    
-   	 	<title>bootstrap</title>
-
-    	<!-- Bootstrap -->
-    	<link href="./resources/css/bootstrap.min.css" rel="stylesheet">
-    	<link href="./resources/css/kfonts2.css" rel="stylesheet">
-    	<link href="./resources/css/custom.css" rel="stylesheet">
-      
     <style>
         body { padding-top: 70px; }
         
@@ -85,6 +75,8 @@
     </style>
 	</head>
 	<body>
+		<jsp:include page="menubar.jsp"/>
+	
 		<div class="col-md-4 col-md-offset-4">
 	        <form>
 	            <div class="login_group">    

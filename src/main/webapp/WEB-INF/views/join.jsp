@@ -4,6 +4,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 		
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	    <script src="./resources/js/bootstrap.min.js"></script>
@@ -15,6 +16,10 @@
     	<link href="./resources/css/kfonts2.css" rel="stylesheet">
     	<link href="./resources/css/custom.css" rel="stylesheet">
     	
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+
 		<style>
 			 body { padding-top: 70px; text-align: center;}
 			 .container {
@@ -26,7 +31,7 @@
             	margin-bottom: 50px;}
         	/* 버튼 */
         	.join_btn{width:500px; height: 100px; margin: 5px; background-color: #FF8000; color: white; font-family: "bareun"; border: 0; font-size: 25px;}
-        	
+
 		</style>
 	</head>
 	<body>

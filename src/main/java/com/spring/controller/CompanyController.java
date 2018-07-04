@@ -27,7 +27,7 @@ public class CompanyController {
 		
 		service.main();
 		
-		return "home";
+		return "main";
 	}
 	
 }
