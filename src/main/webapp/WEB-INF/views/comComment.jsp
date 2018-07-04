@@ -12,9 +12,8 @@
         button:hover { color: #121F27; }
         /* board_detail css */
         .content { font-family: "bareun"; text-align: center; margin-bottom: 50px; }
-        th { font-family: "fallM"; text-align: center; background: #121F27; color: white; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; }
         td { font-family: "NanumM"; text-align: center; background: #121F27; color: white; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; }
-        .button-group { margin-top: 15px;}
+        .table>thead>tr>th { font-family: "fallM"; text-align: center; vertical-align: middle;  background: #121F27; color: white; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; }
 
         .like { background-color: #FF8000; margin: 15px 0 0 15px; }
 
@@ -34,10 +33,15 @@
 		.button_group {
 			width: 100px;
 			height: 37.5px;
-			background-color: white;
-			color: #121F27;
-			border: 0.25px solid #DDDDDD;
+			background-color: #121F27;
+			color: white;
+			font-family: "bareun";
+			border: 1px solid #E4EEF0;
 		}
+        
+        .star_grade {
+        	height: 15px;
+        }
         
         .td_star { color: #121F27; background-color: #FFFFFF; width: 100px; height: 75px; line-height: 75px; text-align: center; vertical-align: middle; }
     </style>
@@ -49,6 +53,7 @@
         <div class="detail_div">
             <div class="table_div">
                 <table class="table">
+                	<thead>
                      <tr>
                        <th class="reply" colspan="7">코멘트 121</th>
                      </tr>
@@ -61,13 +66,14 @@
                        <th>연차사용압력</th>
 					   <th>수정/삭제</th>
                      </tr>
+                     </thead>
                      <tr>
 					   <td class="reply_date">2018-06-26 15:20</td>
                        <td class="reply_contents">너무 걱정하지 마세요~ ^0^</td>
-                       <td class="td_star">dd</td>
-                       <td class="td_star">dd</td>
-                       <td class="td_star">dd</td>
-                       <td class="td_star">dd</td>  
+                       <td class="td_star"><img class="star_grade" src="./resources/image/star_1.png"/></td>
+                       <td class="td_star"><img class="star_grade" src="./resources/image/star_2.png"/></td>
+                       <td class="td_star"><img class="star_grade" src="./resources/image/star_3.png"/></td>
+                       <td class="td_star"><img class="star_grade" src="./resources/image/star_4.png"/></td>  
 					   <td class="reply_updel">
 						<button class="button_group pull-right">수정</button>
 						<br>

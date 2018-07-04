@@ -11,9 +11,11 @@
         body { padding-top: 100px; }
         .content { font-family: "bareun"; text-align: center; margin-bottom: 50px; }
         th { font-family: "NanumM"; text-align: center; background: #121F27; color: white; border: 1px solid white; height: 25px; line-height: 25px; }
+       .table>thead>tr>th { text-align: center; vertical-align: middle; }
         td { font-family: "NanumM"; text-align: center; background: #E4EEF0; border: 1px solid white; height: 25px; line-height: 25px; }
         .paging_button { text-align: center;}
         .page-link { font-family: "bareun"; }
+        th>input[type='checkbox'] { position:relative; top:-4px; }
     </style>
 	</head>
 	<body>
@@ -22,14 +24,14 @@
 	    <div class="container">
 	        <h1 class="content">받은 쪽지함</h1>
 	        <table class="table table-hover">
-	            <thead>
+	        	<thead>
 	             <tr>
 	               <th><input type="checkbox"/></th>
 	               <th>번 호</th>
 	               <th>내 용</th>
 	               <th>작성일자</th>
 	             </tr>
-	             </thead>
+	            </thead>
 	             <tr>
 	               <td><input type="checkbox"/></td>
 	               <td>1</td>

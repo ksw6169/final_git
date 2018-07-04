@@ -11,6 +11,7 @@
         body { padding-top: 100px; }
         .content { font-family: "bareun"; text-align: center; margin-bottom: 50px; }
         th { font-family: "NanumM"; text-align: center; background: #121F27; color: white; border: 1px solid white; height: 25px; line-height: 25px; }
+        .table>thead>tr>th { text-align: center; }
         td { font-family: "NanumM"; text-align: center; background: #E4EEF0; border: 1px solid white; height: 25px; line-height: 25px; }
         .paging_button { text-align: center;}
         .page-link { font-family: "bareun"; }

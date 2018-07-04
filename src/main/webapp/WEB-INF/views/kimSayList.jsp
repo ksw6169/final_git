@@ -95,7 +95,7 @@
 		}
 		
 		
-		select {
+		.custom_select {
 			width: 100px; /* 원하는 너비설정 */ 
 			height: 50px;
 			font-family: inherit; /* 폰트 상속 */ 
@@ -130,7 +130,7 @@
 	<div class="container">
 		<div class="center-block search_div">
 			
-			<select> 
+			<select class="custom_select"> 
 				<option value="전체" selected>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;전체</option> 
 				<option value="잡담">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;잡담</option> 
 				<option value="이직">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이직</option> 

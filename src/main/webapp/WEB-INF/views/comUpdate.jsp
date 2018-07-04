@@ -13,7 +13,7 @@
             .star-input>.input>input:focus+label,
             .star-input>.input>input:checked+label{ display: inline-block;vertical-align:middle;background:url('./resources/image/grade_img.png')no-repeat;}
 			
-			.star-input{display:inline-block; white-space:nowrap;width:200px;height:40px;padding:25px; margin-top: -23px; line-height:30px;}
+			.star-input{display:inline-block; white-space:nowrap;width:200px;height:40px;padding:25px; margin-top: -15px; line-height:30px;}
 			
 			.star-input>.input{display:inline-block;width:150px;background-size:150px;height:28px;white-space:nowrap;overflow:hidden;position: relative;}
 			
@@ -98,7 +98,7 @@
 				height: 150px;
 			}
 
-			button {
+			button.pull-right {
 			  width: 75px;
 			  height: 30px;
 			  line-height: 30px;

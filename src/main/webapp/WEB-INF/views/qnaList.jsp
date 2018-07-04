@@ -59,12 +59,14 @@
 			white-space: pre-line;
 		}
 		
+		
 		.search_div {
 			margin-top: 50px;
 			margin-bottom: 150px;
-			text-align: center;
-			width: 530px;
+			width: 430px;
+		
 		}
+		
 		
 		input[type='text'] {
             font-size:13px;
@@ -88,6 +90,7 @@
 		  float: left;
 		  margin: 5px 0 5px 0;
           border: 0px;
+          text-align: center;
         }
 		
 		.page-link {

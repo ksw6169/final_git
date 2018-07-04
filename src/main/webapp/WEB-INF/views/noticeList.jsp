@@ -12,6 +12,7 @@
         body { padding-top: 100px; }
         th { font-family: "NanumM"; text-align: center; background: #121F27; color: white; border: 1px solid white; height: 25px; line-height: 25px; }
         td { font-family: "NanumM"; text-align: center; background: #E4EEF0; border: 1px solid white; height: 25px; line-height: 25px; }
+        .table>thead>tr>th { text-align: center; vertical-align: middle; }
         .paging_button { text-align: center;}
         .page-link { font-family: "bareun"; }
         
@@ -19,8 +20,6 @@
             text-align: center;
             margin-bottom: 50px;
         }
-        
-        
         
         input[type='text'] {
             font-size:13px;
@@ -33,6 +32,7 @@
         
         .search_group {
             text-align: center;
+            margin-top: 50px;
             margin-bottom: 50px;
         }
         
@@ -49,9 +49,10 @@
           font-size: 13px;
           cursor: pointer;
           margin-left: -4px;
+          text-align: center;
         }
         
-        button {
+        button.pull-right {
           width: 75px;
           height: 30px;
           vertical-align: top;
@@ -63,6 +64,11 @@
           font-size: 13px;
           cursor: pointer;
         }
+        
+        .clear {
+        	height: 7px;
+        }
+        
     </style>
   </head>
 	<body>
@@ -72,6 +78,7 @@
 	        <div class="search_group">
 	            <input type="text" placeholder="제목+내용을 입력해주세요."/>
 	            <span class="input-group-addon">
+	            	<div class="clear"></div>
 	                <span class="glyphicon glyphicon-search"></span>
 	            </span>
 	        </div>

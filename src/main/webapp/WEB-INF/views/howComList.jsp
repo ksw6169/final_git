@@ -63,7 +63,7 @@
 			margin-top: 50px;
 			margin-bottom: 150px;
 			text-align: center;
-			width: 530px;
+			width: 450px;
 		}
 		
 		input[type='text'] {

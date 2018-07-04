@@ -29,7 +29,7 @@
 			background: #E4EEF0;
 			border: 1px solid black;
 			text-align: left;
-            padding-left: 20px;
+            padding-left: 30px;
             float: left;
 			display: inline-block;
 		}
@@ -72,6 +72,12 @@
 			float: left;
 			font-size: 14px;
 		}
+		
+		.star_grade {
+			height: 15px;
+			line-height: 15px;
+			vertical-align: middle;
+		}
     </style>
   </head>
 <body>
@@ -94,19 +100,19 @@
 			</div>
 			<div class="row">
 				<div class="row_header">주당 야근 횟수</div>
-				<div class="row_body">sdf</div>
+				<div class="row_body"><img class="star_grade" src="./resources/image/star_1.png"/></div>
 			</div>
 			<div class="row">
 				<div class="row_header">휴식시간</div>
-				<div class="row_body">sdf</div>
+				<div class="row_body"><img class="star_grade" src="./resources/image/star_2.png"/></div>
 			</div>
 			<div class="row">
 				<div class="row_header">인턴 채용</div>
-				<div class="row_body">sdf</div>
+				<div class="row_body"><img class="star_grade" src="./resources/image/star_3.png"/></div>
 			</div>
 			<div class="row">
 				<div class="row_header">연차사용압력</div>
-				<div class="row_body">sdf</div>
+				<div class="row_body"><img class="star_grade" src="./resources/image/star_4.png"/></div>
 			</div>
 		</div>
 	</div>
