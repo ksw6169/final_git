@@ -8,18 +8,19 @@
    	 	<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		<style>
-        button { width: 120px; height: 40px; background-color: #FF8000; border: none; vertical-align: middle; color:#fff; font-family: "fallB"; text-align: center; display: inline-block; font-size: 12px; }    
+        .btn { width: 120px; height: 40px; background-color: #FF8000; border: none; vertical-align: middle; color:#fff; font-family: "fallB"; text-align: center; display: inline-block; font-size: 12px; }    
         button:hover { color: #121F27; }
         /* board_detail css */
         .content { font-family: "bareun"; text-align: center; margin-bottom: 50px; }
         th { font-family: "fallM"; text-align: center; background: #121F27; color: white; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; }
         td { font-family: "NanumM"; text-align: center; background: #121F27; color: white; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; }
+        .table>tbody>tr>th { text-align: center; }
         .button-group { margin-top: 15px;}
 
         .like { background-color: #FF8000; margin: 15px 0 0 15px; }
 
         .reply { background-color: #121F27; color: white; }
-        .subject, .date { color: #121F27; background-color: #FFFFFF; }
+        .subject, .date { text-align: left; color: #121F27; background-color: #FFFFFF; }
         .contents { color: #121F27; background-color: #FFFFFF; height: 200px; line-height: 100px; text-align: left; } 
 
         .reply_contents { color: #121F27; background-color: #FFFFFF; height: 75px; line-height: 75px; text-align: left; }
@@ -89,9 +90,9 @@
                        <td class="reply_contents" colspan="2">너무 걱정하지 마세요~ ^0^</td>
 					   <td class="reply_date">2018-06-26 15:20</td>
 					   <td class="reply_updel">
-						<button class="button_group pull-right">수정</button>
+						<button class="btn btn-default pull-right" style="border-top-width: 0px;">수정</button>
 						<br>
-                		<button class="button_group pull-right">삭제</button>
+                		<button class="btn btn-default pull-right">삭제</button>
 					   </td>
                      </tr>
                 </table>

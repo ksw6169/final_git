@@ -246,6 +246,12 @@ public class MemberController {
 		return "reqDetail";
 	}
 	
+	@RequestMapping(value = "/reqEmail", method = RequestMethod.GET)
+	public String reqEmail(Locale locale, Model model) {
+		
+		return "reqEmail";
+	}
+	
 	@RequestMapping(value = "/reqList", method = RequestMethod.GET)
 	public String reqList(Locale locale, Model model) {
 		

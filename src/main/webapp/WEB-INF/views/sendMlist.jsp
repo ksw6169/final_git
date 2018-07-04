@@ -11,7 +11,8 @@
     <style>
         body { padding-top: 100px; }
         .content { font-family: "bareun"; text-align: center; margin-bottom: 50px; }
-        th { font-family: "NanumM"; text-align: center; background: #121F27; color: white; border: 1px solid white; height: 25px; line-height: 25px; }
+        th { font-family: "NanumM"; background: #121F27; color: white; border: 1px solid white; height: 25px; line-height: 25px; }
+        th.center{text-align: center;}
         td { font-family: "NanumM"; text-align: center; background: #E4EEF0; border: 1px solid white; height: 25px; line-height: 25px; }
         .paging_button { text-align: center;}
         .page-link { font-family: "bareun"; }
@@ -25,10 +26,10 @@
 	        <table class="table table-hover">
 	            <thead>
 	             <tr>
-	               <th><input type="checkbox"/></th>
-	               <th>번 호</th>
-	               <th>내 용</th>
-	               <th>작성일자</th>
+	               <th class="center"><input type="checkbox"/></th>
+	               <th class="center">번 호</th>
+	               <th class="center">내 용</th>
+	               <th class="center">작성일자</th>
 	             </tr>
 	             </thead>
 	             <tr>
