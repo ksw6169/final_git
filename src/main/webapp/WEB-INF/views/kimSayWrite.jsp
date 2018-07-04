@@ -19,6 +19,7 @@
 		 color: white;
 		 font-family: "fallM"; /* 폰트 상속 */ 
          font-weight: bold;
+		 font-size: medium;
 		 border: 1px solid #999; 
          border-radius: 0px; /* iOS 둥근모서리 제거 */ 
          appearance: none;
