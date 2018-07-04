@@ -27,7 +27,7 @@ public class MessageController {
 		logger.info("Message 컨트롤러 접속");
 		
 		service.main();
-		return "home";
+		return "main";
 	}
 	
 }

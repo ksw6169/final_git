@@ -16,7 +16,7 @@
     	<link href="./resources/css/bootstrap.min.css" rel="stylesheet">
     	<link href="./resources/css/kfonts2.css" rel="stylesheet">
     	<link href="./resources/css/custom.css" rel="stylesheet">
-      
+		
 		<style>
 			 /* Custom navigation bar */
 	        body { padding-top: 70px; }
