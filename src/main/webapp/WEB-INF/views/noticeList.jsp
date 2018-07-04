@@ -10,7 +10,8 @@
       
     <style>
         body { padding-top: 100px; }
-        th { font-family: "NanumM"; text-align: center; background: #121F27; color: white; border: 1px solid white; height: 25px; line-height: 25px; }
+        th { font-family: "NanumM"; background: #121F27; color: white; border: 1px solid white; height: 25px; line-height: 25px; }
+        th.center{text-align: center;}
         td { font-family: "NanumM"; text-align: center; background: #E4EEF0; border: 1px solid white; height: 25px; line-height: 25px; }
         .table>thead>tr>th { text-align: center; vertical-align: middle; }
         .paging_button { text-align: center;}
@@ -34,6 +35,7 @@
             text-align: center;
             margin-top: 50px;
             margin-bottom: 50px;
+            margin-top : 30px;
         }
         
         span.input-group-addon {
@@ -69,6 +71,10 @@
         	height: 7px;
         }
         
+        .pull-right{
+        color : white;
+        }
+
     </style>
   </head>
 	<body>
@@ -85,19 +91,19 @@
 	        <table class="table table-hover">
 	            <thead>
 	             <tr>
-	               <th>번 호</th>
-	               <th>제 목</th>
-	               <th>작성일자</th>
-	               <th>조회수</th>
+	               <th class="center">번 호</th>
+	               <th class="center">제 목</th>
+	               <th class="center">작성일자</th>
+	               <th class="center">조회수</th>
 	             </tr>
 	             </thead>
-	             <tr>
+	             <tr class="center">
 	               <td>1</td>
 	               <td><a href="#">내용내용내용내용내용내용내용내용내용내용내용내용내용내용</a></td>
 	               <td>2018-09-10 10:50</td>
 	               <td>1</td>
 	             </tr>
-	             <tr>
+	             <tr class="center">
 	               <td>2</td>
 	               <td><a href="#">내용내용내용내용내용내용내용내용내용내용내용내용내용내용</a></td>
 	               <td>2018-09-10 10:50</td>

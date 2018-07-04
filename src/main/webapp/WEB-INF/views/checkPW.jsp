@@ -18,19 +18,7 @@
         .content {
             font-family: "bareun";
             text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        .btn-lg.btn-default {
-            font-family: "bareun";
-            color: white;
-            background: #121F27;
-            border: 0px;
-            height: 100px;
-        }
-        
-        .clear {
-            clear: both;
+            margin-bottom: 20px;
         }
         
         input[type='text'], input[type='password'] {
@@ -40,19 +28,17 @@
             height: 50px;
             line-height: 40px;
             outline:none;
-            margin: 5px 0;
+            margin: 50px 0 0 0;
             display: inline;
             float: right;
             padding-left: 20px;
             font-family: "bareun";
         
         }
-        .comment{
-        	font-family: "bareun";
-        	margin-left: 115px;
-            font-size: 11px;
+        input[type='text']{
+        	background-color: gray;
+        	color: white;
         }
-        
         .joinForm {
           font-family: "bareun";
           color: #fff;
@@ -60,18 +46,20 @@
           width: 100px;
           height: 50px;
           font-size: 14px;
-          margin: 5px 0;
+          margin: 50px 0 0 0;
           float:left;
           border: 0px;
           text-align: center;
           padding-top: 15px;
+          
+
         }
         
-        .login_group {
+        .chk_group {
             width: 550px;
         }
         
-        .join_btn {
+        .ckh_btn{
             width: 300px;
             height: 50px;
             font-size: 16px;
@@ -86,7 +74,7 @@
         	font-family: "bareun";
         	margin-left: 115px;
         }
-
+		
 		</style>
 	</head>
 	<body>
@@ -94,40 +82,25 @@
 
 		<div class="col-md-4 col-md-offset-4">
 	        <form action="" method="">
-	            <div class="login_group">    
-	                <h1 class="content">[인턴(비직장인 회원) 회원가입]</h1>
+	            <div class="chk_group">    
+	                <h1 class="content">비밀번호 확인</h1>
 	                <!-- 아이디 입력 -->
 	                <div>
 	                <div class="joinForm">아이디 </div>
-	                <input type="text" placeholder="아이디 (10자 이상,영소문자+숫자로 구성) 입력"/>
-	                <span class="warn">중복된 아이디 입니다.</span></div>
+	                <input type="text" value="아이디" readonly="readonly"/></div>
 	                
 					<!-- 비밀번호 -->
 					<div>
 	                <div class="joinForm">비밀번호</div>  
-	                <input type="password" placeholder="비밀번호 8자 이상 입력">
-	                <span class="warn">비밀번호를 8자 이상 입력해 주세요</span></div>
+	                <input type="password" placeholder="비밀번호 입력"></div>
 	                <!-- 비밀번호 확인 -->
 	                <div>
 	                <div class="joinForm">비밀번호 확인</div>
 	                <input type="password" placeholder="비밀번호 확인 입력">
-	                <span class="warn">비밀번호를 확인 해 주세요 </span></div>
-	                <!-- 이메일 -->
-	                <div>
-	                <div class="joinForm">이메일</div>
-	                <input type="text" placeholder="이메일 입력">
-	                <span class="warn">올바른 이메일 형식이 아닙니다.</span></div>
-	                <!-- 성 -->
-	                <div>
-		                <div class="joinForm">성씨 입력</div>
-		                <input type="text" placeholder="성씨입력">
-		           		<div><b class="comment">*입력한 성씨는 '김인턴,박인턴' 과 같은 호칭에 사용됩니다.</b></div>
-		                <div><b class="comment">*호칭은 본인 외 다른사람이 볼 수 없습니다. </b></div>
-	               </div>
-	               
+	                <span class="warn">비밀번호와 같지 않습니다. </span></div>
 				</div>
 	            <div class="btn_group">
-	                <button class="join_btn">인턴(비직장인 회원) 회원가입</button>
+	                <button class="ckh_btn">비밀번호 확인</button>
 	            </div>
 	        </form>
     	</div>

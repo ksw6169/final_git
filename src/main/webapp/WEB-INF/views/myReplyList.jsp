@@ -26,9 +26,9 @@
 	        <table class="table table-hover">
 	            <thead>
 	             <tr>
-	               <th>번 호 </th>
-	               <th>내 용</th>
-	               <th>작성일자</th>
+	               <th class="center">번 호 </th>
+	               <th class="center">내 용</th>
+	               <th class="center">작성일자</th>
 	             </tr>
 	             </thead>
 	             <tr>

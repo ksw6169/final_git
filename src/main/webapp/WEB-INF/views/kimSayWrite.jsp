@@ -8,20 +8,18 @@
    	 	<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		<style>
-        button { width: 120px; height: 40px; background-color: #FF8000; border: none; vertical-align: middle; color:#fff; font-family: "fallB"; text-align: center; display: inline-block; font-size: 12px; }    
+        .btn { width: 120px; height: 40px; background-color: #FF8000; border: none; vertical-align: middle; color:#fff; font-family: "fallB"; text-align: center; display: inline-block; font-size: 12px; }    
         button:hover { color: #121F27; }
         /* board_detail css */
         .content { font-family: "bareun"; text-align: center; margin-bottom: 50px; }
         th { font-family: "fallM"; text-align: center; background: #121F27; color: white; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; }
         td { font-family: "NanumM"; text-align: center; background: #121F27; color: white; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; }
-        select {
-         width: 100%; /* 원하는 너비설정 */ 
-         padding-left: 46.4%;
-		 height: 50px;
-         background-color: #121F27;
+        .table>tbody>tr>th { text-align: center; }
+        .category { width: 100%; padding-left: 46.4%; height: 50px; background-color: #121F27; /* select -> .category로 수정  */
 		 color: white;
 		 font-family: "fallM"; /* 폰트 상속 */ 
          font-weight: bold;
+		 font-size: medium;
 		 border: 1px solid #999; 
          border-radius: 0px; /* iOS 둥근모서리 제거 */ 
          appearance: none;
@@ -56,8 +54,7 @@
             <div class="table_div">
                 <table class="table">
                      <tr>
-                       
-						   <select name="category">
+						   <select class="category" style="margin-bottom: 0px;">
 						      <option value="" selected="selected">카테고리</option>
 							  <option value="잡담">&nbsp;&nbsp;잡담</option>
 							  <option value="이직">&nbsp;&nbsp;이직</option>
@@ -67,7 +64,7 @@
                      </tr>
                      <tr>
                        <th>제목</th>
-                       <td class="subject"><textarea class="form-control subject" rows="1" placeholder="제목을 입력해주세요."></textarea></td>
+                       <td class="subject"><textarea class="form-control subject" rows="1" placeholder="제목을 입력해주세요." style="padding-bottom: 11px;"></textarea></td>
                      </tr>
                      <tr>
                        <th colspan="2">내용</th>

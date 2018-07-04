@@ -25,9 +25,9 @@
 	        <table class="table table-hover">
 	            <thead>
 	             <tr>
-	               <th>번 호 </th>
-	               <th>제 목</th>
-	               <th>작성일자</th>
+	               <th class="center">번 호 </th>
+	               <th class="center">제 목</th>
+	               <th class="center">작성일자</th>
 	             </tr>
 	             </thead>
 	             <tr>
