@@ -24,6 +24,7 @@ public class CompanyController {
 	@RequestMapping(value = "/c", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Company 컨트롤러 접속");
+		logger.info("main Page");
 		
 		service.main();
 		
