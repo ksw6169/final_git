@@ -52,6 +52,22 @@
 				margin-top: 150px; 
 			}
 		
+			.custom_select {
+				width: 100%; /* 원하는 너비설정 */ 
+				height: 100%;
+				font-family: "fallM"; /* 폰트 상속 */ 
+				border-radius: 0px; /* iOS 둥근모서리 제거 */ 
+				appearance: none;
+				display: inline-block;
+			  	float: left;
+			  	color: white;
+			  	background-color: #121F27;
+			}
+		
+			.custom_select {
+				padding-left: 50%;
+			}
+		
 		</style>
 	</head>
 	
@@ -79,7 +95,15 @@
 		        
 					<div class="center-block">
 					<h1 class="content">회사정보 수정</h1>
-						<div class="duty">직무</div>
+						<div class="duty">
+							<!-- 미수정!(0705_성원) -->
+							<select class="custom_select"> 
+								<option value="직무" selected>전체</option> 
+								<option value="직무1">잡담</option> 
+								<option value="직무2">이직</option> 
+								<option value="직무3">업무 질문&nbsp;</option>
+							</select>
+						</div>
 					<!-- 기업명 수정 -->
 					<div>
 				        <div class="updateForm">기업명</div>
