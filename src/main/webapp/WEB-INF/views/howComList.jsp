@@ -8,10 +8,21 @@
    	 	<meta name="viewport" content="width=device-width, initial-scale=1">
       
 		<style>
+			/* submenubar css */
+	        .submenubar_background{ position:absolute; width:100%; height:100px; background-color:#E4EEF0;}
+			.submenubar_header{ font-family:"fallM"; margin-left:40px; width:500px; height:50px; display:inline-block; margin-top:20px; float:left;}
+			td.submenubar_name{font-family:"fallM"; font-size:25px; color:#121F27; background-color: #E4EEF0; border: 1px solid #E4EEF0; }
+			.submenubar_detail{font-size:12px; margin-left:5px; color:#323838;}
+			.submenubar_description{font-family:"fallM"; font-size:12px; height:15px; margin-top:10px; color:#121F27;  border: 1px solid #E4EEF0; text-align: left; }
+			.submenubar_button,.submenubar_button_last{ width:120px; height:50px; line-height:50px; color:#fff; font-family:fallM; font-size:15px; text-align:center;
+				margin-top:25px; float:right; background-color:#121F27; cursor:pointer; }
+			.submenubar_button{ margin-right:10px; }
+			.submenubar_button_last{ margin-right:100px; }
+			
         body { padding-top: 100px; }
         .content { font-family: "bareun"; text-align: center; margin-bottom: 50px; }
         th { font-family: "NanumM"; text-align: center; background: #121F27; color: white; border: 1px solid white; height: 25px; line-height: 25px; }
-        td { font-family: "NanumM"; text-align: center; background: #E4EEF0; border: 1px solid white; height: 25px; line-height: 25px; }
+        td { font-family: "NanumM"; text-align: center; background: #E4EEF0;  height: 25px; }
         .paging_button { text-align: center;}
         .page-link { font-family: "bareun"; }
 		
@@ -31,7 +42,6 @@
 			background-color: #121F27;
 			color: white;
 		}
-		
 		
 		.caption_detail {
 			margin: 0 auto;
@@ -106,10 +116,30 @@
 		  	margin: 5px 5px 5px 0;
 		  	float: left;
 		}
+		
+		.container {
+			margin-top: 100px;
+		}
     </style>
   </head>
 <body>
 	<jsp:include page="menubar.jsp" flush="false"/>
+
+    <div class="submenubar_background">
+        <div class="submenubar_header">
+            <table>
+                <tr>
+                    <td class="submenubar_name">너의 직장은?<b class="submenubar_detail">꿈의 직장, 아직 만난 적 없는 너를 찾고 있어</b></td>
+                </tr>
+                <tr>
+                    <td class="submenubar_description">*대리 회원(직장인 회원)만 글 작성, 열람이 가능합니다.</td>
+                </tr>
+				<tr>
+                    <td class="submenubar_description">*재직중인 기업만 기업평가 작성이 가능합니다.</td>
+				</tr>
+            </table>
+        </div>
+    </div>
 
 	<div class="container">
 		<div class="center-block search_div">

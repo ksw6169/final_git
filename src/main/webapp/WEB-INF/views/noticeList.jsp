@@ -9,10 +9,21 @@
 		
       
     <style>
+		/* submenubar css */
+        .submenubar_background{position:absolute;width:100%;height:100px;background-color:#E4EEF0;}
+		.submenubar_header{font-family:fallM;margin-left:40px;width:500px;height:50px;display:inline-block;margin-top:35px;float:left;}
+		td.submenubar_name{font-family:"fallM"; font-size:30px;color:#121F27; background-color: #E4EEF0; border: 1px solid #E4EEF0; }
+		.submenubar_detail{font-size:12px;margin-left:5px;color:#323838;}
+		.submenubar_description{font-size:10px;height:15px;margin-top:10px;}
+		.submenubar_button,.submenubar_button_last{width:130px;height:50px;line-height:50px;color:#fff;font-family:fallM;font-size:15px;text-align:center;
+			margin-top:25px;float:right;background-color:#121F27;cursor:pointer;}
+		.submenubar_button{margin-right:10px;}
+		.submenubar_button_last{margin-right:100px;}
+    
         body { padding-top: 100px; }
         th { font-family: "NanumM"; background: #121F27; color: white; border: 1px solid white; height: 25px; line-height: 25px; }
         th.center{text-align: center;}
-        td { font-family: "NanumM"; text-align: center; background: #E4EEF0; border: 1px solid white; height: 25px; line-height: 25px; }
+        td { font-family: "NanumM"; text-align: center; background: #E4EEF0; height: 25px; line-height: 25px; }
         .table>thead>tr>th { text-align: center; vertical-align: middle; }
         .paging_button { text-align: center;}
         .page-link { font-family: "bareun"; }
@@ -72,14 +83,28 @@
         }
         
         .pull-right{
-        color : white;
+	        color : white;
         }
+
+		.container {
+			margin-top: 150px;
+		}
 
     </style>
   </head>
 	<body>
 		<jsp:include page="menubar.jsp"/>
-	
+		
+	    <div class="submenubar_background">
+	        <div class="submenubar_header">
+	            <table>
+	                <tr>
+	                    <td class="submenubar_name">공지합니다<b class="submenubar_detail">공지사항</b></td>
+	                </tr>
+	            </table>
+	        </div>
+	    </div>
+	    
 	    <div class="container">
 	        <div class="search_group">
 	            <input type="text" placeholder="제목+내용을 입력해주세요."/>

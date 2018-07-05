@@ -23,6 +23,7 @@
 		<style>
 			 body { padding-top: 70px; text-align: center;}
 			 .container {
+			 
 	            padding-top: 70px;
 	            padding-bottom: 25px;
         	}

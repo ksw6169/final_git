@@ -87,6 +87,10 @@
         	margin-left: 115px;
         }
 
+		div.col-md-4.col-md-offset-4 {
+			margin-top: 50px;
+		}
+
 		</style>
 	</head>
 	<body>

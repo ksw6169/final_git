@@ -139,6 +139,10 @@
   			overflow: hidden;
         	border:0;
         }
+        
+        div.col-md-4.col-md-offset-4 {
+        	margin-top: 50px;
+        }
     </style>
     <body>
    	 <jsp:include page="menubar.jsp" flush="false"/>

@@ -9,32 +9,60 @@
 		
       
 		<style>
-        .btn { width: 120px; height: 40px; background-color: #FF8000; border: none; vertical-align: middle; color:#fff; font-family: "fallB"; text-align: center; display: inline-block; font-size: 12px; }    
-        button:hover { color: #121F27; }
-        /* board_detail css */
-        .content { font-family: "bareun"; text-align: center; margin-bottom: 50px; }
-        th { font-family: "fallM"; text-align: center; background: #121F27; color: white; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; }
-        td { font-family: "NanumM"; text-align: center; background: #121F27; color: white; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; }
-		.table>tbody>tr>th { text-align: center; }
-		.button-group { margin-top: 15px; }
-        .subject, .date { color: #121F27; background-color: #FFFFFF; }
-		.table>tbody>tr>td.subject { padding: 0px; }
-        .contents { color: #121F27; background-color: #FFFFFF; height: 200px; line-height: 100px; text-align: left; } 
-		.table>tbody>tr>td.write_content { background-color: #E4EEF0; padding: 0px; }
-        .detail_div { margin-top: 50px;}
-        .table_div { background-color: #E4EEF0; padding: 50px; text-align: center;}
-		.form-control { padding: 7px 12px; }
-		.button_group {
-			width: 100px;
-			height: 37.5px;
-			background-color: white;
-			color: #121F27;
-			border: 0.25px solid #DDDDDD;
-		}
-    </style>
+			/* submenubar css */
+			.submenubar_background{position:absolute;width:100%;height:100px;background-color:#E4EEF0;}
+			.submenubar_header{font-family:fallM;margin-left:40px;width:500px;height:50px;display:inline-block;margin-top:25px;float:left;}
+			td.submenubar_name{text-align: left; font-family:"fallM"; font-size:25px;color:#121F27; background-color: #E4EEF0; border: 1px solid #E4EEF0; }
+			.submenubar_detail{font-size:12px;margin-left:5px;color:#323838;}
+			.submenubar_description{font-family: "fallM"; background-color: #E4EEF0; border: 1px solid #E4EEF0; font-size:12px;height:15px;margin-top:10px;color:#121F27;}
+			.submenubar_button,.submenubar_button_last{width:120px;height:50px;line-height:50px;color:#fff;font-family:fallM;font-size:15px;text-align:center;margin-top:25px;float:right;background-color:#121F27;cursor:pointer;}
+			.submenubar_button{margin-right:10px;}
+			.submenubar_button_last{margin-right:100px;}
+			
+	        .btn { width: 120px; height: 40px; background-color: #FF8000; border: none; vertical-align: middle; color:#fff; font-family: "fallB"; text-align: center; display: inline-block; font-size: 12px; }    
+	        button:hover { color: #121F27; }
+	        /* board_detail css */
+	        .content { font-family: "bareun"; text-align: center; margin-bottom: 50px; }
+	        th { font-family: "fallM"; text-align: center; background: #121F27; color: white; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; }
+	        td { font-family: "NanumM"; text-align: center; background: #121F27; color: white; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; }
+			.table>tbody>tr>th { text-align: center; }
+			.button-group { margin-top: 15px; }
+	        .subject, .date { color: #121F27; background-color: #FFFFFF; }
+			.table>tbody>tr>td.subject { padding: 0px; }
+	        .contents { color: #121F27; background-color: #FFFFFF; height: 200px; line-height: 100px; text-align: left; } 
+			.table>tbody>tr>td.write_content { background-color: #E4EEF0; padding: 0px; }
+	        .detail_div { margin-top: 50px;}
+	        .table_div { background-color: #E4EEF0; padding: 50px; text-align: center;}
+			.form-control { padding: 7px 12px; }
+			.button_group {
+				width: 100px;
+				height: 37.5px;
+				background-color: white;
+				color: #121F27;
+				border: 0.25px solid #DDDDDD;
+			}
+			
+			.container {
+				margin-top: 100px;
+			}
+    	</style>
   </head>
   <body>
   <jsp:include page="menubar.jsp"/>
+  
+    <div class="submenubar_background">
+        <div class="submenubar_header">
+            <table>
+                <tr>
+                    <td class="submenubar_name">모르면 물어봐<b class="submenubar_detail">정규직을 향한 인턴들의 폭풍 질문</b></td>
+                </tr>
+                <tr>
+                    <td class="submenubar_description">*대리 회원(직장인 회원)과 인턴 회원(비직장인 회원) 전부 글 작성, 열람이 가능합니다.</td>
+                </tr>
+            </table>
+        </div>
+        <span class="submenubar_button_last">글 작성</span>
+    </div>
   
   <div class="container">
         <div class="detail_div">

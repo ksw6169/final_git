@@ -8,42 +8,88 @@
    	 	<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		<style>
-        .btn { width: 120px; height: 40px; background-color: #FF8000; border: none; vertical-align: middle; color:#fff; font-family: "fallB"; text-align: center; display: inline-block; font-size: 12px; }    
-        /* button -> .btn으로 수정 */
-        button:hover { color: #121F27; }
-        /* board_detail css */
-        .content { font-family: "bareun"; text-align: center; margin-bottom: 50px; }
-        th { font-family: "fallM"; text-align: center; background: #121F27; color: white; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; }
-        td { font-family: "NanumM"; text-align: center; background: #121F27; color: white; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; }
-        .table>tbody>tr>th { text-align: center; }
-        .button-group { margin-top: 15px;}
-
-        .like { background-color: #FF8000; margin: 15px 0 0 15px; }
-
-        .reply { background-color: #121F27; color: white; }
-        .subject, .date { text-align: left; color: #121F27; background-color: #FFFFFF; }
-        .contents { color: #121F27; background-color: #FFFFFF; height: 200px; line-height: 100px; text-align: left; } 
-
-        .reply_contents { color: #121F27; background-color: #FFFFFF; height: 75px; line-height: 75px; text-align: left; }
-        .reply_date { color: #121F27; background-color: #FFFFFF; width: 280px; height: 75px; line-height: 75px; text-align: center; }
-		td.reply_updel { background-color: #FFFFFF; border: 1px #FFFFFF; width: 80px; }
-        .detail_div { margin-top: 50px;}
-        .table_div { background-color: #E4EEF0; padding: 50px; text-align: center;}
-		.table>tbody>tr>td.reply_date { vertical-align: middle; border: 1px white; }
-		.table>tbody>tr>td.reply_updel { padding: 0px; border-top: 0px; }
 		
-		.button_group {
-			width: 100px;
-			height: 37.5px;
-			background-color: white;
-			color: #121F27;
-			border: 0.25px solid #DDDDDD;
-		}
-    </style>
+			/* submenubar css */
+	        .submenubar_background { position: absolute; width: 100%; height: 100px; background-color: #E4EEF0; }
+	        .submenubar_header { font-family: "fallM"; margin-left: 40px; width: 400px; height: 50px; display: inline-block; margin-top: 25px; float: left; }
+	        td.submenubar_name {font-family:"fallM"; font-size: 25px; color: #121F27; background-color: #E4EEF0; border: 1px solid #E4EEF0; }
+	        .submenubar_detail { font-size: 12px; margin-left: 5px; color: #323838; }
+	        .submenubar_description {text-align: left; font-family: "fallM"; border: 1px solid #E4EEF0; font-size: 12px; height: 15px; margin-top: 10px; color: #121F27; background-color: #E4EEF0; }
+	        .submenubar_button { width: 120px; height: 50px; line-height: 50px; color: white; font-family: "fallM"; font-size: 15px; text-align: center; margin-top: 25px;
+				margin-right: 10px; float: right; background-color: #121F27; cursor: pointer; }
+	        .submenubar_button_last { width: 120px; height: 50px; line-height: 50px; color: white; font-family: "fallM"; font-size: 15px; text-align: center; margin-top: 25px;
+				margin-right: 100px; float: right; background-color: #121F27; cursor: pointer; }
+			select { width: 100%; height: 100%; background-color: #121F27; color: white; font-family: "fallM"; border-radius: 0px; appearance: none; outline: none; 
+				display: inline-block; }
+			
+	        .btn { width: 120px; height: 40px; background-color: #FF8000; border: none; vertical-align: middle; color:#fff; font-family: "fallB"; text-align: center; display: inline-block; font-size: 12px; }    
+	        /* button -> .btn으로 수정 */
+	        button:hover { color: #121F27; }
+	        /* board_detail css */
+	        .content { font-family: "bareun"; text-align: center; margin-bottom: 50px; }
+	        th { font-family: "fallM"; text-align: center; background: #121F27; color: white; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; }
+	        td { font-family: "NanumM"; text-align: center; background: #121F27; color: white; height: 25px; line-height: 25px; }
+	        .table>tbody>tr>th { text-align: center; }
+	        .button-group { margin-top: 15px;}
+	
+	        .like { background-color: #FF8000; margin: 15px 0 0 15px; }
+	
+	        .reply { background-color: #121F27; color: white; }
+	        .subject, .date { text-align: left; color: #121F27; background-color: #FFFFFF; }
+	        .contents { color: #121F27; background-color: #FFFFFF; height: 200px; line-height: 100px; text-align: left; } 
+	
+	        .reply_contents { color: #121F27; background-color: #FFFFFF; height: 75px; line-height: 75px; text-align: left; }
+	        .reply_date { color: #121F27; background-color: #FFFFFF; width: 280px; height: 75px; line-height: 75px; text-align: center; }
+			td.reply_updel { background-color: #FFFFFF; border: 1px #FFFFFF; width: 80px; }
+	        .detail_div { margin-top: 50px;}
+	        .table_div { background-color: #E4EEF0; padding: 50px; text-align: center;}
+			.table>tbody>tr>td.reply_date { vertical-align: middle; border: 1px white; }
+			.table>tbody>tr>td.reply_updel { padding: 0px; border-top: 0px; }
+			
+			.button_group {
+				width: 100px;
+				height: 37.5px;
+				background-color: white;
+				color: #121F27;
+				border: 0.25px solid #DDDDDD;
+			}
+			
+			.clear1 {
+				margin-top: 150px;
+			}
+			
+			.clear2 {
+				margin-top: 50px;
+			}
+    	</style>
   </head>
   <body>
   	<jsp:include page="menubar.jsp"/>
-  
+  	
+    <div class="submenubar_background">
+        <div class="submenubar_header">
+            <table>
+                <tr>
+                    <td class="submenubar_name">김대리의 한마디<b class="submenubar_detail">오늘도 수고한 대리들의 뒷이야기</b></td>
+                </tr>
+                <tr>
+                    <td class="submenubar_description">*대리 회원(직장인 회원)만 글 작성, 열람이 가능합니다.</td>
+                </tr>
+            </table>
+        </div>
+		<span class="submenubar_button_last">
+			<select name="category">
+				<option value="" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IT</option>
+				<option value="잡담">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;잡담</option>
+				<option value="이직">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이직</option>
+				<option value="업무질문">&nbsp;&nbsp;&nbsp;&nbsp;업무질문</option>
+			</select>
+		</span>
+        <span class="submenubar_button">글 작성</span>
+    </div>
+  	
+    <div class="clear1"></div>
+    
   <div class="container">
         <div class="detail_div">
             <div class="table_div">
@@ -76,7 +122,8 @@
             </div>
         </div>
     </div>
-      
+    
+    <div class="clear2"></div>
       
 	<div class="container">
         <div class="detail_div">
