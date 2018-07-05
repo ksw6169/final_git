@@ -47,7 +47,7 @@ public class CompanyController {
 		logger.info("[companyList] keyword : "+keyword+" / pagingEnd : "+pagingEnd);
 	
 		return service.companyList(params);
-		//companyList[] - company_name, 조회수, company_eval
+		//companyList[] - company_no, company_name, 조회수, company_eval
 	}
 	
 	@RequestMapping(value = "/companyDetail")
