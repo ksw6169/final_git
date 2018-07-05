@@ -2,10 +2,92 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-    
-<!-- namespace = 연결되는 인터페이스 -->    
-<mapper namespace="com.spring.dao.CompanyInter">
-	
 
+<!-- namespace = 연결되는 인터페이스 -->
+<mapper namespace="com.spring.dao.CompanyInter">
+	<select id="companyList" parameterType="hashMap"
+		resultType="com.spring.dto.CompanyDTO">
+		SELECT rnum, company_no, company_name, company_eval
+		FROM(SELECT
+		ROW_NUMBER() OVER(ORDER BY company_no DESC) AS rnum, company_no,
+		company_name, company_eval FROM company
+		<where>
+			<if test="!keword.equals('')">
+				company_name LIKE '%'||#{keyword}||'%'
+			</if>
+		</where>
+		) WHERE rnum BETWEEN 1 AND #{pagingEnd} ORDER BY company_name ASC
+	</select>
+
+	<select id="companyDetail"
+		resultType="com.spring.dto.CompanyDTO">
+
+		SELECT * FROM company WHERE company_no= #{param1}
+	</select>
+
+	<select id="companyCommentView"
+		resultType="com.spring.dto.EvaluationDTO">
+		SELECT rnum, evaluation_no, member_id, evaluation_year,
+		evaluation_salary, evaluation_night, evaluation_rest,
+		evaluation_intern, evaluation_vacation, evaluation_comment
+		FROM(SELECT
+		ROW_NUMBER() OVER(ORDER BY evaluation_no DESC) AS rnum, evaluation_no,
+		member_id, evaluation_year, evaluation_salary, evaluation_night,
+		evaluation_rest, evaluation_intern, evaluation_vacation,
+		evaluation_comment FROM evaluation)
+		<where>
+			company_no=#{param1},
+			<if test="param2!=null">
+				rnum BETWEEN 1 AND #{param2}
+			</if>
+		</where>
+		ORDER BY rnum DESC
+	</select>
+
+	<insert id="evalWrite"
+		parameterType="com.spring.dto.EvaluationDTO">
+		INSERT INTO evaluation(evaluation_no, company_no,
+		member_id, evaluation_year, evaluation_salary, evaluation_night,
+		evaluation_rest, evaluation_intern, evaluation_vacation,
+		evaluation_comment)
+		VALUES(evaluation_seq.NEXTVAL,#{company_no},#{evaluation_year},#{evaluation_salary},#{evaluation_night},#{evaluation_rest},#{evaluation_intern},#{evaluation_vacation},#{evaluation_comment})
+	</insert>
+
+	<select id="evalUpdateForm">
+		SELECT * FROM evaluation WHERE
+		evaluation_no=#{param1}
+	</select>
+
+	<update id="evalUpdate" parameterType="hashMap">
+		UPDATE evaluation SET
+		evaluation_night=#{evaluation_night},
+		evaluation_rest=#{evaluation_rest},
+		evaluation_intern=#{evaluation_intern},
+		evaluation_vacation=#{evaluation_vacation},
+		evaluation_comment=#{evaluation_comment}
+		WHERE evaluation_no =
+		#{evaluation_no}
+	</update>
+
+	<update id="evalCntUp">
+		UPDATE company SET
+		company_eval=company_eval+#{param2} WHERE company_no=#{param1}
+	</update>
+
+	<delete id="evalDelete">
+		DELETE FROM evaluation WHERE evaluation_no=#{param1}
+	</delete>
 	
+	
+	<!--
+		parameterType="com.file.dto.BoardBean" : 파라메터로 사용될 빈
+		useGenertedKeys="true" : insert 후 키 생성 여부
+		keyProperty="idx" : 키가 될 필드
+		keyColumn="idx"  : 키가 저장될 컬럼
+	 -->
+	<!-- useGeneratedKeys="true" keyProperty="company_no" keyColumn="company_no" -->
+	<insert id="companyWrite" parameterType="com.spring.dto.CompanyDTO">
+		INSERT INTO company(company_no,company_name,company_salary,company_user,company_money,company_code,company_addr,company_eval)
+		VALUES(company_seq.NEXTVAL,#{company_name},#{company_salary},#{company_user},#{company_money},#{company_code},#{company_addr},0)
+	</insert>
 </mapper>
