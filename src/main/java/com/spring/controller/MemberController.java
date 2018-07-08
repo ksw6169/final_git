@@ -24,16 +24,15 @@ public class MemberController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Member 컨트롤러 접속");
-		
 		service.main();
 		
 		return "main";
 	}
 	
+	
+	
+	
 	/* test method */
-	
-	
-	
 	@RequestMapping(value = "/aAnswer", method = RequestMethod.GET)
 	public String aAnswer(Locale locale, Model model) {
 		
