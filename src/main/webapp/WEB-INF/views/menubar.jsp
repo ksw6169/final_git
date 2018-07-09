@@ -48,18 +48,18 @@
 	                </div>
 	                <div class="collapse navbar-collapse navbar-left navbar-ex1-collapse">
 	                    <ul class="nav navbar-nav">
-	                      <li class="menu"><a href="./pageMove/kimSayList">김대리의<br>한마디</a></li>
-	                      <li class="menu"><a href="./pageMove/qnaList">모르면<br>물어봐</a></li>
-	                      <li class="menu"><a href="./pageMove/howComList">너의<br>직장은?</a></li>
-	                      <li class="menu"><a href="./pageMove/noticeList">공지<br>합니다</a></li>
+	                      <li class="menu"><a href="./pageMove?page=kimSayList">김대리의<br>한마디</a></li>
+	                      <li class="menu"><a href="./pageMove?page=qnaList">모르면<br>물어봐</a></li>
+	                      <li class="menu"><a href="./pageMove?page=howComList">너의<br>직장은?</a></li>
+	                      <li class="menu"><a href="./pageMove?page=noticeList">공지<br>합니다</a></li>
 	                    </ul>
 	                </div>
 	                <div class="navbar-right sub_menu">
 	                    <ul class="nav navbar-nav">
 	                      <li class="sub_menu_item"><a href="./loginForm">로그인</a></li>
 	                      <li class="sub_menu_item"><a href="./joinForm">회원가입</a></li>
-	                      <li class="sub_menu_item"><a href="./pageMove/checkPW">마이페이지</a></li>
-	                      <li class="sub_menu_item"><a href="./pageMove/getMlist">쪽지함</a></li>
+	                      <li class="sub_menu_item"><a href="./pageMove?page=checkPW">마이페이지</a></li>
+	                      <li class="sub_menu_item"><a href="./pageMove?page=getMlist">쪽지함</a></li>
 	                    </ul>
 	                </div>
 	            </nav>
