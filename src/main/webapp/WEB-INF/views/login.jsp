@@ -82,11 +82,11 @@
 		<jsp:include page="menubar.jsp"/>
 	
 		<div class="col-md-4 col-md-offset-4">
-	        <form>
+			<form action="./login" method="POST">
 	            <div class="login_group">    
 	                <h1 class="content">로그인</h1>
-	                <input type="text" placeholder="아이디를 입력해주세요.">
-	                <input type="password" placeholder="비밀번호를 입력해주세요.">
+	                <input name="id" type="text" placeholder="아이디를 입력해주세요.">
+	                <input name="pw" type="password" placeholder="비밀번호를 입력해주세요.">
 	                <button class="login_btn">로그인</button>
 	            </div>
             </form>
@@ -97,6 +97,12 @@
     	</div>
 	</body>
 	<script>
+		var msg = "${msg}";	
+		
+		if(msg != "") {
+			alert(msg);
+		}
+		
 		// 회원가입 페이지 이동
 		function joinMove(page) {
 			location.href = "./"+page;
