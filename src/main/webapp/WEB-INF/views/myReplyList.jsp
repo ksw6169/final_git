@@ -38,6 +38,14 @@
 		.submenubar_button a:hover{color: #FF8000; background-color: #121F27;text-decoration: none;}
 		.submenubar_button_last a:hover{color: #FF8000; background-color: #121F27; text-decoration: none;}
 		
+      /* 리스트 크기 */
+      #board_date{width: 350px;}
+      #board_no{width: 150px;}
+      /* 링크 글색 */
+      .boardLink{color: black;}
+      .boardLink:hover{text-decoration: none; color: black;}
+      .boardLink:active{text-decoration: none; color: black;}
+      .boardLink:visited {text-decoration: none; color: black;}
     </style>
   </head>
 	<body>
@@ -71,56 +79,6 @@
 	             </thead>
 	             <tbody id="list">
 	             </tbody>
-	             <!-- <tr>
-	               <td>1</td>
-	               <td><a href="#">내용내용내용내용내용내용내용내용내용내용내용내용내용내용</a></td>
-	               <td>2018-09-10 10:50</td>
-	             </tr>
-	             <tr>
-	               <td>2</td>
-	               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-	               <td>2018-09-10 10:49</td>
-	             </tr>
-	             <tr>
-	               <td>3</td>
-	               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-	               <td>2018-09-10 10:48</td>
-	             </tr>
-	             <tr>
-	               <td>4</td>
-	               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-	               <td>2018-09-10 10:48</td>
-	             </tr>
-	             <tr>
-	               <td>5</td>
-	               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-	               <td>2018-09-10 10:48</td>
-	             </tr>
-	             <tr>
-	               <td>6</td>
-	               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-	               <td>2018-09-10 10:48</td>
-	             </tr>
-	             <tr>
-	               <td>7</td>
-	               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-	               <td>2018-09-10 10:48</td>
-	             </tr>
-	             <tr>
-	               <td>8</td>
-	               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-	               <td>2018-09-10 10:48</td>
-	             </tr>
-	             <tr>
-	               <td>9</td>
-	               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-	               <td>2018-09-10 10:48</td>
-	             </tr>
-	             <tr>
-	               <td>10</td>
-	               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-	               <td>2018-09-10 10:48</td>
-	             </tr> -->
 	        </table>
            <div class="paging_button">
              <ul class="pagination">
@@ -170,7 +128,7 @@
 	   
 	   //리스트 요청
 		function listCall(){
-		   	obj.url = "./myWriteList"; //ajax myWriteList로 요청
+		   	obj.url = "./myReplyList"; //ajax myWriteList로 요청
 			obj.data={ //같이 보낼 데이터
 				"sNum":sNum,
 				"eNum":eNum
@@ -199,10 +157,10 @@
 			list.forEach(function(item, idx){
 				content += "<tr class='listVal'>";
 				content += "<td>"+item.rnum+"</td>";
-				content += "<td><a class='boardLink' href='#'>"+item.board_title+"</a></td>";
+				content += "<td><a class='boardLink' href='#'>"+item.reply_content+"</a></td>";
 				
 				//millisecond 로 나올경우
-				var date = new Date(item.board_date);
+				var date = new Date(item.reply_date);
 				content += "<td>"+date.toLocaleDateString("ko-KR", options)+"</td>";
 				content += "</tr>";
 			});

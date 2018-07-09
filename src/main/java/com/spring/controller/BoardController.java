@@ -46,6 +46,6 @@ public class BoardController {
 	public @ResponseBody HashMap<String, Object> myReplyList(@RequestParam Map<String, String> params) {
 		logger.info("myReplyList 요청");
 		System.out.println(params.get("sNum") +"/"+params.get("eNum"));
-		return service.myWriteList(params);
+		return service.myReplyList(params);
 	}
 }

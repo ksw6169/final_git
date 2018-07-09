@@ -25,5 +25,19 @@
    			member_id = #{userId}
    		</where>
 	</select>
-   
+	
+	<select id="myReplyList" parameterType="map" resultType="com.spring.dto.ReplyDTO">
+		SELECT rnum, board_no, reply_content, reply_date, member_id 
+      	FROM (SELECT ROW_NUMBER() OVER(ORDER BY reply_date DESC) AS rnum, board_no, reply_content, reply_date, member_id FROM reply)
+      	<where>
+      		rnum BETWEEN #{sNum} AND #{eNum} AND member_id = #{userId}
+      	</where>
+	</select>
+	
+   	<select id="myReplyListCnt" parameterType="map" resultType="int">
+   		SELECT COUNT(*) FROM reply 
+   		<where>
+   			member_id = #{userId}
+   		</where>
+	</select>
 </mapper>

@@ -42,6 +42,19 @@ public class BoardService {
 		map.put("listCnt", listCnt);
 		return map;
 	}
+
+	public HashMap<String, Object> myReplyList(Map<String, String> params) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		inter = sqlSession.getMapper(BoardInter.class);
+		String userId = "test";
+		params.put("userId", userId);
+		ArrayList<BoardDTO> list = inter.myReplyList(params);
+		logger.info(""+list.size());
+		int listCnt = inter.myReplyListCnt(params);
+		map.put("list", list);
+		map.put("listCnt", listCnt);
+		return map;
+	}
 	
 	
 }
