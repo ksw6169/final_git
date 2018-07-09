@@ -51,11 +51,11 @@
                    </tr>
                </table>
            </div>
-           <span class="submenubar_button_last">회원탈퇴</span>
-           <span class="submenubar_button">내가 쓴 댓글 보기</span>
-           <span class="submenubar_button">내가 쓴 글 보기</span>
-           <span class="submenubar_button">회원정보 수정</span>
-           <span class="submenubar_button">개인정보 수정</span>
+           <span class="submenubar_button_last"><a href="./pageMove?page=outMemForm">회원탈퇴</a></span>
+           <span class="submenubar_button"><a href="./pageMove?page=myReplyList">내가 쓴 댓글 보기</a></span>
+           <span class="submenubar_button"><a href="./pageMove?page=myWriteList">내가 쓴 글 보기</a></span>
+           <span class="submenubar_button"><a href="./pageMove?page=companyUpdate">회사정보 수정</a></span>
+           <span class="submenubar_button"><a href="./pageMove?page=perUpdate">개인정보 수정</a></span>
        </div>
    
    
