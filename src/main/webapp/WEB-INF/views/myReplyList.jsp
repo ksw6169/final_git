@@ -37,6 +37,8 @@
 		.submenubar_button_last a{color: white;}
 		.submenubar_button a:hover{color: #FF8000; background-color: #121F27;text-decoration: none;}
 		.submenubar_button_last a:hover{color: #FF8000; background-color: #121F27; text-decoration: none;}
+		.submenubar_button a:active{color: #FF8000; background-color: #121F27;text-decoration: none;}
+		.submenubar_button_last a:active{color: #FF8000; background-color: #121F27;text-decoration: none;}
 		
       /* 리스트 크기 */
       #board_date{width: 350px;}

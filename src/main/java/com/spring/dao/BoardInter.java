@@ -11,8 +11,8 @@ public interface BoardInter {
 
 	int myWriteListCnt(Map<String, String> params); //내가 쓴 글 리스트 갯수
 
-	ArrayList<BoardDTO> myReplyList(Map<String, String> params);
+	ArrayList<BoardDTO> myReplyList(Map<String, String> params);//내가 쓴 댓글 리스트
 
-	int myReplyListCnt(Map<String, String> params);
+	int myReplyListCnt(Map<String, String> params); //내가 쓴 댓글 리스트 갯수
 
 }
