@@ -129,6 +129,9 @@
 		                <div><b class="comment">*호칭은 본인 외 다른사람이 볼 수 없습니다. </b></div>
 	               </div>
 				</div>
+				
+	            <input name="member_div" type="hidden" value="인턴"/>
+				
 	            <div class="btn_group">
 	                <button class="join_btn">인턴(비직장인 회원) 회원가입</button>
 	            </div>

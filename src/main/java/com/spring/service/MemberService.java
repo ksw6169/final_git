@@ -2,6 +2,8 @@ package com.spring.service;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +43,13 @@ public class MemberService {
 		dto.setMember_email(String.valueOf(map.get("email")));
 		dto.setMember_family(String.valueOf(map.get("family")));
 		
+		if(String.valueOf(map.get("member_div")).equals("대리")) {
+			dto.setJob_no(Integer.parseInt(String.valueOf(map.get("job_no"))));
+			dto.setMember_company(String.valueOf(map.get("company")));
+		} 
+		
+		dto.setMember_div(String.valueOf(map.get("member_div")));
+		
 		inter = sqlSession.getMapper(MemberInter.class);
 		success = inter.join(dto);
 		
@@ -54,12 +63,25 @@ public class MemberService {
 		return mav;
 	}
 
-	/*BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-	String hash = encoder.encode(userPw);
-	
-	inter = sqlSession.getMapper(MemberInter.class);
-	int success = 0;
-	success = inter.join(userId, hash);
-	logger.info("회원가입 성공 여부: "+success);*/
-	
+	/* 로그인 요청 */
+	public ModelAndView memlogin(String id, String pw, HttpSession session) {
+		inter = sqlSession.getMapper(MemberInter.class);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+		String hash = inter.login(id);	// 암호화된 pw 가져옴
+		boolean success = encoder.matches(pw, hash);		// 입력한 pw와 암호화된 pw 비교
+
+		ModelAndView mav = new ModelAndView();
+		String msg = "로그인 실패";
+		
+		if(success) {
+			msg = "로그인 성공";
+			mav.setViewName("redirect:/");
+			session.setAttribute("loginId", id);
+		}
+		
+		mav.addObject("msg", msg);
+		
+		return mav;
+	}
 }

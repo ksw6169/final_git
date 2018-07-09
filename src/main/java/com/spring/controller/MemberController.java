@@ -3,6 +3,8 @@ package com.spring.controller;
 import java.util.HashMap;
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,13 +73,31 @@ public class MemberController {
 		return "dJoin";
 	}
 	
-	
 	/* 회원가입 요청 */
 	// 인자가 추가로 있다면, 대리 회원가입으로
 	@RequestMapping(value = "/join")
 	public ModelAndView join(@RequestParam HashMap<String, Object> map) {
 		logger.info("회원가입 요청");
-		
 		return service.join(map);
+	}
+	
+	/* 로그인 요청 */
+	@RequestMapping(value = "/login")
+	public ModelAndView memlogin(@RequestParam String id, String pw, HttpSession session) {
+		logger.info("로그인 요청");
+		return service.memlogin(id, pw, session);
+	}
+	
+	/* 로그아웃 요청 */
+	@RequestMapping(value = "/logout")
+	public ModelAndView memlogout(HttpSession session) {
+		logger.info("로그아웃 요청");
+		session.removeAttribute("loginId");
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("msg", "로그아웃 되었습니다.");
+		mav.setViewName("redirect:/");
+		
+		return mav;
 	}
 }

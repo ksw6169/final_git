@@ -126,9 +126,14 @@
 		    <version>4.2.6.RELEASE</version>
 		</dependency>
 		
-		
-		
-				
+		<!-- Java Mail API 라이브러리 -->
+	      <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+	      <dependency>
+	          <groupId>javax.mail</groupId>
+	          <artifactId>mail</artifactId>
+	          <version>1.4.7</version>
+	      </dependency>
+			
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
