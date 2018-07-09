@@ -38,6 +38,7 @@ public class CompanyController {
 	
 	@RequestMapping(value = "/companyListForm")
 	public String companyListForm() {
+		////////
 		logger.info("[companyListForm]");
 		return "howComList";
 	}

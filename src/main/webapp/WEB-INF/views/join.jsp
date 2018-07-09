@@ -42,8 +42,8 @@
 	        <div class="container col-md-4 col-md-offset-4">
 	        	<h1 class="content">회원가입</h1>
 	        	<div class="btn_set">
-	        		<button class="join_btn" onclick="">인턴(비직장인 회원) 회원가입</button>
-	            	<button class="join_btn" onclick="">대리(직장인 회원) 회원가입</button>
+	        		<button class="join_btn" onclick="joinMove('iJoinForm')">인턴(비직장인 회원) 회원가입</button>
+	            	<button class="join_btn" onclick="joinMove('dJoinForm')">대리(직장인 회원) 회원가입</button>
 	        	</div>
 	        </div>
     	</div>
@@ -54,5 +54,13 @@
 		}, function(){
 			$(this).css("background-color", "#FF8000");
 		});
+		
+		// 회원가입 페이지 이동
+		function joinMove(page) {
+			location.href = "./"+page;
+		}
+		
+		
+		
 	</script>
 </html>

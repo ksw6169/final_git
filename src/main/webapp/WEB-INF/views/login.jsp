@@ -89,13 +89,17 @@
 	                <input type="password" placeholder="비밀번호를 입력해주세요.">
 	                <button class="login_btn">로그인</button>
 	            </div>
-	            <div class="btn_group">
-	                <button class="join_btn">인턴(비직장인 회원) 회원가입</button>
-	                <button class="join_btn">대리(직장인 회원) 회원가입</button>
-	            </div>
-	        </form>
+            </form>
+            <div class="btn_group">
+                <button class="join_btn" onclick="joinMove('iJoinForm')">인턴(비직장인 회원) 회원가입</button>
+                <button class="join_btn" onclick="joinMove('dJoinForm')">대리(직장인 회원) 회원가입</button>
+            </div>
     	</div>
 	</body>
 	<script>
+		// 회원가입 페이지 이동
+		function joinMove(page) {
+			location.href = "./"+page;
+		}
 	</script>
 </html>

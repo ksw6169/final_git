@@ -12,7 +12,7 @@ public class LoginCheck extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		System.out.println("controller 요청 전에 실행 -- preHandler()");
-		
+		System.out.println("로그인 체크");
 		
 		return true;
 	}

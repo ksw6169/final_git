@@ -1,15 +1,22 @@
 package com.spring.controller;
 
+import java.util.HashMap;
 import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.dao.MemberInter;
 import com.spring.service.MemberService;
 
 
@@ -20,254 +27,57 @@ public class MemberController {
 	
 	@Autowired MemberService service;
 	
-	//main페이지 접속
+	/* 단순 페이지 이동(로그인 체크가 필요없는 홈, 로그인, 회원가입 페이지 제외) */
+	@RequestMapping(value="/pageMove") 
+	public String pageMove(@RequestParam("page") String pageName) {
+		logger.info(pageName+" 페이지 이동");
+		return pageName;
+	}
+	
+	/* main 페이지 이동 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("Member 컨트롤러 접속");
-		
+		logger.info("메인 페이지 이동");
 		service.main();
 		
 		return "main";
 	}
 	
-	/* test method */
-	
-	
-	
-	@RequestMapping(value = "/aAnswer", method = RequestMethod.GET)
-	public String aAnswer(Locale locale, Model model) {
-		
-		service.main();
-		
-		return "aAnswer";
-	}
-	
-	@RequestMapping(value = "/aGetMlist", method = RequestMethod.GET)
-	public String aGetMlist(Locale locale, Model model) {
-		
-		return "aGetMlist";
-	}
-	
-	@RequestMapping(value = "/aMDetail", method = RequestMethod.GET)
-	public String aMDetail(Locale locale, Model model) {
-		
-		return "aMDetail";
-	}
-	
-	@RequestMapping(value = "/aSendMlist", method = RequestMethod.GET)
-	public String aSendMlist(Locale locale, Model model) {
-		
-		return "aSendMlist";
-	}
-	
-	@RequestMapping(value = "/comComment", method = RequestMethod.GET)
-	public String comComment(Locale locale, Model model) {
-		
-		return "comComment";
-	}
-	
-	@RequestMapping(value = "/comDetail", method = RequestMethod.GET)
-	public String comDetail(Locale locale, Model model) {
-		
-		return "comDetail";
-	}
-	
-	@RequestMapping(value = "/companyUpdate", method = RequestMethod.GET)
-	public String companyUpdate(Locale locale, Model model) {
-		
-		return "companyUpdate";
-	}
-	
-	@RequestMapping(value = "/comUpdate", method = RequestMethod.GET)
-	public String comUpdate(Locale locale, Model model) {
-		
-		return "comUpdate";
-	}
-	
-	@RequestMapping(value = "/comWrite", method = RequestMethod.GET)
-	public String comWrite(Locale locale, Model model) {
-		
-		return "comWrite";
-	}
-	
-	@RequestMapping(value = "/dJoin", method = RequestMethod.GET)
-	public String dJoin(Locale locale, Model model) {
-		
-		return "dJoin";
-	}
-	
-	@RequestMapping(value = "/getMlist", method = RequestMethod.GET)
-	public String getMlist(Locale locale, Model model) {
-		
-		return "getMlist";
-	}
-	
-	@RequestMapping(value = "/howComList", method = RequestMethod.GET)
-	public String howComList(Locale locale, Model model) {
-		
-		return "howComList";
-	}
-	
-	@RequestMapping(value = "/iJoin", method = RequestMethod.GET)
-	public String iJoin(Locale locale, Model model) {
-		
-		return "iJoin";
-	}
-	
-	@RequestMapping(value = "/join", method = RequestMethod.GET)
-	public String join(Locale locale, Model model) {
-		
-		return "join";
-	}
-	
-	@RequestMapping(value = "/kimSayDetail", method = RequestMethod.GET)
-	public String kimSayDetail(Locale locale, Model model) {
-		
-		return "kimSayDetail";
-	}
-	
-	@RequestMapping(value = "/kimSayList", method = RequestMethod.GET)
-	public String kimSayList(Locale locale, Model model) {
-		
-		return "kimSayList";
-	}
-	
-	@RequestMapping(value = "/kimSayUpdate", method = RequestMethod.GET)
-	public String kimSayUpdate(Locale locale, Model model) {
-		
-		return "kimSayUpdate";
-	}
-	
-	@RequestMapping(value = "/kimSayWrite", method = RequestMethod.GET)
-	public String kimSayWrite(Locale locale, Model model) {
-		
-		return "kimSayWrite";
-	}
-	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login(Locale locale, Model model) {
-		
+	/* 로그인 페이지 이동 */
+	@RequestMapping(value = "/loginForm")
+	public String loginForm() {
+		logger.info("로그인 페이지 이동");
 		return "login";
 	}
 	
-	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public String main(Locale locale, Model model) {
-		
-		return "main";
+	/* 회원가입 페이지 이동 */
+	@RequestMapping(value = "/joinForm")
+	public String joinForm() {
+		logger.info("회원가입 페이지 이동");
+		return "join";
 	}
 	
-	@RequestMapping(value = "/mDetail", method = RequestMethod.GET)
-	public String mDetail(Locale locale, Model model) {
-		
-		return "mDetail";
+	/* 인턴 회원가입 페이지 이동 */
+	@RequestMapping(value = "/iJoinForm")
+	public String iJoinForm() {
+		logger.info("인턴 회원가입 페이지 이동");
+		return "iJoin";
 	}
 	
-	@RequestMapping(value = "/mWrite", method = RequestMethod.GET)
-	public String mWrite(Locale locale, Model model) {
-		
-		return "mWrite";
+	/* 대리 회원가입 페이지 이동 */
+	@RequestMapping(value = "/dJoinForm")
+	public String dJoinForm() {
+		logger.info("대리 회원가입 페이지 이동");
+		return "dJoin";
 	}
 	
-	@RequestMapping(value = "/myReplyList", method = RequestMethod.GET)
-	public String myReplyList(Locale locale, Model model) {
-		
-		return "myReplyList";
-	}
 	
-	@RequestMapping(value = "/myWriteList", method = RequestMethod.GET)
-	public String myWriteList(Locale locale, Model model) {
+	/* 회원가입 요청 */
+	// 인자가 추가로 있다면, 대리 회원가입으로
+	@RequestMapping(value = "/join")
+	public ModelAndView join(@RequestParam HashMap<String, Object> map) {
+		logger.info("회원가입 요청");
 		
-		return "myWriteList";
+		return service.join(map);
 	}
-	
-	@RequestMapping(value = "/noticeDetail", method = RequestMethod.GET)
-	public String noticeDetail(Locale locale, Model model) {
-		
-		return "noticeDetail";
-	}
-	
-	@RequestMapping(value = "/noticeList", method = RequestMethod.GET)
-	public String noticeList(Locale locale, Model model) {
-		
-		return "noticeList";
-	}
-	
-	@RequestMapping(value = "/noticeUpdate", method = RequestMethod.GET)
-	public String noticeUpdate(Locale locale, Model model) {
-		
-		return "noticeUpdate";
-	}
-	
-	@RequestMapping(value = "/noticeWrite", method = RequestMethod.GET)
-	public String noticeWrite(Locale locale, Model model) {
-		
-		return "noticeWrite";
-	}
-	
-	@RequestMapping(value = "/outMemForm", method = RequestMethod.GET)
-	public String outMemForm(Locale locale, Model model) {
-		
-		return "outMemForm";
-	}
-	
-	@RequestMapping(value = "/perUpdate", method = RequestMethod.GET)
-	public String perUpdate(Locale locale, Model model) {
-		
-		return "perUpdate";
-	}
-	
-	@RequestMapping(value = "/qnaDetail", method = RequestMethod.GET)
-	public String qnaDetail(Locale locale, Model model) {
-		
-		return "qnaDetail";
-	}
-	
-	@RequestMapping(value = "/qnaList", method = RequestMethod.GET)
-	public String qnaList(Locale locale, Model model) {
-		
-		return "qnaList";
-	}
-	
-	@RequestMapping(value = "/qnaUpdate", method = RequestMethod.GET)
-	public String qnaUpdate(Locale locale, Model model) {
-		
-		return "qnaUpdate";
-	}
-	
-	@RequestMapping(value = "/qnaWrite", method = RequestMethod.GET)
-	public String qnaWrite(Locale locale, Model model) {
-		
-		return "qnaWrite";
-	}
-	
-	@RequestMapping(value = "/reqDetail", method = RequestMethod.GET)
-	public String reqDetail(Locale locale, Model model) {
-		
-		return "reqDetail";
-	}
-	
-	@RequestMapping(value = "/reqEmail", method = RequestMethod.GET)
-	public String reqEmail(Locale locale, Model model) {
-		
-		return "reqEmail";
-	}
-	
-	@RequestMapping(value = "/reqList", method = RequestMethod.GET)
-	public String reqList(Locale locale, Model model) {
-		
-		return "reqList";
-	}
-	
-	@RequestMapping(value = "/sendMlist", method = RequestMethod.GET)
-	public String sendMlist(Locale locale, Model model) {
-		
-		return "sendMlist";
-	}
-	
-	@RequestMapping(value = "/checkPW", method = RequestMethod.GET)
-	public String checkPW(Locale locale, Model model) {
-		
-		return "checkPW";
-	}
-	
 }
