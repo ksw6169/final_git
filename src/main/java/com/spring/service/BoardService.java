@@ -36,6 +36,7 @@ public class BoardService {
 		String userId = "test";
 		params.put("userId", userId);
 		ArrayList<BoardDTO> list = inter.myWriteList(params);
+		logger.info(""+list.size());
 		int listCnt = inter.myWriteListCnt(params);
 		map.put("list", list);
 		map.put("listCnt", listCnt);

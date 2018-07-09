@@ -37,7 +37,12 @@
       .boardLink:hover{text-decoration: none; color: black;}
       .boardLink:active{text-decoration: none; color: black;}
       .boardLink:visited {text-decoration: none; color: black;}
-        
+      
+		/* submenuBar 링크 글자 색상 */
+		.submenubar_button a{ color: white;}
+		.submenubar_button_last a{color: white;}
+		.submenubar_button a:hover{color: #FF8000; background-color: #121F27;text-decoration: none;}
+		.submenubar_button_last a:hover{color: #FF8000; background-color: #121F27; text-decoration: none;}
     </style>
   </head>
    <body>
@@ -177,9 +182,10 @@
 			"eNum":eNum
 		};
 	   	obj.success=function(data){ //성공시의 함수
+	   		console.log(data);
 	   		listCnt = data.listCnt;
 			listPrint(data.list);
-			if(eNum > listCnt){
+			if(eNum >= listCnt){
 				$("#nextLi").addClass('disabled');
 			}else{
 				$("#nextLi").removeClass('disabled');

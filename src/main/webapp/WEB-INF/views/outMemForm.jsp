@@ -93,6 +93,12 @@
 		div.col-md-4.col-md-offset-4 {
 			margin-top: 150px;
 		}
+		
+		/* submenuBar 링크 글자 색상 */
+		.submenubar_button a{ color: white;}
+		.submenubar_button_last a{color: white;}
+		.submenubar_button a:hover{color: #FF8000; background-color: #121F27;text-decoration: none;}
+		.submenubar_button_last a:hover{color: #FF8000; background-color: #121F27; text-decoration: none;}
     </style>
 	</head>
 	<body>
@@ -106,11 +112,11 @@
 	                </tr>
 	            </table>
 	        </div>
-	        <span class="submenubar_button_last">회원탈퇴</span>
-	        <span class="submenubar_button">내가 쓴 댓글 보기</span>
-	        <span class="submenubar_button">내가 쓴 글 보기</span>
-	        <span class="submenubar_button">회원정보 수정</span>
-	        <span class="submenubar_button">개인정보 수정</span>
+           <span class="submenubar_button_last"><a href="./pageMove?page=outMemForm">회원탈퇴</a></span>
+           <span class="submenubar_button"><a href="./pageMove?page=myReplyList">내가 쓴 댓글 보기</a></span>
+           <span class="submenubar_button"><a href="./pageMove?page=myWriteList">내가 쓴 글 보기</a></span>
+           <span class="submenubar_button"><a href="./pageMove?page=companyUpdate">회사정보 수정</a></span>
+           <span class="submenubar_button"><a href="./pageMove?page=perUpdate">개인정보 수정</a></span>
 	    </div>
 		
 		<div class="col-md-4 col-md-offset-4">
