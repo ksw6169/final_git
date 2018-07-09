@@ -208,7 +208,7 @@
 	        	  content+="<td class='td_star'><img class='star_grade' src='./resources/image/star_"+evaluationDTO.evaluation_intern+".png'/></td>";
 	        	  content+="<td class='td_star'><img class='star_grade' src='./resources/image/star_"+evaluationDTO.evaluation_vacation+".png'/></td>"; 
 	        	  content+="<td class='reply_updel'>";
-	        	 if(userID!=null&&userID==evaluationDTO.member_id||userID!="ㅔㅔ메"){ //실제 사용 시 || 없애면됨
+	        	 if(userID!=null&&userID==evaluationDTO.member_id){ //실제 사용 시 || 없애면됨
 		        	  content+="<button class='button_group pull-right' onclick='commentUpdate("+evaluationDTO.evaluation_no+")'>수정</button>";
 		        	  content+="<br>";
 		        	  content+="<button class='button_group pull-right' onclick='commentDelete("+evaluationDTO.evaluation_no+")'''>삭제</button>";
@@ -222,5 +222,20 @@
           });
           }
       }
+	 
+	 function evalCheck(company_no){
+     	var chk={};
+     	chk.url="./evalCheck";
+     	chk.type="GET";
+     	chk.dataType="JSON";
+     	chk.error=function(e){console.log(e)};
+     	chk.data={"company_no":company_no};
+     	chk.success=function(data){
+                if(data.success){
+             	   location.href="./evalForm?company_no="+company_no;
+                }else{alert(msg);}
+             };
+             $.ajax(chk);
+     }
 	</script>
 </html>
