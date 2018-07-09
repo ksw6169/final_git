@@ -71,10 +71,12 @@ public class CompanyController {
 	}
 	
 	@RequestMapping(value = "/evalDelete")
-	public @ResponseBody HashMap<String, Object> companyCommentDelete(@RequestParam("evaluation_no") String evaluation_no){
-		logger.info("[evalDelete] evaluation_no : "+ evaluation_no);
+	public @ResponseBody HashMap<String, Object> companyCommentDelete(@RequestParam("evaluation_no") String evaluation_no, HttpServletRequest request){
+		String member_id=(String) request.getSession().getAttribute("userID");
+		logger.info("[evalDelete] evaluation_no : "+ evaluation_no+" / member_id : "+member_id);
 		
-		return service.evalDelete(evaluation_no);
+		
+		return service.evalDelete(evaluation_no,member_id);
 	}
 	
 	@RequestMapping(value = "/companyCommentList")
@@ -138,6 +140,14 @@ public class CompanyController {
 		logger.info("[evalWrite] params(6개)");
 		return service.evalUpdate(params);
 		//(int)success
+	}
+	
+	@RequestMapping(value = "/evalCheck")
+	public @ResponseBody HashMap<String, Object> evalCheck(HttpServletRequest request, @RequestParam("company_no") String company_no){
+		String member_id=(String) request.getSession().getAttribute("userID");
+		logger.info("[evalCheck] company_no : "+company_no+" / member_id : "+member_id);
+		
+		return service.evalCheck(company_no,member_id);
 	}
 	
 }
