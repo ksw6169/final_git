@@ -5,7 +5,8 @@
     
 <!-- namespace = 연결되는 인터페이스 -->    
 <mapper namespace="com.spring.dao.MemberInter">
-	
-
-	
+	<insert id="join" parameterType="com.spring.dto.MemberDTO">
+		INSERT INTO member(member_id, member_pw, member_email, member_family, member_div) 
+			VALUES (#{member_id}, #{member_pw}, #{member_email}, #{member_family}, '인턴')
+	</insert>
 </mapper>

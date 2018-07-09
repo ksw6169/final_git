@@ -13,6 +13,7 @@ public class MemberDTO {
 	private String member_eval;
 	private int job_no;
 	private String job_name;
+	
 	public String getMember_id() {
 		return member_id;
 	}

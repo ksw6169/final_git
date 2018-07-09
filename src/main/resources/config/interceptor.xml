@@ -14,11 +14,19 @@
 		<!-- 단일 인터셉터 -->
 		<mvc:interceptor>
 			<!-- 인터셉터 할 요청 : /list 로 왔을 경우-->
-			<mvc:mapping path="/"/>
+			<!-- 모든 요청에 인터셉터 적용: https://blog.naver.com/ezzeggu/221228752237 -->
+			<mvc:mapping path="/**"/>
+			
+			<!-- 제외할 페이지 -->
+			<mvc:exclude-mapping path="/"/>
+			<mvc:exclude-mapping path="/pageMove/*"/>
+			<mvc:exclude-mapping path="/loginForm"/>
+			<mvc:exclude-mapping path="/joinForm"/>
+			<mvc:exclude-mapping path="/iJoinForm"/>
+			<mvc:exclude-mapping path="/dJoinForm"/>
 			
 			<!-- 인터셉터 한 내용에 대한 클래스 매핑 -->
 			<bean class="com.spring.service.LoginCheck"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
-
 </beans>
