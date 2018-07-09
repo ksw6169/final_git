@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,10 +28,10 @@ public class MemberController {
 	@Autowired MemberService service;
 	
 	/* 단순 페이지 이동(로그인 체크가 필요없는 홈, 로그인, 회원가입 페이지 제외) */
-	@RequestMapping(value="/pageMove/{pageName}") 
-	public String pageMove(@PathVariable String pageName) {
+	@RequestMapping(value="/pageMove") 
+	public String pageMove(@RequestParam("page") String pageName) {
 		logger.info(pageName+" 페이지 이동");
-		return "redirect:/"+pageName;
+		return pageName;
 	}
 	
 	/* main 페이지 이동 */
