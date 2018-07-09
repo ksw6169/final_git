@@ -6,7 +6,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
    	 	<meta name="viewport" content="width=device-width, initial-scale=1">
-		
+   	 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<style>
 			/* submenubar css */
 			.submenubar_background{position:absolute;width:100%;height:100px;background-color:#E4EEF0;}
@@ -50,6 +50,16 @@
 				font-family: "bareun";
 				border: 1px solid #E4EEF0;
 			}
+			
+			.div_dont{
+				width: 100px;
+				height: 75px;
+				background-color: #121F27;
+				color: white;
+				font-family: "bareun";
+				border: 1px solid #E4EEF0;
+				line-height: 75px;
+			}
 	        
 	        .star_grade {
 	        	height: 15px;
@@ -73,9 +83,9 @@
                 </tr>
             </table>
         </div>
-        <span class="submenubar_button_last">기업평가 작성</span>
-        <span class="submenubar_button">코멘트</span>
-        <span class="submenubar_button">기업평가 정보</span>
+        <span class="submenubar_button_last" onclick="location.href='./evalForm?company_no=${company_no}'">기업평가 작성</span>
+        <span class="submenubar_button" onclick="location.href='./companyCommentView?company_no=${company_no}'">코멘트</span>
+        <span class="submenubar_button" onclick="location.href='./companyDetail?company_no=${company_no}'">기업평가 정보</span>
     </div>
   
   
@@ -117,5 +127,100 @@
     </div>
 </body>
 	<script>
+	var obj={};
+	var userID="${userID}";
+	console.log(userID);
+	createObj(obj);
+	ajaxCall(obj);
+	
+	 function createObj(obj){
+         obj.url="./companyCommentList";
+         obj.type="GET";
+         obj.dataType="JSON";
+         obj.error=function(e){console.log(e)};
+     }
+	 function ajaxCall(obj){
+ 		obj.data={
+             "company_no":"${company_no}"
+         };
+         obj.success=function(data){
+             commentListPrint(data.evaluationList);
+         };
+         $.ajax(obj);
+ 	}
+	 function commentUpdate(evaluation_no){
+		 location.href="./evalUpdateForm?evaluation_no="+evaluation_no;
+	 }
+	 function commentDelete(evaluation_no){
+		 var del={};
+		 createObj(del);
+		 del.url="./evalDelete?evaluation_no="+evaluation_no;
+		 del.success=function(data){
+			 if(data.success>0){console.log("삭제 성공");}
+			 else{console.log("삭제 실패");}
+			 
+			 ajaxCall(obj);
+		 };
+		 console.log(del);
+		 $.ajax(del);
+	 }
+	 
+	 function commentListPrint(list){
+          $("table.table").remove();
+          var content="";
+          if(list.length==0){
+        	  content+="<table class='table'>";
+        	  content+="<thead>";
+        	  content+="<tr>";
+        	  content+="<th class='reply'>작성된 기업평가가 존재하지 않습니다.</th>";
+        	  content+="</tr>";
+        	  content+="</thead>";
+        	  content+="</table>";
+        	  $(".table_div").append(content);
+          }else{
+          
+	          //evaluationList[] - evaluation_comment, evaluation_night, evaluation_rest, evaluation_intern, evaluation_vacation
+	          list.forEach(function(evaluationDTO,idx){
+	        	  var date = new Date(evaluationDTO.evaluation_date);
+	        	  var month=date.getMonth()+1;
+	        	  
+	        	  content="";
+	        	  content+="<table class='table'>";
+	        	  content+="<thead>";
+	        	  content+="<tr>";
+	        	  content+="<th class='reply' colspan='7'>코멘트 "+evaluationDTO.evaluation_no+"</th>";
+	        	  content+="</tr>";
+	        	  content+="<tr>";
+	        	  content+="<th>작성일자</th>";
+	        	  content+="<th>내용</th>";
+	        	  content+="<th>주당야근횟수</th>";
+	        	  content+="<th>휴식시간</th>";
+	        	  content+="<th>인턴채용</th>";
+	        	  content+="<th>연차사용압력</th>";
+	        	  content+="<th>수정/삭제</th>";
+	        	  content+="</tr>";
+	        	  content+="</thead>";
+	        	  content+="<tr>";
+	        	  content+="<td class='reply_date'>"+date.getFullYear()+"."+month+"."+date.getDate()+" "+date.getHours()+":"+date.getMinutes()+"</td>";
+	        	  content+="<td class='reply_contents'>"+evaluationDTO.evaluation_comment+"</td>";
+	        	  content+="<td class='td_star'><img class='star_grade' src='./resources/image/star_"+evaluationDTO.evaluation_night+".png'/></td>";
+	        	  content+="<td class='td_star'><img class='star_grade' src='./resources/image/star_"+evaluationDTO.evaluation_rest+".png'/></td>";
+	        	  content+="<td class='td_star'><img class='star_grade' src='./resources/image/star_"+evaluationDTO.evaluation_intern+".png'/></td>";
+	        	  content+="<td class='td_star'><img class='star_grade' src='./resources/image/star_"+evaluationDTO.evaluation_vacation+".png'/></td>"; 
+	        	  content+="<td class='reply_updel'>";
+	        	 if(userID!=null&&userID==evaluationDTO.member_id||userID!="ㅔㅔ메"){ //실제 사용 시 || 없애면됨
+		        	  content+="<button class='button_group pull-right' onclick='commentUpdate("+evaluationDTO.evaluation_no+")'>수정</button>";
+		        	  content+="<br>";
+		        	  content+="<button class='button_group pull-right' onclick='commentDelete("+evaluationDTO.evaluation_no+")'''>삭제</button>";
+	        	 }else{
+	        		 content+="<div class='div_dont'>수정 불가</div>";
+	        	 }
+	        	  content+="</td>";
+	        	  content+="</tr>";
+	        	  content+="</table>";
+	        	  $(".table_div").append(content);
+          });
+          }
+      }
 	</script>
 </html>

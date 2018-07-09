@@ -1,5 +1,7 @@
 package com.spring.dto;
 
+import java.sql.Timestamp;
+
 public class EvaluationDTO {
 
 	private int evaluation_no;
@@ -12,6 +14,13 @@ public class EvaluationDTO {
 	private int evaluation_intern;
 	private int evaluation_vacation;
 	private String evaluation_comment;
+	private Timestamp evaluation_date;
+	public Timestamp getEvaluation_date() {
+		return evaluation_date;
+	}
+	public void setEvaluation_date(Timestamp evaluation_date) {
+		this.evaluation_date = evaluation_date;
+	}
 	public int getEvaluation_no() {
 		return evaluation_no;
 	}

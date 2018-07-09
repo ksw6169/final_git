@@ -39,11 +39,12 @@ public class CompanyService {
 		return map;
 	}
 
+	@Transactional
 	public ModelAndView companyDetail(String company_no) {
 		inter=sqlSession.getMapper(CompanyInter.class);
 		CompanyDTO companyDTO=inter.companyDetail(company_no);
-		ArrayList<EvaluationDTO> list= inter.companyCommentView(company_no,null);
-		
+		ArrayList<EvaluationDTO> list= inter.companyCommentList(company_no,null);
+		inter.companyUpHit(company_no);
 		
 		float night=0;
 		float rest=0;
@@ -56,10 +57,12 @@ public class CompanyService {
 			vacation+=dto.getEvaluation_vacation();
 		}
 		
+		if(list.size()!=0) {
 		companyDTO.setEvaluatino_nightAVG(Math.round(night/list.size()));
 		companyDTO.setEvaluatino_restAVG(Math.round(rest/list.size()));
 		companyDTO.setEvaluatino_internAVG(Math.round(intern/list.size()));
 		companyDTO.setEvaluatino_vacationAVG(Math.round(vacation/list.size()));
+		}
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("companyDTO", companyDTO);
@@ -67,11 +70,11 @@ public class CompanyService {
 		return mav;
 	}
 
-	public HashMap<String, Object> companyCommentView(String company_no, String pagingEnd) {
+	public HashMap<String, Object> companyCommentList(String company_no, String pagingEnd) {
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		
 		inter=sqlSession.getMapper(CompanyInter.class);
-		ArrayList<EvaluationDTO> list= inter.companyCommentView(company_no,pagingEnd);
+		ArrayList<EvaluationDTO> list= inter.companyCommentList(company_no,pagingEnd);
 		
 		map.put("evaluationList", list);
 		return map;
@@ -83,20 +86,22 @@ public class CompanyService {
 		EvaluationDTO dto=new EvaluationDTO();
 		dto.setCompany_no(Integer.parseInt(params.get("company_no")));
 		dto.setMember_id(params.get("member_id"));
-		dto.setEvaluation_year(Integer.parseInt(params.get("evaluation_year")));
-		dto.setEvaluation_salary(Integer.parseInt(params.get("evaluation_salary")));
+		/*dto.setEvaluation_year(Integer.parseInt(params.get("evaluation_year")));
+		dto.setEvaluation_salary(Integer.parseInt(params.get("evaluation_salary")));*/
 		dto.setEvaluation_night(Integer.parseInt(params.get("evaluation_night")));
 		dto.setEvaluation_rest(Integer.parseInt(params.get("evaluation_rest")));
 		dto.setEvaluation_intern(Integer.parseInt(params.get("evaluation_intern")));
 		dto.setEvaluation_vacation(Integer.parseInt(params.get("evaluation_vacation")));
 		dto.setEvaluation_comment(params.get("evaluation_comment"));
 		
+		if(dto.getEvaluation_comment()==null) {dto.setEvaluation_comment("작성내용이 없습니다.");}
+		
 		inter=sqlSession.getMapper(CompanyInter.class);
 		int success=inter.evalWrite(dto);
 		String page="comWrite";
 		if(success>0) {
 			inter.evalCnt(dto.getCompany_no(),1);
-			page="redirect:./companyDetail";
+			page="redirect:./companyCommentView?company_no="+dto.getCompany_no();
 			
 		}
 		
@@ -109,11 +114,14 @@ public class CompanyService {
 	public ModelAndView evalUpdateForm(String evaluation_no) {
 		inter=sqlSession.getMapper(CompanyInter.class);
 		EvaluationDTO evaluationDTO=inter.evalUpdateForm(evaluation_no);
-		CompanyDTO companyDTO=inter.companyDetail(String.valueOf(evaluationDTO.getCompany_no()));
 		
 		ModelAndView mav= new ModelAndView();
+		if(evaluationDTO!=null) {
+		CompanyDTO companyDTO=inter.companyDetail(String.valueOf(evaluationDTO.getCompany_no()));
 		mav.addObject("evaluationDTO", evaluationDTO);
 		mav.addObject("companyDTO", companyDTO);
+		}
+		
 		mav.setViewName("comUpdate");
 		
 		return mav;
@@ -125,7 +133,7 @@ public class CompanyService {
 		int success=inter.evalUpdate(params);
 		String page="redirect:./evalUpdateForm?evaluation_no="+params.get("evaluation_no");
 		if(success>0) {
-			page="redirect:./companyDetail";
+			page="redirect:./companyCommentView?company_no="+params.get("company_no");
 		}
 		
 		ModelAndView mav=new ModelAndView();
@@ -133,6 +141,19 @@ public class CompanyService {
 		mav.setViewName(page);
 		
 		return mav;
+	}
+
+	@Transactional
+	public HashMap<String, Object> evalDelete(String evaluation_no) {
+		inter=sqlSession.getMapper(CompanyInter.class);
+		EvaluationDTO dto=inter.evalUpdateForm(evaluation_no);
+		int success=inter.evalDelete(evaluation_no);
+		
+		if(success>0){inter.evalCnt(dto.getCompany_no(),-1);}
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("success",success);
+		
+		return map;
 	}
 	
 }

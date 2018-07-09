@@ -143,6 +143,18 @@
         div.col-md-4.col-md-offset-4 {
         	margin-top: 50px;
         }
+        
+        .custom_select {
+			width: 100%; /* 원하는 너비설정 */ 
+			height: 100%;
+			font-family: "fallM"; /* 폰트 상속 */ 
+			border-radius: 0px; /* iOS 둥근모서리 제거 */ 
+			appearance: none;
+			display: inline-block;
+		  	float: left;
+		  	color: white;
+		  	background-color: #121F27;
+		}
     </style>
     <body>
    	 <jsp:include page="menubar.jsp" flush="false"/>
@@ -180,7 +192,20 @@
 	          
 					<!-- 기업 -->
 					<div class="login_group">
-						<div class="company_join">기업</div>
+						<div class="company_join">
+							<select class="custom_select"> 
+								<option value="1" selected>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;경영, 사무, 금융, 보험직</option> 
+								<option value="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;연구직 및 공학기술직</option> 
+								<option value="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;교육, 법률, 사회복지, 경찰, 소방직 및 군인</option> 
+								<option value="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;보건, 의료직</option>
+								<option value="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예술, 디자인, 방송, 스포츠직</option>
+								<option value="6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;미용, 여행, 숙박, 음식, 경비, 청소직</option>
+								<option value="7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;영업, 판매, 운전, 운송직</option>
+								<option value="8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;건설, 채굴직</option>
+								<option value="9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;설치, 정비, 생산직</option>
+								<option value="10">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;농림어업직</option>
+							</select>
+						</div>
 						<!-- 기업명 -->
 		                <div>
 			            <div class="joinForm">기업명</div>
@@ -198,6 +223,8 @@
 			            <div><b class="comment_red">회원님의 익명을 절대 보장해 드립니다.</b></div>
                     </div>        
 	            </div>
+	            
+	            <input name="member_div" type="hidden" value="대리"/>
 	            
 	            <div class="btn_group">
 	                <button class="join_btn">대리(직장인 회원) 회원가입</button>

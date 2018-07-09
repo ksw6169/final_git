@@ -41,6 +41,11 @@ public class MemberService {
 		dto.setMember_email(String.valueOf(map.get("email")));
 		dto.setMember_family(String.valueOf(map.get("family")));
 		
+		if(String.valueOf(map.get("member_div")).equals("대리")) {
+			
+			
+		} 
+		
 		inter = sqlSession.getMapper(MemberInter.class);
 		success = inter.join(dto);
 		

@@ -6,7 +6,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
    	 	<meta name="viewport" content="width=device-width, initial-scale=1">
-		
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<style>
 		
 			/* submenubar css */
@@ -102,45 +102,69 @@
                 </tr>
             </table>
         </div>
-        <span class="submenubar_button_last">기업평가 작성</span>
-        <span class="submenubar_button">코멘트</span>
-        <span class="submenubar_button">기업평가 정보</span>
+        <span class="submenubar_button_last" onclick="location.href='./evalForm?company_no=${companyDTO.company_no}'">기업평가 작성</span>
+        <span class="submenubar_button" onclick="location.href='./companyCommentView?company_no=${companyDTO.company_no}'">코멘트</span>
+        <span class="submenubar_button" onclick="location.href='./companyDetail?company_no=${companyDTO.company_no}'">기업평가 정보</span>
     </div>
 
 	<div class="container">
 		<div class="eval center-block">
 			<div class="row">
-				<div class="row_title center-block">
-					<b>NHN Technology</b>
+				<div id="company_name" class="row_title center-block">
+					NHN Technology
 				</div>
 			</div>
 			<div class="row">
 				<div class="row_header">평균연봉</div>
-				<div class="row_body">5300만원</div> 
+				<div id="company_salary" class="row_body">만원</div> 
 			</div>
 			<div class="row">
 				<div class="row_header">평가자수</div>
-				<div class="row_body">121명</div>
+				<div id="company_user" class="row_body">명</div>
 			</div>
 			<div class="row">
 				<div class="row_header">주당 야근 횟수</div>
-				<div class="row_body"><img class="star_grade" src="./resources/image/star_1.png"/></div>
+				<div class="row_body"><img id="evaluatino_nightAVG" class="star_grade" src="./resources/image/star_1.png"/></div>
 			</div>
 			<div class="row">
 				<div class="row_header">휴식시간</div>
-				<div class="row_body"><img class="star_grade" src="./resources/image/star_2.png"/></div>
+				<div class="row_body"><img id="evaluatino_restAVG" class="star_grade" src="./resources/image/star_1.png"/></div>
 			</div>
 			<div class="row">
 				<div class="row_header">인턴 채용</div>
-				<div class="row_body"><img class="star_grade" src="./resources/image/star_3.png"/></div>
+				<div class="row_body"><img id="evaluatino_internAVG" class="star_grade" src="./resources/image/star_1.png"/></div>
 			</div>
 			<div class="row">
 				<div class="row_header">연차사용압력</div>
-				<div class="row_body"><img class="star_grade" src="./resources/image/star_4.png"/></div>
+				<div class="row_body"><img id="evaluatino_vacationAVG" class="star_grade" src="./resources/image/star_1.png"/></div>
 			</div>
 		</div>
 	</div>
 </body>
 	<script>
+        //companyDTO.company_name, companyDTO.company_salary, companyDTO.company_user, companyDTO.evaluatino_nightAVG,
+		//companyDTO.evaluatino_restAVG, companyDTO.evaluatino_internAVG, companyDTO.evaluatino_vacationAVG
+		var dto={
+				company_name:"${companyDTO.company_name}",
+				company_salary:"${companyDTO.company_salary}",
+				company_user:"${companyDTO.company_user}",
+				evaluatino_nightAVG:"${companyDTO.evaluatino_nightAVG}",
+				evaluatino_restAVG:"${companyDTO.evaluatino_restAVG}",
+				evaluatino_internAVG:"${companyDTO.evaluatino_internAVG}",
+				evaluatino_vacationAVG:"${companyDTO.evaluatino_vacationAVG}",
+        };
+        
+		companyPrint(dto);
+		
+        function companyPrint(companyDTO){
+        	console.log(companyDTO.company_name);
+            $("#company_name").html("<b>"+companyDTO.company_name+"</b>");
+            $("#company_salary").html(companyDTO.company_salary+"만원");
+            $("#company_user").html(companyDTO.company_user+"명");
+            $("#evaluatino_nightAVG").attr("src","./resources/image/star_"+Math.floor(companyDTO.evaluatino_nightAVG)+".png");
+            $("#evaluatino_restAVG").attr("src","./resources/image/star_"+Math.floor(companyDTO.evaluatino_restAVG)+".png");
+            $("#evaluatino_internAVG").attr("src","./resources/image/star_"+Math.floor(companyDTO.evaluatino_internAVG)+".png");
+            $("#evaluatino_vacationAVG").attr("src","./resources/image/star_"+Math.floor(companyDTO.evaluatino_vacationAVG)+".png");
+        }
 	</script>
 </html>
