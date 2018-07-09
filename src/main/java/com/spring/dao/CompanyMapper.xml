@@ -7,12 +7,12 @@
 <mapper namespace="com.spring.dao.CompanyInter">
 	<select id="companyList" parameterType="hashMap"
 		resultType="com.spring.dto.CompanyDTO">
-		SELECT rnum, company_no, company_name, company_eval
+		SELECT rnum, company_no, company_name, company_eval, company_bHit
 		FROM(SELECT
 		ROW_NUMBER() OVER(ORDER BY company_no DESC) AS rnum, company_no,
-		company_name, company_eval FROM company
+		company_name, company_eval, company_bHit FROM company
 		<where>
-			<if test="!keword.equals('')">
+			<if test="keyword!=null||!keyword.equals('')">
 				company_name LIKE '%'||#{keyword}||'%'
 			</if>
 		</where>
@@ -24,24 +24,28 @@
 
 		SELECT * FROM company WHERE company_no= #{param1}
 	</select>
+	
+	<update id="companyUpHit">
+		UPDATE company SET company_bHit=company_bHit+1 WHERE company_no=#{param1}
+	</update>
 
-	<select id="companyCommentView"
+	<select id="companyCommentList"
 		resultType="com.spring.dto.EvaluationDTO">
-		SELECT rnum, evaluation_no, member_id, evaluation_year,
+		SELECT rnum, evaluation_no,company_no, member_id, evaluation_year,
 		evaluation_salary, evaluation_night, evaluation_rest,
-		evaluation_intern, evaluation_vacation, evaluation_comment
+		evaluation_intern, evaluation_vacation, evaluation_comment,evaluation_date
 		FROM(SELECT
-		ROW_NUMBER() OVER(ORDER BY evaluation_no DESC) AS rnum, evaluation_no,
+		ROW_NUMBER() OVER(ORDER BY evaluation_no DESC) AS rnum, evaluation_no, company_no,
 		member_id, evaluation_year, evaluation_salary, evaluation_night,
 		evaluation_rest, evaluation_intern, evaluation_vacation,
-		evaluation_comment FROM evaluation)
+		evaluation_comment,evaluation_date FROM evaluation)
 		<where>
-			company_no=#{param1},
+			company_no=#{param1}
 			<if test="param2!=null">
-				rnum BETWEEN 1 AND #{param2}
+				AND (rnum BETWEEN 1 AND #{param2})
 			</if>
 		</where>
-		ORDER BY rnum DESC
+		ORDER BY evaluation_no DESC
 	</select>
 
 	<insert id="evalWrite"
@@ -49,29 +53,35 @@
 		INSERT INTO evaluation(evaluation_no, company_no,
 		member_id, evaluation_year, evaluation_salary, evaluation_night,
 		evaluation_rest, evaluation_intern, evaluation_vacation,
-		evaluation_comment)
-		VALUES(evaluation_seq.NEXTVAL,#{company_no},#{evaluation_year},#{evaluation_salary},#{evaluation_night},#{evaluation_rest},#{evaluation_intern},#{evaluation_vacation},#{evaluation_comment})
+		evaluation_comment, evaluation_date)
+		<if test="evaluation_comment==null||evaluation_comment.equals('')">
+			VALUES(evaluation_seq.NEXTVAL,#{company_no},#{member_id},#{evaluation_year},#{evaluation_salary},#{evaluation_night},#{evaluation_rest},#{evaluation_intern},#{evaluation_vacation},'작성내용이 없습니다.',SYSDATE)
+		</if>
+		<if test="!(evaluation_comment==null||evaluation_comment.equals(''))">
+			VALUES(evaluation_seq.NEXTVAL,#{company_no},#{member_id},#{evaluation_year},#{evaluation_salary},#{evaluation_night},#{evaluation_rest},#{evaluation_intern},#{evaluation_vacation},#{evaluation_comment},SYSDATE)
+		</if>
 	</insert>
 
-	<select id="evalUpdateForm">
+	<select id="evalUpdateForm" resultType="com.spring.dto.EvaluationDTO">
 		SELECT * FROM evaluation WHERE
 		evaluation_no=#{param1}
 	</select>
 
 	<update id="evalUpdate" parameterType="hashMap">
-		UPDATE evaluation SET
+		UPDATE evaluation
+		<set>
 		evaluation_night=#{evaluation_night},
 		evaluation_rest=#{evaluation_rest},
 		evaluation_intern=#{evaluation_intern},
-		evaluation_vacation=#{evaluation_vacation},
-		evaluation_comment=#{evaluation_comment}
-		WHERE evaluation_no =
-		#{evaluation_no}
+		evaluation_vacation=#{evaluation_vacation}
+	 		<if test="evaluation_comment==null||evaluation_comment.equals('')">,evaluation_comment='작성내용이 없습니다.'</if>
+	 		<if test="!(evaluation_comment==null||evaluation_comment.equals(''))">,evaluation_comment=#{evaluation_comment}</if>
+	 	</set>
+		WHERE evaluation_no =#{evaluation_no}
 	</update>
 
-	<update id="evalCntUp">
-		UPDATE company SET
-		company_eval=company_eval+#{param2} WHERE company_no=#{param1}
+	<update id="evalCnt">
+		UPDATE company SET company_eval=company_eval+#{param2} WHERE company_no=#{param1}
 	</update>
 
 	<delete id="evalDelete">
@@ -87,7 +97,7 @@
 	 -->
 	<!-- useGeneratedKeys="true" keyProperty="company_no" keyColumn="company_no" -->
 	<insert id="companyWrite" parameterType="com.spring.dto.CompanyDTO">
-		INSERT INTO company(company_no,company_name,company_salary,company_user,company_money,company_code,company_addr,company_eval)
-		VALUES(company_seq.NEXTVAL,#{company_name},#{company_salary},#{company_user},#{company_money},#{company_code},#{company_addr},0)
+		INSERT INTO company(company_no,company_name,company_salary,company_user,company_money,company_code,company_addr,company_eval,company_bHit)
+		VALUES(company_seq.NEXTVAL,#{company_name},#{company_salary},#{company_user},#{company_money},#{company_code},#{company_addr},0,0)
 	</insert>
 </mapper>

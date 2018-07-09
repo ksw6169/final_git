@@ -1,7 +1,8 @@
 package com.spring.controller;
 
 import java.util.HashMap;
-import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.service.CompanyService;
@@ -31,7 +33,7 @@ public class CompanyController {
 		
 		service.main();
 		
-		return "main";
+		return "redirect:./companyListForm";
 	}
 	
 	@RequestMapping(value = "/companyListForm")
@@ -54,32 +56,56 @@ public class CompanyController {
 	public ModelAndView companyDetail(@RequestParam("company_no") String company_no) {
 		logger.info("[companyDetail] company_no : "+ company_no);
 		return service.companyDetail(company_no);
-		//companyDTO.company_name, companyDTO.company_salary, companyDTO.company_user, companyDTO.evaluatino_nightAVG,
+		//companyDTO.company_no, companyDTO.company_name, companyDTO.company_salary, companyDTO.company_user, companyDTO.evaluatino_nightAVG,
 		//companyDTO.evaluatino_restAVG, companyDTO.evaluatino_internAVG, companyDTO.evaluatino_vacationAVG
 	}
 	
 	@RequestMapping(value = "/companyCommentView")
-	public @ResponseBody HashMap<String, Object> companyCommentView(@RequestParam HashMap<String, String> params){
+	public ModelAndView companyCommentView(@RequestParam("company_no") String company_no, HttpServletRequest request) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("company_no", company_no);
+		mav.addObject("userID",request.getSession().getAttribute("userID"));
+		mav.setViewName("comComment");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/evalDelete")
+	public @ResponseBody HashMap<String, Object> companyCommentDelete(@RequestParam("evaluation_no") String evaluation_no){
+		logger.info("[evalDelete] evaluation_no : "+ evaluation_no);
+		
+		return service.evalDelete(evaluation_no);
+	}
+	
+	@RequestMapping(value = "/companyCommentList")
+	public @ResponseBody HashMap<String, Object> companyCommentList(@RequestParam HashMap<String, String> params){
 		String company_no=params.get("company_no");
 		String pagingEnd=params.get("pagingEnd");
 		logger.info("[companyCommentView] company_no : "+company_no+" / pagingEnd : "+pagingEnd);
 		
-		return service.companyCommentView(company_no,pagingEnd);
+		return service.companyCommentList(company_no,pagingEnd);
 		//evaluationList[] - evaluation_comment, evaluation_night, evaluation_rest, evaluation_intern, evaluation_vacation
 	}
 	
 	@RequestMapping(value = "/evalForm")
-	public String evalForm() {
-		logger.info("[evalForm]");
-		return "comWrite";
+	public ModelAndView evalForm(@RequestParam("company_no") String company_no) {
+		logger.info("[evalForm]company_no : "+company_no);
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("company_no", company_no);
+		mav.setViewName("comWrite");
+		return mav;
 	}
 	
 	@RequestMapping(value = "/evalWrite")
-	public ModelAndView evalWrite(@RequestParam HashMap<String,String> params) {
+	public ModelAndView evalWrite(@RequestParam HashMap<String,String> params,  HttpServletRequest request) {
+		request.getSession().setAttribute("userID", "worhkddlsp");//나중에 주석처리
+		
 		String company_no=params.get("company_no");
-		String member_id= params.get("member_id");
-		String evaluation_year=params.get("evaluation_year");
-		String evaluation_salary=params.get("evaluation_salary");
+		
+		String member_id= (String) request.getSession().getAttribute("userID");
+		params.put("member_id", member_id);
+		
+		/*String evaluation_year=params.get("evaluation_year");
+		String evaluation_salary=params.get("evaluation_salary");*/
 		String evaluation_night=params.get("evaluation_night");
 		String evaluation_rest=params.get("evaluation_rest");
 		String evaluation_intern= params.get("evaluation_intern");
@@ -87,6 +113,7 @@ public class CompanyController {
 		String evaluation_comment=params.get("evaluation_comment");
 		
 		logger.info("[evalWrite] params(9개)");
+		logger.info(company_no+"/"+member_id+"/"+evaluation_night+"/"+evaluation_rest+"/"+evaluation_intern+"/"+evaluation_vacation+"/"+evaluation_comment);
 		return service.evalWrite(params);
 	}
 	

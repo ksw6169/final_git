@@ -50,7 +50,7 @@
 	                    <ul class="nav navbar-nav">
 	                      <li class="menu"><a href="#">김대리의<br>한마디</a></li>
 	                      <li class="menu"><a href="#">모르면<br>물어봐</a></li>
-	                      <li class="menu"><a href="#">너의<br>직장은?</a></li>
+	                      <li class="menu"><a href="./companyListForm">너의<br>직장은?</a></li>
 	                      <li class="menu"><a href="#">공지<br>합니다</a></li>
 	                    </ul>
 	                </div>
