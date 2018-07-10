@@ -89,7 +89,7 @@
            <span class="submenubar_button"><a href="./pageMove?page=myReplyList">내가 쓴 댓글 보기</a></span>
            <span class="submenubar_button"><a href="./pageMove?page=myWriteList">내가 쓴 글 보기</a></span>
            <span class="submenubar_button"><a href="./pageMove?page=companyUpdate">회사정보 수정</a></span>
-           <span class="submenubar_button"><a href="./pageMove?page=perUpdate">개인정보 수정</a></span>
+           <span class="submenubar_button"><a href="./perUpdateForm">개인정보 수정</a></span>
 	    </div>
 		
 		<div class="col-md-4 col-md-offset-4">

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.dto.MemberDTO;
 import com.spring.service.MemberService;
 
 
@@ -106,5 +107,25 @@ public class MemberController {
 		String userId = (String) request.getSession().getAttribute("loginId");
 		logger.info(userId);
 		return service.checkPW(userId, userPw);
+	}
+	
+	/*마이페이지 개인정보 수정 폼*/
+	@RequestMapping(value = "/perUpdateForm")
+	public ModelAndView perUpdateForm(HttpServletRequest request) {
+		logger.info("개인정보 수정 페이지 요청");
+		
+		String userId = (String) request.getSession().getAttribute("loginId");
+		logger.info(userId);
+		return service.perUpdateForm(userId);
+	}
+	
+	@RequestMapping(value = "/perUpdate")
+	public ModelAndView perUpdate(HttpServletRequest request, @RequestParam HashMap<String, String> map) {
+		logger.info("개인정보 수정 요청");
+		
+		String userId = (String) request.getSession().getAttribute("loginId");
+		map.put("id", userId);
+		logger.info(userId);
+		return service.perUpdate(map);
 	}
 }
