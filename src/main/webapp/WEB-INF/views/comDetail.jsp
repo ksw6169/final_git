@@ -3,6 +3,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 	<head>
+		<script>
+			divCheck();
+			function divCheck(){
+		    	var loginId = "${sessionScope.loginId}";
+		    	var loginDiv ="${sessionScope.member_div}";
+		
+		    	if(loginId != null && loginDiv == "인턴"){
+		    		alert("해당 게시판 권한이 없습니다.");
+		    		location.href=document.referrer;
+		    	}
+		    }
+		</script>
+		
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
    	 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -111,7 +124,7 @@
 		<div class="eval center-block">
 			<div class="row">
 				<div id="company_name" class="row_title center-block">
-					NHN Technology
+					기업명
 				</div>
 			</div>
 			<div class="row">
@@ -142,8 +155,6 @@
 	</div>
 </body>
 	<script>
-        //companyDTO.company_name, companyDTO.company_salary, companyDTO.company_user, companyDTO.evaluatino_nightAVG,
-		//companyDTO.evaluatino_restAVG, companyDTO.evaluatino_internAVG, companyDTO.evaluatino_vacationAVG
 		var dto={
 				company_name:"${companyDTO.company_name}",
 				company_salary:"${companyDTO.company_salary}",
@@ -158,7 +169,6 @@
 		companyPrint(dto);
 		
         function companyPrint(companyDTO){
-        	console.log(companyDTO.company_name);
             $("#company_name").html("<b>"+companyDTO.company_name+"</b>");
             $("#company_salary").html(companyDTO.company_salary+"만원");
             $("#company_user").html(companyDTO.company_eval+"명");
@@ -182,5 +192,6 @@
                 };
                 $.ajax(chk);
         }
+
 	</script>
 </html>

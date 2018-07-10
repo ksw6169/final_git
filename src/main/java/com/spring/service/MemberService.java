@@ -85,6 +85,7 @@ public class MemberService {
 		return mav;
 	}
 
+	/*마이페이지 비밀번호 체크*/
 	public ModelAndView checkPW(String userId, String userPw) {
 		inter = sqlSession.getMapper(MemberInter.class);
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -99,7 +100,7 @@ public class MemberService {
 		String msg = "비밀번호를 다시 입력해 주세요.";
 		
 		if(success) {
-			mav.setViewName("redirect:/pageMove?page=perUpdate");
+			mav.setViewName("redirect:/perUpdateForm");
 		} else {
 			mav.addObject("msg", msg);
 		}
@@ -124,5 +125,46 @@ public class MemberService {
 		map.put("msg", msg);
 		
 		return map;
+	}
+	
+	/*마이페이지-회원수정페이지*/
+	public ModelAndView perUpdateForm(String userId) {
+		ModelAndView mav = new ModelAndView();
+		inter = sqlSession.getMapper(MemberInter.class);
+		MemberDTO dto = new MemberDTO();
+		dto = inter.member(userId);
+		mav.addObject("member", dto);
+		mav.setViewName("perUpdate");
+		logger.info(dto.getMember_id());
+		return mav;
+	}
+
+	/*마이페이지 - 회원 수정*/
+	public ModelAndView perUpdate(HashMap<String, String> map) {
+		ModelAndView mav = new ModelAndView();
+		inter = sqlSession.getMapper(MemberInter.class);
+		if(map.get("pw") != "") { //들어온 비밀번호가 있다면 암호화 해서 map에 다시 넣음
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();	
+			String hash = encoder.encode(String.valueOf(map.get("pw")));
+			map.put("pw", hash);
+		}
+		int success = inter.perUpdate(map);
+		mav.setViewName("redirect:/perUpdateForm");
+		return mav;
+	}
+
+	/*회원탈퇴*/
+	public ModelAndView outMem(String userId) {
+		ModelAndView mav = new ModelAndView();
+		inter = sqlSession.getMapper(MemberInter.class);
+		int success = inter.outMem(userId);
+		
+		String msg = "회원탈퇴 실패";
+		if(success >0) {
+			mav.setViewName("redirect:/logout");
+			msg = "회원탈퇴 성공";
+		}
+		mav.addObject("msg", msg);
+		return mav;
 	}
 }

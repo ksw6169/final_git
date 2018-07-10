@@ -32,7 +32,7 @@
 	        .center-block{ width: 650px;}
 	        #group{background: black; color: white; height: 15px; width: 150px;}
 	        /* 비밀번호 확인 */
-	        #pwchk{ font-family: "bareun"; color: red; margin-left: 115px;}
+	        #warn{ font-family: "bareun"; color: red; margin-left: 115px;}
 	        #blink{height: 1px; background-color: white; border-color: white; width: 150px;}
 	        /* 성 밑에 설명 */
 	        #info{font-family: "bareun"; margin-left: 115px;}
@@ -68,46 +68,81 @@
            <span class="submenubar_button"><a href="./pageMove?page=myReplyList">내가 쓴 댓글 보기</a></span>
            <span class="submenubar_button"><a href="./pageMove?page=myWriteList">내가 쓴 글 보기</a></span>
            <span class="submenubar_button"><a href="./pageMove?page=companyUpdate">회사정보 수정</a></span>
-           <span class="submenubar_button"><a href="./pageMove?page=perUpdate">개인정보 수정</a></span>
+           <span class="submenubar_button"><a href="./perUpdateForm">개인정보 수정</a></span>
 	    </div>
 		
 		
 	    <div class="col-md-4 col-md-offset-4">   
-	        <form action="#" method="post">
-	        	
+	        <form method="post">
 				<div class="center-block">
 				<h1 class="content">개인정보 수정</h1>
 					<!-- 아이디 수정 -->
 					
 			        <div class="updateForm">아이디</div>
-					<input type="text" readonly="readonly" value="아이디"/>
+					<input type="text" readonly="readonly" value="${member.member_id}"/>
 	
 			       <!-- 비밀번호 수정 -->
 			        <div class="updateForm">비밀번호</div>  
-		            <input type="password" placeholder="비밀번호 입력">
+		            <input type="password" id="pw" placeholder="비밀번호 입력" name="pw">
 		            
 			        <!-- 비밀번호 확인 수정 -->
 			        <div class="updateForm">비밀번호 확인</div>  
-		            <input type="password" placeholder="비밀번호 입력">
-		            <div><span id="pwchk">비밀번호가 같지 않습니다. </span></div>
+		            <input type="password" id="pwChk" placeholder="비밀번호 입력">
+		            <div><span id="warn" >비밀번호가 같지 않습니다. </span></div>
 	
 			       <!--  이메일 수정 -->
 			        <div class="updateForm">이메일</div>  
-		            <input type="text" placeholder="이메일 입력">
+		            <input type="text" placeholder="이메일 입력" value="${member.member_email }" name="email">
 		            
 			        <!-- 성씨 수정 -->
 			        <div class="updateForm">성씨 입력</div>  
-		            <input type="text" placeholder="성씨 입력">
+		            <input type="text" placeholder="성씨 입력" value="${member.member_family }" name="family">
 			        <div><span id="info">*입력한 성씨는 '김인턴, 박인턴'과 같은 호칭에 사용됩니다.</span></div>
 			        <div><span id="info">*호칭은 본인 외 다른 사람들은 볼 수 없습니다.</span></div>
 		        </div>
 		        <br/>
 			    <div id="btnC" class="center-block">
-			    	<input id="mUpdate" type="button" value="개인정보 수정">
+			    	<button id="mUpdate">개인정보 수정</button>
 			    </div>
 	        </form>
 	    </div>
 	</body>
 	<script>
+	$(document).ready(function(){
+		$("#warn").hide();
+	});
+	
+	$("#pwChk").keyup(function(){
+		if($("#pw").val() != $("#pwChk").val()){
+			$("#warn").show();
+		}else{
+			$("#warn").hide();
+			console.log($("#warn"));
+		}
+		
+		//console.log("pwChk");
+	});
+	
+	$("#pw").keyup(function(){
+		if($("#pw").val() != $("#pwChk").val()){
+			$("#warn").show();
+		}else{
+			$("#warn").hide();
+		}
+	});
+	
+	$(".ckh_btn").click(function(){
+		if($("#warn").css("display") == "none"){
+			console.log("컨트롤러에 보냄");
+			$("form").attr("action", "checkPW");
+		}
+	});
+	
+	$("#mUpdate").click(function(){
+		if($("#warn").css("display") == "none"){
+			console.log("컨트롤러에 보냄");
+			$("form").attr("action", "perUpdate");
+		}
+	});
 	</script>
 </html>

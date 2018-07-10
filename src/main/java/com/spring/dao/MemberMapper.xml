@@ -24,4 +24,25 @@
 	<select id="overlay" parameterType="String" resultType="int">
 		SELECT COUNT(*) FROM member WHERE member_id = #{param1}
 	</select>
+	
+	<!-- 회원정보  -->
+	<select id="member" resultType="com.spring.dto.MemberDTO">
+		SELECT * FROM member WHERE member_id = #{param1}
+	</select>
+	
+	<!-- 회원 정보 수정 -->
+	 <update id="perUpdate" parameterType="hashMap">
+	 	UPDATE member
+	 	<set>
+	 		<if test="pw!=''">member_pw = #{pw},</if>
+	 		<if test="faily!=''">member_family = #{family},</if>
+	 		<if test="email!=''">member_email = #{email}</if>
+	 	</set>
+	 	WHERE member_id = #{id}
+	 </update>
+	 
+	 <!-- 회원 탈퇴 -->
+	 <delete id="outMem">
+	 	DELETE FROM member WHERE member_id = #{param1}
+	 </delete>
 </mapper>
