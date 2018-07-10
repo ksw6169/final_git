@@ -110,6 +110,12 @@
     	</div>
 	</body>
 	<script>
+	var msg = "${msg}";	
+	
+	if(msg != "") {
+		alert(msg);
+	}
+	
 	var userId = "${sessionScope.loginId}";
 	$(document).ready(function(){
 		$("#userId").val(userId);

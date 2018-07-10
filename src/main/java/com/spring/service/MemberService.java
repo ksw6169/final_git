@@ -95,7 +95,10 @@ public class MemberService {
 		inter = sqlSession.getMapper(MemberInter.class);
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		
-		String hash = inter.login(userId);
+		MemberDTO dto = new MemberDTO();
+		dto = inter.login(userId);
+		String hash = dto.getMember_pw();
+		
 		boolean success = encoder.matches(userPw, hash);
 		
 		ModelAndView mav = new ModelAndView();
@@ -103,7 +106,10 @@ public class MemberService {
 		
 		if(success) {
 			mav.setViewName("redirect:/pageMove?page=perUpdate");
+		} else {
+			mav.addObject("msg", msg);
 		}
+		
 		return mav;
 	}
 }
