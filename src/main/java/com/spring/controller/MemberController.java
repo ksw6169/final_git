@@ -3,6 +3,7 @@ package com.spring.controller;
 import java.util.HashMap;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -95,5 +96,15 @@ public class MemberController {
 		mav.setViewName("redirect:/");
 		
 		return mav;
+	}
+	
+	/*마이페이지 비밀번호 체크*/
+	@RequestMapping(value = "/checkPW")
+	public ModelAndView checkPW(HttpServletRequest request, @RequestParam("userPw") String userPw) {
+		logger.info("비밀번호 체크 요청");
+		
+		String userId = (String) request.getSession().getAttribute("loginId");
+		logger.info(userId);
+		return service.checkPW(userId, userPw);
 	}
 }

@@ -84,4 +84,20 @@ public class MemberService {
 		
 		return mav;
 	}
+
+	public ModelAndView checkPW(String userId, String userPw) {
+		inter = sqlSession.getMapper(MemberInter.class);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		
+		String hash = inter.login(userId);
+		boolean success = encoder.matches(userPw, hash);
+		
+		ModelAndView mav = new ModelAndView();
+		String msg = "비밀번호를 다시 입력해 주세요.";
+		
+		if(success) {
+			mav.setViewName("redirect:/pageMove?page=perUpdate");
+		}
+		return mav;
+	}
 }
