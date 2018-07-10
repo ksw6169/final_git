@@ -41,7 +41,6 @@ public class MemberController {
 	public String home(Locale locale, Model model) {
 		logger.info("메인 페이지 이동");
 		service.main();
-		
 		return "main";
 	}
 	
@@ -93,6 +92,7 @@ public class MemberController {
 	public ModelAndView memlogout(HttpSession session) {
 		logger.info("로그아웃 요청");
 		session.removeAttribute("loginId");
+		session.removeAttribute("member_div");
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("msg", "로그아웃 되었습니다.");
