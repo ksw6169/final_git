@@ -36,4 +36,9 @@
 	 	</set>
 	 	WHERE member_id = #{id}
 	 </update>
+	 
+	 <!-- 회원 탈퇴 -->
+	 <delete id="outMem">
+	 	DELETE FROM member WHERE member_id = #{param1}
+	 </delete>
 </mapper>

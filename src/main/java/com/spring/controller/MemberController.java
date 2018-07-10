@@ -119,6 +119,7 @@ public class MemberController {
 		return service.perUpdateForm(userId);
 	}
 	
+	/*마이페이지 개인정보 수정*/
 	@RequestMapping(value = "/perUpdate")
 	public ModelAndView perUpdate(HttpServletRequest request, @RequestParam HashMap<String, String> map) {
 		logger.info("개인정보 수정 요청");
@@ -127,5 +128,15 @@ public class MemberController {
 		map.put("id", userId);
 		logger.info(userId);
 		return service.perUpdate(map);
+	}
+	
+	/*마이페이지 회원탈퇴*/
+	@RequestMapping(value = "/outMem")
+	public ModelAndView outMem(HttpServletRequest request) {
+		logger.info("회원탈퇴 요청");
+		
+		String userId = (String) request.getSession().getAttribute("loginId");
+		logger.info(userId);
+		return service.outMem(userId);
 	}
 }

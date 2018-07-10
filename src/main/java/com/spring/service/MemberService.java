@@ -139,4 +139,19 @@ public class MemberService {
 		mav.setViewName("redirect:/perUpdateForm");
 		return mav;
 	}
+
+	/*회원탈퇴*/
+	public ModelAndView outMem(String userId) {
+		ModelAndView mav = new ModelAndView();
+		inter = sqlSession.getMapper(MemberInter.class);
+		int success = inter.outMem(userId);
+		
+		String msg = "회원탈퇴 실패";
+		if(success >0) {
+			mav.setViewName("redirect:/logout");
+			msg = "회원탈퇴 성공";
+		}
+		mav.addObject("msg", msg);
+		return mav;
+	}
 }

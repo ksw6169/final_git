@@ -10,4 +10,5 @@ public interface MemberInter {
 	MemberDTO login(String id);			// 로그인 요청
 	MemberDTO member(String userId);	//회원정보
 	int perUpdate(HashMap<String, String> map);	//회원 수정
+	int outMem(String userId);	//회원 탈퇴
 }
