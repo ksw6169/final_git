@@ -370,6 +370,8 @@
         </body>
         <script src="./resources/js/star.js"></script>
         <script>
+        divCheck();
+        
         $("#row1p1").attr('checked', true);
     	$("#row2p1").attr('checked', true);
     	$("#row3p1").attr('checked', true);
@@ -378,5 +380,34 @@
     	function before(){
     		location.href=document.referrer;
     	}
+    	
+    	//${company_no}
+    	function evalCheck(company_no){
+        	var chk={};
+        	chk.url="./evalCheck";
+        	chk.type="GET";
+        	chk.dataType="JSON";
+        	chk.error=function(e){console.log(e)};
+        	chk.data={"company_no":company_no};
+        	chk.success=function(data){
+                   if(data.success){
+                	   console.log("기업평가 작성 가능");
+                   }else{
+                	   alert(data.msg);
+                	   before();
+                	   }
+                };
+                $.ajax(chk);
+        }
+    	
+    	function divCheck(){
+         	var loginId = "${sessionScope.loginId}";
+         	var loginDiv = "${sessionScope.member_div}";
+
+         	if(loginId != null && loginDiv == "인턴"){
+         		alert("해당 게시판 권한이 없습니다.");
+         		location.href=document.referrer;
+         	}
+         }
         </script>
         </html>
