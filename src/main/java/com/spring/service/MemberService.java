@@ -67,8 +67,13 @@ public class MemberService {
 	public ModelAndView memlogin(String id, String pw, HttpSession session) {
 		inter = sqlSession.getMapper(MemberInter.class);
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
-		String hash = inter.login(id);	// 암호화된 pw 가져옴
+		
+		MemberDTO dto = new MemberDTO();
+		
+		dto = inter.login(id);
+		String hash = dto.getMember_pw();				// 암호화된 pw 가져옴
+		String member_div = dto.getMember_div();	// 사용자 권한 가져옴
+		
 		boolean success = encoder.matches(pw, hash);		// 입력한 pw와 암호화된 pw 비교
 
 		ModelAndView mav = new ModelAndView();
@@ -78,9 +83,32 @@ public class MemberService {
 			msg = "로그인 성공";
 			mav.setViewName("redirect:/");
 			session.setAttribute("loginId", id);
+			session.setAttribute("member_div", member_div);
 		}
 		
 		mav.addObject("msg", msg);
+		
+		return mav;
+	}
+
+	public ModelAndView checkPW(String userId, String userPw) {
+		inter = sqlSession.getMapper(MemberInter.class);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		
+		MemberDTO dto = new MemberDTO();
+		dto = inter.login(userId);
+		String hash = dto.getMember_pw();
+		
+		boolean success = encoder.matches(userPw, hash);
+		
+		ModelAndView mav = new ModelAndView();
+		String msg = "비밀번호를 다시 입력해 주세요.";
+		
+		if(success) {
+			mav.setViewName("redirect:/pageMove?page=perUpdate");
+		} else {
+			mav.addObject("msg", msg);
+		}
 		
 		return mav;
 	}
