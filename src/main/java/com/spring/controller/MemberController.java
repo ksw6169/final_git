@@ -2,6 +2,7 @@ package com.spring.controller;
 
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.dto.MemberDTO;
@@ -73,7 +75,7 @@ public class MemberController {
 	/* 회원가입 요청 */
 	// 인자가 추가로 있다면, 대리 회원가입으로
 	@RequestMapping(value = "/join")
-	public ModelAndView join(@RequestParam HashMap<String, Object> map) {
+	public @ResponseBody HashMap<String, Integer> join(@RequestParam HashMap<String, Object> map) {
 		logger.info("회원가입 요청");
 		return service.join(map);
 	}
@@ -99,6 +101,14 @@ public class MemberController {
 		return mav;
 	}
 	
+	/* 회원가입 시, ID 중복 확인 요청 */
+	@RequestMapping(value = "/overlay")
+	public @ResponseBody HashMap<String, String> overlay(@RequestParam("id") String id) {
+		logger.info("ID 중복 확인 요청");
+		
+		return service.overlay(id);
+	}
+	
 	/*마이페이지 비밀번호 체크*/
 	@RequestMapping(value = "/checkPW")
 	public ModelAndView checkPW(HttpServletRequest request, @RequestParam("userPw") String userPw) {
@@ -119,6 +129,7 @@ public class MemberController {
 		return service.perUpdateForm(userId);
 	}
 	
+	/*마이페이지 개인정보 수정*/
 	@RequestMapping(value = "/perUpdate")
 	public ModelAndView perUpdate(HttpServletRequest request, @RequestParam HashMap<String, String> map) {
 		logger.info("개인정보 수정 요청");
@@ -127,5 +138,15 @@ public class MemberController {
 		map.put("id", userId);
 		logger.info(userId);
 		return service.perUpdate(map);
+	}
+	
+	/*마이페이지 회원탈퇴*/
+	@RequestMapping(value = "/outMem")
+	public ModelAndView outMem(HttpServletRequest request) {
+		logger.info("회원탈퇴 요청");
+		
+		String userId = (String) request.getSession().getAttribute("loginId");
+		logger.info(userId);
+		return service.outMem(userId);
 	}
 }
