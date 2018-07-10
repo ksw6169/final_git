@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.taglibs.standard.tag.common.fmt.RequestEncodingSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,13 +35,15 @@ public class BoardController {
 	
 	//공지사항 리스트
 	@RequestMapping(value="/nBoardList")
-	public @ResponseBody HashMap<String, Object> nBoardList(@RequestParam Map<String, String> map) {
+	public @ResponseBody HashMap<String, Object> nBoardList(@RequestParam Map<String, String> map, HttpServletRequest request) {
 		logger.info("공지사항 리스트 실행");
 		String startPage = map.get("startPage");
 		String addPage = map.get("addPage");
+		String serch = map.get("serch");
 		logger.info(map.get("startPage"));
-		
 		logger.info(startPage+"/"+addPage);
+		String id = (String) request.getSession().getAttribute("loginId");
+		map.put("loginId",id);
 		return service.nBoardList(startPage,addPage);
 	}
 	
@@ -48,7 +51,11 @@ public class BoardController {
 	@RequestMapping(value="/nBoardWrite")
 	public ModelAndView nBoardWrite(@RequestParam HashMap<String, String> map, HttpSession session) {
 		logger.info("공지사항 작성 실행");
-	//	String id = (String) session.getAttribute("admin");
+		String id = (String) session.getAttribute("admin");
+		map.put("admin", id); //map에 담음
+		String board_title = map.get("board_title");
+		String board_content = map.get("board_content");
+		logger.info(board_title+"/"+board_content+"/"+id);
 		return service.nBoardWrite(map);
 	}
 	
@@ -84,12 +91,6 @@ public class BoardController {
 		
 		return service.nBoardUpdate(map);
 	}
-/*	공지사항내에 검색 
- * @RequestMapping(value="/NoticeSerch")
-	public ModelAndView NoticeSerch() {
-		
-		return service.serch();
-	}*/
 	
 	/*내가 쓴 글 리스트 - ajax*/
 	@RequestMapping(value = "/myWriteList")

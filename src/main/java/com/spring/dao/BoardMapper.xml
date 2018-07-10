@@ -8,11 +8,17 @@
 
 	<!-- 공지사항 리스트 -->
 	<select id="nBoardList" resultType="com.spring.dto.BoardDTO">
-		SELECT board_no,board_title,board_date,board_bHit 
+		SELECT board_no,board_title,board_content,board_date,board_bHit 
 			FROM 
-			(SELECT board_no,board_title,board_date,board_bHit, 
-					ROW_NUMBER() OVER(ORDER BY board_no DESC) AS rnum FROM board) 
-						WHERE rnum BETWEEN #{param1} AND #{param2}
+			(SELECT board_no,board_title,board_content,board_date,board_bHit, 
+					ROW_NUMBER() OVER(ORDER BY board_no DESC) AS rnum FROM board
+<!-- 				<where>
+					<if test="serch !=null || !serch.equals('')">
+						board_title LIKE '%'||#{param3}||'%' AND board_content LIKE '%'||#{param3}||'%'
+					</if>
+				</where>	 -->
+					) 
+					WHERE rnum BETWEEN #{param1} AND #{param2}
 	</select>
 	
 	<!-- 공지사항 작성  -->
@@ -23,14 +29,13 @@
 		keyProperty = "idx" <- 키가 될 필드
 		keyColumn = "idx" <- 키가 저장될 컬럼
 	 -->
-	<insert id="nBoardWrite" 
-	parameterType="com.spring.dto.BoardDTO"
-	useGeneratedKeys="true"
-	keyProperty="board_no"
-	keyColumn="board_no">
+	<insert id="nBoardWrite"  parameterType="com.spring.dto.BoardDTO"
+		 	useGeneratedKeys="true"
+	 	keyProperty="board_no" 	keyColumn="board_no">
 		INSERT INTO board(board_no,member_id,board_title,board_content) 
-			VALUES(board_seq.NEXTVAL,'admin',#{board_title},#{board_content})
+			VALUES(board_seq.NEXTVAL,#{member_id},#{board_title},#{board_content})
 	</insert>
+	
 	
  	<!-- 공지사항 상세보기  -->
 	<select id="nBoardDetail" resultType="com.spring.dto.BoardDTO"> 
@@ -51,12 +56,6 @@
 	<update id="upHit">
 		UPDATE board SET board_bHit = board_bHit+1 WHERE board_no= #{param1}
 	</update> 	
-	
-	
-	<!-- 공지사항 게시물 총 수  -->
-	<select id="allCount" resultType="Integer">
-		SELECT COUNT(*) FROM board WHERE member_id ='admin'
-	</select>
 	
 	
 	<select id="myWriteList" parameterType="map" resultType="com.spring.dto.BoardDTO">

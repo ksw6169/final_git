@@ -18,7 +18,6 @@ public interface BoardInter {
 
 	void upHit(String board_no);
 
-	int allCount(); //총 게시물 수 
 	
 	ArrayList<BoardDTO> myWriteList(Map<String, String> params);//내가 쓴 글 리스트
 

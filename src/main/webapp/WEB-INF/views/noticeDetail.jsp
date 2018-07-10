@@ -67,20 +67,20 @@
                 <table class="table">
                      <tr>
                        <th>제목</th>
-                       <td class="subject">{board.board_subject}</td>
+                       <td class="subject">${board.board_title}</td>
                      </tr>
                      <tr>
                        <th colspan="2">내용</th>
                      </tr>
                      <tr>
-                       <td class="contents" colspan="2">{board.board_content}</td>
+                       <td class="contents" colspan="2">${board.board_content}</td>
                      </tr>
                 </table>
             </div>    
             <div class="button-group">
                 <button class="btn btn-default pull-right" onclick="location.href='nBoardDelete'">삭제</button>
                 <button class="btn btn-default pull-right" onclick="location.href='noticeUpdate'">수정</button>
-                <button class="btn btn-default pull-right" onclick="location.href='noticeList'">목록</button>       
+                <button class="btn btn-default pull-right" onclick="history.go(-1)">목록</button>       
             </div>
         </div>
     </div>

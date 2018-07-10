@@ -31,7 +31,6 @@ public class BoardService {
 		inter = sqlSession.getMapper(BoardInter.class);
 		HashMap<String , Object> map = new HashMap<>();
 		map.put("nBoardList", inter.nBoardList(startPage, addPage));
-	
 		return map;
 	}
 
@@ -87,7 +86,7 @@ public class BoardService {
 		inter = sqlSession.getMapper(BoardInter.class);
 		inter.upHit(board_no);
 		mav.addObject("board", inter.nBoardDetail(board_no));
-		mav.setViewName("noticDetail");
+		mav.setViewName("noticeDetail");
 		
 		return mav;
 	}
