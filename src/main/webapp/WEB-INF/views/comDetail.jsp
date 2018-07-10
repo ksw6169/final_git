@@ -152,6 +152,7 @@
 				evaluatino_restAVG:"${companyDTO.evaluatino_restAVG}",
 				evaluatino_internAVG:"${companyDTO.evaluatino_internAVG}",
 				evaluatino_vacationAVG:"${companyDTO.evaluatino_vacationAVG}",
+				company_eval:"${companyDTO.company_eval}"
         };
         
 		companyPrint(dto);
@@ -160,11 +161,26 @@
         	console.log(companyDTO.company_name);
             $("#company_name").html("<b>"+companyDTO.company_name+"</b>");
             $("#company_salary").html(companyDTO.company_salary+"만원");
-            $("#company_user").html(companyDTO.company_user+"명");
+            $("#company_user").html(companyDTO.company_eval+"명");
             $("#evaluatino_nightAVG").attr("src","./resources/image/star_"+Math.floor(companyDTO.evaluatino_nightAVG)+".png");
             $("#evaluatino_restAVG").attr("src","./resources/image/star_"+Math.floor(companyDTO.evaluatino_restAVG)+".png");
             $("#evaluatino_internAVG").attr("src","./resources/image/star_"+Math.floor(companyDTO.evaluatino_internAVG)+".png");
             $("#evaluatino_vacationAVG").attr("src","./resources/image/star_"+Math.floor(companyDTO.evaluatino_vacationAVG)+".png");
+        }
+        
+        function evalCheck(company_no){
+        	var chk={};
+        	chk.url="./evalCheck";
+        	chk.type="GET";
+        	chk.dataType="JSON";
+        	chk.error=function(e){console.log(e)};
+        	chk.data={"company_no":company_no};
+        	chk.success=function(data){
+                   if(data.success){
+                	   location.href="./evalForm?company_no="+company_no;
+                   }else{alert(msg);}
+                };
+                $.ajax(chk);
         }
 	</script>
 </html>

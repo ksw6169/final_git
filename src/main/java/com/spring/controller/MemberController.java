@@ -3,22 +3,19 @@ package com.spring.controller;
 import java.util.HashMap;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.spring.dao.MemberInter;
 import com.spring.service.MemberService;
 
 
@@ -99,5 +96,15 @@ public class MemberController {
 		mav.setViewName("redirect:/");
 		
 		return mav;
+	}
+	
+	/*마이페이지 비밀번호 체크*/
+	@RequestMapping(value = "/checkPW")
+	public ModelAndView checkPW(HttpServletRequest request, @RequestParam("userPw") String userPw) {
+		logger.info("비밀번호 체크 요청");
+		
+		String userId = (String) request.getSession().getAttribute("loginId");
+		logger.info(userId);
+		return service.checkPW(userId, userPw);
 	}
 }

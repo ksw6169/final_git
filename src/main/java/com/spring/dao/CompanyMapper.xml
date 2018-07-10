@@ -100,4 +100,8 @@
 		INSERT INTO company(company_no,company_name,company_salary,company_user,company_money,company_code,company_addr,company_eval,company_bHit)
 		VALUES(company_seq.NEXTVAL,#{company_name},#{company_salary},#{company_user},#{company_money},#{company_code},#{company_addr},0,0)
 	</insert>
+	
+	<update id="memberEvalCnt">
+		UPDATE member SET member_eval=member_eval+#{param2} WHERE member_id=#{param1}
+	</update>
 </mapper>

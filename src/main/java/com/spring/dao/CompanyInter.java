@@ -29,4 +29,6 @@ public interface CompanyInter {
 	int evalDelete(String evaluation_no); //기업평가 삭제
 
 	void companyUpHit(String company_no);
+	
+	int memberEvalCnt(String member_id,int plus);
 }

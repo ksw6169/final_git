@@ -19,6 +19,7 @@
 			margin-top:25px;float:right;background-color:#121F27;cursor:pointer;}
 		.submenubar_button{margin-right:10px;}
 		.submenubar_button_last{margin-right:100px};
+		
     
         body { padding-top: 100px; }
         .content { font-family: "bareun"; text-align: center; margin-bottom: 50px; }
@@ -30,6 +31,23 @@
         .container {
 			margin-top: 150px;
 		}
+		
+		/* submenuBar 링크 글자 색상 */
+		.submenubar_button a{ color: white;}
+		.submenubar_button_last a{color: white;}
+		.submenubar_button a:hover{color: #FF8000; background-color: #121F27;text-decoration: none;}
+		.submenubar_button_last a:hover{color: #FF8000; background-color: #121F27; text-decoration: none;}
+		.submenubar_button a:active{color: #FF8000; background-color: #121F27;text-decoration: none;}
+		.submenubar_button_last a:active{color: #FF8000; background-color: #121F27;text-decoration: none;}
+		
+      /* 리스트 크기 */
+      #board_date{width: 350px;}
+      #board_no{width: 150px;}
+      /* 링크 글색 */
+      .boardLink{color: black;}
+      .boardLink:hover{text-decoration: none; color: black;}
+      .boardLink:active{text-decoration: none; color: black;}
+      .boardLink:visited {text-decoration: none; color: black;}
     </style>
   </head>
 	<body>
@@ -43,87 +61,118 @@
 	                </tr>
 	            </table>
 	        </div>
-	        <span class="submenubar_button_last">회원탈퇴</span>
-	        <span class="submenubar_button">내가 쓴 댓글 보기</span>
-	        <span class="submenubar_button">내가 쓴 글 보기</span>
-	        <span class="submenubar_button">회원정보 수정</span>
-	        <span class="submenubar_button">개인정보 수정</span>
+           <span class="submenubar_button_last"><a href="./pageMove?page=outMemForm">회원탈퇴</a></span>
+           <span class="submenubar_button"><a href="./pageMove?page=myReplyList">내가 쓴 댓글 보기</a></span>
+           <span class="submenubar_button"><a href="./pageMove?page=myWriteList">내가 쓴 글 보기</a></span>
+           <span class="submenubar_button"><a href="./pageMove?page=companyUpdate">회사정보 수정</a></span>
+           <span class="submenubar_button"><a href="./pageMove?page=perUpdate">개인정보 수정</a></span>
 	    </div>
 	
 	
 	    <div class="container">
 	        <h1 class="content">내가 쓴 댓글 보기</h1>
-	        <table class="table table-hover">
-	            <thead>
+	        <table class="table table-hover" id="listTable">
+	            <thead id="tableTh">
 	             <tr>
 	               <th class="center">번 호 </th>
 	               <th class="center">내 용</th>
 	               <th class="center">작성일자</th>
 	             </tr>
 	             </thead>
-	             <tr>
-	               <td>1</td>
-	               <td><a href="#">내용내용내용내용내용내용내용내용내용내용내용내용내용내용</a></td>
-	               <td>2018-09-10 10:50</td>
-	             </tr>
-	             <tr>
-	               <td>2</td>
-	               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-	               <td>2018-09-10 10:49</td>
-	             </tr>
-	             <tr>
-	               <td>3</td>
-	               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-	               <td>2018-09-10 10:48</td>
-	             </tr>
-	             <tr>
-	               <td>4</td>
-	               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-	               <td>2018-09-10 10:48</td>
-	             </tr>
-	             <tr>
-	               <td>5</td>
-	               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-	               <td>2018-09-10 10:48</td>
-	             </tr>
-	             <tr>
-	               <td>6</td>
-	               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-	               <td>2018-09-10 10:48</td>
-	             </tr>
-	             <tr>
-	               <td>7</td>
-	               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-	               <td>2018-09-10 10:48</td>
-	             </tr>
-	             <tr>
-	               <td>8</td>
-	               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-	               <td>2018-09-10 10:48</td>
-	             </tr>
-	             <tr>
-	               <td>9</td>
-	               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-	               <td>2018-09-10 10:48</td>
-	             </tr>
-	             <tr>
-	               <td>10</td>
-	               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-	               <td>2018-09-10 10:48</td>
-	             </tr>
+	             <tbody id="list">
+	             </tbody>
 	        </table>
-	        <div class="paging_button">
-	          <ul class="pagination">
-	            <li class="page-item disabled">
-	              <a class="page-link" href="#" tabindex="-1">이전 페이지</a>
-	            </li>
-	            <li class="page-item">
-	              <a class="page-link" href="#">다음 페이지</a>
-	            </li>
-	          </ul>
-	        </div>
+           <div class="paging_button">
+             <ul class="pagination">
+               <li id="preLi" class="page-item">
+                 <a id="pre" class="page-link" tabindex="-1">이전 페이지</a>
+               </li>
+               <li id="nextLi" class="page-item">
+                 <a id="next" class="page-link">다음 페이지</a>
+               </li>
+             </ul>
+           </div>
 	    </div>
 	</body>
 	<script>
+	   var tableTh = $("#tableTh").html();
+	   var sNum = 1;
+	   var eNum = 10;
+	   var listCnt = 0;
+	   var obj = {};
+	   var options = {year: "numeric", month: "numeric",
+			    day: "numeric", hour: "2-digit", minute: "numeric", second: "numeric"};
+	   
+	   obj.error=function(e){console.log(e)}; //ajax 에러날 경우의 함수
+	   obj.type="POST"; //ajax로 보낼 타입
+	   obj.dataType="JSON"; //ajax 실행 후 받을 값 형태
+	   $(document).ready(function(){
+	      listCall();
+	      console.log($("#preLi"));
+	      
+	   });
+	   
+	   $("#pre").click(function(){
+		   if($("#preLi").attr('class') != "page-item disabled"){
+			   sNum -= 10;
+			   eNum -= 10;
+			   listCall();
+		   }
+	   });
+	   
+	   $("#next").click(function(){
+		   if($("#nextLi").attr('class') != 'page-item disabled'){
+			   sNum += 10;
+			   eNum += 10;
+			   listCall();
+		   }
+	   });
+	   
+	   //리스트 요청
+		function listCall(){
+		   	obj.url = "./myReplyList"; //ajax myWriteList로 요청
+			obj.data={ //같이 보낼 데이터
+				"sNum":sNum,
+				"eNum":eNum
+			};
+		   	obj.success=function(data){ //성공시의 함수
+		   		console.log(data);
+		   		listCnt = data.listCnt;
+				listPrint(data.list);
+				if(eNum >= listCnt){
+					$("#nextLi").addClass('disabled');
+				}else{
+					$("#nextLi").removeClass('disabled');
+				}
+				if(sNum == 1){
+					$("#preLi").addClass('disabled');
+				}else{
+					$("#preLi").removeClass('disabled');
+				}
+			};
+			ajaxCall(obj); //아작스 보내는 함수 호출
+	   }
+	   
+		//받아온 리스트 그리기
+		function listPrint(list){
+			var content = "";
+			list.forEach(function(item, idx){
+				content += "<tr class='listVal'>";
+				content += "<td>"+item.rnum+"</td>";
+				content += "<td><a class='boardLink' href='#'>"+item.reply_content+"</a></td>";
+				
+				//millisecond 로 나올경우
+				var date = new Date(item.reply_date);
+				content += "<td>"+date.toLocaleDateString("ko-KR", options)+"</td>";
+				content += "</tr>";
+			});
+			$("#list").empty();
+			$("#list").append(content);//내용 붙이기
+		}
+	   
+
+		function ajaxCall(obj){
+			$.ajax(obj);
+		}
 	</script>
 </html>

@@ -8,6 +8,15 @@ public class ReplyDTO {
 	private int board_no;
 	private String reply_content;
 	private Timestamp reply_date;
+	private int rnum;
+	
+	
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
 	public int getReply_no() {
 		return reply_no;
 	}

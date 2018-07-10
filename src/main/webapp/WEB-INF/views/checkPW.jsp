@@ -85,23 +85,23 @@
 	    <jsp:include page="menubar.jsp" flush="false"/>
 
 		<div class="col-md-4 col-md-offset-4">
-	        <form action="" method="">
+	        <form method="post">
 	            <div class="chk_group">    
 	                <h1 class="content">비밀번호 확인</h1>
 	                <!-- 아이디 입력 -->
 	                <div>
 	                <div class="joinForm">아이디 </div>
-	                <input type="text" value="아이디" readonly="readonly"/></div>
+	                <input id="userId" type="text" value="" readonly="readonly" name="userId"/></div>
 	                
 					<!-- 비밀번호 -->
 					<div>
 	                <div class="joinForm">비밀번호</div>  
-	                <input type="password" placeholder="비밀번호 입력"></div>
+	                <input type="password" id="pw" placeholder="비밀번호 입력" name="userPw"></div>
 	                <!-- 비밀번호 확인 -->
 	                <div>
 	                <div class="joinForm">비밀번호 확인</div>
-	                <input type="password" placeholder="비밀번호 확인 입력">
-	                <span class="warn">비밀번호와 같지 않습니다. </span></div>
+	                <input type="password" id="pwChk" placeholder="비밀번호 확인 입력">
+	                <span id="warn" class="warn">비밀번호와 같지 않습니다. </span></div>
 				</div>
 	            <div class="btn_group">
 	                <button class="ckh_btn">비밀번호 확인</button>
@@ -110,5 +110,38 @@
     	</div>
 	</body>
 	<script>
+	var userId = "${sessionScope.loginId}";
+	$(document).ready(function(){
+		$("#userId").val(userId);
+		$("#warn").hide();
+	});
+	
+	$("#pwChk").keyup(function(){
+		if($("#pw").val() != $("#pwChk").val()){
+			$("#warn").show();
+		}else{
+			$("#warn").hide();
+			console.log($("#warn"));
+		}
+		
+		//console.log("pwChk");
+	});
+	
+	$("#pw").keyup(function(){
+		if($("#pw").val() != $("#pwChk").val()){
+			$("#warn").show();
+		}else{
+			$("#warn").hide();
+		}
+	});
+	
+	$(".ckh_btn").click(function(){
+		if($("#warn").css("display") == "none"){
+			console.log("컨트롤러에 보냄");
+			$("form").attr("action", "checkPW");
+		}
+	});
+	
+	
 	</script>
 </html>

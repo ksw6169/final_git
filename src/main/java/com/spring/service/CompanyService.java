@@ -15,6 +15,7 @@ import com.spring.dao.CompanyInter;
 import com.spring.dao.MemberInter;
 import com.spring.dto.CompanyDTO;
 import com.spring.dto.EvaluationDTO;
+import com.spring.dto.MemberDTO;
 @Service
 public class CompanyService {
 
@@ -94,12 +95,11 @@ public class CompanyService {
 		dto.setEvaluation_vacation(Integer.parseInt(params.get("evaluation_vacation")));
 		dto.setEvaluation_comment(params.get("evaluation_comment"));
 		
-		if(dto.getEvaluation_comment()==null) {dto.setEvaluation_comment("작성내용이 없습니다.");}
-		
 		inter=sqlSession.getMapper(CompanyInter.class);
 		int success=inter.evalWrite(dto);
 		String page="comWrite";
 		if(success>0) {
+			inter.memberEvalCnt(dto.getMember_id(), 1);
 			inter.evalCnt(dto.getCompany_no(),1);
 			page="redirect:./companyCommentView?company_no="+dto.getCompany_no();
 			
@@ -144,15 +144,43 @@ public class CompanyService {
 	}
 
 	@Transactional
-	public HashMap<String, Object> evalDelete(String evaluation_no) {
+	public HashMap<String, Object> evalDelete(String evaluation_no, String member_id) {
 		inter=sqlSession.getMapper(CompanyInter.class);
 		EvaluationDTO dto=inter.evalUpdateForm(evaluation_no);
 		int success=inter.evalDelete(evaluation_no);
 		
-		if(success>0){inter.evalCnt(dto.getCompany_no(),-1);}
+		if(success>0){
+			inter.memberEvalCnt(member_id, -1);
+			inter.evalCnt(dto.getCompany_no(),-1);
+			}
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("success",success);
 		
+		return map;
+	}
+
+	public HashMap<String, Object> evalCheck(String company_no, String member_id) {
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		Boolean success=false;
+		String msg="DB 조회 오류!";
+		
+		inter=sqlSession.getMapper(CompanyInter.class);
+		CompanyDTO companyDTO=inter.companyDetail(company_no);
+		
+		MemberInter memberInter=sqlSession.getMapper(MemberInter.class);
+		MemberDTO memberDTO=null;
+		if(Integer.parseInt(memberDTO.getMember_cert())>0) {
+		msg="기업 인증을 진행하지 않으셨습니다.";	
+		}else if(Integer.parseInt(memberDTO.getMember_eval())>0) {
+			msg="이미 기업평가를 하셨습니다.";
+		}else if(!companyDTO.getCompany_name().equals(memberDTO.getMember_company())) {
+			msg="해당 기업의 직원으로 인증되지 않으셨습니다.";
+		}else {
+			success=true;
+		}
+		
+		map.put("success", success);
+		map.put("msg", msg);
 		return map;
 	}
 	
