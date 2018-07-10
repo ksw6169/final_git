@@ -144,6 +144,7 @@
 	<script>
         //companyDTO.company_name, companyDTO.company_salary, companyDTO.company_user, companyDTO.evaluatino_nightAVG,
 		//companyDTO.evaluatino_restAVG, companyDTO.evaluatino_internAVG, companyDTO.evaluatino_vacationAVG
+		divCheck();
 		var dto={
 				company_name:"${companyDTO.company_name}",
 				company_salary:"${companyDTO.company_salary}",
@@ -182,5 +183,17 @@
                 };
                 $.ajax(chk);
         }
+        
+        function divCheck(){
+        	var loginId = "${sessionScope.loginId}";
+        	var loginDiv = "${sessionScope.member_div}";
+
+        	if(loginId != null && loginDiv == "인턴"){
+        		alert("해당 게시판 권한이 없습니다.");
+        		location.href=document.referrer;
+        	}
+        }
+        
+        
 	</script>
 </html>

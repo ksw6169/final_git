@@ -65,14 +65,14 @@ public class CompanyController {
 	public ModelAndView companyCommentView(@RequestParam("company_no") String company_no, HttpServletRequest request) {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("company_no", company_no);
-		mav.addObject("userID",request.getSession().getAttribute("userID"));
+		mav.addObject("userID",request.getSession().getAttribute("loginId"));
 		mav.setViewName("comComment");
 		return mav;
 	}
 	
 	@RequestMapping(value = "/evalDelete")
 	public @ResponseBody HashMap<String, Object> companyCommentDelete(@RequestParam("evaluation_no") String evaluation_no, HttpServletRequest request){
-		String member_id=(String) request.getSession().getAttribute("userID");
+		String member_id=(String) request.getSession().getAttribute("loginId");
 		logger.info("[evalDelete] evaluation_no : "+ evaluation_no+" / member_id : "+member_id);
 		
 		
@@ -100,11 +100,9 @@ public class CompanyController {
 	
 	@RequestMapping(value = "/evalWrite")
 	public ModelAndView evalWrite(@RequestParam HashMap<String,String> params,  HttpServletRequest request) {
-		request.getSession().setAttribute("userID", "worhkddlsp");//나중에 주석처리
-		
 		String company_no=params.get("company_no");
 		
-		String member_id= (String) request.getSession().getAttribute("userID");
+		String member_id= (String) request.getSession().getAttribute("loginId");
 		params.put("member_id", member_id);
 		
 		/*String evaluation_year=params.get("evaluation_year");
@@ -144,7 +142,7 @@ public class CompanyController {
 	
 	@RequestMapping(value = "/evalCheck")
 	public @ResponseBody HashMap<String, Object> evalCheck(HttpServletRequest request, @RequestParam("company_no") String company_no){
-		String member_id=(String) request.getSession().getAttribute("userID");
+		String member_id=(String) request.getSession().getAttribute("loginId");
 		logger.info("[evalCheck] company_no : "+company_no+" / member_id : "+member_id);
 		
 		return service.evalCheck(company_no,member_id);

@@ -129,7 +129,8 @@
 	<script>
 	var obj={};
 	var userID="${userID}";
-	console.log(userID);
+	divCheck();
+	
 	createObj(obj);
 	ajaxCall(obj);
 	
@@ -212,6 +213,8 @@
 		        	  content+="<button class='button_group pull-right' onclick='commentUpdate("+evaluationDTO.evaluation_no+")'>수정</button>";
 		        	  content+="<br>";
 		        	  content+="<button class='button_group pull-right' onclick='commentDelete("+evaluationDTO.evaluation_no+")'''>삭제</button>";
+	        	 }else if(userID=="admin"){
+	        		 content+="<button class='div_dont pull-right' onclick='commentDelete("+evaluationDTO.evaluation_no+")'''>삭제</button>";
 	        	 }else{
 	        		 content+="<div class='div_dont'>수정 불가</div>";
 	        	 }
@@ -236,6 +239,16 @@
                 }else{alert(msg);}
              };
              $.ajax(chk);
+     }
+	 
+	 function divCheck(){
+     	var loginId = "${sessionScope.loginId}";
+     	var loginDiv = "${sessionScope.member_div}";
+
+     	if(loginId != null && loginDiv == "인턴"){
+     		alert("해당 게시판 권한이 없습니다.");
+     		location.href=document.referrer;
+     	}
      }
 	</script>
 </html>
