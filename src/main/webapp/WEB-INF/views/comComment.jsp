@@ -3,6 +3,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 	<head>
+		<script>
+			divCheck();
+			function divCheck(){
+		    	var loginId = "${sessionScope.loginId}";
+		    	var loginDiv ="${sessionScope.member_div}";
+		
+		    	if(loginId != null && loginDiv == "인턴"){
+		    		alert("해당 게시판 권한이 없습니다.");
+		    		location.href=document.referrer;
+		    	}
+		    }
+		</script>
+	
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
    	 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -129,7 +142,6 @@
 	<script>
 	var obj={};
 	var userID="${userID}";
-	divCheck();
 	
 	createObj(obj);
 	ajaxCall(obj);
@@ -209,11 +221,11 @@
 	        	  content+="<td class='td_star'><img class='star_grade' src='./resources/image/star_"+evaluationDTO.evaluation_intern+".png'/></td>";
 	        	  content+="<td class='td_star'><img class='star_grade' src='./resources/image/star_"+evaluationDTO.evaluation_vacation+".png'/></td>"; 
 	        	  content+="<td class='reply_updel'>";
-	        	 if(userID!=null&&userID==evaluationDTO.member_id){ //실제 사용 시 || 없애면됨
+	        	 if(userID!=null&&userID==evaluationDTO.member_id){
 		        	  content+="<button class='button_group pull-right' onclick='commentUpdate("+evaluationDTO.evaluation_no+")'>수정</button>";
 		        	  content+="<br>";
 		        	  content+="<button class='button_group pull-right' onclick='commentDelete("+evaluationDTO.evaluation_no+")'''>삭제</button>";
-	        	 }else if(userID=="admin"){
+	        	 }else if("${sessionScope.member_div}"=="관리자"){
 	        		 content+="<button class='div_dont pull-right' onclick='commentDelete("+evaluationDTO.evaluation_no+")'''>삭제</button>";
 	        	 }else{
 	        		 content+="<div class='div_dont'>수정 불가</div>";
@@ -239,16 +251,6 @@
                 }else{alert(msg);}
              };
              $.ajax(chk);
-     }
-	 
-	 function divCheck(){
-     	var loginId = "${sessionScope.loginId}";
-     	var loginDiv = "${sessionScope.member_div}";
-
-     	if(loginId != null && loginDiv == "인턴"){
-     		alert("해당 게시판 권한이 없습니다.");
-     		location.href=document.referrer;
-     	}
      }
 	</script>
 </html>

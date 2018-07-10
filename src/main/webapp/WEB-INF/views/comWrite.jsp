@@ -4,6 +4,19 @@
         <html>
 
         <head>
+	        <script>
+				divCheck();
+				function divCheck(){
+			    	var loginId = "${sessionScope.loginId}";
+			    	var loginDiv ="${sessionScope.member_div}";
+			
+			    	if(loginId != null && loginDiv == "인턴"){
+			    		alert("해당 게시판 권한이 없습니다.");
+			    		location.href=document.referrer;
+			    	}
+			    }
+			</script>
+        
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -370,8 +383,6 @@
         </body>
         <script src="./resources/js/star.js"></script>
         <script>
-        divCheck();
-        
         $("#row1p1").attr('checked', true);
     	$("#row2p1").attr('checked', true);
     	$("#row3p1").attr('checked', true);
@@ -399,15 +410,5 @@
                 };
                 $.ajax(chk);
         }
-    	
-    	function divCheck(){
-         	var loginId = "${sessionScope.loginId}";
-         	var loginDiv = "${sessionScope.member_div}";
-
-         	if(loginId != null && loginDiv == "인턴"){
-         		alert("해당 게시판 권한이 없습니다.");
-         		location.href=document.referrer;
-         	}
-         }
         </script>
         </html>
