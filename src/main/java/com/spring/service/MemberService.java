@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.dao.MemberInter;
@@ -24,15 +25,13 @@ public class MemberService {
 	String photo = null;
 
 	public void main() {
-		
 		logger.info("MemberService 접속");
-		
 	}
 
 	// 회원가입 요청
-	public ModelAndView join(HashMap<String, Object> map) {
+	public @ResponseBody HashMap<String, Integer> join(HashMap<String, Object> map) {
 		int success = 0;	// 회원가입 성공 여부
-		ModelAndView mav = new ModelAndView();
+		HashMap<String, Integer> resultMap = new HashMap<>();
 		
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();	
 		String hash = encoder.encode(String.valueOf(map.get("pw")));
@@ -53,14 +52,9 @@ public class MemberService {
 		inter = sqlSession.getMapper(MemberInter.class);
 		success = inter.join(dto);
 		
-		mav.addObject("msg", "회원가입에 실패했습니다.");
+		resultMap.put("success", success);
 		
-		if(success > 0) {
-			mav.setViewName("redirect:/");
-			mav.addObject("msg", "회원가입에 성공했습니다.");
-		}
-		
-		return mav;
+		return resultMap;
 	}
 
 	/* 로그인 요청 */
@@ -111,5 +105,24 @@ public class MemberService {
 		}
 		
 		return mav;
+	}
+
+	/* ID 중복 체크 */
+	public HashMap<String, String> overlay(String id) {
+		inter = sqlSession.getMapper(MemberInter.class);
+		
+		int chk = 0;	// 중복 체크 여부
+		
+		chk = inter.overlay(id);
+		
+		String msg = "사용 가능한 ID 입니다."; 	// 중복 체크 메시지
+		if(chk == 1) {
+			msg = "중복된 ID 입니다.";
+		}
+		
+		HashMap<String, String> map = new HashMap<>();
+		map.put("msg", msg);
+		
+		return map;
 	}
 }

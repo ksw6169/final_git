@@ -16,8 +16,12 @@
 		</if>
 	</insert>
 	
-	<!-- 수정 -> resultType을 String에서 MemberDTO로 -->
 	<select id="login" parameterType="String" resultType="com.spring.dto.MemberDTO">
 		SELECT member_pw, member_div FROM member WHERE member_id = #{param1}
+	</select>
+	
+	<!-- 중복 체크 -->
+	<select id="overlay" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM member WHERE member_id = #{param1}
 	</select>
 </mapper>
