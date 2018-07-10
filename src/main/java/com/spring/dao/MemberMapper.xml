@@ -16,7 +16,24 @@
 		</if>
 	</insert>
 	
-	<select id="login" parameterType="String" resultType="String">
-		SELECT member_pw FROM member WHERE member_id = #{param1}
+	<!-- 수정 -> resultType을 String에서 MemberDTO로 -->
+	<select id="login" parameterType="String" resultType="com.spring.dto.MemberDTO">
+		SELECT member_pw, member_div FROM member WHERE member_id = #{param1}
 	</select>
+	
+	<!-- 회원정보  -->
+	<select id="member" resultType="com.spring.dto.MemberDTO">
+		SELECT * FROM member WHERE member_id = #{param1}
+	</select>
+	
+	<!-- 회원 정보 수정 -->
+	 <update id="perUpdate" parameterType="hashMap">
+	 	UPDATE member
+	 	<set>
+	 		<if test="pw!=''">member_pw = #{pw},</if>
+	 		<if test="faily!=''">member_family = #{family},</if>
+	 		<if test="email!=''">member_email = #{email}</if>
+	 	</set>
+	 	WHERE member_id = #{id}
+	 </update>
 </mapper>

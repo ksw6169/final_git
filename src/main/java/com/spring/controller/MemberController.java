@@ -3,22 +3,20 @@ package com.spring.controller;
 import java.util.HashMap;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.spring.dao.MemberInter;
+import com.spring.dto.MemberDTO;
 import com.spring.service.MemberService;
 
 
@@ -41,7 +39,6 @@ public class MemberController {
 	public String home(Locale locale, Model model) {
 		logger.info("메인 페이지 이동");
 		service.main();
-		
 		return "main";
 	}
 	
@@ -93,11 +90,42 @@ public class MemberController {
 	public ModelAndView memlogout(HttpSession session) {
 		logger.info("로그아웃 요청");
 		session.removeAttribute("loginId");
+		session.removeAttribute("member_div");
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("msg", "로그아웃 되었습니다.");
 		mav.setViewName("redirect:/");
 		
 		return mav;
+	}
+	
+	/*마이페이지 비밀번호 체크*/
+	@RequestMapping(value = "/checkPW")
+	public ModelAndView checkPW(HttpServletRequest request, @RequestParam("userPw") String userPw) {
+		logger.info("비밀번호 체크 요청");
+		
+		String userId = (String) request.getSession().getAttribute("loginId");
+		logger.info(userId);
+		return service.checkPW(userId, userPw);
+	}
+	
+	/*마이페이지 개인정보 수정 폼*/
+	@RequestMapping(value = "/perUpdateForm")
+	public ModelAndView perUpdateForm(HttpServletRequest request) {
+		logger.info("개인정보 수정 페이지 요청");
+		
+		String userId = (String) request.getSession().getAttribute("loginId");
+		logger.info(userId);
+		return service.perUpdateForm(userId);
+	}
+	
+	@RequestMapping(value = "/perUpdate")
+	public ModelAndView perUpdate(HttpServletRequest request, @RequestParam HashMap<String, String> map) {
+		logger.info("개인정보 수정 요청");
+		
+		String userId = (String) request.getSession().getAttribute("loginId");
+		map.put("id", userId);
+		logger.info(userId);
+		return service.perUpdate(map);
 	}
 }

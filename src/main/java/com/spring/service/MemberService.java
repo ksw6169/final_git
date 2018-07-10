@@ -67,8 +67,13 @@ public class MemberService {
 	public ModelAndView memlogin(String id, String pw, HttpSession session) {
 		inter = sqlSession.getMapper(MemberInter.class);
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
-		String hash = inter.login(id);	// 암호화된 pw 가져옴
+		
+		MemberDTO dto = new MemberDTO();
+		
+		dto = inter.login(id);
+		String hash = dto.getMember_pw();				// 암호화된 pw 가져옴
+		String member_div = dto.getMember_div();	// 사용자 권한 가져옴
+		
 		boolean success = encoder.matches(pw, hash);		// 입력한 pw와 암호화된 pw 비교
 
 		ModelAndView mav = new ModelAndView();
@@ -78,10 +83,60 @@ public class MemberService {
 			msg = "로그인 성공";
 			mav.setViewName("redirect:/");
 			session.setAttribute("loginId", id);
+			session.setAttribute("member_div", member_div);
 		}
 		
 		mav.addObject("msg", msg);
 		
+		return mav;
+	}
+
+	/*마이페이지 비밀번호 체크*/
+	public ModelAndView checkPW(String userId, String userPw) {
+		inter = sqlSession.getMapper(MemberInter.class);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		
+		MemberDTO dto = new MemberDTO();
+		dto = inter.login(userId);
+		String hash = dto.getMember_pw();
+		
+		boolean success = encoder.matches(userPw, hash);
+		
+		ModelAndView mav = new ModelAndView();
+		String msg = "비밀번호를 다시 입력해 주세요.";
+		
+		if(success) {
+			mav.setViewName("redirect:/perUpdateForm");
+		} else {
+			mav.addObject("msg", msg);
+		}
+		
+		return mav;
+	}
+
+	/*마이페이지-회원수정페이지*/
+	public ModelAndView perUpdateForm(String userId) {
+		ModelAndView mav = new ModelAndView();
+		inter = sqlSession.getMapper(MemberInter.class);
+		MemberDTO dto = new MemberDTO();
+		dto = inter.member(userId);
+		mav.addObject("member", dto);
+		mav.setViewName("perUpdate");
+		logger.info(dto.getMember_id());
+		return mav;
+	}
+
+	/*마이페이지 - 회원 수정*/
+	public ModelAndView perUpdate(HashMap<String, String> map) {
+		ModelAndView mav = new ModelAndView();
+		inter = sqlSession.getMapper(MemberInter.class);
+		if(map.get("pw") != "") { //들어온 비밀번호가 있다면 암호화 해서 map에 다시 넣음
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();	
+			String hash = encoder.encode(String.valueOf(map.get("pw")));
+			map.put("pw", hash);
+		}
+		int success = inter.perUpdate(map);
+		mav.setViewName("redirect:/perUpdateForm");
 		return mav;
 	}
 }
