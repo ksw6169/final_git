@@ -19,7 +19,6 @@
 			
 			<!-- 제외할 페이지 -->
 			<mvc:exclude-mapping path="/"/>
-			<mvc:exclude-mapping path="/pageMove/*"/>
 			<mvc:exclude-mapping path="/login"/>
 			<mvc:exclude-mapping path="/loginForm"/>
 			<mvc:exclude-mapping path="/join"/>
