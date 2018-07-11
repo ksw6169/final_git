@@ -9,10 +9,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -54,9 +56,10 @@ public class CompanyController {
 	}
 	
 	@RequestMapping(value = "/companyDetail")
-	public ModelAndView companyDetail(@RequestParam("company_no") String company_no) {
-		logger.info("[companyDetail] company_no : "+ company_no);
-		return service.companyDetail(company_no);
+	public ModelAndView companyDetail(HttpServletRequest request,@RequestParam("company_no") String company_no) {
+		String member_id=(String) request.getSession().getAttribute("loginId");
+		logger.info("[companyDetail] company_no : "+ company_no," / member_id : "+member_id);
+		return service.companyDetail(company_no,member_id);
 		//companyDTO.company_no, companyDTO.company_name, companyDTO.company_salary, companyDTO.company_user, companyDTO.evaluatino_nightAVG,
 		//companyDTO.evaluatino_restAVG, companyDTO.evaluatino_internAVG, companyDTO.evaluatino_vacationAVG
 	}
@@ -64,6 +67,13 @@ public class CompanyController {
 	@RequestMapping(value = "/companyCommentView")
 	public ModelAndView companyCommentView(@RequestParam("company_no") String company_no, HttpServletRequest request) {
 		ModelAndView mav=new ModelAndView();
+		if(service.certCheck((String)request.getSession().getAttribute("loginId"))) {
+			mav.addObject("msg", "기업 인증을 진행하지 않으셨습니다.");
+			mav.setViewName("howComList");
+			
+			return mav;
+		}
+		
 		mav.addObject("company_no", company_no);
 		mav.addObject("userID",request.getSession().getAttribute("loginId"));
 		mav.setViewName("comComment");
