@@ -1,5 +1,10 @@
 package com.spring.service;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -11,10 +16,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.dao.MemberInter;
 import com.spring.dto.MemberDTO;
+
 @Service
 public class MemberService {
 
@@ -23,11 +30,8 @@ public class MemberService {
 	@Autowired SqlSession sqlSession;
 	MemberInter inter  = null;
 	String photo = null;
-
-	public void main() {
-		logger.info("MemberService 접속");
-	}
-
+	HashMap<String, String> fileList = new HashMap<String, String>();
+	
 	// 회원가입 요청
 	public @ResponseBody HashMap<String, Integer> join(HashMap<String, Object> map) {
 		int success = 0;	// 회원가입 성공 여부
@@ -165,6 +169,49 @@ public class MemberService {
 			msg = "회원탈퇴 성공";
 		}
 		mav.addObject("msg", msg);
+		return mav;
+	}
+
+	
+	
+	
+	
+	/* 사진 업로드 요청(회원가입) */
+	public ModelAndView memUpload(MultipartFile file, String root) {
+		ModelAndView mav = new ModelAndView();
+		String fullPath = root+"resources/upload/";
+		logger.info("fullPath: " + fullPath);
+		
+		// 1. 폴더가 없을 경우 폴더 생성
+		File dir = new File(fullPath);
+		
+		if(!dir.exists()) {
+			logger.info("폴더 없음 - 폴더 생성");
+			dir.mkdir();
+		}
+		
+		// 2. 파일명 추출
+		String oriFileName = file.getOriginalFilename();	
+		
+		// 3. 새로운 파일명 생성(새 파일명 + 확장자)
+		String newFileName = 
+				System.currentTimeMillis()+
+					oriFileName.substring(oriFileName.lastIndexOf("."));	
+		
+		// 4. 파일 추출
+		try {
+			byte[] bytes = file.getBytes();	// MultipartFile에서부터 바이트 추출
+			Path filePath = Paths.get(fullPath+newFileName);	// 파일 생성 경로
+			Files.write(filePath,  bytes);		// 파일 생성
+			fileList.put(newFileName, oriFileName);
+			logger.info("저장할 파일 갯수: {}", fileList.size());
+			mav.addObject("path", "resources/upload/"+newFileName);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+		
+		mav.setViewName("./");
+		
 		return mav;
 	}
 }
