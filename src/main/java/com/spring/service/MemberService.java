@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.dao.MemberInter;
@@ -24,15 +25,13 @@ public class MemberService {
 	String photo = null;
 
 	public void main() {
-		
 		logger.info("MemberService 접속");
-		
 	}
 
 	// 회원가입 요청
-	public ModelAndView join(HashMap<String, Object> map) {
+	public @ResponseBody HashMap<String, Integer> join(HashMap<String, Object> map) {
 		int success = 0;	// 회원가입 성공 여부
-		ModelAndView mav = new ModelAndView();
+		HashMap<String, Integer> resultMap = new HashMap<String, Integer>();
 		
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();	
 		String hash = encoder.encode(String.valueOf(map.get("pw")));
@@ -53,14 +52,9 @@ public class MemberService {
 		inter = sqlSession.getMapper(MemberInter.class);
 		success = inter.join(dto);
 		
-		mav.addObject("msg", "회원가입에 실패했습니다.");
+		resultMap.put("success", success);
 		
-		if(success > 0) {
-			mav.setViewName("redirect:/");
-			mav.addObject("msg", "회원가입에 성공했습니다.");
-		}
-		
-		return mav;
+		return resultMap;
 	}
 
 	/* 로그인 요청 */
@@ -114,6 +108,25 @@ public class MemberService {
 		return mav;
 	}
 
+	/* ID 중복 체크 */
+	public HashMap<String, String> overlay(String id) {
+		inter = sqlSession.getMapper(MemberInter.class);
+		
+		int chk = 0;	// 중복 체크 여부
+		
+		chk = inter.overlay(id);
+		
+		String msg = "사용 가능한 ID 입니다."; 	// 중복 체크 메시지
+		if(chk == 1) {
+			msg = "중복된 ID 입니다.";
+		}
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("msg", msg);
+		
+		return map;
+	}
+	
 	/*마이페이지-회원수정페이지*/
 	public ModelAndView perUpdateForm(String userId) {
 		ModelAndView mav = new ModelAndView();
@@ -137,6 +150,21 @@ public class MemberService {
 		}
 		int success = inter.perUpdate(map);
 		mav.setViewName("redirect:/perUpdateForm");
+		return mav;
+	}
+
+	/*회원탈퇴*/
+	public ModelAndView outMem(String userId) {
+		ModelAndView mav = new ModelAndView();
+		inter = sqlSession.getMapper(MemberInter.class);
+		int success = inter.outMem(userId);
+		
+		String msg = "회원탈퇴 실패";
+		if(success >0) {
+			mav.setViewName("redirect:/logout");
+			msg = "회원탈퇴 성공";
+		}
+		mav.addObject("msg", msg);
 		return mav;
 	}
 }

@@ -107,13 +107,13 @@
 	    
 	    <div class="container">
 	        <div class="search_group">
-	            <input type="text" placeholder="제목+내용을 입력해주세요."/>
-	            <span class="input-group-addon">
+	            <input id="serchBox" type="text" placeholder="제목+내용을 입력해주세요."/>
+	            <span class="input-group-addon" id="Nserch">
 	            	<div class="clear"></div>
 	                <span class="glyphicon glyphicon-search"></span>
 	            </span>
 	        </div>
-	        <table class="table table-hover">
+	        <table class="table table-hover" >
 	            <thead>
 	             <tr>
 	               <th class="center">번 호</th>
@@ -122,81 +122,120 @@
 	               <th class="center">조회수</th>
 	             </tr>
 	             </thead>
-	             <tr class="center">
-	               <td>1</td>
-	               <td><a href="#">내용내용내용내용내용내용내용내용내용내용내용내용내용내용</a></td>
-	               <td>2018-09-10 10:50</td>
-	               <td>1</td>
-	             </tr>
-	             <tr class="center">
-	               <td>2</td>
-	               <td><a href="#">내용내용내용내용내용내용내용내용내용내용내용내용내용내용</a></td>
-	               <td>2018-09-10 10:50</td>
-	               <td>1</td>
-	             </tr>
-	             <tr>
-	               <td>3</td>
-	               <td><a href="#">내용내용내용내용내용내용내용내용내용내용내용내용내용내용</a></td>
-	               <td>2018-09-10 10:50</td>
-	               <td>1</td>
-	             </tr>
-	             <tr>
-	               <td>4</td>
-	               <td><a href="#">내용내용내용내용내용내용내용내용내용내용내용내용내용내용</a></td>
-	               <td>2018-09-10 10:50</td>
-	               <td>1</td>
-	             </tr>
-	             <tr>
-	               <td>5</td>
-	               <td><a href="#">내용내용내용내용내용내용내용내용내용내용내용내용내용내용</a></td>
-	               <td>2018-09-10 10:50</td>
-	               <td>1</td>
-	             </tr>
-	             <tr>
-	               <td>6</td>
-	               <td><a href="#">내용내용내용내용내용내용내용내용내용내용내용내용내용내용</a></td>
-	               <td>2018-09-10 10:50</td>
-	               <td>1</td>
-	             </tr>
-	             <tr>
-	               <td>7</td>
-	               <td><a href="#">내용내용내용내용내용내용내용내용내용내용내용내용내용내용</a></td>
-	               <td>2018-09-10 10:50</td>
-	               <td>1</td>
-	             </tr>
-	             <tr>
-	               <td>8</td>
-	               <td><a href="#">내용내용내용내용내용내용내용내용내용내용내용내용내용내용</a></td>
-	               <td>2018-09-10 10:50</td>
-	               <td>1</td>
-	             </tr>
-	             <tr>
-	               <td>9</td>
-	               <td><a href="#">내용내용내용내용내용내용내용내용내용내용내용내용내용내용</a></td>
-	               <td>2018-09-10 10:50</td>
-	               <td>1</td>
-	             </tr>
-	             <tr>
-	               <td>10</td>
-	               <td><a href="#">내용내용내용내용내용내용내용내용내용내용내용내용내용내용</a></td>
-	               <td>2018-09-10 10:50</td>
-	               <td>1</td>
-	             </tr>
-	             
+	             <tbody id="list"></tbody>
 	        </table>
-	        <button class="pull-right">글 작성</button>
+	        <button class="pull-right"  onclick ="location.href ='pageMove?page=noticeWrite'">글 작성</button>
 	        <div class="paging_button">
 	          <ul class="pagination">
-	            <li class="page-item disabled">
-	              <a class="page-link" href="#" tabindex="-1">이전 페이지</a>
+	            <li class="page-item" id="pre">
+	              <a class="page-link" tabindex="-1">이전 페이지</a>
 	            </li>
-	            <li class="page-item">
-	              <a class="page-link" href="#">다음 페이지</a>
+	            <li class="page-item"  id="next">
+	              <a class="page-link" >다음 페이지</a>
 	            </li>
 	          </ul>
 	        </div>
 	    </div>
 	</body>
 	<script>
+	
+		var obj = {};
+		var startPage = 1; //페이징 첫
+		var addPage = 10; //페이지 마지막
+		var allPage = 0;
+		var serText = "";
+		obj.error=function(e){console.log(e)};
+		obj.dataType="JSON";
+		obj.type="POST";
+		
+		//페이지 출력시 바로 실행 
+		$(document).ready(function(){
+			listCall(); 
+		});
+		
+		function listCall(){
+			console.log(startPage+"/"+addPage);
+			obj.url = "./nBoardList";
+			obj.data = {
+					"startPage":startPage, 
+					"addPage":addPage
+					};
+			obj.success = function(data){
+				allPage = data.allPage;
+				listPrint(data.nBoardList);
+				if(addPage >= allPage){
+					//페이지 당 리스트의 갯수가 addPage = 10 보다 작으면 다음 페이지 비활성화
+					$("next").addClass('disabled');
+				}else{
+					$("next").removeClass('disabled');
+				}
+				if(startPage==1){
+					$("#pre").addClass('diasbled');
+				}else{
+					$("#pre").removeClass('disabled');
+				}
+			};
+			ajaxCall(obj);
+		}
+		
+		//ajax 실행 
+		function ajaxCall(obj){
+			$.ajax(obj)
+		};
+		
+		//리스트 그리기
+		function listPrint(nBoardList){
+			var content ="";
+			console.log(nBoardList);
+			//번호, 제목, 작성일, 조회수
+			nBoardList.forEach(function(item,board_no){
+					content += "<tr>";
+					content += "<td>"+item.board_no+"</td>";
+					content += "<td><a href='./nBoardDetail?board_no="+item.board_no+"''>"+item.board_title+"</a></td>";
+					//날짜 변경 
+					var date = new Date(item.board_date);
+					content += "<td>"+date.toLocaleDateString("ko-KR")+"</td>";
+					content += "<td>"+item.board_bHit+"</td>";
+					content += "</tr>";
+				
+				});
+			$("#list").empty();
+			$("#list").append(content);
+		}
+		
+		//다음 버튼 클릭시 
+		$("#next").click(function(){
+			 if($("#next").attr('class') != "page-item disabled"){
+				startPage +=10;
+				addPage +=10;
+				listCall();
+			 }
+		});
+		
+		$("#pre").click(function(){
+			 if($("#pre").attr('class') != "page-item disabled"){
+				//이전 목록 활성화 시키기
+				startPage -=10;
+				addPage -=10;
+				listCall();
+			 }
+		});
+		
+		$("#Nserch").click(function(){
+			addPage = 10;
+			listCall();
+			
+			
+		})
+
+	
+	
+
+	
+
+ 
+		
+	
+	
 	</script>
 </html>
