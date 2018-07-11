@@ -192,9 +192,6 @@
     var obj={};
     var pagingEnd=15;
     var keyword="";
-   /*  obj.error=function(e){console.log(e)};
-	obj.type="POST";
-	obj.dataType = "JSON"; */
     ajaxCall(obj,keyword,pagingEnd);
     
     $("#more").click(function(){
@@ -231,11 +228,9 @@
 				console.log(data);
 				$("div.row").remove();
 				var str = "";
-	            //kimSayList.forEach(function(item,board_no){
 				for(var i=0; i<data.list.length; i++) {
 					str+="<div class='col-md-4'>";
 		            str+="<div class='thumbnail'>";
-		            //<span class="submenubar_button" onclick="location.href='./companyCommentView?company_no=${companyDTO.company_no}'">코멘트</span>
 		            str+="<a href='./kimSayDetail?board_no="+data.list[i].board_no+"'><div id='title' class='thumbnail_header'><p class='thumbnail_contents'>"+data.list[i].board_title+"</p></div></a>";
 		            var date = new Date(data.list[i].board_date);
 		            str+="<span class='caption_date'>작성일자: <b>"+date.toLocaleDateString("ko-KR")+"</b></span>";
@@ -252,8 +247,5 @@
 			}
 		});
 	}
-	
-	
-	
 	</script>
 </html>
