@@ -113,8 +113,22 @@
           border: 0px white;
           text-align: center;
           padding-top: 10px;
-          
         }
+        
+        .company_btn {
+            font-family: "bareun";
+         	color: #fff;
+          	background-color: #121F27;
+            float: right;
+            width: 150px;
+            height: 50px;
+            margin: 5px 20px 0 0;
+            border: 0;
+            cursor: pointer;
+            text-align: center;
+            line-height: 50px;
+        }
+        
         .file_btn {
             font-family: "bareun";
          	color: #fff;
@@ -207,16 +221,21 @@
 					</div>
 					<!-- 기업명 -->
 	                <div>
-		            <div class="joinForm">기업명</div>
-		            <input id="company" name="company" type="text" placeholder="기업명 입력"/>
-                	<div><span id="companyMsg" class="warn">　</span></div>
+			            <div class="joinForm">기업명</div>
+			            <input id="company" name="company" type="text" placeholder="기업명 입력"/>
+			            <label class="company_btn">기업명 버튼</label>
+	                	<div><span id="companyMsg" class="warn">　</span></div>
 		            </div>
 		            <!-- 기업 캡쳐파일 부분 -->               
 	                <div class="company_photo">기업 웹메일 <br/>사이트 캡쳐사진</div>
-		            <input id="company_photo" type="text" readonly>
+		            <input id="fileName" type="text" placeholder="파일명" readonly>
+					
 					<!-- 파일 첨부 버튼-->
 		            <label for="upload" class=file_btn>파일 첨부</label>
-		            <input type="file" id="upload"/>
+		            <form id="fileUpload" method="post" enctype="multipart/form-data">
+		           		<input type="file" id="upload" name="file" onchange="fileUpload()" />
+	           		</form>
+		            
 		            <!-- 코멘트 -->     
 		           	<div><b class="comment_red">*기업 웹메일 사이트에 로그인한 화면을 캡쳐하신 후 첨부해주세요.</b></div>
 		            <div><b class="comment_red">*기업명과 첨부하신 로그인 화면은 가입 신청 승인 후 즉시 폐기되어</b></div>
@@ -322,6 +341,9 @@
 			var userPw = $("#userPw").val();
 			var userPw_re = $("#userPw_re").val();
 			
+			var form = $("#fileUpload")[0];
+			var formData = new FormData(form);
+			
 			var idReg = /^[A-Za-z0-9+]{5,16}$/;
 			
 			if($("#userId").val()==""){
@@ -359,6 +381,10 @@
 				$("#company").focus();
 			} else{
 				$.ajax({
+					// contentType, processData : ajax 파일 업로드 시 필요한 속성
+					contentType: false,	
+					processData: false,
+					
 					type : "post",
 					url : "./join",
 					data : {
@@ -368,7 +394,8 @@
 						family : $("#userFamily").val(),
 						member_div : $("#member_div").val(),
 						job_no : $("#job_no").val(),
-						company : $("#company").val()
+						company : $("#company").val(),
+						file : formData
 						// company_photo 아직 X
 					},
 					dataType : "json",
@@ -386,5 +413,13 @@
 				});
 			}
 		});
+		
+		// 회사 사진 처리
+		function fileUpload() {
+			var fileValue = $("#upload").val().split("\\");
+			var fileName = fileValue[fileValue.length-1]; // 파일명 
+			$("#fileName").val(fileName);
+		}
+		
 	</script>
 </html>

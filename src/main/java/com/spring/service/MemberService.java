@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.dao.MemberInter;
 import com.spring.dto.MemberDTO;
+
 @Service
 public class MemberService {
 
@@ -30,11 +31,8 @@ public class MemberService {
 	@Autowired SqlSession sqlSession;
 	MemberInter inter  = null;
 	String photo = null;
-
-	public void main() {
-		logger.info("MemberService 접속");
-	}
-
+	HashMap<String, String> fileList = new HashMap<String, String>();
+	
 	// 회원가입 요청
 	public @ResponseBody HashMap<String, Integer> join(HashMap<String, Object> map) {
 		int success = 0;	// 회원가입 성공 여부
@@ -174,7 +172,49 @@ public class MemberService {
 		mav.addObject("msg", msg);
 		return mav;
 	}
-
+	
+	
+	
+	
+	/* 사진 업로드 요청(회원가입) */
+	public ModelAndView memUpload(MultipartFile file, String root) {
+		ModelAndView mav = new ModelAndView();
+		String fullPath = root+"resources/upload/";
+		logger.info("fullPath: " + fullPath);
+		
+		// 1. 폴더가 없을 경우 폴더 생성
+		File dir = new File(fullPath);
+		
+		if(!dir.exists()) {
+			logger.info("폴더 없음 - 폴더 생성");
+			dir.mkdir();
+		}
+		
+		// 2. 파일명 추출
+		String oriFileName = file.getOriginalFilename();	
+		
+		// 3. 새로운 파일명 생성(새 파일명 + 확장자)
+		String newFileName = 
+				System.currentTimeMillis()+
+					oriFileName.substring(oriFileName.lastIndexOf("."));	
+		
+		// 4. 파일 추출
+		try {
+			byte[] bytes = file.getBytes();	// MultipartFile에서부터 바이트 추출
+			Path filePath = Paths.get(fullPath+newFileName);	// 파일 생성 경로
+			Files.write(filePath,  bytes);		// 파일 생성
+			fileList.put(newFileName, oriFileName);
+			logger.info("저장할 파일 갯수: {}", fileList.size());
+			mav.addObject("path", "resources/upload/"+newFileName);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+		
+		mav.setViewName("./");
+		
+		return mav;
+	}
+	
 	//회사 정보 수정
 	@Transactional
 	public ModelAndView companyUpdate(MultipartFile file, String root, String companyName,String jobSel, String id) {
@@ -230,6 +270,7 @@ public class MemberService {
 		if(success >0) {
 			mav.setViewName("redirect:/perUpdateForm");
 		}
+		
 		return mav;
 	}
 }
