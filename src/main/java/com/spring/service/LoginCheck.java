@@ -19,7 +19,7 @@ public class LoginCheck extends HandlerInterceptorAdapter {
 		
 		// 비 로그인 시 메인 화면으로 이동
 		if(obj == null) {
-			response.sendRedirect("./");
+			response.sendRedirect("./main");
 			return false;
 		}
 		

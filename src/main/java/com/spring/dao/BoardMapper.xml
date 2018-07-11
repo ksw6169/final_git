@@ -8,7 +8,7 @@
 
 	<!-- 김대리의 한마디 글 리스트 -->
 	<select id="kimSayList" resultType="com.spring.dto.BoardDTO">
-		SELECT board_title,board_date,board_bHit,board_recom,board_reply,board_no FROM board,member 
+		SELECT board_title,board_date,board_bHit,board_recom,board_no FROM board,member 
 		WHERE member_div='대리' ORDER BY board_no DESC
 	</select>
 	

@@ -170,14 +170,9 @@
         console.log(board);
         $("#board_category").html(board.board_category);
         $("#board_title.subject").html(board.board_title);
-        //var date = new Date(board.board_date);
-        //$("#board_date.date").html(date.toLocaleDateString("ko-KR"));
         $("#board_date.date").html(board.board_date);
         $("#board_content.contents").html(board.board_content);
         $("#like.btn.like_btn").html("추천 "+board.board_recom);
-        /*$("#evaluatino_restAVG").attr("src","./resources/image/star_"+Math.floor(companyDTO.evaluatino_restAVG)+".png");
-        $("#evaluatino_internAVG").attr("src","./resources/image/star_"+Math.floor(companyDTO.evaluatino_internAVG)+".png");
-        $("#evaluatino_vacationAVG").attr("src","./resources/image/star_"+Math.floor(companyDTO.evaluatino_vacationAVG)+".png"); */
     }
 
 

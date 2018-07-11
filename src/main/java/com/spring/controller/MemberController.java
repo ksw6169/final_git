@@ -2,9 +2,9 @@ package com.spring.controller;
 
 import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.spring.dto.MemberDTO;
 import com.spring.service.MemberService;
 
 
@@ -28,7 +28,7 @@ public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@Autowired MemberService service;
-	
+
 	/* 단순 페이지 이동(로그인 체크가 필요없는 홈, 로그인, 회원가입 페이지 제외) */
 	@RequestMapping(value="/pageMove") 
 	public String pageMove(@RequestParam("page") String pageName) {
@@ -39,8 +39,12 @@ public class MemberController {
 	/* main 페이지 이동 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("메인 페이지 이동");
-		service.main();
+		return "redirect:/main";
+	}
+	
+	/* main 페이지 이동 */
+	@RequestMapping(value = "/main")
+	public String main() {
 		return "main";
 	}
 	
@@ -77,6 +81,8 @@ public class MemberController {
 	@RequestMapping(value = "/join")
 	public @ResponseBody HashMap<String, Integer> join(@RequestParam HashMap<String, Object> map) {
 		logger.info("회원가입 요청");
+		// logger.info("파일 테스트 : "+String.valueOf(map.get("file")));
+		
 		return service.join(map);
 	}
 	
@@ -148,5 +154,23 @@ public class MemberController {
 		String userId = (String) request.getSession().getAttribute("loginId");
 		logger.info(userId);
 		return service.outMem(userId);
+	}
+	
+	@RequestMapping(value = "/memUpload")
+	public ModelAndView memUpload(MultipartFile file, HttpSession session) {
+		logger.info("파일 업로드 요청");
+		String root = session.getServletContext().getRealPath("/");
+		
+		return service.memUpload(file, root);
+	}
+	
+	/*회사 정보 수정*/
+	@RequestMapping(value = "/companyUpdate")
+	public ModelAndView companyUpdate(MultipartFile file, HttpSession session, @RequestParam("companyName") String companyName, @RequestParam("jobSel") String jobSel) {
+		logger.info("회사 정보 수정");
+		logger.info(companyName);
+		String id = (String) session.getAttribute("loginId");
+		String root = session.getServletContext().getRealPath("/");
+		return service.companyUpdate(file, root, companyName, jobSel ,id);
 	}
 }
