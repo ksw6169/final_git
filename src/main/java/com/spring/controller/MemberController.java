@@ -39,12 +39,6 @@ public class MemberController {
 	/* main 페이지 이동 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		return "redirect:/main";
-	}
-	
-	/* main 페이지 이동 */
-	@RequestMapping(value = "/main")
-	public String main() {
 		return "main";
 	}
 	
