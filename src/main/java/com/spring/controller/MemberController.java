@@ -29,14 +29,6 @@ public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@Autowired MemberService service;
-	
-	/* main 페이지 이동 */
-	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(HttpServletResponse response) {
-		logger.info("메인 페이지 접속");		
-		return "main";
-	}
 
 	/* 단순 페이지 이동(로그인 체크가 필요없는 홈, 로그인, 회원가입 페이지 제외) */
 	@RequestMapping(value="/pageMove") 
