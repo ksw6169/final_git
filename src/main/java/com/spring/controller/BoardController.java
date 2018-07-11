@@ -56,33 +56,33 @@ public class BoardController {
 		return"noticeList";
 	}
 	
-	//공지사항 리스트
+	//공지사항 리스트 = > ajax => 완성 
 	@RequestMapping(value="/nBoardList")
-	public @ResponseBody HashMap<String, Object> nBoardList(@RequestParam Map<String, String> map, HttpServletRequest request) {
+	public @ResponseBody HashMap<String, Object> nBoardList(@RequestParam Map<String, Object> map, HttpServletRequest request) {
 		logger.info("공지사항 리스트 실행");
-		String startPage = map.get("startPage");
-		String addPage = map.get("addPage");
-		String serch = map.get("serch");
-		logger.info(map.get("startPage"));
-		logger.info(startPage+"/"+addPage);
+
 		String id = (String) request.getSession().getAttribute("loginId");
 		map.put("loginId",id);
-		return service.nBoardList(startPage,addPage);
+		String keyword = (String) map.get("keyword");
+		return service.nBoardList(map);
 	}
 	
-	//공지사항 작성
+	//공지사항 작성 => mav
 	@RequestMapping(value="/nBoardWrite")
-	public ModelAndView nBoardWrite(@RequestParam HashMap<String, String> map, HttpSession session) {
+	public ModelAndView nBoardWrite(@RequestParam HashMap<String, String> map, HttpServletRequest reqeust) {
 		logger.info("공지사항 작성 실행");
-		String id = (String) session.getAttribute("admin");
-		map.put("admin", id); //map에 담음
+		String loginId = (String) reqeust.getSession().getAttribute("loginId");
+		map.put("loginId", loginId);
+		
+		// 작성시 필요 (member_id, board_title, board_content, board_no)
+		String board_no = map.get("board_no");
 		String board_title = map.get("board_title");
 		String board_content = map.get("board_content");
-		logger.info(board_title+"/"+board_content+"/"+id);
+		logger.info(board_no+"/"+board_title+"/"+board_content+"/"+loginId);
 		return service.nBoardWrite(map);
 	}
 	
-	//공지사항 상세보기
+	//공지사항 상세보기 => mav => 완성됨 
 	@RequestMapping(value="/nBoardDetail")
 	public ModelAndView nBoardDetail(@RequestParam("board_no") String board_no) {
 		logger.info("공지사항 상세보기 실행");
@@ -109,7 +109,7 @@ public class BoardController {
 	
 	//공지사항 수정
 	@RequestMapping(value="/nBoardUpdate")
-	public ModelAndView nBoardUpdate(@RequestParam HashMap<String, String>map) {
+	public ModelAndView nBoardUpdate(@RequestParam HashMap<String, Object> map) {
 		logger.info("공지사항 수정 실행");
 		
 		return service.nBoardUpdate(map);

@@ -5,27 +5,29 @@
     
 <!-- namespace = 연결되는 인터페이스 -->    
 <mapper namespace="com.spring.dao.BoardInter">
+
 	<!-- 김대리의 한마디 글 리스트 -->
 	<select id="kimSayList" resultType="com.spring.dto.BoardDTO">
-		SELECT board_title,board_date,board_bHit,board_recom,board_reply,board_no FROM board,member WHERE member_div='대리' ORDER BY board_no DESC
+		SELECT board_title,board_date,board_bHit,board_recom,board_reply,board_no FROM board,member 
+		WHERE member_div='대리' ORDER BY board_no DESC
 	</select>
 	
 	<select id="kimSayDetail" resultType="com.spring.dto.BoardDTO">
 		SELECT board_category, board_title, board_date, board_content from board where board_no=#{param1}
 	</select>
-	<!-- 공지사항 리스트 -->
-	<select id="nBoardList" resultType="com.spring.dto.BoardDTO">
+	
+	<!-- 공지사항 리스트 및 검색-->
+	<select id="nBoardList" parameterType="hashMap" resultType="com.spring.dto.BoardDTO">
 		SELECT board_no,board_title,board_content,board_date,board_bHit 
 			FROM 
 			(SELECT board_no,board_title,board_content,board_date,board_bHit, 
 					ROW_NUMBER() OVER(ORDER BY board_no DESC) AS rnum FROM board
-<!-- 				<where>
-					<if test="serch !=null || !serch.equals('')">
-						board_title LIKE '%'||#{param3}||'%' AND board_content LIKE '%'||#{param3}||'%'
+ 				<where>
+					<if test="keyword !=null || !keyword.equals('')">
+						board_title LIKE '%'||#{keyword}||'%'  AND board_content LIKE '%'||#{keyword}||'%'
 					</if>
-				</where>	 -->
-					) 
-					WHERE rnum BETWEEN #{param1} AND #{param2}
+				</where>    
+				) WHERE rnum BETWEEN #{startPage} AND #{addPage} ORDER BY board_title ASC
 	</select>
 	
 	<!-- 공지사항 작성  -->
@@ -37,8 +39,7 @@
 		keyColumn = "idx" <- 키가 저장될 컬럼
 	 -->
 	<insert id="nBoardWrite"  parameterType="com.spring.dto.BoardDTO"
-		 	useGeneratedKeys="true"
-	 	keyProperty="board_no" 	keyColumn="board_no">
+	useGeneratedKeys="true" keyProperty="board_no" 	keyColumn="board_no">
 		INSERT INTO board(board_no,member_id,board_title,board_content) 
 			VALUES(board_seq.NEXTVAL,#{member_id},#{board_title},#{board_content})
 	</insert>
@@ -63,6 +64,13 @@
 	<update id="upHit">
 		UPDATE board SET board_bHit = board_bHit+1 WHERE board_no= #{param1}
 	</update> 	
+	
+	<select id="listCnt" parameterType="hashMap" resultType="int">
+		SELECT COUNT(*) FROM board 
+<!-- 		<where>
+			member_id = #{loginId}
+		</where> -->
+	</select>
 	
 	
 	<select id="myWriteList" parameterType="map" resultType="com.spring.dto.BoardDTO">

@@ -60,11 +60,14 @@ public class BoardService {
 	}
 	
 	//공지사항 리스트 
-	public HashMap<String, Object> nBoardList(String startPage, String addPage) {	
+	public HashMap<String, Object> nBoardList(Map<String, Object> param) {	
 		logger.info("공지사항 list 서비스 요청");
 		inter = sqlSession.getMapper(BoardInter.class);
 		HashMap<String , Object> map = new HashMap<String , Object>();
-		map.put("nBoardList", inter.nBoardList(startPage, addPage));
+		ArrayList<BoardDTO> nBoardList = inter.nBoardList(param);
+		int listAll = inter.listCnt(param);
+		map.put("nBoardList", nBoardList);
+		map.put("listAll", listAll);
 		return map;
 	}
 
@@ -73,18 +76,17 @@ public class BoardService {
 		inter = sqlSession.getMapper(BoardInter.class);
 		ModelAndView mav = new ModelAndView();
 		BoardDTO dto = new BoardDTO();
+		
 		dto.setMember_id(map.get("member_id"));
 		dto.setBoard_title(map.get("board_title"));
 		dto.setBoard_content(map.get("board_content"));
 		int success=inter.nBoardWrite(dto);
+		String page = "noticeWrite";
 		
-		String msg ="글 작성 실패!";
-		logger.info("실패");
-		if(success==0) {
-			msg = "글 작성 성공 .";
-			logger.info("성공");
+		if(success>0) { //글작성 성공시 
+			page = "redirect:./nBoardDetail?board_no="+dto.getBoard_no();
 		}
-		mav.addObject("msg", msg);
+		mav.setViewName(page);
 		return mav;
 	}
 
@@ -144,14 +146,14 @@ public class BoardService {
 	}
 
 	@Transactional
-	public ModelAndView nBoardUpdate(HashMap<String, String> map) {
+	public ModelAndView nBoardUpdate(HashMap<String, Object> map) {
 		logger.info("공지사항 수정하기 서비스");
 		inter = sqlSession.getMapper(BoardInter.class);
 		ModelAndView mav = new ModelAndView();
 		//1. 파라메터 값 가져오기 
-		String board_no = map.get("board_no");
-		String board_subject = map.get("board_subject");
-		String board_content = map.get("board_content");
+		String board_no = (String) map.get("board_no");
+		String board_subject = (String) map.get("board_subject");
+		String board_content = (String) map.get("board_content");
 		logger.info(board_no+"/"+board_subject+"/"+board_content);
 		String page = "redirect:/nBoardUpdateForm?board_no="+board_no;
 		// 2. 수정 쿼리 실행
