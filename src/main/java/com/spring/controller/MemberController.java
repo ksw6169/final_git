@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.dto.MemberDTO;
@@ -148,5 +149,15 @@ public class MemberController {
 		String userId = (String) request.getSession().getAttribute("loginId");
 		logger.info(userId);
 		return service.outMem(userId);
+	}
+	
+	/*회사 정보 수정*/
+	@RequestMapping(value = "/companyUpdate")
+	public ModelAndView companyUpdate(MultipartFile file, HttpSession session, @RequestParam("companyName") String companyName) {
+		logger.info("회사 정보 수정");
+		logger.info(companyName);
+		String id = (String) session.getAttribute("loginId");
+		String root = session.getServletContext().getRealPath("/");
+		return service.companyUpdate(file, root, companyName, id);
 	}
 }

@@ -1,5 +1,10 @@
 package com.spring.service;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -10,7 +15,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.dao.MemberInter;
@@ -165,6 +172,64 @@ public class MemberService {
 			msg = "회원탈퇴 성공";
 		}
 		mav.addObject("msg", msg);
+		return mav;
+	}
+
+	//회사 정보 수정
+	@Transactional
+	public ModelAndView companyUpdate(MultipartFile file, String root, String companyName, String id) {
+		ModelAndView mav = new ModelAndView();
+		inter = sqlSession.getMapper(MemberInter.class);
+		int success = 0;
+		
+		String fullPath = root+"resources/upload/"; //세션의 경로와 내가 사진을 넣을 폴더 위치 합치기
+		
+		//1. 폴더가 없을 경우 폴더를 생성
+		File dir = new File(fullPath);//만든 폴더명 넣기
+		if(!dir.exists()) {//폴더가 없다면
+			logger.info("폴더 없음, 생성 시작");
+			dir.mkdir(); //폴더를 생성
+		}
+		
+		//2. 파일명을 추출
+		String fileName = file.getOriginalFilename(); //확장자를 뽑기 위해
+		
+		//3. 새로운 파일명 생성(시간)
+		//시스템상의 시간을 밀리세컨트로 한 글과 원래 파일명에서 확장자만을 추출해 합친다(맨뒤의 .이 있는곳)
+		String newFileName = System.currentTimeMillis()+fileName.substring(fileName.lastIndexOf(".")); 
+		
+		//혹시 회원이 관리자가 승인을 하기 전에 파일 업로드를 했는 지 확인
+		MemberDTO dto = inter.member(id);
+		//만약 있다면
+		if(dto.getMember_capture() != null) {
+			try {
+				String delFile = root+"resources/upload/"+dto.getMember_capture();
+				//D:\Spring\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\09_FileService\resources
+				File del = new File(delFile);
+				if(del.exists()) { //삭제할 파일이 있으면
+					del.delete();
+				}else{
+					logger.info("이미 삭제된 사진");
+				}
+			}catch (Exception e) {
+				System.out.println(e);
+				success = 0;
+			}
+		}
+		//4. 파일 추출
+		try {
+			byte[] bytes = file.getBytes();//MutipartFile에서부터 바이트 추출
+			Path filePath = Paths.get(fullPath+newFileName);
+			Files.write(filePath, bytes); //파일을 써줌(자바 7부터 사용가능)
+			fileName = newFileName;
+			logger.info("저장할 파일 이름  : "+fileName);
+			success = inter.companyUpdate(companyName, newFileName, id);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		if(success >0) {
+			mav.setViewName("redirect:/perUpdateForm");
+		}
 		return mav;
 	}
 }
