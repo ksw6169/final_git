@@ -35,7 +35,7 @@
 	        .like { background-color: #FF8000; margin: 15px 0 0 15px; }
 	
 	        .reply { background-color: #121F27; color: white; }
-	        .subject, .date { text-align: left; color: #121F27; background-color: #FFFFFF; }
+	        .subject, .date { width: 750px; text-align: center; color: #121F27; background-color: #FFFFFF; }
 	        .contents { color: #121F27; background-color: #FFFFFF; height: 200px; line-height: 100px; text-align: left; } 
 	
 	        .reply_contents { color: #121F27; background-color: #FFFFFF; height: 75px; line-height: 75px; text-align: left; }
@@ -85,7 +85,7 @@
 				<option value="업무질문">&nbsp;&nbsp;&nbsp;&nbsp;업무질문</option>
 			</select>
 		</span>
-        <span class="submenubar_button">글 작성</span>
+        <span class="submenubar_button" onclick="location.href='./pageMove?page=kimSayWrite'">글 작성</span>
     </div>
   	
     <div class="clear1"></div>
@@ -95,30 +95,30 @@
             <div class="table_div">
                 <table class="table">
                      <tr>
-                       <th colspan="2">이직</th>
+                       <th id="board_category" colspan="2"></th>
                      </tr>
                      <tr>
                        <th>제목</th>
-                       <td class="subject">입사한지 3개월 이직해도 될까요?</td>
+                       <td id="board_title" class="subject"></td>
                      </tr>
                      <tr>
                        <th>작성일자</th>
-                       <td class="date">2018-06-26 14:32</td>
+                       <td id="board_date" class="date"></td>
                      </tr>
                      <tr>
                        <th colspan="2">내용</th>
                      </tr>
                      <tr>
-                       <td class="contents" colspan="2">내용내용</td>
+                       <td id="board_content" class="contents" colspan="2"></td>
                      </tr>
                 </table>
 
-                <button class="btn like_btn">추천 5</button>
+                <button id="like" class="btn like_btn"></button>
             </div>    
             <div class="button-group">
                 <button class="btn btn-default pull-right">삭제</button>
                 <button class="btn btn-default pull-right">수정</button>
-                <button class="btn btn-default pull-right">목록</button>       
+                <button class="btn btn-default pull-right" onclick="location.href='./pageMove?page=kimSayList'">목록</button>
             </div>
         </div>
     </div>
@@ -156,5 +156,30 @@
     </div>
 </body>
 	<script>
+    var dto={
+            board_title:"${board.board_title}",
+            board_date:"${board.board_date}",
+            board_content:"${board.board_content}",
+            board_recom:"${board.board_recom}",
+            board_category:"${board.board_category}"
+    };
+    
+    BoardPrint(dto);
+    
+    function BoardPrint(board){
+        console.log(board);
+        $("#board_category").html(board.board_category);
+        $("#board_title.subject").html(board.board_title);
+        //var date = new Date(board.board_date);
+        //$("#board_date.date").html(date.toLocaleDateString("ko-KR"));
+        $("#board_date.date").html(board.board_date);
+        $("#board_content.contents").html(board.board_content);
+        $("#like.btn.like_btn").html("추천 "+board.board_recom);
+        /*$("#evaluatino_restAVG").attr("src","./resources/image/star_"+Math.floor(companyDTO.evaluatino_restAVG)+".png");
+        $("#evaluatino_internAVG").attr("src","./resources/image/star_"+Math.floor(companyDTO.evaluatino_internAVG)+".png");
+        $("#evaluatino_vacationAVG").attr("src","./resources/image/star_"+Math.floor(companyDTO.evaluatino_vacationAVG)+".png"); */
+    }
+
+
 	</script>
 </html>

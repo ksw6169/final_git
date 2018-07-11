@@ -15,7 +15,7 @@ public class BoardDTO {
 	private String board_category;
 	private int board_bHit;
 	private Timestamp board_date;
-	private int board_recorm;
+	private int board_recom;
 	private int board_reply;
 	
 	public int getBoard_no() {
@@ -78,11 +78,11 @@ public class BoardDTO {
 	public void setBoard_date(Timestamp board_date) {
 		this.board_date = board_date;
 	}
-	public int getBoard_recorm() {
-		return board_recorm;
+	public int getBoard_recom() {
+		return board_recom;
 	}
-	public void setBoard_recorm(int board_recorm) {
-		this.board_recorm = board_recorm;
+	public void setBoard_recom(int board_recom) {
+		this.board_recom = board_recom;
 	}
 	public int getBoard_reply() {
 		return board_reply;

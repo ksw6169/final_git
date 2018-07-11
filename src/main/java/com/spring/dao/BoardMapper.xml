@@ -5,7 +5,12 @@
     
 <!-- namespace = 연결되는 인터페이스 -->    
 <mapper namespace="com.spring.dao.BoardInter">
+	<!-- 김대리의 한마디 글 리스트 -->
+	<select id="kimSayList" resultType="com.spring.dto.BoardDTO">
+		SELECT board_title,board_date,board_bHit,board_recom,board_reply,board_no FROM board,member WHERE member_div='대리' ORDER BY board_no DESC
+	</select>
 	
-
-	
+	<select id="kimSayDetail" resultType="com.spring.dto.BoardDTO">
+		SELECT board_category, board_title, board_date, board_content from board where board_no=#{param1}
+	</select>
 </mapper>

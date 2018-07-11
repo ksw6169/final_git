@@ -1,11 +1,18 @@
 package com.spring.controller;
 
+import java.util.HashMap;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.service.BoardService;
 
@@ -18,16 +25,28 @@ public class BoardController {
 	
 	@Autowired BoardService service;
 	
-	//main페이지 접속
-	@RequestMapping(value = "/b", method = RequestMethod.GET)
-	public String home() {
-		logger.info("Board 컨트롤러 접속");
-		logger.info("test");
-		logger.info("test랍니다");
-		
-		service.main();
-		
-		return "main";
+	/*김대리의 한마디 리스트*/
+	@RequestMapping(value = "/kimSayCall")
+	public @ResponseBody HashMap<String, Object> kimSayListCall() {
+		logger.info("김대리의 한마디 글 리스트 요청");
+		return service.kimSay();
 	}
 	
+	/*김대리의 한마디 상세보기
+	@RequestMapping(value = "/kimSayDetail")
+	public ModelAndView kimSayDetail(@RequestParam("idx") String idx) {		
+		logger.info("{} 번 게시물 요청",idx);
+		return service.kimSayDetail(idx);
+	}*/
+	
+	
+	@RequestMapping(value = "/kimSayDetail")
+    public ModelAndView kimSayDetail(@RequestParam("board_no") String board_no, HttpServletRequest request) {
+        ModelAndView mav=new ModelAndView();
+        logger.info("board_no"+board_no);
+        mav.addObject("board_no", board_no);
+        mav.setViewName("kimSayDetail");
+        return service.kimSayDetail(board_no);
+    }
+
 }
