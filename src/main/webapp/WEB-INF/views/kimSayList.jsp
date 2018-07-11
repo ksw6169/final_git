@@ -218,6 +218,7 @@
 	
 	$(document).ready(function() {
 		kimSayListCall();
+		console.log(kimSayListCall);
 	});
 	
 	function kimSayListCall(kimSayList) {
@@ -236,7 +237,6 @@
 		            str+="<span class='caption_date'>작성일자: <b>"+date.toLocaleDateString("ko-KR")+"</b></span>";
 		            str+="<span class='caption_detail'>조회<br/><b>"+data.list[i].board_bHit+"</b></span>";
 		            str+="<span class='caption_detail'>추천<br/><b>"+data.list[i].board_recom+"</b></span>";
-		            str+="<span class='caption_detail'>댓글<br/><b>"+data.list[i].board_reply+"</b></span>";
 		            str+="</div>";
 		            str+="</div>";
 				}

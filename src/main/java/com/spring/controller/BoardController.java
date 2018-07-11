@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,14 +30,7 @@ public class BoardController {
 		return service.kimSay();
 	}
 	
-	/*김대리의 한마디 상세보기
-	@RequestMapping(value = "/kimSayDetail")
-	public ModelAndView kimSayDetail(@RequestParam("idx") String idx) {		
-		logger.info("{} 번 게시물 요청",idx);
-		return service.kimSayDetail(idx);
-	}*/
-	
-	
+	/*김대리의 한마디 상세보기*/
 	@RequestMapping(value = "/kimSayDetail")
     public ModelAndView kimSayDetail(@RequestParam("board_no") String board_no, HttpServletRequest request) {
         ModelAndView mav=new ModelAndView();
@@ -130,6 +122,7 @@ public class BoardController {
 		logger.info("myReplyList 요청");
 		String userId = (String) request.getSession().getAttribute("loginId");//세션에서 로그인 한 아이디 값 가져와
 		params.put("userId", userId); //map에 담음
+		
 		return service.myReplyList(params); //담은 map을 서비스로 넘김
 	}
 }
