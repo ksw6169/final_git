@@ -16,6 +16,7 @@
 			<!-- 인터셉터 할 요청 : /list 로 왔을 경우-->
 			<!-- 모든 요청에 인터셉터 적용: https://blog.naver.com/ezzeggu/221228752237 -->
 			<mvc:mapping path="/**"/>
+			<!-- <mvc:mapping path="/pageMove"/> -->
 			
 			<!-- 제외할 페이지 -->
 			<mvc:exclude-mapping path="/"/>

@@ -94,47 +94,63 @@
 		
 		<div class="col-md-4 col-md-offset-4">
 		
-	        <form action="#" method="post">
-		        
-					<div class="center-block">
-					<h1 class="content">회사정보 수정</h1>
-						<div class="duty">
-							<!-- 미수정!(0705_성원) -->
-							<select class="custom_select"> 
-								<option value="1" selected>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;경영, 사무, 금융, 보험직</option> 
-								<option value="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;연구직 및 공학기술직</option> 
-								<option value="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;교육, 법률, 사회복지, 경찰, 소방직 및 군인</option> 
-								<option value="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;보건, 의료직</option>
-								<option value="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예술, 디자인, 방송, 스포츠직</option>
-								<option value="6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;미용, 여행, 숙박, 음식, 경비, 청소직</option>
-								<option value="7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;영업, 판매, 운전, 운송직</option>
-								<option value="8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;건설, 채굴직</option>
-								<option value="9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;설치, 정비, 생산직</option>
-								<option value="10">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;농림어업직</option>
-							</select>
-						</div>
-					<!-- 기업명 수정 -->
-					<div>
-				        <div class="updateForm">기업명</div>
-				        <input type="text" placeholder="기업명 입력" />
-				    </div>
+	        <form method="post" id="fileUpload" enctype="multipart/form-data">
+				<div class="center-block">
+				<h1 class="content">회사정보 수정</h1>
+					<div class="duty">
+						<!-- 미수정!(0705_성원) -->
+						<select class="custom_select"> 
+							<option value="1" selected>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;경영, 사무, 금융, 보험직</option> 
+							<option value="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;연구직 및 공학기술직</option> 
+							<option value="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;교육, 법률, 사회복지, 경찰, 소방직 및 군인</option> 
+							<option value="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;보건, 의료직</option>
+							<option value="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예술, 디자인, 방송, 스포츠직</option>
+							<option value="6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;미용, 여행, 숙박, 음식, 경비, 청소직</option>
+							<option value="7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;영업, 판매, 운전, 운송직</option>
+							<option value="8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;건설, 채굴직</option>
+							<option value="9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;설치, 정비, 생산직</option>
+							<option value="10">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;농림어업직</option>
+						</select>
+					</div>
+				<!-- 기업명 수정 -->
+				<div>
+			        <div class="updateForm">기업명</div>
+			        <input type="text" id="comName" placeholder="기업명 입력" value="" name="companyName"/>
+			    </div>
 				    <!-- 기업 웹메일 수정 -->
 				   	<div class="company_photo">기업 웹메일<br/> 사이트 캡쳐사진</div>
-				   	<input type="text" placeholder="파일명" readonly/>
+				   	<input type="text" id="fileName" placeholder="파일명" readonly/>
 				   	<label for="upload" class=file_btn>파일 첨부</label>
-					<input type="file" id="upload"/>
+					<input type="file" id="upload" name="file" onchange="fileUpload()"/>
 				   	<!-- 코멘트 -->
 					<div><span id="info">*기업 웹메일 사이트에 로그인한 화면을 캡쳐하신 후 첨부해주세요.</span></div>
 				    <div><span id="info">*기업명과 첨부하신 로그인 화면은 수정 신청 승인 후 즉시 폐기되어</span></div>
 				    <div><span id="info">회원님의 익명을 절대 보장해드립니다.</span></div>
-				    </div>
-				    
-					<div class="center-block">
-					    	<input id="mUpdate" type="button" value="개인정보 수정">
-					</div>	    
+			    </div>
+			    
+				<div class="center-block">
+				    <button id="mUpdate">개인정보 수정</button>
+				</div>	    
 	        </form>
 			</div>
 	</body>
 	<script>
+	function fileUpload(){
+		var fileValue = $("#upload").val().split("\\");
+		var fileName = fileValue[fileValue.length-1]; // 파일명 
+		$("#fileName").val(fileName);
+	}
+	
+	$("#mUpdate").click(function(){
+		if($("#comName").val()==""){
+			alert("기업명을 입력 해 주세요.");
+			$("#comName").focus();
+			console.log("미입력");
+		}else if($("#fileName").val() == ""){
+			alert("사진을 선택 해 주세요");
+		}else{
+			$("form").attr("action", "companyUpdate");
+		}
+	});
 	</script>
 </html>

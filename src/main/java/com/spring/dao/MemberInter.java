@@ -12,4 +12,5 @@ public interface MemberInter {
 	MemberDTO member(String userId);	//회원정보
 	int perUpdate(HashMap<String, String> map);	//회원 수정
 	int outMem(String userId);	//회원 탈퇴
+	int companyUpdate(String companyName, String newFileName, String id);	//회사 수정
 }
