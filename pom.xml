@@ -43,7 +43,7 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 		
-		<!-- oracle-jdbc -->
+<!-- oracle-jdbc -->
 		<dependency>
 		    <groupId>com.oracle</groupId>
 		    <artifactId>ojdbc14</artifactId>
@@ -127,14 +127,13 @@
 		</dependency>
 		
 		<!-- Java Mail API 라이브러리 -->
-		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
-		<dependency>
-		    <groupId>javax.mail</groupId>
-		    <artifactId>mail</artifactId>
-		    <version>1.4.7</version>
-		</dependency>
-		
-				
+	      <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+	      <dependency>
+	          <groupId>javax.mail</groupId>
+	          <artifactId>mail</artifactId>
+	          <version>1.4.7</version>
+	      </dependency>
+			
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>

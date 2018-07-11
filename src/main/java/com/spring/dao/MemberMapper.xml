@@ -6,7 +6,43 @@
 <!-- namespace = 연결되는 인터페이스 -->    
 <mapper namespace="com.spring.dao.MemberInter">
 	<insert id="join" parameterType="com.spring.dto.MemberDTO">
-		INSERT INTO member(member_id, member_pw, member_email, member_family, member_div) 
-			VALUES (#{member_id}, #{member_pw}, #{member_email}, #{member_family}, '인턴')
+		<if test="member_div.equals('인턴')">
+			INSERT INTO member(member_id, member_pw, member_email, member_family, member_div) 
+				VALUES (#{member_id}, #{member_pw}, #{member_email}, #{member_family}, #{member_div})
+		</if>	
+		<if test="member_div.equals('대리')">
+			INSERT INTO member(member_id, job_no, member_pw, member_email, member_family, member_company, member_div, member_cert, member_eval) 
+				VALUES (#{member_id}, #{job_no}, #{member_pw}, #{member_email}, #{member_family}, #{member_company}, #{member_div}, 'N', 1)
+		</if>
 	</insert>
+	
+	<select id="login" parameterType="String" resultType="com.spring.dto.MemberDTO">
+		SELECT member_pw, member_div FROM member WHERE member_id = #{param1}
+	</select>
+	
+	<!-- 중복 체크 -->
+	<select id="overlay" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM member WHERE member_id = #{param1}
+	</select>
+	
+	<!-- 회원정보  -->
+	<select id="member" resultType="com.spring.dto.MemberDTO">
+		SELECT * FROM member WHERE member_id = #{param1}
+	</select>
+	
+	<!-- 회원 정보 수정 -->
+	 <update id="perUpdate" parameterType="hashMap">
+	 	UPDATE member
+	 	<set>
+	 		<if test="pw!=''">member_pw = #{pw},</if>
+	 		<if test="faily!=''">member_family = #{family},</if>
+	 		<if test="email!=''">member_email = #{email}</if>
+	 	</set>
+	 	WHERE member_id = #{id}
+	 </update>
+	 
+	 <!-- 회원 탈퇴 -->
+	 <delete id="outMem">
+	 	DELETE FROM member WHERE member_id = #{param1}
+	 </delete>
 </mapper>

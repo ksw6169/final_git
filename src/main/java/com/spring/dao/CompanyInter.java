@@ -12,7 +12,7 @@ public interface CompanyInter {
 
 	CompanyDTO companyDetail(String company_no);
 
-	ArrayList<EvaluationDTO> companyCommentView(String company_no, String pagingEnd);
+	ArrayList<EvaluationDTO> companyCommentList(String company_no, String pagingEnd);
 
 	int companyWrite(CompanyDTO dto);
 	
@@ -27,4 +27,8 @@ public interface CompanyInter {
 	EvaluationDTO evalChk(HashMap<String,String> params); //기업평가 작성 체크
 	
 	int evalDelete(String evaluation_no); //기업평가 삭제
+
+	void companyUpHit(String company_no);
+	
+	int memberEvalCnt(String member_id,int plus);
 }

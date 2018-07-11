@@ -1,17 +1,21 @@
 package com.spring.controller;
 
 import java.util.HashMap;
-import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.service.CompanyService;
@@ -31,11 +35,12 @@ public class CompanyController {
 		
 		service.main();
 		
-		return "main";
+		return "redirect:./companyListForm";
 	}
 	
 	@RequestMapping(value = "/companyListForm")
 	public String companyListForm() {
+		////////
 		logger.info("[companyListForm]");
 		return "howComList";
 	}
@@ -47,39 +52,71 @@ public class CompanyController {
 		logger.info("[companyList] keyword : "+keyword+" / pagingEnd : "+pagingEnd);
 	
 		return service.companyList(params);
-		//companyList[] - company_name, 조회수, company_eval
+		//companyList[] - company_no, company_name, 조회수, company_eval
 	}
 	
 	@RequestMapping(value = "/companyDetail")
-	public ModelAndView companyDetail(@RequestParam("company_no") String company_no) {
-		logger.info("[companyDetail] company_no : "+ company_no);
-		return service.companyDetail(company_no);
-		//companyDTO.company_name, companyDTO.company_salary, companyDTO.company_user, companyDTO.evaluatino_nightAVG,
+	public ModelAndView companyDetail(HttpServletRequest request,@RequestParam("company_no") String company_no) {
+		String member_id=(String) request.getSession().getAttribute("loginId");
+		logger.info("[companyDetail] company_no : "+ company_no," / member_id : "+member_id);
+		return service.companyDetail(company_no,member_id);
+		//companyDTO.company_no, companyDTO.company_name, companyDTO.company_salary, companyDTO.company_user, companyDTO.evaluatino_nightAVG,
 		//companyDTO.evaluatino_restAVG, companyDTO.evaluatino_internAVG, companyDTO.evaluatino_vacationAVG
 	}
 	
 	@RequestMapping(value = "/companyCommentView")
-	public @ResponseBody HashMap<String, Object> companyCommentView(@RequestParam HashMap<String, String> params){
+	public ModelAndView companyCommentView(@RequestParam("company_no") String company_no, HttpServletRequest request) {
+		ModelAndView mav=new ModelAndView();
+		if(service.certCheck((String)request.getSession().getAttribute("loginId"))) {
+			mav.addObject("msg", "기업 인증을 진행하지 않으셨습니다.");
+			mav.setViewName("howComList");
+			
+			return mav;
+		}
+		
+		mav.addObject("company_no", company_no);
+		mav.addObject("userID",request.getSession().getAttribute("loginId"));
+		mav.setViewName("comComment");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/evalDelete")
+	public @ResponseBody HashMap<String, Object> companyCommentDelete(@RequestParam("evaluation_no") String evaluation_no, HttpServletRequest request){
+		String member_id=(String) request.getSession().getAttribute("loginId");
+		logger.info("[evalDelete] evaluation_no : "+ evaluation_no+" / member_id : "+member_id);
+		
+		
+		return service.evalDelete(evaluation_no,member_id);
+	}
+	
+	@RequestMapping(value = "/companyCommentList")
+	public @ResponseBody HashMap<String, Object> companyCommentList(@RequestParam HashMap<String, String> params){
 		String company_no=params.get("company_no");
 		String pagingEnd=params.get("pagingEnd");
 		logger.info("[companyCommentView] company_no : "+company_no+" / pagingEnd : "+pagingEnd);
 		
-		return service.companyCommentView(company_no,pagingEnd);
+		return service.companyCommentList(company_no,pagingEnd);
 		//evaluationList[] - evaluation_comment, evaluation_night, evaluation_rest, evaluation_intern, evaluation_vacation
 	}
 	
 	@RequestMapping(value = "/evalForm")
-	public String evalForm() {
-		logger.info("[evalForm]");
-		return "comWrite";
+	public ModelAndView evalForm(@RequestParam("company_no") String company_no) {
+		logger.info("[evalForm]company_no : "+company_no);
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("company_no", company_no);
+		mav.setViewName("comWrite");
+		return mav;
 	}
 	
 	@RequestMapping(value = "/evalWrite")
-	public ModelAndView evalWrite(@RequestParam HashMap<String,String> params) {
+	public ModelAndView evalWrite(@RequestParam HashMap<String,String> params,  HttpServletRequest request) {
 		String company_no=params.get("company_no");
-		String member_id= params.get("member_id");
-		String evaluation_year=params.get("evaluation_year");
-		String evaluation_salary=params.get("evaluation_salary");
+		
+		String member_id= (String) request.getSession().getAttribute("loginId");
+		params.put("member_id", member_id);
+		
+		/*String evaluation_year=params.get("evaluation_year");
+		String evaluation_salary=params.get("evaluation_salary");*/
 		String evaluation_night=params.get("evaluation_night");
 		String evaluation_rest=params.get("evaluation_rest");
 		String evaluation_intern= params.get("evaluation_intern");
@@ -87,6 +124,7 @@ public class CompanyController {
 		String evaluation_comment=params.get("evaluation_comment");
 		
 		logger.info("[evalWrite] params(9개)");
+		logger.info(company_no+"/"+member_id+"/"+evaluation_night+"/"+evaluation_rest+"/"+evaluation_intern+"/"+evaluation_vacation+"/"+evaluation_comment);
 		return service.evalWrite(params);
 	}
 	
@@ -110,6 +148,14 @@ public class CompanyController {
 		logger.info("[evalWrite] params(6개)");
 		return service.evalUpdate(params);
 		//(int)success
+	}
+	
+	@RequestMapping(value = "/evalCheck")
+	public @ResponseBody HashMap<String, Object> evalCheck(HttpServletRequest request, @RequestParam("company_no") String company_no){
+		String member_id=(String) request.getSession().getAttribute("loginId");
+		logger.info("[evalCheck] company_no : "+company_no+" / member_id : "+member_id);
+		
+		return service.evalCheck(company_no,member_id);
 	}
 	
 }

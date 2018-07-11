@@ -10,10 +10,17 @@ public class CompanyDTO {
 	private int company_code;
 	private String company_addr;
 	private int company_eval;
+	private int company_bHit;
 	private float evaluatino_nightAVG;//기업평가 야근 평균
 	private float evaluatino_restAVG;//기업평가 휴식시간 평균
 	private float evaluatino_internAVG; //기업평가 인턴채용률 평균
 	private float evaluatino_vacationAVG; //기업평가 연차사용압력 평균
+	public int getCompany_bHit() {
+		return company_bHit;
+	}
+	public void setCompany_bHit(int company_bHit) {
+		this.company_bHit = company_bHit;
+	}
 	public int getCompany_no() {
 		return company_no;
 	}
