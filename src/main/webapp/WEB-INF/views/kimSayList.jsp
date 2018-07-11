@@ -167,7 +167,7 @@
     </div>
 
 	<div class="container">
-		<div class="center-block search_div">
+		<div id="search_div" class="center-block search_div">
 			
 			<select class="custom_select"> 
 				<option value="전체" selected>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;전체</option> 
@@ -179,177 +179,73 @@
 			<input type="text" placeholder="검색어를 입력해주세요.">
 			<button class="search_btn">검색</button>
 		</div>
-		
-        <div class="row">
-			<div class="col-md-4">
-				<div class="thumbnail">
-					<a href="#"><div class="thumbnail_header"><p class="thumbnail_contents">안녕안녕안녕안녕안녕
-						안녕안녕안녕안녕안녕</p></div></a>
-					<span class="caption_date">작성일자: <b>2018-07-03 13:07</b></span>
-					<span class="caption_detail">조회<br/><b>1</b></span>
-					<span class="caption_detail">추천<br/><b>1</b></span>
-					<span class="caption_detail">댓글<br/><b>1</b></span>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="thumbnail">
-					<a href="#"><div class="thumbnail_header"><p class="thumbnail_contents">안녕안녕안녕안녕안녕
-						안녕안녕안녕안녕안녕</p></div></a>
-					<span class="caption_date">작성일자: <b>2018-07-03 13:07</b></span>
-					<span class="caption_detail">조회<br/><b>1</b></span>
-					<span class="caption_detail">추천<br/><b>1</b></span>
-					<span class="caption_detail">댓글<br/><b>1</b></span>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="thumbnail">
-					<a href="#"><div class="thumbnail_header"><p class="thumbnail_contents">안녕안녕안녕안녕안녕
-						안녕안녕안녕안녕안녕</p></div></a>
-					<span class="caption_date">작성일자: <b>2018-07-03 13:07</b></span>
-					<span class="caption_detail">조회<br/><b>1</b></span>
-					<span class="caption_detail">추천<br/><b>1</b></span>
-					<span class="caption_detail">댓글<br/><b>1</b></span>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-4">
-				<div class="thumbnail">
-					<a href="#"><div class="thumbnail_header"><p class="thumbnail_contents">안녕안녕안녕안녕안녕
-						안녕안녕안녕안녕안녕</p></div></a>
-					<span class="caption_date">작성일자: <b>2018-07-03 13:07</b></span>
-					<span class="caption_detail">조회<br/><b>1</b></span>
-					<span class="caption_detail">추천<br/><b>1</b></span>
-					<span class="caption_detail">댓글<br/><b>1</b></span>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="thumbnail">
-					<a href="#"><div class="thumbnail_header"><p class="thumbnail_contents">안녕안녕안녕안녕안녕
-						안녕안녕안녕안녕안녕</p></div></a>
-					<span class="caption_date">작성일자: <b>2018-07-03 13:07</b></span>
-					<span class="caption_detail">조회<br/><b>1</b></span>
-					<span class="caption_detail">추천<br/><b>1</b></span>
-					<span class="caption_detail">댓글<br/><b>1</b></span>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="thumbnail">
-					<a href="#"><div class="thumbnail_header"><p class="thumbnail_contents">안녕안녕안녕안녕안녕
-						안녕안녕안녕안녕안녕</p></div></a>
-					<span class="caption_date">작성일자: <b>2018-07-03 13:07</b></span>
-					<span class="caption_detail">조회<br/><b>1</b></span>
-					<span class="caption_detail">추천<br/><b>1</b></span>
-					<span class="caption_detail">댓글<br/><b>1</b></span>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-4">
-				<div class="thumbnail">
-					<a href="#"><div class="thumbnail_header"><p class="thumbnail_contents">안녕안녕안녕안녕안녕
-						안녕안녕안녕안녕안녕</p></div></a>
-					<span class="caption_date">작성일자: <b>2018-07-03 13:07</b></span>
-					<span class="caption_detail">조회<br/><b>1</b></span>
-					<span class="caption_detail">추천<br/><b>1</b></span>
-					<span class="caption_detail">댓글<br/><b>1</b></span>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="thumbnail">
-					<a href="#"><div class="thumbnail_header"><p class="thumbnail_contents">안녕안녕안녕안녕안녕
-						안녕안녕안녕안녕안녕</p></div></a>
-					<span class="caption_date">작성일자: <b>2018-07-03 13:07</b></span>
-					<span class="caption_detail">조회<br/><b>1</b></span>
-					<span class="caption_detail">추천<br/><b>1</b></span>
-					<span class="caption_detail">댓글<br/><b>1</b></span>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="thumbnail">
-					<a href="#"><div class="thumbnail_header"><p class="thumbnail_contents">안녕안녕안녕안녕안녕
-						안녕안녕안녕안녕안녕</p></div></a>
-					<span class="caption_date">작성일자: <b>2018-07-03 13:07</b></span>
-					<span class="caption_detail">조회<br/><b>1</b></span>
-					<span class="caption_detail">추천<br/><b>1</b></span>
-					<span class="caption_detail">댓글<br/><b>1</b></span>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-4">
-				<div class="thumbnail">
-					<a href="#"><div class="thumbnail_header"><p class="thumbnail_contents">안녕안녕안녕안녕안녕
-						안녕안녕안녕안녕안녕</p></div></a>
-					<span class="caption_date">작성일자: <b>2018-07-03 13:07</b></span>
-					<span class="caption_detail">조회<br/><b>1</b></span>
-					<span class="caption_detail">추천<br/><b>1</b></span>
-					<span class="caption_detail">댓글<br/><b>1</b></span>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="thumbnail">
-					<a href="#"><div class="thumbnail_header"><p class="thumbnail_contents">안녕안녕안녕안녕안녕
-						안녕안녕안녕안녕안녕</p></div></a>
-					<span class="caption_date">작성일자: <b>2018-07-03 13:07</b></span>
-					<span class="caption_detail">조회<br/><b>1</b></span>
-					<span class="caption_detail">추천<br/><b>1</b></span>
-					<span class="caption_detail">댓글<br/><b>1</b></span>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="thumbnail">
-					<a href="#"><div class="thumbnail_header"><p class="thumbnail_contents">안녕안녕안녕안녕안녕
-						안녕안녕안녕안녕안녕</p></div></a>
-					<span class="caption_date">작성일자: <b>2018-07-03 13:07</b></span>
-					<span class="caption_detail">조회<br/><b>1</b></span>
-					<span class="caption_detail">추천<br/><b>1</b></span>
-					<span class="caption_detail">댓글<br/><b>1</b></span>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-4">
-				<div class="thumbnail">
-					<a href="#"><div class="thumbnail_header"><p class="thumbnail_contents">안녕안녕안녕안녕안녕
-						안녕안녕안녕안녕안녕</p></div></a>
-					<span class="caption_date">작성일자: <b>2018-07-03 13:07</b></span>
-					<span class="caption_detail">조회<br/><b>1</b></span>
-					<span class="caption_detail">추천<br/><b>1</b></span>
-					<span class="caption_detail">댓글<br/><b>1</b></span>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="thumbnail">
-					<a href="#"><div class="thumbnail_header"><p class="thumbnail_contents">안녕안녕안녕안녕안녕
-						안녕안녕안녕안녕안녕</p></div></a>
-					<span class="caption_date">작성일자: <b>2018-07-03 13:07</b></span>
-					<span class="caption_detail">조회<br/><b>1</b></span>
-					<span class="caption_detail">추천<br/><b>1</b></span>
-					<span class="caption_detail">댓글<br/><b>1</b></span>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="thumbnail">
-					<a href="#"><div class="thumbnail_header"><p class="thumbnail_contents">안녕안녕안녕안녕안녕
-						안녕안녕안녕안녕안녕</p></div></a>
-					<span class="caption_date">작성일자: <b>2018-07-03 13:07</b></span>
-					<span class="caption_detail">조회<br/><b>1</b></span>
-					<span class="caption_detail">추천<br/><b>1</b></span>
-					<span class="caption_detail">댓글<br/><b>1</b></span>
-				</div>
-			</div>
-		</div>
-		
         <div class="paging_button">
           <ul class="pagination pagination-lg">
             <li class="page-item disabled">
-              <a class="page-link" href="#" tabindex="-1">더보기</a>
+              <a id="more" class="page-link" href="#" tabindex="-1">더보기</a>
             </li>
           </ul>
         </div>
     </div>
 </body>
 	<script>
+    var obj={};
+    var pagingEnd=15;
+    var keyword="";
+    ajaxCall(obj,keyword,pagingEnd);
+    
+    $("#more").click(function(){
+        pagingEnd+=15;
+        ajaxCall(obj,keyword,pagingEnd);
+    });
+    
+    $(".search_btn").click(function(){
+        pagingEnd=15;
+        keyword=$("#search_text").val();
+        ajaxCall(obj,keyword,pagingEnd);
+    });
+    
+    function ajaxCall(obj,keyword,pagingEnd){
+        obj.data={
+            "keyword":keyword,
+            "pagingEnd":pagingEnd
+        };
+        obj.success=function(data){
+        	
+        };
+        $.ajax(obj);
+    }
+	
+	$(document).ready(function() {
+		kimSayListCall();
+	});
+	
+	function kimSayListCall(kimSayList) {
+		$.ajax({
+			type : "get",
+			url : "./kimSayCall",
+			success : function(data) {
+				console.log(data);
+				$("div.row").remove();
+				var str = "";
+				for(var i=0; i<data.list.length; i++) {
+					str+="<div class='col-md-4'>";
+		            str+="<div class='thumbnail'>";
+		            str+="<a href='./kimSayDetail?board_no="+data.list[i].board_no+"'><div id='title' class='thumbnail_header'><p class='thumbnail_contents'>"+data.list[i].board_title+"</p></div></a>";
+		            var date = new Date(data.list[i].board_date);
+		            str+="<span class='caption_date'>작성일자: <b>"+date.toLocaleDateString("ko-KR")+"</b></span>";
+		            str+="<span class='caption_detail'>조회<br/><b>"+data.list[i].board_bHit+"</b></span>";
+		            str+="<span class='caption_detail'>추천<br/><b>"+data.list[i].board_recom+"</b></span>";
+		            str+="<span class='caption_detail'>댓글<br/><b>"+data.list[i].board_reply+"</b></span>";
+		            str+="</div>";
+		            str+="</div>";
+				}
+				$("#search_div").after(str);
+			},
+			error : function(e) {
+				console.log(e);
+			}
+		});
+	}
 	</script>
 </html>
