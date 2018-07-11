@@ -28,6 +28,10 @@ public interface BoardInter {
 
 	ArrayList<BoardDTO> myReplyList(Map<String, String> params);//내가 쓴 댓글 리스트
 
+	ArrayList<BoardDTO> kimSayList();
+
+	BoardDTO kimSayDetail(String board_no);
+
 	int myReplyListCnt(Map<String, String> params); //내가 쓴 댓글 리스트 갯수
 
 
