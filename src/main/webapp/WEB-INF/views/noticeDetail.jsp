@@ -87,7 +87,7 @@
 </body>
 	<script>
 		function update(){
-			location.href ="./nBoardUpdateForm?board_no="+${board_no}; 
+			location.href ="./nBoardUpdateForm?board_no="+${board.board_no}; 
 			
 		}
 

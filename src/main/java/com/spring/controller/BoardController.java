@@ -109,9 +109,13 @@ public class BoardController {
 	
 	//공지사항 수정
 	@RequestMapping(value="/nBoardUpdate")
-	public ModelAndView nBoardUpdate(@RequestParam HashMap<String, Object> map) {
+	public ModelAndView nBoardUpdate(@RequestParam HashMap<String, String> map) {
 		logger.info("공지사항 수정 실행");
-		
+		//board_title,board_title, board_content
+		String board_no = map.get("board_no");
+		String board_title = map.get("board_title");
+		String board_content = map.get("board_content");
+		logger.info(board_no+"/"+board_title+"/"+board_content);
 		return service.nBoardUpdate(map);
 	}
 	
