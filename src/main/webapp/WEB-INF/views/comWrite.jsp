@@ -15,6 +15,7 @@
 			    		location.href=document.referrer;
 			    	}
 			    }
+				
 			</script>
         
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -383,6 +384,8 @@
         </body>
         <script src="./resources/js/star.js"></script>
         <script>
+        evalCheck("${company_no}");
+        
         $("#row1p1").attr('checked', true);
     	$("#row2p1").attr('checked', true);
     	$("#row3p1").attr('checked', true);

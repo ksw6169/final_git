@@ -31,7 +31,7 @@ public class MemberService {
 	// 회원가입 요청
 	public @ResponseBody HashMap<String, Integer> join(HashMap<String, Object> map) {
 		int success = 0;	// 회원가입 성공 여부
-		HashMap<String, Integer> resultMap = new HashMap<>();
+		HashMap<String, Integer> resultMap = new HashMap<String, Integer>();
 		
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();	
 		String hash = encoder.encode(String.valueOf(map.get("pw")));
@@ -121,7 +121,7 @@ public class MemberService {
 			msg = "중복된 ID 입니다.";
 		}
 		
-		HashMap<String, String> map = new HashMap<>();
+		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("msg", msg);
 		
 		return map;
