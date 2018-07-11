@@ -4,9 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
-import org.apache.taglibs.standard.tag.common.fmt.RequestEncodingSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +23,23 @@ public class BoardController {
 	
 	@Autowired BoardService service;
 	
+	/*김대리의 한마디 리스트*/
+	@RequestMapping(value = "/kimSayCall")
+	public @ResponseBody HashMap<String, Object> kimSayListCall() {
+		logger.info("김대리의 한마디 글 리스트 요청");
+		return service.kimSay();
+	}
+	
+	/*김대리의 한마디 상세보기*/
+	@RequestMapping(value = "/kimSayDetail")
+    public ModelAndView kimSayDetail(@RequestParam("board_no") String board_no, HttpServletRequest request) {
+        ModelAndView mav=new ModelAndView();
+        logger.info("board_no"+board_no);
+        mav.addObject("board_no", board_no);
+        mav.setViewName("kimSayDetail");
+        return service.kimSayDetail(board_no);
+    }
+
 	//공지사항리스트 폼
 	@RequestMapping(value="/nBoardListForm")
 	public String nBoardListForm() {
@@ -33,33 +48,33 @@ public class BoardController {
 		return"noticeList";
 	}
 	
-	//공지사항 리스트
+	//공지사항 리스트 = > ajax => 완성 
 	@RequestMapping(value="/nBoardList")
-	public @ResponseBody HashMap<String, Object> nBoardList(@RequestParam Map<String, String> map, HttpServletRequest request) {
+	public @ResponseBody HashMap<String, Object> nBoardList(@RequestParam Map<String, Object> map, HttpServletRequest request) {
 		logger.info("공지사항 리스트 실행");
-		String startPage = map.get("startPage");
-		String addPage = map.get("addPage");
-		String serch = map.get("serch");
-		logger.info(map.get("startPage"));
-		logger.info(startPage+"/"+addPage);
+
 		String id = (String) request.getSession().getAttribute("loginId");
 		map.put("loginId",id);
-		return service.nBoardList(startPage,addPage);
+		String keyword = (String) map.get("keyword");
+		return service.nBoardList(map);
 	}
 	
-	//공지사항 작성
+	//공지사항 작성 => mav
 	@RequestMapping(value="/nBoardWrite")
-	public ModelAndView nBoardWrite(@RequestParam HashMap<String, String> map, HttpSession session) {
+	public ModelAndView nBoardWrite(@RequestParam HashMap<String, String> map, HttpServletRequest reqeust) {
 		logger.info("공지사항 작성 실행");
-		String id = (String) session.getAttribute("admin");
-		map.put("admin", id); //map에 담음
+		String loginId = (String) reqeust.getSession().getAttribute("loginId");
+		map.put("loginId", loginId);
+		
+		// 작성시 필요 (member_id, board_title, board_content, board_no)
+		String board_no = map.get("board_no");
 		String board_title = map.get("board_title");
 		String board_content = map.get("board_content");
-		logger.info(board_title+"/"+board_content+"/"+id);
+		logger.info(board_no+"/"+board_title+"/"+board_content+"/"+loginId);
 		return service.nBoardWrite(map);
 	}
 	
-	//공지사항 상세보기
+	//공지사항 상세보기 => mav => 완성됨 
 	@RequestMapping(value="/nBoardDetail")
 	public ModelAndView nBoardDetail(@RequestParam("board_no") String board_no) {
 		logger.info("공지사항 상세보기 실행");
@@ -86,9 +101,13 @@ public class BoardController {
 	
 	//공지사항 수정
 	@RequestMapping(value="/nBoardUpdate")
-	public ModelAndView nBoardUpdate(@RequestParam HashMap<String, String>map) {
+	public ModelAndView nBoardUpdate(@RequestParam HashMap<String, String> map) {
 		logger.info("공지사항 수정 실행");
-		
+		//board_title,board_title, board_content
+		String board_no = map.get("board_no");
+		String board_title = map.get("board_title");
+		String board_content = map.get("board_content");
+		logger.info(board_no+"/"+board_title+"/"+board_content);
 		return service.nBoardUpdate(map);
 	}
 	
@@ -107,6 +126,7 @@ public class BoardController {
 		logger.info("myReplyList 요청");
 		String userId = (String) request.getSession().getAttribute("loginId");//세션에서 로그인 한 아이디 값 가져와
 		params.put("userId", userId); //map에 담음
+		
 		return service.myReplyList(params); //담은 map을 서비스로 넘김
 	}
 }

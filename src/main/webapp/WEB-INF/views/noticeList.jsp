@@ -107,8 +107,8 @@
 	    
 	    <div class="container">
 	        <div class="search_group">
-	            <input id="serchBox" type="text" placeholder="제목+내용을 입력해주세요."/>
-	            <span class="input-group-addon" id="Nserch">
+	            <input id="serchText" type="text" placeholder="제목+내용을 입력해주세요."/>
+	            <span id="serchBtn" class="input-group-addon" >
 	            	<div class="clear"></div>
 	                <span class="glyphicon glyphicon-search"></span>
 	            </span>
@@ -143,50 +143,54 @@
 		var startPage = 1; //페이징 첫
 		var addPage = 10; //페이지 마지막
 		var allPage = 0;
-		var serText = "";
+		var keyword = ""; //검색 키워드 
+		
 		obj.error=function(e){console.log(e)};
 		obj.dataType="JSON";
 		obj.type="POST";
 		
 		//페이지 출력시 바로 실행 
 		$(document).ready(function(){
-			listCall(); 
+			listCall(obj,startPage,keyword); 
 		});
 		
-		function listCall(){
+		
+		//검색 버튼 클릭시 
+		$("#serchBtn").click(function(){
+			keyword=$("#serchText").val();
+			console.log(keyword);
+			listCall(obj,startPage,keyword);
+		});
+		
+		function listCall(obj,startPage,keyword){
 			console.log(startPage+"/"+addPage);
 			obj.url = "./nBoardList";
 			obj.data = {
 					"startPage":startPage, 
-					"addPage":addPage
+					"addPage":addPage,
+					"keyword":keyword
 					};
 			obj.success = function(data){
-				allPage = data.allPage;
-				listPrint(data.nBoardList);
+				listPrint(data.nBoardList); //리스트 뿌리기 
+				allPage = data.listAll; //이전 다음 버튼 disabled 설정
 				if(addPage >= allPage){
-					//페이지 당 리스트의 갯수가 addPage = 10 보다 작으면 다음 페이지 비활성화
-					$("next").addClass('disabled');
+					$("#next").addClass('disabled');
 				}else{
-					$("next").removeClass('disabled');
+					$("#next").removeClass('disabled');
 				}
 				if(startPage==1){
-					$("#pre").addClass('diasbled');
+					$("#pre").addClass('disabled');
 				}else{
 					$("#pre").removeClass('disabled');
 				}
 			};
 			ajaxCall(obj);
 		}
-		
-		//ajax 실행 
-		function ajaxCall(obj){
-			$.ajax(obj)
-		};
+
 		
 		//리스트 그리기
 		function listPrint(nBoardList){
 			var content ="";
-			console.log(nBoardList);
 			//번호, 제목, 작성일, 조회수
 			nBoardList.forEach(function(item,board_no){
 					content += "<tr>";
@@ -197,7 +201,6 @@
 					content += "<td>"+date.toLocaleDateString("ko-KR")+"</td>";
 					content += "<td>"+item.board_bHit+"</td>";
 					content += "</tr>";
-				
 				});
 			$("#list").empty();
 			$("#list").append(content);
@@ -208,7 +211,7 @@
 			 if($("#next").attr('class') != "page-item disabled"){
 				startPage +=10;
 				addPage +=10;
-				listCall();
+				listCall(obj,startPage,keyword);
 			 }
 		});
 		
@@ -217,16 +220,17 @@
 				//이전 목록 활성화 시키기
 				startPage -=10;
 				addPage -=10;
-				listCall();
+				listCall(obj,startPage,keyword);
 			 }
 		});
+
+		//ajax 실행 
+		function ajaxCall(obj){
+			$.ajax(obj)
+		};
 		
-		$("#Nserch").click(function(){
-			addPage = 10;
-			listCall();
-			
-			
-		})
+
+
 
 	
 	
