@@ -66,14 +66,14 @@
                 <table class="table">
                      <tr>
                        <th>제목</th>
-                       <td class="subject">{board.board_subject}<textarea class="form-control subject" rows="1" style="padding-bottom: 11px;">공지사항입니다.</textarea></td>
+                       <td class="subject">${board.board_title}<textarea class="form-control subject" rows="1" style="padding-bottom: 11px;">공지사항입니다.</textarea></td>
                      </tr>
                      
                      <tr>
                        <th colspan="2">내용</th>
 					 </tr>
 					<tr>
-						<td class="write_content" colspan="2">{board.board_content}<textarea class="form-control" rows="15">공지사항이요~</textarea></td>
+						<td class="write_content" colspan="2">${board.board_content}<textarea class="form-control" rows="15">공지사항이요~</textarea></td>
 					</tr>
                 </table>
                 

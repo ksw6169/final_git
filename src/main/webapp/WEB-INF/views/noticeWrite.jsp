@@ -64,7 +64,7 @@
   <div class="container">
         <div class="detail_div">
             <div class="table_div">
-            <form action="nBoardWrite" method="post">
+            <form action="./nBoardWrite" method="post">
                 <table class="table">
                      <tr>
                        <th>제목</th>
@@ -88,5 +88,7 @@
     </div>
 </body>
 	<script>
+	
+	
 	</script>
 </html>

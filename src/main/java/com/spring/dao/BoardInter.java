@@ -1,12 +1,13 @@
 package com.spring.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.spring.dto.BoardDTO;
 
 public interface BoardInter {
-	ArrayList<BoardDTO> nBoardList(String startPage, String addPage); //공지사항 리스트
+	ArrayList<BoardDTO> nBoardList(Map<String, Object> param); //공지사항 리스트
 
 	int nBoardWrite(BoardDTO dto); //공지사항 작성
 
@@ -17,6 +18,8 @@ public interface BoardInter {
 	int nBoardUpdate(String board_title, String board_content, String board_no);
 
 	void upHit(String board_no);
+	
+	int listCnt(Map<String, Object> param); //공지사항 리스트 수 
 
 	
 	ArrayList<BoardDTO> myWriteList(Map<String, String> params);//내가 쓴 글 리스트
@@ -26,4 +29,8 @@ public interface BoardInter {
 	ArrayList<BoardDTO> myReplyList(Map<String, String> params);//내가 쓴 댓글 리스트
 
 	int myReplyListCnt(Map<String, String> params); //내가 쓴 댓글 리스트 갯수
+
+
+
+	
 }
