@@ -146,23 +146,18 @@ public class BoardService {
 	}
 
 	@Transactional
-	public ModelAndView nBoardUpdate(HashMap<String, Object> map) {
+	public ModelAndView nBoardUpdate(HashMap<String, String> map) {
 		logger.info("공지사항 수정하기 서비스");
 		inter = sqlSession.getMapper(BoardInter.class);
 		ModelAndView mav = new ModelAndView();
-		//1. 파라메터 값 가져오기 
-		String board_no = (String) map.get("board_no");
-		String board_subject = (String) map.get("board_subject");
-		String board_content = (String) map.get("board_content");
-		logger.info(board_no+"/"+board_subject+"/"+board_content);
-		String page = "redirect:/nBoardUpdateForm?board_no="+board_no;
-		// 2. 수정 쿼리 실행
-		int success = inter.nBoardUpdate(board_subject,board_content,board_no);
-		logger.info("success : "+success);
-		if(success > 0) {
-			page = "redirect:/nBoardDetail?board_no="+board_no; 
-		}	
 		
+		String page = "redirect:/nBoardUpdateForm?board_no="+map.get("board_no");
+		int success = inter.nBoardUpdate(map);
+		if(success > 0) {
+			page = "redirect:/nBoardDetail?board_no="+map.get("board_no"); 
+		}		
+		logger.info("success : "+success);
+		mav.addObject("success", success);
 		mav.setViewName(page);
 		return mav;
 	}
