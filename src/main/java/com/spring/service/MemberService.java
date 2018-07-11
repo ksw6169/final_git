@@ -177,7 +177,7 @@ public class MemberService {
 
 	//회사 정보 수정
 	@Transactional
-	public ModelAndView companyUpdate(MultipartFile file, String root, String companyName, String id) {
+	public ModelAndView companyUpdate(MultipartFile file, String root, String companyName,String jobSel, String id) {
 		ModelAndView mav = new ModelAndView();
 		inter = sqlSession.getMapper(MemberInter.class);
 		int success = 0;
@@ -223,7 +223,7 @@ public class MemberService {
 			Files.write(filePath, bytes); //파일을 써줌(자바 7부터 사용가능)
 			fileName = newFileName;
 			logger.info("저장할 파일 이름  : "+fileName);
-			success = inter.companyUpdate(companyName, newFileName, id);
+			success = inter.companyUpdate(companyName, newFileName,jobSel, id);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

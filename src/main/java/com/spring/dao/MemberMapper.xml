@@ -48,6 +48,6 @@
 	 
 	 <!-- 회사 수정 -->
 	 <update id="companyUpdate">
-	 	UPDATE member SET member_company = #{param1}, member_capture = #{param2} WHERE member_id = #{param3}
+	 	UPDATE member SET member_company = #{param1}, member_capture = #{param2}, job_no = #{param3} WHERE member_id = #{param4}
 	 </update>
 </mapper>

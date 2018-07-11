@@ -157,11 +157,11 @@ public class MemberController {
 	
 	/*회사 정보 수정*/
 	@RequestMapping(value = "/companyUpdate")
-	public ModelAndView companyUpdate(MultipartFile file, HttpSession session, @RequestParam("companyName") String companyName) {
+	public ModelAndView companyUpdate(MultipartFile file, HttpSession session, @RequestParam("companyName") String companyName, @RequestParam("jobSel") String jobSel) {
 		logger.info("회사 정보 수정");
 		logger.info(companyName);
 		String id = (String) session.getAttribute("loginId");
 		String root = session.getServletContext().getRealPath("/");
-		return service.companyUpdate(file, root, companyName, id);
+		return service.companyUpdate(file, root, companyName, jobSel ,id);
 	}
 }
