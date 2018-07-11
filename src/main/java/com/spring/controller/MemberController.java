@@ -45,6 +45,18 @@ public class MemberController {
 		return pageName;
 	}
 	
+	/* main 페이지 이동 */
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home(Locale locale, Model model) {
+		return "redirect:/main";
+	}
+	
+	/* main 페이지 이동 */
+	@RequestMapping(value = "/main")
+	public String main() {
+		return "main";
+	}
+	
 	/* 로그인 페이지 이동 */
 	@RequestMapping(value = "/loginForm")
 	public String loginForm() {
@@ -159,5 +171,15 @@ public class MemberController {
 		String root = session.getServletContext().getRealPath("/");
 		
 		return service.memUpload(file, root);
+	}
+	
+	/*회사 정보 수정*/
+	@RequestMapping(value = "/companyUpdate")
+	public ModelAndView companyUpdate(MultipartFile file, HttpSession session, @RequestParam("companyName") String companyName) {
+		logger.info("회사 정보 수정");
+		logger.info(companyName);
+		String id = (String) session.getAttribute("loginId");
+		String root = session.getServletContext().getRealPath("/");
+		return service.companyUpdate(file, root, companyName, id);
 	}
 }

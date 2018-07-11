@@ -45,4 +45,9 @@
 	 <delete id="outMem">
 	 	DELETE FROM member WHERE member_id = #{param1}
 	 </delete>
+	 
+	 <!-- 회사 수정 -->
+	 <update id="companyUpdate">
+	 	UPDATE member SET member_company = #{param1}, member_capture = #{param2} WHERE member_id = #{param3}
+	 </update>
 </mapper>

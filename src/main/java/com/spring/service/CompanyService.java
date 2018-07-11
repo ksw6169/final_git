@@ -41,7 +41,15 @@ public class CompanyService {
 	}
 
 	@Transactional
-	public ModelAndView companyDetail(String company_no) {
+	public ModelAndView companyDetail(String company_no, String member_id) {
+		ModelAndView mav = new ModelAndView();
+		if(certCheck(member_id)) {
+			mav.addObject("msg", "기업 인증을 진행하지 않으셨습니다.");
+			mav.setViewName("howComList");
+			
+			return mav;
+		}
+		
 		inter=sqlSession.getMapper(CompanyInter.class);
 		CompanyDTO companyDTO=inter.companyDetail(company_no);
 		ArrayList<EvaluationDTO> list= inter.companyCommentList(company_no,null);
@@ -65,7 +73,6 @@ public class CompanyService {
 		companyDTO.setEvaluatino_vacationAVG(Math.round(vacation/list.size()));
 		}
 		
-		ModelAndView mav = new ModelAndView();
 		mav.addObject("companyDTO", companyDTO);
 		mav.setViewName("comDetail");
 		return mav;
@@ -168,9 +175,9 @@ public class CompanyService {
 		CompanyDTO companyDTO=inter.companyDetail(company_no);
 		
 		MemberInter memberInter=sqlSession.getMapper(MemberInter.class);
-		MemberDTO memberDTO=null;
-		if(Integer.parseInt(memberDTO.getMember_cert())>0) {
-		msg="기업 인증을 진행하지 않으셨습니다.";	
+		MemberDTO memberDTO=memberInter.member(member_id);
+		if(!memberDTO.getMember_cert().equals("Y")) {
+			msg="기업 인증을 진행하지 않으셨습니다.";	
 		}else if(Integer.parseInt(memberDTO.getMember_eval())>0) {
 			msg="이미 기업평가를 하셨습니다.";
 		}else if(!companyDTO.getCompany_name().equals(memberDTO.getMember_company())) {
@@ -182,6 +189,20 @@ public class CompanyService {
 		map.put("success", success);
 		map.put("msg", msg);
 		return map;
+	}
+
+	public boolean certCheck(String member_id) {
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		Boolean success=false;
+		
+		MemberInter memberInter=sqlSession.getMapper(MemberInter.class);
+		MemberDTO memberDTO=memberInter.member(member_id);
+		
+		if(memberDTO.getMember_cert()==null||!memberDTO.getMember_cert().equals("Y")) { //실제 구동시 &조건 삭제 해야함
+			success=true;
+		}
+		
+		return success;
 	}
 	
 }

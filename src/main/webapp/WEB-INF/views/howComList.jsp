@@ -162,7 +162,11 @@
         var pagingEnd=15;
         var keyword="";
         createObj(obj);
-        ajaxCall(obj,keyword,pagingEnd);
+        
+        $(document).ready(function() {
+    		ajaxCall(obj,keyword,pagingEnd);
+    		if("${msg}"!=""){alert("${msg}");}
+    	});
         
         $("#more").click(function(){
             pagingEnd+=15;
