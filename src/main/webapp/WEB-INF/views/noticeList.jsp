@@ -124,7 +124,7 @@
 	             </thead>
 	             <tbody id="list"></tbody>
 	        </table>
-	        <button class="pull-right"  onclick ="location.href ='pageMove?page=noticeWrite'">글 작성</button>
+	        <button id="aWrite" class="pull-right"  onclick ="location.href ='pageMove?page=noticeWrite'">글 작성</button>
 	        <div class="paging_button">
 	          <ul class="pagination">
 	            <li class="page-item" id="pre">
@@ -152,7 +152,21 @@
 		//페이지 출력시 바로 실행 
 		$(document).ready(function(){
 			listCall(obj,startPage,keyword); 
+			adminCK();
+			
 		});
+		
+		//관리자 접속 체크 및 공지사항 작성 버튼 활성화 
+		 function adminCK(){
+			 	var id = "${sessionScope.loginId}"
+				var div = "${sessionScope.membe_div}"
+					console.log(id +"/"+div);
+				if(id != "admin" && div != "관리자"){
+					$("#aWrite").hide()
+				}else{
+					$("#aWrite").show();
+				}
+			}
 		
 		
 		//검색 버튼 클릭시 
