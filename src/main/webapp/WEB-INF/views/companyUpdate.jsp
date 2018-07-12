@@ -88,7 +88,7 @@
            <span class="submenubar_button_last"><a href="./pageMove?page=outMemForm">회원탈퇴</a></span>
            <span class="submenubar_button"><a href="./pageMove?page=myReplyList">내가 쓴 댓글 보기</a></span>
            <span class="submenubar_button"><a href="./pageMove?page=myWriteList">내가 쓴 글 보기</a></span>
-           <span class="submenubar_button"><a href="./pageMove?page=companyUpdate">회사정보 수정</a></span>
+           <span id="companyupdate_btn" class="submenubar_button"></span>
            <span class="submenubar_button"><a href="./perUpdateForm">개인정보 수정</a></span>
 	    </div>
 		
@@ -129,28 +129,39 @@
 			    </div>
 			    
 				<div class="center-block">
-				    <button id="mUpdate">개인정보 수정</button>
+				    <button id="mUpdate">회사정보 수정</button>
 				</div>	    
 	        </form>
 			</div>
 	</body>
 	<script>
-	function fileUpload(){
-		var fileValue = $("#upload").val().split("\\");
-		var fileName = fileValue[fileValue.length-1]; // 파일명 
-		$("#fileName").val(fileName);
-	}
-	
-	$("#mUpdate").click(function(){
-		if($("#comName").val()==""){
-			alert("기업명을 입력 해 주세요.");
-			$("#comName").focus();
-			console.log("미입력");
-		}else if($("#fileName").val() == ""){
-			alert("사진을 선택 해 주세요");
-		}else{
-			$("form").attr("action", "companyUpdate");
+		// 서브 메뉴바
+		var member_div = "${sessionScope.member_div}";
+		
+		$(document).ready(function(){
+			if(member_div == "인턴") {
+				$("#companyupdate_btn").html("<a href='./pageMove?page=companyUpdate'>회사정보 등록</a>");
+			} else {
+				$("#companyupdate_btn").html("<a href='./pageMove?page=companyUpdate'>회사정보 수정</a>");
+			}
+		});
+		
+		function fileUpload(){
+			var fileValue = $("#upload").val().split("\\");
+			var fileName = fileValue[fileValue.length-1]; // 파일명 
+			$("#fileName").val(fileName);
 		}
-	});
+		
+		$("#mUpdate").click(function(){
+			if($("#comName").val()==""){
+				alert("기업명을 입력해주세요.");
+				$("#comName").focus();
+				console.log("미입력");
+			}else if($("#fileName").val() == ""){
+				alert("사진을 선택해주세요");
+			}else{
+				$("form").attr("action", "companyUpdate");
+			}
+		});
 	</script>
 </html>

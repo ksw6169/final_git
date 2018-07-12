@@ -117,7 +117,7 @@
            <span class="submenubar_button_last"><a href="./pageMove?page=outMemForm">회원탈퇴</a></span>
            <span class="submenubar_button"><a href="./pageMove?page=myReplyList">내가 쓴 댓글 보기</a></span>
            <span class="submenubar_button"><a href="./pageMove?page=myWriteList">내가 쓴 글 보기</a></span>
-           <span class="submenubar_button"><a href="./pageMove?page=companyUpdate">회사정보 수정</a></span>
+           <span id="companyupdate_btn" class="submenubar_button"></span>
            <span class="submenubar_button"><a href="./perUpdateForm">개인정보 수정</a></span>
        </div>
       
@@ -140,22 +140,33 @@
         </div>
    </body>
    <script>
-   var msg = "{msg}";
-   if(msg == ""){
-      alert(msg);
-   }
-   var userId = "${sessionScope.loginId}";
-   $("#wrong").hide();
-   $("#out").click(function(){
-      if($("#inputId").val() == userId){
-         location.href="./outMem";
-      }else{
-         $("#wrong").show();
-         $("#inputId").clear();
-      }
-   });
-   $("#inputId").keyup(function(){
-      $("#wrong").hide();
-   });
+	   var msg = "{msg}";
+	   if(msg == ""){
+	      alert(msg);
+	   }
+	   var userId = "${sessionScope.loginId}";
+		// 서브 메뉴바
+		var member_div = "${sessionScope.member_div}";
+			
+		$(document).ready(function(){
+			if(member_div == "인턴") {
+				$("#companyupdate_btn").html("<a href='./pageMove?page=companyUpdate'>회사정보 등록</a>");
+			} else {
+				$("#companyupdate_btn").html("<a href='./pageMove?page=companyUpdate'>회사정보 수정</a>");
+			}
+		});
+	   
+	   $("#wrong").hide();
+	   $("#out").click(function(){
+	      if($("#inputId").val() == userId){
+	         location.href="./outMem";
+	      }else{
+	         $("#wrong").show();
+	         $("#inputId").clear();
+	      }
+	   });
+	   $("#inputId").keyup(function(){
+	      $("#wrong").hide();
+	   });
    </script>
 </html>

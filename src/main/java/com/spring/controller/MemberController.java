@@ -113,7 +113,6 @@ public class MemberController {
 		logger.info("비밀번호 체크 요청");
 		
 		String userId = (String) request.getSession().getAttribute("loginId");
-		logger.info(userId);
 		return service.checkPW(userId, userPw);
 	}
 	

@@ -22,7 +22,7 @@
 			
 	        body {padding-top: 70px;}
 	        .content {font-family: "bareun"; margin-bottom: 50px; text-align: center;}
-	        .updateForm{font-family: "bareun"; color: #fff;background-color: #121F27; width: 100px;height: 50px;
+	        .updateForm{font-family: "bareun"; color: #fff;background-color: #121F27; width: 120px;height: 50px;
 	          font-size: 14px; margin: 5px 0; float:left;border: 0px;text-align: center;padding-top: 15px;}
 	        input[type='text'], input[type='password'] {font-size:13px;padding:10px;width: 500px;height: 50px;
 	            line-height: 40px; outline:none;margin: 5px 0;display: inline;padding-left: 20px;margin-left: 15px;
@@ -32,10 +32,10 @@
 	        .center-block{ width: 650px;}
 	        #group{background: black; color: white; height: 15px; width: 150px;}
 	        /* 비밀번호 확인 */
-	        #warn{ font-family: "bareun"; color: red; margin-left: 115px;}
+	        .warn{ font-family: "bareun"; margin-left: 135px; display: none; }
 	        #blink{height: 1px; background-color: white; border-color: white; width: 150px;}
 	        /* 성 밑에 설명 */
-	        #info{font-family: "bareun"; margin-left: 115px;}
+	        #info{font-family: "bareun"; margin-left: 140px;}
 	        /* 버튼 */
 	        #mUpdate{font-family: "bareun";font-size:18; padding: 10px 60px; text-align: center; background-color: #FF8000; border: 0; color: white;}
 	        #btnC{text-align: center;}
@@ -45,17 +45,23 @@
 	        	margin-top: 150px;
 	        }
 	        
-		/* submenuBar 링크 글자 색상 */
-		.submenubar_button a{ color: white;}
-		.submenubar_button_last a{color: white;}
-		.submenubar_button a:hover{color: #FF8000; background-color: #121F27;text-decoration: none;}
-		.submenubar_button_last a:hover{color: #FF8000; background-color: #121F27; text-decoration: none;}
+	        #updateForm_id {
+	        	background-color: gray;
+	        	color: white;
+	        }
+	        
+			/* submenuBar 링크 글자 색상 */
+			.submenubar_button a{ color: white;}
+			.submenubar_button_last a{color: white;}
+			.submenubar_button a:hover{color: #FF8000; background-color: #121F27;text-decoration: none;}
+			.submenubar_button_last a:hover{color: #FF8000; background-color: #121F27; text-decoration: none;}
 		</style>
 	</head>
 
 	<body>
 		<jsp:include page="menubar.jsp"/>
 		
+		<!-- 서브 메뉴바 -->
 	    <div class="submenubar_background">
 	        <div class="submenubar_header">
 	            <table>
@@ -67,28 +73,28 @@
            <span class="submenubar_button_last"><a href="./pageMove?page=outMemForm">회원탈퇴</a></span>
            <span class="submenubar_button"><a href="./pageMove?page=myReplyList">내가 쓴 댓글 보기</a></span>
            <span class="submenubar_button"><a href="./pageMove?page=myWriteList">내가 쓴 글 보기</a></span>
-           <span class="submenubar_button"><a href="./pageMove?page=companyUpdate">회사정보 수정</a></span>
+           <span id="companyupdate_btn" class="submenubar_button"></span>
            <span class="submenubar_button"><a href="./perUpdateForm">개인정보 수정</a></span>
 	    </div>
 		
-		
+		<!-- 개인정보 수정 페이지 -->
 	    <div class="col-md-4 col-md-offset-4">   
 	        <form method="post">
 				<div class="center-block">
 				<h1 class="content">개인정보 수정</h1>
 					<!-- 아이디 수정 -->
-					
 			        <div class="updateForm">아이디</div>
-					<input type="text" readonly="readonly" value="${member.member_id}"/>
+					<input id="updateForm_id" type="text" readonly="readonly" value="${member.member_id}"/>
 	
 			       <!-- 비밀번호 수정 -->
 			        <div class="updateForm">새 비밀번호</div>  
 		            <input type="password" id="pw" placeholder="비밀번호 입력" name="pw">
+		            <div><span id="pwChkMsg" class="warn">　</span></div>
 		            
 			        <!-- 비밀번호 확인 수정 -->
 			        <div class="updateForm">새 비밀번호 확인</div>  
 		            <input type="password" id="pwChk" placeholder="비밀번호 입력">
-		            <div><span id="warn" >비밀번호가 같지 않습니다. </span></div>
+		            <div><span id="pwChkReMsg" class="warn">　</span></div>
 	
 			       <!--  이메일 수정 -->
 			        <div class="updateForm">이메일</div>  
@@ -108,41 +114,55 @@
 	    </div>
 	</body>
 	<script>
-	$(document).ready(function(){
-		$("#warn").hide();
-	});
+		// 서브 메뉴바
+		var member_div = "${sessionScope.member_div}";
+			
+		$(document).ready(function(){
+			if(member_div == "인턴") {
+				$("#companyupdate_btn").html("<a href='./pageMove?page=companyUpdate'>회사정보 등록</a>");
+			} else {
+				$("#companyupdate_btn").html("<a href='./pageMove?page=companyUpdate'>회사정보 수정</a>");
+			}
+		});
 	
-	$("#pwChk").keyup(function(){
-		if($("#pw").val() != $("#pwChk").val()){
-			$("#warn").show();
-		}else{
-			$("#warn").hide();
-			console.log($("#warn"));
-		}
+		// 비밀번호 길이 검사
+		$("#pw").keyup(function(){
+			if($("#pw").val() == ""){
+				$("#pwChkMsg").css("display", "inline");
+				$("#pwChkMsg").css("color", "red");
+				$("#pwChkMsg").html("새 비밀번호 8~12자리 입력");
+			} else if ($("#pw").val().length < 8 || $("#pw").val().length > 12){
+				$("#pwChkMsg").css("display", "inline");
+				$("#pwChkMsg").css("color", "red");
+				$("#pwChkMsg").html("새 비밀번호 8~12자리 입력");
+			} else if ($("#pw").val().length >= 8 || $("#pw").val().length <= 12){
+				$("#pwChkMsg").css("display", "none");
+			}
+		});
 		
-		//console.log("pwChk");
-	});
-	
-	$("#pw").keyup(function(){
-		if($("#pw").val() != $("#pwChk").val()){
-			$("#warn").show();
-		}else{
-			$("#warn").hide();
-		}
-	});
-	
-	$(".ckh_btn").click(function(){
-		if($("#warn").css("display") == "none"){
-			console.log("컨트롤러에 보냄");
-			$("form").attr("action", "checkPW");
-		}
-	});
-	
-	$("#mUpdate").click(function(){
-		if($("#warn").css("display") == "none"){
-			console.log("컨트롤러에 보냄");
-			$("form").attr("action", "perUpdate");
-		}
-	});
+		// 비밀번호 확인 중복 검사
+		$("#pwChk").keyup(function(){
+			if($("#pw").val() != $("#pwChk").val()){
+				$("#pwChkReMsg").css("display", "inline");
+				$("#pwChkReMsg").css("color", "red");
+				$("#pwChkReMsg").html("비밀번호가 일치하지 않습니다.");
+			} else {
+				$("#pwChkReMsg").css("display", "none");
+			}
+		});
+		
+		// 개인정보 수정 버튼을 클릭했을 때, 
+		$("#mUpdate").click(function(){
+			if($("#pw").val() == "" || $("#pw").val().length < 8 || $("#pw").val().length > 12){
+				alert("새 비밀번호를 다시 입력해주세요.");
+				$("#pw").focus();
+			} else if($("#pw").val() != $("#pwChk").val()) {
+				alert("새 비밀번호 확인을 다시 입력해주세요.");
+				$("#pwChk").focus();
+			} else {
+				alert("개인정보 수정이 완료되었습니다.");
+				$("form").attr("action", "perUpdate");
+			}
+		});
 	</script>
 </html>

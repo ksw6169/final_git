@@ -113,10 +113,10 @@ public class MemberService {
 		boolean success = encoder.matches(pw, hash);		// 입력한 pw와 암호화된 pw 비교
 
 		ModelAndView mav = new ModelAndView();
-		String msg = "로그인 실패";
+		String msg = "ID와 비밀번호를 다시 입력해주세요.";
 		
 		if(success) {
-			msg = "로그인 성공";
+			msg = "로그인에 성공했습니다.";
 			mav.setViewName("redirect:/");
 			session.setAttribute("loginId", id);
 			session.setAttribute("member_div", member_div);
@@ -139,7 +139,7 @@ public class MemberService {
 		boolean success = encoder.matches(userPw, hash);
 		
 		ModelAndView mav = new ModelAndView();
-		String msg = "비밀번호를 다시 입력해 주세요.";
+		String msg = "비밀번호가 일치하지 않습니다. 다시 입력해 주세요.";
 		
 		if(success) {
 			mav.setViewName("redirect:/perUpdateForm");
@@ -189,7 +189,7 @@ public class MemberService {
 			map.put("pw", hash);
 		}
 		int success = inter.perUpdate(map);
-		mav.setViewName("redirect:/perUpdateForm");
+		mav.setViewName("redirect:/");
 		return mav;
 	}
 
@@ -199,10 +199,10 @@ public class MemberService {
 		inter = sqlSession.getMapper(MemberInter.class);
 		int success = inter.outMem(userId);
 		
-		String msg = "회원탈퇴 실패";
+		String msg = "회원 탈퇴에 실패했습니다.";
 		if(success >0) {
 			mav.setViewName("redirect:/logout");
-			msg = "회원탈퇴 성공";
+			msg = "회원 탈퇴에 성공했습니다.";
 		}
 		mav.addObject("msg", msg);
 		return mav;
@@ -261,7 +261,7 @@ public class MemberService {
 			e.printStackTrace();
 		}
 		if(success >0) {
-			mav.setViewName("redirect:/perUpdateForm");
+			mav.setViewName("redirect:/");
 		}
 		
 		return mav;
