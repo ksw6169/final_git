@@ -42,7 +42,7 @@
 	        .reply_date { color: #121F27; background-color: #FFFFFF; width: 280px; height: 75px; line-height: 75px; text-align: center; }
 			td.reply_updel { background-color: #FFFFFF; border: 1px #FFFFFF; width: 80px; }
 	        .detail_div { margin-top: 50px;}
-	        .table_div { background-color: #E4EEF0; padding: 50px; text-align: center;}
+	        .table_div { background-color: #E4EEF0; padding: 50px; text-align: center; margin-bottom: 50px; }
 			.table>tbody>tr>td.reply_date { vertical-align: middle; border: 1px white; }
 			.table>tbody>tr>td.reply_updel { padding: 0px; border-top: 0px; }
 			
