@@ -24,10 +24,10 @@
 					ROW_NUMBER() OVER(ORDER BY board_no DESC) AS rnum FROM board
  				<where>
 					<if test="keyword !=null || !keyword.equals('')">
-						board_title LIKE '%'||#{keyword}||'%'  AND board_content LIKE '%'||#{keyword}||'%'
+						board_title LIKE '%'||#{keyword}||'%'  OR board_content LIKE '%'||#{keyword}||'%'
 					</if>
 				</where>    
-				) WHERE rnum BETWEEN #{startPage} AND #{addPage} ORDER BY board_title ASC
+				) WHERE rnum BETWEEN #{startPage} AND #{addPage} ORDER BY board_date DESC
 	</select>
 	
 	<!-- 공지사항 작성  -->

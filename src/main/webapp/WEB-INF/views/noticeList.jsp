@@ -161,10 +161,10 @@
 			 	var id = "${sessionScope.loginId}"
 				var div = "${sessionScope.membe_div}"
 					console.log(id +"/"+div);
-				if(id != "admin" && div != "관리자" && id ==null){
-					$("#aWrite").addClass('hide');
+				if(id != "admin" && div != "관리자"){
+					$("#aWrite").hide()
 				}else{
-					$("#aWrite").removeClass('hide');
+					$("#aWrite").show();
 				}
 			}
 		

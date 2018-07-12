@@ -91,7 +91,7 @@
 </body>
 	<script>
 		function list(){
-			location.href ="redirect:/noticeList";
+			location.href ="./nBoardListForm";
 			
 		}
 	
