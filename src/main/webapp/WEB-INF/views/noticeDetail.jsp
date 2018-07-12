@@ -78,7 +78,7 @@
                 </table>
             </div>    
             <div class="button-group">
-                <button class="btn btn-default pull-right" onclick="location.href='nBoardDelete'">삭제</button>
+                <button class="btn btn-default pull-right" onclick="del()">삭제</button>
                 <button class="btn btn-default pull-right" onclick="update()">수정</button>
                 <button class="btn btn-default pull-right" onclick="history.go(-1)">목록</button>       
             </div>
@@ -89,6 +89,9 @@
 		function update(){
 			location.href ="./nBoardUpdateForm?board_no="+${board.board_no}; 
 			
+		}
+		function del(){
+			location.href="./nBoardDelete?board_no="+${board.board_no};
 		}
 
 	

@@ -38,10 +38,9 @@
 		keyProperty = "idx" <- 키가 될 필드
 		keyColumn = "idx" <- 키가 저장될 컬럼
 	 -->
-	<insert id="nBoardWrite"  parameterType="com.spring.dto.BoardDTO"
-	useGeneratedKeys="true" keyProperty="board_no" 	keyColumn="board_no">
+	<insert id="nBoardWrite"  parameterType="com.spring.dto.BoardDTO">
 		INSERT INTO board(board_no,member_id,board_title,board_content) 
-			VALUES(board_seq.NEXTVAL,#{member_id},#{board_title},#{board_content})
+			VALUES(board_seq.NEXTVAL,'admin',#{board_title},#{board_content})
 	</insert>
 	
 	
@@ -57,11 +56,8 @@
 	
 	<!-- 공지사항 수정 -->
 	<update id="nBoardUpdate" parameterType="hashMap">
-		UPDATE board 
-		<set>
-			board_title=#{board_title}, board_content=#{board_content} 
-		</set>
-		WHERE board_no=#{board_no}
+		UPDATE board SET board_title = #{board_title}, board_content=#{board_content}
+		WHERE board_no =#{board_no}
 	</update>
 	
 	<!-- 조회수 증가 -->

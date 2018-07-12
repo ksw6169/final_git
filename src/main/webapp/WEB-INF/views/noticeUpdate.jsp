@@ -62,13 +62,13 @@
   
   <div class="container">
         <div class="detail_div">
-          <form action="nBoardUpdate" method="post">
+          <form action="nBoardUpdate?board_no=${board.board_no}" method="post">
             <div class="table_div">
                 <table class="table">
                      <tr>
                        <th>제목</th>
                        <td class="subject">
-                       <textarea class="form-control subject" rows="1" style="padding-bottom: 11px;">${board.board_title}</textarea></td>
+                       <textarea class="form-control subject" rows="1" style="padding-bottom: 11px;" name="board_title">${board.board_title}</textarea></td>
                      </tr>
                      
                      <tr>
@@ -76,7 +76,7 @@
 					 </tr>
 					<tr>
 						<td class="write_content" colspan="2">
-						<textarea class="form-control" rows="15">${board.board_content}</textarea></td>
+						<textarea class="form-control" rows="15" name="board_content">${board.board_content}</textarea></td>
 					</tr>
                 </table>
                      
@@ -90,5 +90,26 @@
     </div>
 </body>
 	<script>
+/* 	
+	var obj = {};
+	var board_title = ${board.board_title};
+	var board_content = ${board.board_content};
+	
+	$("#update").click(function(){
+		obj.url = "./nBoardUpdate?board_no=${board.board_no}";
+		obj.data={ 
+				"board_title" : board_title,
+				"board_content":board_content};
+		obj.success = function(d){
+			console.log(d);
+			
+		}
+		ajaxCall();
+		
+	});
+	
+	function ajaxCall(){
+		$.ajax;
+	} */
 	</script>
 </html>

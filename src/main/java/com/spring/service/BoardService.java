@@ -76,7 +76,7 @@ public class BoardService {
 		inter = sqlSession.getMapper(BoardInter.class);
 		ModelAndView mav = new ModelAndView();
 		BoardDTO dto = new BoardDTO();
-		
+		//아이디, 번호, 제목, 내용 => dto
 		dto.setMember_id(map.get("member_id"));
 		dto.setBoard_title(map.get("board_title"));
 		dto.setBoard_content(map.get("board_content"));
@@ -84,7 +84,7 @@ public class BoardService {
 		String page = "noticeWrite";
 		
 		if(success>0) { //글작성 성공시 
-			page = "redirect:./nBoardDetail?board_no="+dto.getBoard_no();
+			page = "noticeList";
 		}
 		mav.setViewName(page);
 		return mav;
@@ -132,7 +132,7 @@ public class BoardService {
 		inter = sqlSession.getMapper(BoardInter.class);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("board", inter.nBoardDelete(board_no));
-		mav.setViewName("redirect:/");
+		mav.setViewName("noticeList");
 		return mav;
 	}
 
@@ -156,7 +156,6 @@ public class BoardService {
 		if(success > 0) {
 			page = "redirect:/nBoardDetail?board_no="+map.get("board_no"); 
 		}		
-		logger.info("success : "+success);
 		mav.addObject("success", success);
 		mav.setViewName(page);
 		return mav;
