@@ -100,14 +100,12 @@
             <div class="table_div">
                 <table class="table">
                      <tr>
-                       
 						   <select class="category" style="margin-bottom: 0px;">
 						      <option value="">카테고리</option>
 							  <option value="잡담">&nbsp;&nbsp;잡담</option>
 							  <option value="이직" selected="selected">&nbsp;&nbsp;이직</option>
 							  <option value="업무질문">업무질문</option>
 						   </select>
-					   
                      </tr>
                      <tr>
                        <th>제목</th>
