@@ -16,10 +16,11 @@ public class LoginCheck extends HandlerInterceptorAdapter {
 		
 		HttpSession session = request.getSession();
 		Object obj = session.getAttribute("loginId");
-		
+		String requestUrl = request.getRequestURL().toString();
+		System.out.println(requestUrl);
 		// 비 로그인 시 메인 화면으로 이동
 		if(obj == null) {
-			response.sendRedirect("./main");
+			response.sendRedirect("./");
 			return false;
 		}
 		
