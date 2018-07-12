@@ -28,7 +28,7 @@
 	        .sub_menu_item a { font-family: "fallM"; margin-right: 5px; font-size: 12px; }
 	        .nav.navbar-nav li a { color: white; }
 	        .nav.navbar-nav li a:hover { color: #FF8000; background-color: #121F27; }
-	        #logout_btn { display: none; }
+	        #logout_btn, #req_btn, #mlist_btn, #mypage_btn { display: none; }
 	        
 		</style>
 	</head>
@@ -61,8 +61,9 @@
 	                      <li id="login_btn" class="sub_menu_item"><a href="./loginForm">로그인</a></li>
 	                      <li id="join_btn" class="sub_menu_item"><a href="./joinForm">회원가입</a></li>
 	                      <li id="logout_btn" class="sub_menu_item"><a href="./logout">로그아웃</a></li>
-	                      <li class="sub_menu_item"><a href="./pageMove?page=checkPW">마이페이지</a></li>
-	                      <li class="sub_menu_item"><a href="./pageMove?page=getMlist">쪽지함</a></li>
+	                      <li id="req_btn" class="sub_menu_item"><a href="./pageMove?page=reqList">인증신청관리</a></li>
+	                      <li id="mypage_btn" class="sub_menu_item"><a href="./pageMove?page=checkPW">마이페이지</a></li>
+	                      <li id="mlist_btn" class="sub_menu_item"><a href="./pageMove?page=getMlist">쪽지함</a></li>
 	                    </ul>
 	                </div>
 	            </nav>
@@ -72,16 +73,30 @@
 	<script>
 		$(document).ready(function() {
 	    	var loginId = "${sessionScope.loginId}";
-	    	console.log(loginId);
+	    	var member_div = "${sessionScope.member_div}";
 	    	
-	    	if(loginId != "") {
-	    		$("#login_btn").css("display", "none");
-	        	$("#logout_btn").css("display", "inline-block");
-	        	$("#join_btn").css("display", "none");
-	    	} else {
+	    	// 비 로그인 시,
+	    	if(loginId == "") {
 	    		$("#login_btn").css("display", "inline-block");
-	        	$("#logout_btn").css("display", "none");
 	        	$("#join_btn").css("display", "inline-block");
+	        	$("#logout_btn").css("display", "none");
+	        	$("#req_btn").css("display", "none");
+	        	$("#mypage_btn").css("display", "none");
+	        	$("#mlist_btn").css("display", "none");
+	    	} else if(member_div == "인턴" || member_div == "대리"){
+	        	$("#logout_btn").css("display", "inline-block");
+	        	$("#mypage_btn").css("display", "inline-block");
+	        	$("#mlist_btn").css("display", "inline-block");
+	    		$("#login_btn").css("display", "none");
+	        	$("#join_btn").css("display", "none");
+	        	$("#req_btn").css("display", "none");
+	    	} else if(member_div == "관리자") {
+	        	$("#logout_btn").css("display", "inline-block");
+	        	$("#req_btn").css("display", "inline-block");
+	        	$("#mlist_btn").css("display", "inline-block");
+	    		$("#login_btn").css("display", "none");
+	        	$("#join_btn").css("display", "none");
+	        	$("#mypage_btn").css("display", "none");
 	    	}
 		});
 	</script>

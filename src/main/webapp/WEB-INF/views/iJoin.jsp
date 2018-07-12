@@ -230,34 +230,34 @@
 			var idReg = /^[A-Za-z0-9+]{5,16}$/;
 			
 			if($("#userId").val()==""){
-				$("#userIdMsg").html("아이디를 입력하세요.");
+				alert("ID를 입력해주세요.");
 				$("#userId").focus();
 			}else if(chk==false){
-				$("#userIdMsg").html("아이디가 중복되었습니다.");
+				alert("ID가 중복되었습니다.");
 				$("#userId").focus();
 			}else if(!idReg.test(userId)){
-				$("#userIdMsg").html("5~20자리 영문과 숫자만 가능");
+				alert("ID를 5~20자리 영문과 숫자로 입력해주세요.");
 				$("#userId").focus();
 			}else if(userPw==""){
-				$("#userPwMsg").html("비밀번호를 입력하세요.");
+				alert("비밀번호를 입력해주세요.");
 				$("#userPw").focus();
 			}else if($("#userPw").val().length < 8 || $("#userPw").val().length >12){
-				$("#userPwMsg").html("비밀번호 8~12자리 입력");
+				alert("비밀번호를 8~12자리 입력해주세요.")
 				$("#userPw").focus();
 			}else if(userPw_re==""){		
-				$("#userPwReMsg").html("비밀번호를 입력하세요.");
+				alert("비밀번호 확인을 입력해주세요.");
 				$("#userPw_re").focus();
 			}else if(userPw != userPw_re){
-				$("#userPwReMsg").html("비밀번호가 일치하지 않습니다.");
+				alert("비밀번호가 일치하지 않습니다.");
 				$("#userPw_re").focus();
 			}else if($("#userEmail").val()==""){
-				$("#userEmailMsg").html("이메일을 입력하세요.");
+				alert("이메일을 입력해주세요.");
 				$("#userEmail").focus();
 			}else if(emailChk==false){
-				$("#userEmailMsg").html("올바른 이메일 형식이 아닙니다.");
+				alert("올바른 이메일 형식이 아닙니다.");
 				$("#userEmail").focus();
 			} else if($("#userFamily").val()=="") {
-				alert("성을 입력하세요.");
+				alert("성을 입력해주세요.");
 				$("#userFamily").focus();
 			} else{
 				$.ajax({
@@ -268,12 +268,13 @@
 						pw : $("#userPw").val(),
 						email : $("#userEmail").val(),
 						family : $("#userFamily").val(),
-						member_div : $("#member_div").val()
+						member_div : $("#member_div").val(),
+						div: "인턴 회원가입 요청"
 					},
 					dataType : "json",
 					success : function(data) {
 						if(data.success > 0){
-							alert("회원가입이 완료되었습니다.");
+							alert("회원가입에 성공했습니다.");
 							location.href="./";	
 						}else{
 							alert("회원가입에 실패했습니다.");
