@@ -25,9 +25,9 @@ public class BoardController {
 	
 	/*김대리의 한마디 리스트*/
 	@RequestMapping(value = "/kimSayCall")
-	public @ResponseBody HashMap<String, Object> kimSayListCall() {
+	public @ResponseBody HashMap<String, Object> kimSayCallCall() {
 		logger.info("김대리의 한마디 글 리스트 요청");
-		return service.kimSay();
+		return service.kimSayCall();
 	}
 	
 	/*김대리의 한마디 상세보기*/
@@ -39,6 +39,34 @@ public class BoardController {
         mav.setViewName("kimSayDetail");
         return service.kimSayDetail(board_no);
     }
+	
+	/*김대리의 한마디 수정 폼*/
+	@RequestMapping(value = "/kimSayUpdateForm")
+    public ModelAndView kimSayUpdate(@RequestParam("board_no") String board_no, HttpServletRequest request) {
+        ModelAndView mav=new ModelAndView();
+        logger.info("board_no"+board_no);
+        mav.addObject("board_no", board_no);
+        mav.setViewName("kimSayUpdateForm");
+        return service.kimSayUpdateForm(board_no);
+    }
+	
+	/*public @ResponseBody HashMap<String, Object> kimSayDelete(@RequestParam("board_no") String board_no, HttpServletRequest request){
+		String board_no=(String) request.getSession().getAttribute("board_no");
+		logger.info(board_no);
+		
+		return service.kimSayDelete(board_no);
+	}*/
+	
+	//김대리의 한마디 게시글 삭제
+	@RequestMapping(value="/kimSayDelete")
+	public ModelAndView kimSayDelete(@RequestParam("board_no") String board_no, HttpServletRequest request) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("board_no", board_no);
+		logger.info("김대리의 한마디 삭제 실행");
+		logger.info("board:{}" , board_no);
+		return service.kimSayDelete(board_no);
+		
+	}
 
 	//공지사항리스트 폼
 	@RequestMapping(value="/nBoardListForm")

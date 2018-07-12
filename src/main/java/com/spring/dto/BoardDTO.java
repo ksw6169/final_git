@@ -16,7 +16,6 @@ public class BoardDTO {
 	private int board_bHit;
 	private Timestamp board_date;
 	private int board_recom;
-	private int board_reply;
 	private int rnum;
 	
 	
@@ -92,14 +91,5 @@ public class BoardDTO {
 	public void setBoard_recom(int board_recom) {
 		this.board_recom = board_recom;
 	}
-	public int getBoard_reply() {
-		return board_reply;
-	}
-	public void setBoard_reply(int board_reply) {
-		this.board_reply = board_reply;
-	}
-	
-	
-	
 	
 }

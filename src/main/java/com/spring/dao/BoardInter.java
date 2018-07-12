@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.spring.dto.BoardDTO;
+import com.spring.dto.MemberDTO;
 
 public interface BoardInter {
 	ArrayList<BoardDTO> nBoardList(Map<String, Object> param); //공지사항 리스트
@@ -28,11 +29,18 @@ public interface BoardInter {
 
 	ArrayList<BoardDTO> myReplyList(Map<String, String> params);//내가 쓴 댓글 리스트
 
-	ArrayList<BoardDTO> kimSayList();
-
 	BoardDTO kimSayDetail(String board_no);
 
 	int myReplyListCnt(Map<String, String> params); //내가 쓴 댓글 리스트 갯수
+
+	ArrayList<String> kimsaymemberlist();
+
+	ArrayList<BoardDTO> kimsayboardlist(String string);
+
+	int kimSayDelete(String board_no);
+
+	
+
 
 
 
