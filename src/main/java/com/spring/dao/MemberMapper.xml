@@ -6,13 +6,13 @@
 <!-- namespace = 연결되는 인터페이스 -->    
 <mapper namespace="com.spring.dao.MemberInter">
 	<insert id="join" parameterType="com.spring.dto.MemberDTO">
-		<if test="member_div.equals('인턴')">
+		<if test="div == '인턴 회원가입 요청'">
 			INSERT INTO member(member_id, member_pw, member_email, member_family, member_div) 
 				VALUES (#{member_id}, #{member_pw}, #{member_email}, #{member_family}, #{member_div})
 		</if>	
-		<if test="member_div.equals('대리')">
-			INSERT INTO member(member_id, job_no, member_pw, member_email, member_family, member_company, member_div, member_cert, member_eval) 
-				VALUES (#{member_id}, #{job_no}, #{member_pw}, #{member_email}, #{member_family}, #{member_company}, #{member_div}, 'N', 1)
+		<if test="div == '대리 회원가입 요청'">
+			INSERT INTO member(member_id, job_no, member_pw, member_email, member_family, member_company, member_div, member_cert, member_eval, member_capture) 
+				VALUES (#{member_id}, #{job_no}, #{member_pw}, #{member_email}, #{member_family}, #{member_company}, #{member_div}, 'N', 1, #{member_capture})
 		</if>
 	</insert>
 	

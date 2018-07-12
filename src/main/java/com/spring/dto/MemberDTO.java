@@ -13,7 +13,14 @@ public class MemberDTO {
 	private String member_eval;
 	private int job_no;
 	private String job_name;
+	private String div;	// 회원가입 요청 구분(0712 추가_성원)
 	
+	public String getDiv() {
+		return div;
+	}
+	public void setDiv(String div) {
+		this.div = div;
+	}
 	public String getMember_id() {
 		return member_id;
 	}

@@ -1,11 +1,9 @@
 package com.spring.controller;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -78,13 +76,12 @@ public class MemberController {
 	}
 	
 	/* 회원가입 요청 */
-	// 인자가 추가로 있다면, 대리 회원가입으로
 	@RequestMapping(value = "/join")
-	public @ResponseBody HashMap<String, Integer> join(@RequestParam HashMap<String, Object> map) {
+	public @ResponseBody HashMap<String, Integer> join(MultipartFile file, HttpSession session, @RequestParam HashMap<String, Object> map) {
 		logger.info("회원가입 요청");
-		// logger.info("파일 테스트 : "+String.valueOf(map.get("file")));
+		String root = session.getServletContext().getRealPath("/");
 		
-		return service.join(map);
+		return service.join(root, file, map);
 	}
 	
 	/* 로그인 요청 */
@@ -155,14 +152,6 @@ public class MemberController {
 		String userId = (String) request.getSession().getAttribute("loginId");
 		logger.info(userId);
 		return service.outMem(userId);
-	}
-	
-	@RequestMapping(value = "/memUpload")
-	public ModelAndView memUpload(MultipartFile file, HttpSession session) {
-		logger.info("파일 업로드 요청");
-		String root = session.getServletContext().getRealPath("/");
-		
-		return service.memUpload(file, root);
 	}
 	
 	/*회사 정보 수정*/
