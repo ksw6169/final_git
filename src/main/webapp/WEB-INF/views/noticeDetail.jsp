@@ -78,18 +78,40 @@
                 </table>
             </div>    
             <div class="button-group">
-                <button class="btn btn-default pull-right" onclick="location.href='nBoardDelete'">삭제</button>
-                <button class="btn btn-default pull-right" onclick="update()">수정</button>
-                <button class="btn btn-default pull-right" onclick="history.go(-1)">목록</button>       
+                <button id=Adel class="btn btn-default pull-right" onclick="del()">삭제</button>
+                <button id=Aup class="btn btn-default pull-right" onclick="update()">수정</button>
+                <button class="btn btn-default pull-right" onclick="list()">목록</button>       
             </div>
         </div>
     </div>
 </body>
 	<script>
+	
+		adminCK();
+
 		function update(){
-			location.href ="./nBoardUpdateForm?board_no="+${board_no}; 
-			
+			location.href ="./nBoardUpdateForm?board_no="+${board.board_no};
 		}
+		function del(){
+			location.href="./nBoardDelete?board_no="+${board.board_no};
+		}
+		function list(){
+			location.href="./nBoardListForm";
+		}
+		
+		//관리자 접속 체크 및 공지사항 작성 버튼 활성/비활성화 
+		 function adminCK(){
+			 	var id = "${sessionScope.loginId}"
+				var div = "${sessionScope.membe_div}"
+					console.log(id +"/"+div);
+				if(id != "admin" && div != "관리자"){
+					$("#Adel").hide();
+					$("#Aup").hide();
+				}else{
+					$("#Ack").show();
+					$("#Aup").show();
+				}
+			}
 
 	
 	</script>

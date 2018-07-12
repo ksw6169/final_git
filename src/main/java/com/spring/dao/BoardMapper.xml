@@ -37,10 +37,10 @@
 					ROW_NUMBER() OVER(ORDER BY board_no DESC) AS rnum FROM board
  				<where>
 					<if test="keyword !=null || !keyword.equals('')">
-						board_title LIKE '%'||#{keyword}||'%'  AND board_content LIKE '%'||#{keyword}||'%'
+						board_title LIKE '%'||#{keyword}||'%'  OR board_content LIKE '%'||#{keyword}||'%'
 					</if>
 				</where>    
-				) WHERE rnum BETWEEN #{startPage} AND #{addPage} ORDER BY board_title ASC
+				) WHERE rnum BETWEEN #{startPage} AND #{addPage} ORDER BY board_date DESC
 	</select>
 	
 	<!-- 공지사항 작성  -->
@@ -51,10 +51,9 @@
 		keyProperty = "idx" <- 키가 될 필드
 		keyColumn = "idx" <- 키가 저장될 컬럼
 	 -->
-	<insert id="nBoardWrite"  parameterType="com.spring.dto.BoardDTO"
-	useGeneratedKeys="true" keyProperty="board_no" 	keyColumn="board_no">
+	<insert id="nBoardWrite"  parameterType="com.spring.dto.BoardDTO">
 		INSERT INTO board(board_no,member_id,board_title,board_content) 
-			VALUES(board_seq.NEXTVAL,#{member_id},#{board_title},#{board_content})
+			VALUES(board_seq.NEXTVAL,'admin',#{board_title},#{board_content})
 	</insert>
 	
 	
@@ -69,8 +68,9 @@
 	</delete>
 	
 	<!-- 공지사항 수정 -->
-	<update id="nBoardUpdate">
-		UPDATE board SET board_title=#{param1}, board_content=#{param2} WHERE board_no=${param3}
+	<update id="nBoardUpdate" parameterType="hashMap">
+		UPDATE board SET board_title = #{board_title}, board_content=#{board_content}
+		WHERE board_no =#{board_no}
 	</update>
 	
 	<!-- 조회수 증가 -->

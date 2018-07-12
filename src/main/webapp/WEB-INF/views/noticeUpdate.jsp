@@ -62,23 +62,27 @@
   
   <div class="container">
         <div class="detail_div">
+          <form action="nBoardUpdate?board_no=${board.board_no}" method="post">
             <div class="table_div">
                 <table class="table">
                      <tr>
                        <th>제목</th>
-                       <td class="subject">${board.board_title}<textarea class="form-control subject" rows="1" style="padding-bottom: 11px;">공지사항입니다.</textarea></td>
+                       <td class="subject">
+                       <textarea class="form-control subject" rows="1" style="padding-bottom: 11px;" name="board_title">${board.board_title}</textarea></td>
                      </tr>
                      
                      <tr>
                        <th colspan="2">내용</th>
 					 </tr>
 					<tr>
-						<td class="write_content" colspan="2">${board.board_content}<textarea class="form-control" rows="15">공지사항이요~</textarea></td>
+						<td class="write_content" colspan="2">
+						<textarea class="form-control" rows="15" name="board_content">${board.board_content}</textarea></td>
 					</tr>
                 </table>
-                
-				<button class="btn btn-default pull-right" onclick="location.href='nBoardUpdate'">수정 완료</button>
-            </div>    
+                     
+				<button class="btn btn-default pull-right" >수정 완료</button>
+            </div>
+          </form> 
             <div class="button-group">
                 <button class="btn btn-default pull-right" onclick="location.href='nBoardList'">목록</button>       
             </div>
@@ -86,5 +90,26 @@
     </div>
 </body>
 	<script>
+/* 	
+	var obj = {};
+	var board_title = ${board.board_title};
+	var board_content = ${board.board_content};
+	
+	$("#update").click(function(){
+		obj.url = "./nBoardUpdate?board_no=${board.board_no}";
+		obj.data={ 
+				"board_title" : board_title,
+				"board_content":board_content};
+		obj.success = function(d){
+			console.log(d);
+			
+		}
+		ajaxCall();
+		
+	});
+	
+	function ajaxCall(){
+		$.ajax;
+	} */
 	</script>
 </html>

@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.dao.MemberInter;
 import com.spring.dto.MemberDTO;
+
 @Service
 public class MemberService {
 
@@ -30,31 +31,65 @@ public class MemberService {
 	@Autowired SqlSession sqlSession;
 	MemberInter inter  = null;
 	String photo = null;
-
-	public void main() {
-		logger.info("MemberService 접속");
-	}
-
-	// 회원가입 요청
-	public @ResponseBody HashMap<String, Integer> join(HashMap<String, Object> map) {
+	HashMap<String, String> fileList = new HashMap<String, String>();
+	
+	/* 인턴, 대리 회원가입 요청 */
+	public @ResponseBody HashMap<String, Integer> join(String root, MultipartFile file, HashMap<String, Object> map) {
 		int success = 0;	// 회원가입 성공 여부
 		HashMap<String, Integer> resultMap = new HashMap<String, Integer>();
 		
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();	
 		String hash = encoder.encode(String.valueOf(map.get("pw")));
 		
+		/* Member Table에 담기 위해 dto에 회원가입 시 입력 받은 사항들 전부 담음 */
 		MemberDTO dto = new MemberDTO();
+		
 		dto.setMember_id(String.valueOf(map.get("id")));
 		dto.setMember_pw(hash);
 		dto.setMember_email(String.valueOf(map.get("email")));
 		dto.setMember_family(String.valueOf(map.get("family")));
+		dto.setMember_div(String.valueOf(map.get("member_div")));
+		dto.setDiv(String.valueOf(map.get("div")));
 		
-		if(String.valueOf(map.get("member_div")).equals("대리")) {
+		/* test - job_no는 대리 회원가입에서만 있으므로, */
+		if(String.valueOf(map.get("div")).equals("대리 회원가입 요청")) {
+			logger.info("job_no: "+String.valueOf(map.get("job_no")));
+			logger.info("되나 안되나..");
 			dto.setJob_no(Integer.parseInt(String.valueOf(map.get("job_no"))));
 			dto.setMember_company(String.valueOf(map.get("company")));
+			
+			/* 파일 처리 */
+			String fullPath = root+"resources/upload/";
+			logger.info("fullPath: " + fullPath);
+			
+			// 1. 폴더가 없을 경우 폴더 생성
+			File dir = new File(fullPath);
+			
+			if(!dir.exists()) {
+				logger.info("폴더 없음 - 폴더 생성");
+				dir.mkdir();
+			}
+			
+			// 2. 파일명 추출
+			String oriFileName = file.getOriginalFilename();	
+			
+			// 3. 새로운 파일명 생성(새 파일명 + 확장자)
+			String newFileName = System.currentTimeMillis()+oriFileName.substring(oriFileName.lastIndexOf("."));	
+			
+			// 4. 파일 추출
+			try {
+				byte[] bytes = file.getBytes();												// MultipartFile에서부터 바이트 추출
+				Path filePath = Paths.get(fullPath+newFileName);				// 파일 생성 경로 추출
+				Files.write(filePath,  bytes);													// 파일 생성
+				fileList.put(newFileName, oriFileName);								// 새 경로, 원 경로 담음
+				map.put("path", "resources/upload/"+newFileName);		// test
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			dto.setMember_capture(newFileName);
 		} 
 		
-		dto.setMember_div(String.valueOf(map.get("member_div")));
 		
 		inter = sqlSession.getMapper(MemberInter.class);
 		success = inter.join(dto);
@@ -118,9 +153,7 @@ public class MemberService {
 	/* ID 중복 체크 */
 	public HashMap<String, String> overlay(String id) {
 		inter = sqlSession.getMapper(MemberInter.class);
-		
 		int chk = 0;	// 중복 체크 여부
-		
 		chk = inter.overlay(id);
 		
 		String msg = "사용 가능한 ID 입니다."; 	// 중복 체크 메시지
@@ -174,10 +207,10 @@ public class MemberService {
 		mav.addObject("msg", msg);
 		return mav;
 	}
-
+	
 	//회사 정보 수정
 	@Transactional
-	public ModelAndView companyUpdate(MultipartFile file, String root, String companyName, String id) {
+	public ModelAndView companyUpdate(MultipartFile file, String root, String companyName,String jobSel, String id) {
 		ModelAndView mav = new ModelAndView();
 		inter = sqlSession.getMapper(MemberInter.class);
 		int success = 0;
@@ -223,13 +256,14 @@ public class MemberService {
 			Files.write(filePath, bytes); //파일을 써줌(자바 7부터 사용가능)
 			fileName = newFileName;
 			logger.info("저장할 파일 이름  : "+fileName);
-			success = inter.companyUpdate(companyName, newFileName, id);
+			success = inter.companyUpdate(companyName, newFileName,jobSel, id);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		if(success >0) {
 			mav.setViewName("redirect:/perUpdateForm");
 		}
+		
 		return mav;
 	}
 }

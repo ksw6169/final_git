@@ -82,11 +82,11 @@
 					<input type="text" readonly="readonly" value="${member.member_id}"/>
 	
 			       <!-- 비밀번호 수정 -->
-			        <div class="updateForm">비밀번호</div>  
+			        <div class="updateForm">새 비밀번호</div>  
 		            <input type="password" id="pw" placeholder="비밀번호 입력" name="pw">
 		            
 			        <!-- 비밀번호 확인 수정 -->
-			        <div class="updateForm">비밀번호 확인</div>  
+			        <div class="updateForm">새 비밀번호 확인</div>  
 		            <input type="password" id="pwChk" placeholder="비밀번호 입력">
 		            <div><span id="warn" >비밀번호가 같지 않습니다. </span></div>
 	

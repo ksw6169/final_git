@@ -16,7 +16,7 @@ public interface BoardInter {
 
 	int nBoardDelete(String board_no);
 
-	int nBoardUpdate(String board_title, String board_content, String board_no);
+	int nBoardUpdate(HashMap<String, String> map); //공지사항 수정 
 
 	void upHit(String board_no);
 	
@@ -40,6 +40,10 @@ public interface BoardInter {
 	int kimSayDelete(String board_no);
 
 	
+
+
+
+
 
 
 

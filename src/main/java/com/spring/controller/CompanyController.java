@@ -153,9 +153,19 @@ public class CompanyController {
 	@RequestMapping(value = "/evalCheck")
 	public @ResponseBody HashMap<String, Object> evalCheck(HttpServletRequest request, @RequestParam("company_no") String company_no){
 		String member_id=(String) request.getSession().getAttribute("loginId");
+		String member_div=(String) request.getSession().getAttribute("member_div");
 		logger.info("[evalCheck] company_no : "+company_no+" / member_id : "+member_id);
 		
-		return service.evalCheck(company_no,member_id);
+		return service.evalCheck(company_no,member_id,member_div);
 	}
+	
+	@RequestMapping(value = "/companyWrite")
+	public @ResponseBody HashMap<String, Object> companyWrite(@RequestParam("company_name") String company_name){
+		logger.info("[companyWrite] company_name : "+company_name);
+		
+		return service.companyWrite(company_name);
+	}
+	
+	
 	
 }
