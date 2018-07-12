@@ -46,6 +46,12 @@
 			.container {
 				margin-top: 100px;
 			}
+			
+			#capture{
+				margin: 0px;
+				width: 1000px;
+				height: 500px;
+			}
     	</style>
   </head>
   <body>
@@ -69,24 +75,36 @@
                        <th colspan="2">회사명</th>
                      </tr>
                      <tr>
-                       <th class="company" colspan="2">NHN</th>
+                       <th class="company" colspan="2">${member.member_company }</th>
                      </tr>
                      <tr>
                        <th colspan="2">사진</th>
                      </tr>
                      <tr>
-                       <td class="contents" colspan="2">이미지</td>
+                       <td class="contents" colspan="2"><img id="capture" src="${path}" style="cursor: pointer;"/></td>
                      </tr>
                 </table>
             </div>    
             <div class="button-group">
-                <button class="btn btn-default pull-right">목록</button>
-                <button class="btn btn-default pull">승인</button>
-                <button class="btn btn-default pull">거절</button>   
+                <button id="back" class="btn btn-default pull-right">목록</button>
+                <button id="ok" class="btn btn-default pull">승인</button>
+                <button id="no" class="btn btn-default pull">거절</button>   
             </div>
         </div>
     </div>
 </body>
 	<script>
+	$("#capture").click(function(){
+		window.open("${path}", "이미지", "width=800, height=700, toolbar=no, menubar=no, scrollbars=yes, resizable=yes" ); 
+
+	});
+	
+	$("#back").click(function(){
+		window.history.back();
+	});
+	
+	$("#ok").click(function(){
+		location.href="./memAcceptOk?id=${member.member_id}";
+	});
 	</script>
 </html>

@@ -2,11 +2,23 @@ package com.spring.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -20,8 +32,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.annotation.JsonAppend.Prop;
 import com.spring.dao.MemberInter;
 import com.spring.dto.MemberDTO;
+
+import sun.text.normalizer.ICUBinary.Authenticate;
 
 @Service
 public class MemberService {
@@ -268,9 +283,94 @@ public class MemberService {
 			e.printStackTrace();
 		}
 		if(success >0) {
-			mav.setViewName("redirect:/perUpdateForm");
+			mav.setViewName("./");
 		}
 		
 		return mav;
+	}
+
+	//회사 승인 리스트
+	public HashMap<String, Object> memAcceptList(Map<String, String> params) {
+		HashMap<String, Object> map=  new HashMap<>();
+		inter = sqlSession.getMapper(MemberInter.class);
+		ArrayList<MemberDTO> list = inter.memAcception(params);
+		int listCnt = inter.memAcceptListCnt();
+		map.put("list", list);
+		map.put("listCnt", listCnt);
+		return map;
+	}
+
+	//회사 승인 상세보기
+	public ModelAndView memAcceptDetail(String id) {
+		ModelAndView mav = new ModelAndView();
+		MemberDTO dto = inter.member(id);
+		String fullPath = "resources/upload/"+dto.getMember_capture(); //세션의 경로와 내가 사진을 넣을 폴더+DB에 저장된 파일명
+		logger.info(fullPath);
+		mav.addObject("member", dto);
+		mav.addObject("path", fullPath);
+		mav.setViewName("reqDetail");
+		return mav;
+	}
+
+	//회사 승인
+	@Transactional
+	public String memAcceptOk(String id, String root) {
+		String page = "redirect:/pageMove?page=reqList";
+		MemberDTO dto = inter.member(id);
+		logger.info(dto.getMember_email());
+		String email = dto.getMember_email();
+		String content = "대리 등급 신청이 승인 되었습니다.";
+		String subject = "김과장이 왜 그럴까 대리 승인";
+		sendEmail(subject, content, email);
+		String photo = dto.getMember_capture();
+		int success = inter.memAcceptOk(id);
+		if(success >0) {
+			try {
+				String delFile = root+"resources/upload/"+photo;
+				File del = new File(delFile);
+				if(del.exists()) { //삭제할 파일이 있으면
+					del.delete();
+				}else{
+					logger.info("이미 삭제된 사진");
+				}
+			}catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+		return page;
+	}
+	
+	/*메일 전송*/
+	public void sendEmail(String subject, String content, String email) {
+		Properties props = new Properties(); 
+		
+		props.put("mail.smtp.host", "smtp.gmail.com"); 
+	    props.put("mail.smtp.port", "25"); 
+	    props.put("mail.debug", "true"); 
+	    props.put("mail.smtp.auth", "true"); 
+	    props.put("mail.smtp.starttls.enable","true"); 
+	    props.put("mail.smtp.EnableSSL.enable","true");
+	    props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");   
+	    props.setProperty("mail.smtp.socketFactory.fallback", "false");   
+	    props.setProperty("mail.smtp.port", "465");   
+	    props.setProperty("mail.smtp.socketFactory.port", "465"); 
+
+	    Session session = Session.getInstance(props, new javax.mail.Authenticator() { 
+	           protected PasswordAuthentication getPasswordAuthentication() { 
+	           return new PasswordAuthentication("yjo53272", "ka1mi2ya8*"); 
+	           }});
+	           try{
+	               Message message = new MimeMessage(session); 
+	               message.setFrom(new InternetAddress("yjo53272@gmail.com", "김과장이 왜 그럴까"));// 
+	               message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email)); 
+	               message.setSubject(subject);
+	               message.setText(content);//내용 
+	               //message.setContent("내용","text/html; charset=utf-8");//글내용을 html타입 charset설정
+	               System.out.println("send!!!");
+	               Transport.send(message); 
+	               System.out.println("SEND");
+	           } catch(Exception e){
+	               e.printStackTrace();
+	           }
 	}
 }

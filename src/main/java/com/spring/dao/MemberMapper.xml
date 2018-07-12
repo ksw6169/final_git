@@ -50,4 +50,21 @@
 	 <update id="companyUpdate">
 	 	UPDATE member SET member_company = #{param1}, member_capture = #{param2}, job_no = #{param3} WHERE member_id = #{param4}
 	 </update>
+	 
+	 <!-- 회사 승인 리스트 -->
+	 <select id="memAcception" parameterType="map" resultType="com.spring.dto.MemberDTO">
+	 	SELECT rnum, member_id, member_company ,member_capture 
+	 		FROM (SELECT ROW_NUMBER() OVER(ORDER BY member_capture) AS rnum, member_id, member_company ,member_capture 
+	 			FROM member) WHERE rnum BETWEEN #{sNum} AND #{eNum} AND member_capture IS NOT NULL
+	 </select>
+	 
+	 <!-- 회사 승인 리스트 갯수 -->
+	 <select id="memAcceptListCnt" resultType="int">
+	 	SELECT COUNT(*) FROM member WHERE member_capture IS NOT NULL
+	 </select>
+	 
+	 <!-- 회사 인증 승인 -->
+	 <update id="memAcceptOk">
+	 	UPDATE member SET member_capture = null, member_div = '대리', member_cert = 'Y', member_eval = member_eval+1 WHERE member_id = #{param1}
+	 </update>
 </mapper>

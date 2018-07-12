@@ -2,6 +2,7 @@ package com.spring.controller;
 
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -166,5 +167,47 @@ public class MemberController {
 		String id = (String) session.getAttribute("loginId");
 		String root = session.getServletContext().getRealPath("/");
 		return service.companyUpdate(file, root, companyName, jobSel ,id);
+	}
+	
+	/*회사 승인 리스트*/
+	@RequestMapping(value = "/memAcceptList")
+	public @ResponseBody HashMap<String, Object> memAcceptList(HttpSession session, @RequestParam Map<String, String> params) {
+		logger.info("회사 승인 리스트 요청");
+		String div = (String) session.getAttribute("member_div");
+		if(div.equals("관리자")) {
+			return service.memAcceptList(params);
+		}else {
+			HashMap<String, Object> map = new HashMap<>();
+			map.put("msg", "관리자 아이디가 아닙니다.");
+			return map;
+		}
+		
+	}
+	
+	/*회사 승인 상세보기*/
+	@RequestMapping(value = "/memAcceptDetail")
+	public ModelAndView memAcceptDetail (HttpSession session, @RequestParam("id") String id) {
+		logger.info("회사 승인 상세보기 요청");
+		String div = (String) session.getAttribute("member_div");
+		if(!div.equals("관리자")) {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("/");
+			return mav;
+		}else {
+			return service.memAcceptDetail(id);
+		}
+	}
+	
+	/*회사 승인 상세보기*/
+	@RequestMapping(value = "/memAcceptOk")
+	public String memAcceptOk (HttpSession session, @RequestParam("id") String id) {
+		logger.info("회사 승인 요청");
+		String div = (String) session.getAttribute("member_div");
+		if(!div.equals("관리자")) {
+			return "/";
+		}else {
+			String root = session.getServletContext().getRealPath("/");
+			return service.memAcceptOk(id, root);
+		}
 	}
 }

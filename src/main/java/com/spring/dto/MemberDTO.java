@@ -13,7 +13,15 @@ public class MemberDTO {
 	private String member_eval;
 	private int job_no;
 	private String job_name;
+	private int rnum;
 	
+	
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
 	public String getMember_id() {
 		return member_id;
 	}
