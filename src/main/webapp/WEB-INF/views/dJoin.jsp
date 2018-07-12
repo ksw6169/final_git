@@ -341,8 +341,19 @@
 			var userPw = $("#userPw").val();
 			var userPw_re = $("#userPw_re").val();
 			
-			var form = $("#fileUpload")[0];
-			var formData = new FormData(form);
+			var formData = new FormData();
+			
+			// 전송할 데이터 담음
+			formData.append("id", $("#userId").val());
+			formData.append("pw", $("#userPw").val());
+			formData.append("email", $("#userEmail").val());
+			formData.append("family", $("#userFamily").val());
+			formData.append("member_div", $("#member_div").val());
+			formData.append("job_no", $("#job_no").val());
+			formData.append("company", $("#company").val());
+			formData.append("div", "대리 회원가입 요청");
+			
+			formData.append("file", $("#upload")[0].files[0]);
 			
 			var idReg = /^[A-Za-z0-9+]{5,16}$/;
 			
@@ -381,23 +392,13 @@
 				$("#company").focus();
 			} else{
 				$.ajax({
-					// contentType, processData : ajax 파일 업로드 시 필요한 속성
+					// contentType, processData : ajax 파일 업로드 시 반드시 필요
 					contentType: false,	
 					processData: false,
 					
 					type : "post",
 					url : "./join",
-					data : {
-						id : $("#userId").val(),
-						pw : $("#userPw").val(),
-						email : $("#userEmail").val(),
-						family : $("#userFamily").val(),
-						member_div : $("#member_div").val(),
-						job_no : $("#job_no").val(),
-						company : $("#company").val(),
-						file : formData
-						// company_photo 아직 X
-					},
+					data : formData,
 					dataType : "json",
 					success : function(data) {
 						if(data.success > 0){
@@ -414,7 +415,7 @@
 			}
 		});
 		
-		// 회사 사진 처리
+		// 기업 인증 사진 처리
 		function fileUpload() {
 			var fileValue = $("#upload").val().split("\\");
 			var fileName = fileValue[fileValue.length-1]; // 파일명 

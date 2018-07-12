@@ -268,7 +268,8 @@
 						pw : $("#userPw").val(),
 						email : $("#userEmail").val(),
 						family : $("#userFamily").val(),
-						member_div : $("#member_div").val()
+						member_div : $("#member_div").val(),
+						div: "인턴 회원가입 요청"
 					},
 					dataType : "json",
 					success : function(data) {
