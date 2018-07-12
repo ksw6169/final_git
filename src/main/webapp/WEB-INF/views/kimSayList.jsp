@@ -215,37 +215,49 @@
         };
         $.ajax(obj);
     }
-	
+    
 	$(document).ready(function() {
-		kimSayListCall();
-		console.log(kimSayListCall);
+        var loginId = "${sessionScope.loginId}";
+        var member_div = "${sessionScope.member_div}";
+        
+        if(member_div == "관리자" || member_div == "대리"){
+            kimSayList();
+        } else if(member_div == "인턴"){
+        	alert("대리 회원만 이용 가능합니다.");
+        	location.href='./';
+        }
 	});
 	
-	function kimSayListCall(kimSayList) {
+	function kimSayList(){
 		$.ajax({
 			type : "get",
 			url : "./kimSayCall",
 			success : function(data) {
 				console.log(data);
-				$("div.row").remove();
-				var str = "";
-				for(var i=0; i<data.list.length; i++) {
-					str+="<div class='col-md-4'>";
-		            str+="<div class='thumbnail'>";
-		            str+="<a href='./kimSayDetail?board_no="+data.list[i].board_no+"'><div id='title' class='thumbnail_header'><p class='thumbnail_contents'>"+data.list[i].board_title+"</p></div></a>";
-		            var date = new Date(data.list[i].board_date);
-		            str+="<span class='caption_date'>작성일자: <b>"+date.toLocaleDateString("ko-KR")+"</b></span>";
-		            str+="<span class='caption_detail'>조회<br/><b>"+data.list[i].board_bHit+"</b></span>";
-		            str+="<span class='caption_detail'>추천<br/><b>"+data.list[i].board_recom+"</b></span>";
-		            str+="</div>";
-		            str+="</div>";
-				}
-				$("#search_div").after(str);
+				boardPrint(data.list);
 			},
 			error : function(e) {
 				console.log(e);
 			}
 		});
+	}
+	function boardPrint(list){
+		var str = "";
+		list.forEach(function(i){
+			i.forEach(function(item){
+				str+="<div class='col-md-4'>";
+	            str+="<div class='thumbnail'>";
+	            str+="<a href='./kimSayDetail?board_no="+item.board_no+"'><div id='title' class='thumbnail_header'><p class='thumbnail_contents'>"+item.board_title+"</p></div></a>";
+	            var date = new Date(item.board_date);
+	            str+="<span class='caption_date'>작성일자: <b>"+date.toLocaleDateString("ko-KR")+"</b></span>";
+	            str+="<span class='caption_detail'>조회<br/><b>"+item.board_bHit+"</b></span>";
+	            str+="<span class='caption_detail'>추천<br/><b>"+item.board_recom+"</b></span>";
+	            str+="</div>";
+	            str+="</div>";
+			})
+		})
+		$("#search_div").after(str);
+		
 	}
 	</script>
 </html>

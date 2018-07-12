@@ -13,7 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.dao.BoardInter;
+import com.spring.dao.CompanyInter;
+import com.spring.dao.MemberInter;
 import com.spring.dto.BoardDTO;
+import com.spring.dto.EvaluationDTO;
+import com.spring.dto.MemberDTO;
 @Service
 public class BoardService {
 
@@ -25,25 +29,21 @@ public class BoardService {
 	String photo = null;
 
 	// 김대리의 한마디 글 리스트 요청
-	public HashMap<String, Object> kimSay() {
+	public HashMap<String, Object> kimSayCall() {
 		logger.info("김대리의 한마디 리스트 서비스 접근");
 		inter = sqlSession.getMapper(BoardInter.class);
-		ArrayList<BoardDTO> list = inter.kimSayList();
-		ModelAndView mav = new ModelAndView();
-		logger.info("list : "+list.size());
+		ArrayList<String> list1 = inter.kimsaymemberlist();
+		logger.info("아이디 1번 :"+list1.get(0));
+		ArrayList<ArrayList<BoardDTO>> list = new ArrayList<ArrayList<BoardDTO>>();
+		for(int i =0;i<list1.size();i++) {
+			list.add(inter.kimsayboardlist(list1.get(i)));
+		}
+		//ArrayList<BoardDTO> list = inter.kimSayList();
+		//logger.info("list : "+list.size());
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
 		return map;
 	}
-	
-	/*// 김대리의 한마디 상세보기 요청
-	public ModelAndView kimSayDetail(String board_no) {
-		ModelAndView mav = new ModelAndView();
-		inter = sqlSession.getMapper(BoardInter.class);
-		mav.addObject("dto", inter.kimSayDetail(Integer.parseInt(board_no)));
-		mav.setViewName("kimSayDetail");
-		return mav;
-	}*/
 	
 	//상세보기(조회수 올리기 + 상세보기)
 	//트랜잭션 처리 요구 구간
@@ -58,6 +58,33 @@ public class BoardService {
 		mav.setViewName("kimSayDetail");
 		return(mav);
 	}
+	
+	//김대리의 한마디 수정 폼
+	public ModelAndView kimSayUpdateForm(String board_no) {
+		ModelAndView mav = new ModelAndView();
+		inter = sqlSession.getMapper(BoardInter.class);
+		mav.addObject("board", inter.kimSayDetail(board_no));
+		mav.setViewName("kimSayUpdate");
+		return mav;
+	}
+	
+	//김대리의 한마디 게시글 삭제
+	public ModelAndView kimSayDelete(String board_no) {
+		logger.info("게시글 삭제 서비스");
+		inter = sqlSession.getMapper(BoardInter.class);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("board", inter.kimSayDelete(board_no));
+		mav.setViewName("kimSayList");
+		return mav;
+	}
+	
+	/*public HashMap<String, Object> evalDelete(String board_no) {
+		inter=sqlSession.getMapper(BoardInter.class);
+		BoardDTO dto=inter.kimSayDetail(board_no);
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("success",success);
+		return map;
+	}*/
 	
 	//공지사항 리스트 
 	public HashMap<String, Object> nBoardList(Map<String, Object> param) {	
@@ -160,11 +187,5 @@ public class BoardService {
 		mav.setViewName(page);
 		return mav;
 	}
-
-
-
-
-
-
 	
 }

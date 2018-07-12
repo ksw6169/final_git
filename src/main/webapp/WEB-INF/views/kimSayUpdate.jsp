@@ -109,13 +109,13 @@
                      </tr>
                      <tr>
                        <th>제목</th>
-                       <td class="subject"><textarea class="form-control subject" rows="1" style="padding-bottom: 11px;">입사한지 3개월.. 이직해도 될까요?</textarea></td>
+                       <td id="board_title" class="subject"><textarea class="form-control subject" rows="1" style="padding-bottom: 11px;"></textarea></td>
                      </tr>
                      <tr>
                        <th colspan="2">내용</th>
 					 </tr>
 					<tr>
-						<td class="write_content" colspan="2"><textarea class="form-control" rows="15">내용내용</textarea></td>
+						<td id="board_content" class="write_content" colspan="2"><textarea class="form-control" rows="15"></textarea></td>
 					</tr>
                 </table>
                 
@@ -128,5 +128,19 @@
     </div>
 </body>
 	<script>
+	var dto={
+            board_title:"${board.board_title}",
+            board_content:"${board.board_content}",
+            board_category:"${board.board_category}"
+    };
+    
+    BoardPrint(dto);
+    
+    function BoardPrint(board){
+        console.log(board);
+        //$("#board_category").html(board.board_category);
+        $("#board_title.subject").html(board.board_title);
+        $("#board_content.write_content").html(board.board_content);
+    }
 	</script>
 </html>
