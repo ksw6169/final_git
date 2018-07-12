@@ -181,7 +181,6 @@ public class MemberController {
 			map.put("msg", "관리자 아이디가 아닙니다.");
 			return map;
 		}
-		
 	}
 	
 	/*회사 승인 상세보기*/
@@ -198,7 +197,7 @@ public class MemberController {
 		}
 	}
 	
-	/*회사 승인 상세보기*/
+	/*회사 승인*/
 	@RequestMapping(value = "/memAcceptOk")
 	public String memAcceptOk (HttpSession session, @RequestParam("id") String id) {
 		logger.info("회사 승인 요청");
@@ -208,6 +207,35 @@ public class MemberController {
 		}else {
 			String root = session.getServletContext().getRealPath("/");
 			return service.memAcceptOk(id, root);
+		}
+	}
+	
+	/*회사 승인 거부 페이지*/
+	@RequestMapping(value = "/reqEmail")
+	public ModelAndView reqEmail (HttpSession session, @RequestParam("id") String id) {
+		logger.info("회사 승인 상세보기 요청");
+		String div = (String) session.getAttribute("member_div");
+		if(!div.equals("관리자")) {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("/");
+			return mav;
+		}else {
+			return service.reqEmail(id);
+		}
+	}
+	
+	/*회사 승인 거부 */
+	@RequestMapping(value = "/memAcceptNo")
+	public @ResponseBody HashMap<String, Object> memAcceptNo(HttpSession session, @RequestParam Map<String, String> params) {
+		logger.info("회사 승인 리스트 요청");
+		String div = (String) session.getAttribute("member_div");
+		if(div.equals("관리자")) {
+			String root = session.getServletContext().getRealPath("/");
+			return service.memAcceptNo(params, root);
+		}else {
+			HashMap<String, Object> map = new HashMap<>();
+			map.put("msg", "관리자 아이디가 아닙니다.");
+			return map;
 		}
 	}
 }

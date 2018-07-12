@@ -283,7 +283,7 @@ public class MemberService {
 			e.printStackTrace();
 		}
 		if(success >0) {
-			mav.setViewName("./");
+			mav.setViewName("redirect:/");
 		}
 		
 		return mav;
@@ -372,5 +372,41 @@ public class MemberService {
 	           } catch(Exception e){
 	               e.printStackTrace();
 	           }
+	}
+
+	//회사 인증 거절 페이지
+	public ModelAndView reqEmail(String id) {
+		ModelAndView mav = new ModelAndView();
+		inter = sqlSession.getMapper(MemberInter.class);
+		MemberDTO dto = inter.member(id);
+		mav.addObject("member", dto);
+		mav.setViewName("reqEmail");
+		return mav;
+	}
+
+	//회사 승인 거부
+	public HashMap<String, Object> memAcceptNo(Map<String, String> params, String root) {
+		HashMap<String, Object> map = new HashMap<>();
+		MemberDTO dto = inter.member(params.get("id"));
+		logger.info(dto.getMember_email());
+		String email = dto.getMember_email();
+		sendEmail(params.get("subject"), params.get("content"), email);
+		String photo = dto.getMember_capture();
+		int success = inter.memAcceptNo(params.get("id"));
+		if(success >0) {
+			try {
+				String delFile = root+"resources/upload/"+photo;
+				File del = new File(delFile);
+				if(del.exists()) { //삭제할 파일이 있으면
+					del.delete();
+				}else{
+					logger.info("이미 삭제된 사진");
+				}
+				map.put("success", success);
+			}catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+		return map;
 	}
 }

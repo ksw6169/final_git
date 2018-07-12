@@ -18,4 +18,5 @@ public interface MemberInter {
 	ArrayList<MemberDTO> memAcception(Map<String, String> params); //회사 승인 리스트
 	int memAcceptListCnt();	//회사 승인 리스트 전체 갯수
 	int memAcceptOk(String id);	//회사 인증 승인
+	int memAcceptNo(String string); //회사 인증 거부
 }

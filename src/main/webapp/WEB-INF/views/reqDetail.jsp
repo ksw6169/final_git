@@ -106,5 +106,9 @@
 	$("#ok").click(function(){
 		location.href="./memAcceptOk?id=${member.member_id}";
 	});
+	
+	$("#no").click(function(){
+		location.href="./reqEmail?id=${member.member_id}";
+	});
 	</script>
 </html>

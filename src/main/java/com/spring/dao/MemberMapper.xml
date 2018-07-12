@@ -67,4 +67,9 @@
 	 <update id="memAcceptOk">
 	 	UPDATE member SET member_capture = null, member_div = '대리', member_cert = 'Y', member_eval = member_eval+1 WHERE member_id = #{param1}
 	 </update>
+	 
+	 <!-- 회사 인증 거부 -->
+	 <update id="memAcceptNo">
+	 	UPDATE member SET member_capture = null, member_div = '인턴', member_cert = 'N' WHERE member_id = #{param1}
+	 </update>
 </mapper>
