@@ -174,11 +174,11 @@
 			margin-bottom: 50px;
 		}
 		
+		/* modal search-bar */
 		#myModalLabel {
 			font-family: "bareun";
 		}
 		
-		/* modal search-bar */
 		#modal-search-bar {
             font-size:13px;
             padding:10px;

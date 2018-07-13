@@ -118,17 +118,23 @@ public class MemberService {
 	public ModelAndView memlogin(String id, String pw, HttpSession session) {
 		inter = sqlSession.getMapper(MemberInter.class);
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String hash = "";
+		String member_div = null;
+		boolean success = false;
 		
 		MemberDTO dto = new MemberDTO();
 		
 		dto = inter.login(id);
-		String hash = dto.getMember_pw();				// 암호화된 pw 가져옴
-		String member_div = dto.getMember_div();	// 사용자 권한 가져옴
 		
-		boolean success = encoder.matches(pw, hash);		// 입력한 pw와 암호화된 pw 비교
-
+		if(dto != null) {
+			hash = dto.getMember_pw();						// 암호화된 pw 가져옴
+			member_div = dto.getMember_div();			// 사용자 권한 가져옴
+			success = encoder.matches(pw, hash);		// 입력한 pw와 암호화된 pw 비교
+		}
+		
 		ModelAndView mav = new ModelAndView();
 		String msg = "ID와 비밀번호를 다시 입력해주세요.";
+		mav.setViewName("login");
 		
 		if(success) {
 			msg = "로그인에 성공했습니다.";

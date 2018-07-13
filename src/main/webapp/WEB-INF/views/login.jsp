@@ -82,12 +82,12 @@
 		<jsp:include page="menubar.jsp"/>
 	
 		<div class="col-md-4 col-md-offset-4">
-			<form action="./login" method="POST">
+			<form action="" method="POST">
 	            <div class="login_group">    
 	                <h1 class="content">로그인</h1>
 	                <input name="id" type="text" placeholder="아이디를 입력해주세요.">
 	                <input name="pw" type="password" placeholder="비밀번호를 입력해주세요.">
-	                <button class="login_btn">로그인</button>
+	                <button class="login_btn" onclick="login()">로그인</button>
 	            </div>
             </form>
             <div class="btn_group">
@@ -101,6 +101,17 @@
 		
 		if(msg != "") {
 			alert(msg);
+		}
+		
+		function login() {
+			var id = $("input[name='id']").val();
+			var pw = $("input[name='pw']").val();
+
+			if(id == "" || pw == "") {
+				alert("ID와 비밀번호를 다시 입력해주세요.");	
+			} else {
+				$("form").attr("action", "./login");	
+			}
 		}
 		
 		// 회원가입 페이지 이동
