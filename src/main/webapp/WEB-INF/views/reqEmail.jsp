@@ -69,25 +69,57 @@
                 <table class="table">
                      <tr>
                        <th>받는 사람 이메일</th>
-                       <td class="email">user001@naver.com</td>
+                       <td class="email">${member.member_email}</td>
                      </tr>
 					 <tr>
                        <th>제목</th>
-                       <td class="subject"><textarea class="form-control" rows="1">'김과장이 왜그럴까' 회원가입 신청 미승인</textarea></td>
+                       <td class="subject"><textarea id="subject" class="form-control" rows="1"></textarea></td>
                      </tr>
                      <tr>
                        <th colspan="2">내용</th>
 					 </tr>
 					<tr>
-						<td class="write_content" colspan="2"><textarea class="form-control" rows="15">안녕하세요. 귀하의 대리(직장인) 회원가입 신청이 승인되지 못했습니다. 사유는 이러이러 합니다.</textarea></td>
+						<td class="write_content" colspan="2"><textarea id="content" class="form-control" rows="15"></textarea></td>
 					</tr>
                 </table>
-				<button class="btn btn-default send">전송</button>
-				<button class="btn btn-default pull-right">이전</button>
+				<button id="submit" class="btn btn-default send">전송</button>
+				<button id="back" class="btn btn-default pull-right">이전</button>
             </div>
         </div>
     </div>
 </body>
 	<script>
+		$("#back").click(function(){
+			window.history.back();
+		});
+		
+		$("#submit").click(function(){
+			console.log("전송 클릭");
+			console.log($("#subject").val());
+			if($("#subject").val() == ""){
+				$("#subject").focus();
+			}else if($("#content").val() == ""){
+				$("#content").focus();
+			}else{
+				var obj = {};
+				obj.error=function(e){console.log(e)}; //ajax 에러날 경우의 함수
+				obj.type="POST"; //ajax로 보낼 타입
+				obj.dataType="JSON"; //ajax 실행 후 받을 값 형태
+				obj.url = "./memAcceptNo"; //ajax memAcceptList요청
+				obj.data={ //같이 보낼 데이터
+					"id":"${member.member_id}",
+					"subject":$("#subject").val(),
+					"content":$("#content").val()
+				};
+			   	obj.success=function(data){ //성공시의 함수
+			   		console.log(data);
+			   		if(data.success > 0){
+			   			location.href="./pageMove?page=reqList";
+			   		}
+				};
+				$.ajax(obj);
+			}
+		});
+	
 	</script>
 </html>
