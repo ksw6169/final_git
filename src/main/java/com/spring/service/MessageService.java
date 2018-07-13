@@ -1,14 +1,15 @@
 package com.spring.service;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.dao.MessageInter;
@@ -85,7 +86,18 @@ public class MessageService {
 		return mav;
 	}
 
+	/* menubar - 안 읽은 쪽지 개수 알림 */
+	public @ResponseBody HashMap<String, Integer> messageCount(String id) {
+		inter = sqlSession.getMapper(MessageInter.class);
+		
+		HashMap<String, Integer> resultMap = new HashMap<>();
+		
+		int msgCnt = inter.messageCount(id);
+		resultMap.put("msgCnt", msgCnt);
+		
+		logger.info("메시지 개수 : "+msgCnt);
+		
+		return resultMap;
+	}
 
-	
-	
 }

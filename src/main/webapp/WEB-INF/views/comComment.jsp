@@ -105,7 +105,7 @@
 	<div class="container">
         <div class="detail_div">
             <div class="table_div">
-                <table class="table">
+                <!-- <table class="table">
                 	<thead>
                      <tr>
                        <th class="reply" colspan="7">코멘트 121</th>
@@ -133,7 +133,7 @@
                 		<button class="button_group pull-right">삭제</button>
 					   </td>
                      </tr>
-                </table>
+                </table> -->
             </div>
         </div>
 		

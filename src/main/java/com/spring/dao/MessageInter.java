@@ -7,6 +7,7 @@ import com.spring.dto.MessageDTO;
 
 public interface MessageInter {
 
+
 	//user 보낸 리스트
 	ArrayList<MessageDTO> messageList(HashMap<String, Object> map);
 	//user 받은 리스트
@@ -20,6 +21,7 @@ public interface MessageInter {
 	
 	int messagedetail(String message_no);
 
-	
+	int messageCount(String id);
+
 
 }

@@ -3,13 +3,11 @@ package com.spring.controller;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -66,7 +64,7 @@ public class MessageController {
 		logger.info("쪽지 내용 : " +message_content );
 		return service.messagewrite(map);
 	}
-	
+
 	@RequestMapping(value="/UmessageDetail")
 	public ModelAndView UmessageDetail(@RequestParam("message_no") String message_no) {
 		logger.info("쪽지 상세보기 실행");
@@ -81,5 +79,12 @@ public class MessageController {
 		return service.messagedetail(message_no);
 	}
 	
-	
+
+	/* menubar - 안 읽은 쪽지 개수 알림 */
+	@RequestMapping(value = "/messageCount")
+	public @ResponseBody HashMap<String, Integer> messageCount(@RequestParam HashMap<String, Object> map) {
+		
+		return service.messageCount(String.valueOf(map.get("id")));
+	}
+
 }
