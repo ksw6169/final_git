@@ -1,5 +1,6 @@
 package com.spring.controller;
 
+import java.util.HashMap;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.service.MessageService;
 
@@ -28,6 +31,13 @@ public class MessageController {
 		
 		service.main();
 		return "main";
+	}
+	
+	/* menubar - 안 읽은 쪽지 개수 알림 */
+	@RequestMapping(value = "/messageCount")
+	public @ResponseBody HashMap<String, Integer> messageCount(@RequestParam HashMap<String, Object> map) {
+		
+		return service.messageCount(String.valueOf(map.get("id")));
 	}
 	
 }
