@@ -4,9 +4,11 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -194,7 +196,7 @@ public class CompanyService {
 			MemberDTO memberDTO = memberInter.member(member_id);
 			if (!memberDTO.getMember_cert().equals("Y")) {
 				msg = "기업 인증을 진행하지 않으셨습니다.";
-			} else if (Integer.parseInt(memberDTO.getMember_eval()) > 0) {
+			} else if (memberDTO.getMember_eval()!=null&&Integer.parseInt(memberDTO.getMember_eval()) > 0) {
 				msg = "이미 기업평가를 하셨습니다.";
 			} else if (!companyDTO.getCompany_name().equals(memberDTO.getMember_company())) {
 				msg = "해당 기업의 직원으로 인증되지 않으셨습니다.";
@@ -209,13 +211,12 @@ public class CompanyService {
 	}
 
 	public boolean certCheck(String member_id) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
 		Boolean success = false;
 
 		MemberInter memberInter = sqlSession.getMapper(MemberInter.class);
 		MemberDTO memberDTO = memberInter.member(member_id);
 
-		if (memberDTO.getMember_cert() == null || !memberDTO.getMember_cert().equals("Y")) { // 실제 구동시 &조건 삭제 해야함
+		if (memberDTO.getMember_cert() == null || !memberDTO.getMember_cert().equals("Y")) {
 			success = true;
 		}
 

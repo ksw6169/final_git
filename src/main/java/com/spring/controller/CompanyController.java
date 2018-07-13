@@ -155,7 +155,7 @@ public class CompanyController {
 		
 		return service.evalCheck(company_no,member_id,member_div);
 	}
-	
+
 	// 기업명 검색
 	@RequestMapping(value = "/apiList")
     public @ResponseBody HashMap<String, Object> apiList(@RequestParam HashMap<String, Object> params){
@@ -173,7 +173,6 @@ public class CompanyController {
       
       return service.companyWrite(seq);
    }
-	
 	
 	
 }
