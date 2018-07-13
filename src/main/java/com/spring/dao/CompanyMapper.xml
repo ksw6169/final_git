@@ -104,4 +104,8 @@
 	<update id="memberEvalCnt">
 		UPDATE member SET member_eval=member_eval+#{param2} WHERE member_id=#{param1}
 	</update>
+	
+	<select id="companyCount" resultType="java.lang.Integer">
+		select count(*) from company where company_name=#{param1}
+	</select>
 </mapper>

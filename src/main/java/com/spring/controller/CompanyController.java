@@ -158,14 +158,4 @@ public class CompanyController {
 		
 		return service.evalCheck(company_no,member_id,member_div);
 	}
-	
-	@RequestMapping(value = "/companyWrite")
-	public @ResponseBody HashMap<String, Object> companyWrite(@RequestParam("company_name") String company_name){
-		logger.info("[companyWrite] company_name : "+company_name);
-		
-		return service.companyWrite(company_name);
-	}
-	
-	
-	
 }
