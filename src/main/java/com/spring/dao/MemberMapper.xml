@@ -48,7 +48,7 @@
 	 
 	 <!-- 회사 수정 -->
 	 <update id="companyUpdate">
-	 	UPDATE member SET member_company = #{param1}, member_capture = #{param2}, job_no = #{param3} WHERE member_id = #{param4}
+	 	UPDATE member SET member_company = #{param1}, member_capture = #{param2}, job_no = #{param3}, member_cert = 'N' WHERE member_id = #{param4}
 	 </update>
 	 
 	 <!-- 회사 승인 리스트 -->
@@ -65,7 +65,7 @@
 	 
 	 <!-- 회사 인증 승인 -->
 	 <update id="memAcceptOk">
-	 	UPDATE member SET member_capture = null, member_div = '대리', member_cert = 'Y', member_eval = member_eval+1 WHERE member_id = #{param1}
+	 	UPDATE member SET member_capture = null, member_div = '대리', member_cert = 'Y', member_eval = 0 WHERE member_id = #{param1}
 	 </update>
 	 
 	 <!-- 회사 인증 거부 -->
