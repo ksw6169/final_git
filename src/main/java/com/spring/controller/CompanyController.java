@@ -9,13 +9,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.service.CompanyService;
@@ -158,4 +155,24 @@ public class CompanyController {
 		
 		return service.evalCheck(company_no,member_id,member_div);
 	}
+
+	// 기업명 검색
+	@RequestMapping(value = "/apiList")
+    public @ResponseBody HashMap<String, Object> apiList(@RequestParam HashMap<String, Object> params){
+      String company_name=(String) params.get("company_name");
+      logger.info("[apiList] company_name : "+company_name);
+      
+      return service.apiList(company_name);
+    }
+	
+	@RequestMapping(value = "/companyWrite")
+    public @ResponseBody HashMap<String, Object> companyWrite(@RequestParam HashMap<String, Object> params){
+      HashMap<String,Object> map=new HashMap<>();
+      String seq=(String) params.get("seq");
+      logger.info("[companyWrite] seq : "+seq);
+      
+      return service.companyWrite(seq);
+   }
+	
+	
 }

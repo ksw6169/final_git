@@ -2,11 +2,23 @@ package com.spring.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -20,8 +32,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.annotation.JsonAppend.Prop;
 import com.spring.dao.MemberInter;
 import com.spring.dto.MemberDTO;
+
+import sun.text.normalizer.ICUBinary.Authenticate;
 
 @Service
 public class MemberService {
@@ -33,26 +48,63 @@ public class MemberService {
 	String photo = null;
 	HashMap<String, String> fileList = new HashMap<String, String>();
 	
-	// 회원가입 요청
-	public @ResponseBody HashMap<String, Integer> join(HashMap<String, Object> map) {
+	/* 인턴, 대리 회원가입 요청 */
+	public @ResponseBody HashMap<String, Integer> join(String root, MultipartFile file, HashMap<String, Object> map) {
 		int success = 0;	// 회원가입 성공 여부
 		HashMap<String, Integer> resultMap = new HashMap<String, Integer>();
 		
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();	
 		String hash = encoder.encode(String.valueOf(map.get("pw")));
 		
+		/* Member Table에 담기 위해 dto에 회원가입 시 입력 받은 사항들 전부 담음 */
 		MemberDTO dto = new MemberDTO();
+		
 		dto.setMember_id(String.valueOf(map.get("id")));
 		dto.setMember_pw(hash);
 		dto.setMember_email(String.valueOf(map.get("email")));
 		dto.setMember_family(String.valueOf(map.get("family")));
+		dto.setMember_div(String.valueOf(map.get("member_div")));
+		dto.setDiv(String.valueOf(map.get("div")));
 		
-		if(String.valueOf(map.get("member_div")).equals("대리")) {
+		/* test - job_no는 대리 회원가입에서만 있으므로, */
+		if(String.valueOf(map.get("div")).equals("대리 회원가입 요청")) {
+			logger.info("job_no: "+String.valueOf(map.get("job_no")));
+			logger.info("되나 안되나..");
 			dto.setJob_no(Integer.parseInt(String.valueOf(map.get("job_no"))));
 			dto.setMember_company(String.valueOf(map.get("company")));
+			
+			/* 파일 처리 */
+			String fullPath = root+"resources/upload/";
+			logger.info("fullPath: " + fullPath);
+			
+			// 1. 폴더가 없을 경우 폴더 생성
+			File dir = new File(fullPath);
+			
+			if(!dir.exists()) {
+				logger.info("폴더 없음 - 폴더 생성");
+				dir.mkdir();
+			}
+			
+			// 2. 파일명 추출
+			String oriFileName = file.getOriginalFilename();	
+			
+			// 3. 새로운 파일명 생성(새 파일명 + 확장자)
+			String newFileName = System.currentTimeMillis()+oriFileName.substring(oriFileName.lastIndexOf("."));	
+			
+			// 4. 파일 추출
+			try {
+				byte[] bytes = file.getBytes();												// MultipartFile에서부터 바이트 추출
+				Path filePath = Paths.get(fullPath+newFileName);				// 파일 생성 경로 추출
+				Files.write(filePath,  bytes);													// 파일 생성
+				fileList.put(newFileName, oriFileName);								// 새 경로, 원 경로 담음
+				map.put("path", "resources/upload/"+newFileName);		// test
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			dto.setMember_capture(newFileName);
 		} 
 		
-		dto.setMember_div(String.valueOf(map.get("member_div")));
 		
 		inter = sqlSession.getMapper(MemberInter.class);
 		success = inter.join(dto);
@@ -76,10 +128,10 @@ public class MemberService {
 		boolean success = encoder.matches(pw, hash);		// 입력한 pw와 암호화된 pw 비교
 
 		ModelAndView mav = new ModelAndView();
-		String msg = "로그인 실패";
+		String msg = "ID와 비밀번호를 다시 입력해주세요.";
 		
 		if(success) {
-			msg = "로그인 성공";
+			msg = "로그인에 성공했습니다.";
 			mav.setViewName("redirect:/");
 			session.setAttribute("loginId", id);
 			session.setAttribute("member_div", member_div);
@@ -102,7 +154,7 @@ public class MemberService {
 		boolean success = encoder.matches(userPw, hash);
 		
 		ModelAndView mav = new ModelAndView();
-		String msg = "비밀번호를 다시 입력해 주세요.";
+		String msg = "비밀번호가 일치하지 않습니다. 다시 입력해 주세요.";
 		
 		if(success) {
 			mav.setViewName("redirect:/perUpdateForm");
@@ -116,9 +168,7 @@ public class MemberService {
 	/* ID 중복 체크 */
 	public HashMap<String, String> overlay(String id) {
 		inter = sqlSession.getMapper(MemberInter.class);
-		
 		int chk = 0;	// 중복 체크 여부
-		
 		chk = inter.overlay(id);
 		
 		String msg = "사용 가능한 ID 입니다."; 	// 중복 체크 메시지
@@ -154,7 +204,7 @@ public class MemberService {
 			map.put("pw", hash);
 		}
 		int success = inter.perUpdate(map);
-		mav.setViewName("redirect:/perUpdateForm");
+		mav.setViewName("redirect:/");
 		return mav;
 	}
 
@@ -164,54 +214,12 @@ public class MemberService {
 		inter = sqlSession.getMapper(MemberInter.class);
 		int success = inter.outMem(userId);
 		
-		String msg = "회원탈퇴 실패";
+		String msg = "회원 탈퇴에 실패했습니다.";
 		if(success >0) {
 			mav.setViewName("redirect:/logout");
-			msg = "회원탈퇴 성공";
+			msg = "회원 탈퇴에 성공했습니다.";
 		}
 		mav.addObject("msg", msg);
-		return mav;
-	}
-	
-	
-	
-	
-	/* 사진 업로드 요청(회원가입) */
-	public ModelAndView memUpload(MultipartFile file, String root) {
-		ModelAndView mav = new ModelAndView();
-		String fullPath = root+"resources/upload/";
-		logger.info("fullPath: " + fullPath);
-		
-		// 1. 폴더가 없을 경우 폴더 생성
-		File dir = new File(fullPath);
-		
-		if(!dir.exists()) {
-			logger.info("폴더 없음 - 폴더 생성");
-			dir.mkdir();
-		}
-		
-		// 2. 파일명 추출
-		String oriFileName = file.getOriginalFilename();	
-		
-		// 3. 새로운 파일명 생성(새 파일명 + 확장자)
-		String newFileName = 
-				System.currentTimeMillis()+
-					oriFileName.substring(oriFileName.lastIndexOf("."));	
-		
-		// 4. 파일 추출
-		try {
-			byte[] bytes = file.getBytes();	// MultipartFile에서부터 바이트 추출
-			Path filePath = Paths.get(fullPath+newFileName);	// 파일 생성 경로
-			Files.write(filePath,  bytes);		// 파일 생성
-			fileList.put(newFileName, oriFileName);
-			logger.info("저장할 파일 갯수: {}", fileList.size());
-			mav.addObject("path", "resources/upload/"+newFileName);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} 
-		
-		mav.setViewName("./");
-		
 		return mav;
 	}
 	
@@ -268,9 +276,136 @@ public class MemberService {
 			e.printStackTrace();
 		}
 		if(success >0) {
-			mav.setViewName("redirect:/perUpdateForm");
+			mav.setViewName("redirect:/");
 		}
 		
 		return mav;
+	}
+
+	//회사 승인 리스트
+	public HashMap<String, Object> memAcceptList(Map<String, String> params) {
+		HashMap<String, Object> map=  new HashMap<>();
+		inter = sqlSession.getMapper(MemberInter.class);
+		ArrayList<MemberDTO> list = inter.memAcception(params);
+		int listCnt = inter.memAcceptListCnt();
+		map.put("list", list);
+		map.put("listCnt", listCnt);
+		return map;
+	}
+
+	//회사 승인 상세보기
+	public ModelAndView memAcceptDetail(String id) {
+		ModelAndView mav = new ModelAndView();
+		MemberDTO dto = inter.member(id);
+		String fullPath = "resources/upload/"+dto.getMember_capture(); //세션의 경로와 내가 사진을 넣을 폴더+DB에 저장된 파일명
+		logger.info(fullPath);
+		mav.addObject("member", dto);
+		mav.addObject("path", fullPath);
+		mav.setViewName("reqDetail");
+		return mav;
+	}
+
+	//회사 승인
+	@Transactional
+	public String memAcceptOk(String id, String root) {
+		String page = "redirect:/pageMove?page=reqList";
+		MemberDTO dto = inter.member(id);
+		logger.info(dto.getMember_email());
+		String email = dto.getMember_email();
+		String content = "대리 등급 신청이 승인 되었습니다.";
+		String subject = "김과장이 왜 그럴까 대리 승인";
+		if(sendEmail(subject, content, email) > 0) { //메일 전송이 성공하면
+			String photo = dto.getMember_capture();
+			int success = inter.memAcceptOk(id);
+			if(success >0) {
+				try {
+					String delFile = root+"resources/upload/"+photo; //지울파일 위치와 파일명
+					File del = new File(delFile);
+					if(del.exists()) { //삭제할 파일이 있으면
+						del.delete();
+					}else{
+						logger.info("이미 삭제된 사진");
+					}
+				}catch (Exception e) {
+					System.out.println(e);
+				}
+			}
+		}
+		return page;
+	}
+	
+	/*메일 전송*/
+	public int sendEmail(String subject, String content, String email) {//인자값으로 제목,내용, 보낼 주소 받음
+		int send = 0;
+		Properties props = new Properties(); 
+		
+		props.put("mail.smtp.host", "smtp.gmail.com"); 
+	    props.put("mail.smtp.port", "25"); 
+	    props.put("mail.debug", "true"); 
+	    props.put("mail.smtp.auth", "true"); 
+	    props.put("mail.smtp.starttls.enable","true"); 
+	    props.put("mail.smtp.EnableSSL.enable","true");
+	    props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");   
+	    props.setProperty("mail.smtp.socketFactory.fallback", "false");   
+	    props.setProperty("mail.smtp.port", "465");   
+	    props.setProperty("mail.smtp.socketFactory.port", "465"); 
+
+	    Session session = Session.getInstance(props, new javax.mail.Authenticator() { 
+	           protected PasswordAuthentication getPasswordAuthentication() { 
+	           return new PasswordAuthentication("yjo53272", "ka1mi2ya8*"); 
+	           }});
+	           try{
+	               Message message = new MimeMessage(session); 
+	               message.setFrom(new InternetAddress("yjo53272@gmail.com", "김과장이 왜 그럴까"));// 보낼 메일주소와 이름
+	               message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email)); 
+	               message.setSubject(subject);
+	               message.setText(content);//내용 
+	               //message.setContent("내용","text/html; charset=utf-8");//글내용을 html타입 charset설정
+	               System.out.println("send!!!");
+	               Transport.send(message); 
+	               System.out.println("SEND");
+	               send = 1;
+	           } catch(Exception e){
+	               e.printStackTrace();
+	               send = 0;
+	           }
+	     return send;
+	}
+
+	//회사 인증 거절 페이지
+	public ModelAndView reqEmail(String id) {
+		ModelAndView mav = new ModelAndView();
+		inter = sqlSession.getMapper(MemberInter.class);
+		MemberDTO dto = inter.member(id);
+		mav.addObject("member", dto);
+		mav.setViewName("reqEmail");
+		return mav;
+	}
+
+	//회사 승인 거부
+	public HashMap<String, Object> memAcceptNo(Map<String, String> params, String root) {
+		HashMap<String, Object> map = new HashMap<>();
+		MemberDTO dto = inter.member(params.get("id"));
+		logger.info(dto.getMember_email());
+		String email = dto.getMember_email();
+		if(sendEmail(params.get("subject"), params.get("content"), email) > 0) { //메일 전송이 성공이면
+			String photo = dto.getMember_capture(); //파일 이름
+			int success = inter.memAcceptNo(params.get("id"));	//DB수정
+			if(success >0) {
+				try {
+					String delFile = root+"resources/upload/"+photo;
+					File del = new File(delFile);
+					if(del.exists()) { //삭제할 파일이 있으면
+						del.delete(); //파일 삭제
+					}else{
+						logger.info("이미 삭제된 사진");
+					}
+					map.put("success", success);
+				}catch (Exception e) {
+					System.out.println(e);
+				}
+			}
+		}
+		return map;
 	}
 }

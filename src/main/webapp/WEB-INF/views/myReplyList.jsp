@@ -64,7 +64,7 @@
            <span class="submenubar_button_last"><a href="./pageMove?page=outMemForm">회원탈퇴</a></span>
            <span class="submenubar_button"><a href="./pageMove?page=myReplyList">내가 쓴 댓글 보기</a></span>
            <span class="submenubar_button"><a href="./pageMove?page=myWriteList">내가 쓴 글 보기</a></span>
-           <span class="submenubar_button"><a href="./pageMove?page=companyUpdate">회사정보 수정</a></span>
+           <span id="companyupdate_btn" class="submenubar_button"></span>
            <span class="submenubar_button"><a href="./perUpdateForm">개인정보 수정</a></span>
 	    </div>
 	
@@ -95,6 +95,17 @@
 	    </div>
 	</body>
 	<script>
+		// 서브 메뉴바
+		var member_div = "${sessionScope.member_div}";
+			
+		$(document).ready(function(){
+			if(member_div == "인턴") {
+				$("#companyupdate_btn").html("<a href='./pageMove?page=companyUpdate'>회사정보 등록</a>");
+			} else {
+				$("#companyupdate_btn").html("<a href='./pageMove?page=companyUpdate'>회사정보 수정</a>");
+			}
+		});
+	
 	   var tableTh = $("#tableTh").html();
 	   var sNum = 1;
 	   var eNum = 10;
@@ -170,7 +181,6 @@
 			$("#list").append(content);//내용 붙이기
 		}
 	   
-
 		function ajaxCall(obj){
 			$.ajax(obj);
 		}

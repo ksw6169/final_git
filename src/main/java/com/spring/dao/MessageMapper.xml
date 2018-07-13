@@ -6,6 +6,8 @@
 <!-- namespace = 연결되는 인터페이스 -->    
 <mapper namespace="com.spring.dao.MessageInter">
 	
-
+	<select id="messageCount" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM message WHERE message_receive = #{param1}
+	</select>
 	
 </mapper>

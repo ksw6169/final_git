@@ -2,9 +2,9 @@ package com.spring.controller;
 
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -39,12 +39,6 @@ public class MemberController {
 	/* main 페이지 이동 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		return "redirect:/main";
-	}
-	
-	/* main 페이지 이동 */
-	@RequestMapping(value = "/main")
-	public String main() {
 		return "main";
 	}
 	
@@ -77,13 +71,12 @@ public class MemberController {
 	}
 	
 	/* 회원가입 요청 */
-	// 인자가 추가로 있다면, 대리 회원가입으로
 	@RequestMapping(value = "/join")
-	public @ResponseBody HashMap<String, Integer> join(@RequestParam HashMap<String, Object> map) {
+	public @ResponseBody HashMap<String, Integer> join(MultipartFile file, HttpSession session, @RequestParam HashMap<String, Object> map) {
 		logger.info("회원가입 요청");
-		// logger.info("파일 테스트 : "+String.valueOf(map.get("file")));
+		String root = session.getServletContext().getRealPath("/");
 		
-		return service.join(map);
+		return service.join(root, file, map);
 	}
 	
 	/* 로그인 요청 */
@@ -121,7 +114,6 @@ public class MemberController {
 		logger.info("비밀번호 체크 요청");
 		
 		String userId = (String) request.getSession().getAttribute("loginId");
-		logger.info(userId);
 		return service.checkPW(userId, userPw);
 	}
 	
@@ -156,14 +148,6 @@ public class MemberController {
 		return service.outMem(userId);
 	}
 	
-	@RequestMapping(value = "/memUpload")
-	public ModelAndView memUpload(MultipartFile file, HttpSession session) {
-		logger.info("파일 업로드 요청");
-		String root = session.getServletContext().getRealPath("/");
-		
-		return service.memUpload(file, root);
-	}
-	
 	/*회사 정보 수정*/
 	@RequestMapping(value = "/companyUpdate")
 	public ModelAndView companyUpdate(MultipartFile file, HttpSession session, @RequestParam("companyName") String companyName, @RequestParam("jobSel") String jobSel) {
@@ -172,5 +156,75 @@ public class MemberController {
 		String id = (String) session.getAttribute("loginId");
 		String root = session.getServletContext().getRealPath("/");
 		return service.companyUpdate(file, root, companyName, jobSel ,id);
+	}
+	
+	/*회사 승인 리스트*/
+	@RequestMapping(value = "/memAcceptList")
+	public @ResponseBody HashMap<String, Object> memAcceptList(HttpSession session, @RequestParam Map<String, String> params) {
+		logger.info("회사 승인 리스트 요청");
+		String div = (String) session.getAttribute("member_div");
+		if(div.equals("관리자")) {
+			return service.memAcceptList(params);
+		}else {
+			HashMap<String, Object> map = new HashMap<>();
+			map.put("msg", "관리자 아이디가 아닙니다.");
+			return map;
+		}
+	}
+	
+	/*회사 승인 상세보기*/
+	@RequestMapping(value = "/memAcceptDetail")
+	public ModelAndView memAcceptDetail (HttpSession session, @RequestParam("id") String id) {
+		logger.info("회사 승인 상세보기 요청");
+		String div = (String) session.getAttribute("member_div");
+		if(!div.equals("관리자")) {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("/");
+			return mav;
+		}else {
+			return service.memAcceptDetail(id);
+		}
+	}
+	
+	/*회사 승인*/
+	@RequestMapping(value = "/memAcceptOk")
+	public String memAcceptOk (HttpSession session, @RequestParam("id") String id) {
+		logger.info("회사 승인 요청");
+		String div = (String) session.getAttribute("member_div");
+		if(!div.equals("관리자")) {
+			return "/";
+		}else {
+			String root = session.getServletContext().getRealPath("/");
+			return service.memAcceptOk(id, root);
+		}
+	}
+	
+	/*회사 승인 거부 페이지*/
+	@RequestMapping(value = "/reqEmail")
+	public ModelAndView reqEmail (HttpSession session, @RequestParam("id") String id) {
+		logger.info("회사 승인 상세보기 요청");
+		String div = (String) session.getAttribute("member_div");
+		if(!div.equals("관리자")) {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("/");
+			return mav;
+		}else {
+			return service.reqEmail(id);
+		}
+	}
+	
+	/*회사 승인 거부 */
+	@RequestMapping(value = "/memAcceptNo")
+	public @ResponseBody HashMap<String, Object> memAcceptNo(HttpSession session, @RequestParam Map<String, String> params) {
+		logger.info("회사 승인 리스트 요청");
+		String div = (String) session.getAttribute("member_div");
+		if(div.equals("관리자")) {
+			String root = session.getServletContext().getRealPath("/");
+			return service.memAcceptNo(params, root);
+		}else {
+			HashMap<String, Object> map = new HashMap<>();
+			map.put("msg", "관리자 아이디가 아닙니다.");
+			return map;
+		}
 	}
 }

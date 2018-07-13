@@ -106,6 +106,6 @@
 	</update>
 	
 	<select id="companyCount" resultType="java.lang.Integer">
-		select count(*) from company where company_name=#{param1}
-	</select>
+      	select count(*) from company where company_name=#{param1}
+    </select>
 </mapper>

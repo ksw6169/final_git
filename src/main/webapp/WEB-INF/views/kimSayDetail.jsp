@@ -42,7 +42,7 @@
 	        .reply_date { color: #121F27; background-color: #FFFFFF; width: 280px; height: 75px; line-height: 75px; text-align: center; }
 			td.reply_updel { background-color: #FFFFFF; border: 1px #FFFFFF; width: 80px; }
 	        .detail_div { margin-top: 50px;}
-	        .table_div { background-color: #E4EEF0; padding: 50px; text-align: center;}
+	        .table_div { background-color: #E4EEF0; padding: 50px; text-align: center; margin-bottom: 50px; }
 			.table>tbody>tr>td.reply_date { vertical-align: middle; border: 1px white; }
 			.table>tbody>tr>td.reply_updel { padding: 0px; border-top: 0px; }
 			
@@ -116,15 +116,16 @@
                 <button id="like" class="btn like_btn"></button>
             </div>    
             <div class="button-group">
-                <button class="btn btn-default pull-right">삭제</button>
-                <button class="btn btn-default pull-right">수정</button>
+                <button id="delete" class="btn btn-default pull-right">삭제</button>
+                <button id="update" class="btn btn-default pull-right">수정</button>
                 <button class="btn btn-default pull-right" onclick="location.href='./pageMove?page=kimSayList'">목록</button>
             </div>
         </div>
     </div>
     
     <div class="clear2"></div>
-      
+    
+    <!-- 댓글 부분 미구현 -->  
 	<div class="container">
         <div class="detail_div">
             <div class="table_div">
@@ -161,7 +162,8 @@
             board_date:"${board.board_date}",
             board_content:"${board.board_content}",
             board_recom:"${board.board_recom}",
-            board_category:"${board.board_category}"
+            board_category:"${board.board_category}",
+            board_no:"${board.board_no}"
     };
     
     BoardPrint(dto);
@@ -174,7 +176,13 @@
         $("#board_content.contents").html(board.board_content);
         $("#like.btn.like_btn").html("추천 "+board.board_recom);
     }
-
-
+    
+    $("#update").click(function(){
+		location.href="./kimSayUpdateForm?board_no="+${board.board_no};
+	});
+    
+    $("#delete").click(function(){
+		location.href="./kimSayDelete?board_no="+${board.board_no};
+	});
 	</script>
 </html>

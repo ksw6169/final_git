@@ -67,6 +67,7 @@
 			
 			.container {
 				margin-top: 100px;
+				margin-bottom: 50px;
 			}
     	</style>
   </head>
@@ -100,24 +101,22 @@
             <div class="table_div">
                 <table class="table">
                      <tr>
-                       
 						   <select class="category" style="margin-bottom: 0px;">
 						      <option value="">카테고리</option>
 							  <option value="잡담">&nbsp;&nbsp;잡담</option>
 							  <option value="이직" selected="selected">&nbsp;&nbsp;이직</option>
 							  <option value="업무질문">업무질문</option>
 						   </select>
-					   
                      </tr>
                      <tr>
                        <th>제목</th>
-                       <td class="subject"><textarea class="form-control subject" rows="1" style="padding-bottom: 11px;">입사한지 3개월.. 이직해도 될까요?</textarea></td>
+                       <td id="board_title" class="subject"><textarea id="title_textarea" class="form-control subject" rows="1" style="padding-bottom: 11px;"></textarea></td>
                      </tr>
                      <tr>
                        <th colspan="2">내용</th>
 					 </tr>
 					<tr>
-						<td class="write_content" colspan="2"><textarea class="form-control" rows="15">내용내용</textarea></td>
+						<td id="board_content" class="write_content" colspan="2"><textarea id="content_textarea" class="form-control" rows="15"></textarea></td>
 					</tr>
                 </table>
                 
@@ -130,5 +129,19 @@
     </div>
 </body>
 	<script>
+	var dto={
+            board_title:"${board.board_title}",
+            board_content:"${board.board_content}",
+            board_category:"${board.board_category}"
+    };
+    
+    BoardPrint(dto);
+    
+    function BoardPrint(board){
+        console.log(board);
+        //$("#board_category").html(board.board_category);
+        $("#title_textarea").text(board.board_title);
+        $("#content_textarea").text(board.board_content);
+    }
 	</script>
 </html>
