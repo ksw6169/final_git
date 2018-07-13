@@ -166,7 +166,7 @@ public class MemberController {
 		if(div.equals("관리자")) {
 			return service.memAcceptList(params);
 		}else {
-			HashMap<String, Object> map = new HashMap<>();
+			HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("msg", "관리자 아이디가 아닙니다.");
 			return map;
 		}
@@ -222,7 +222,7 @@ public class MemberController {
 			String root = session.getServletContext().getRealPath("/");
 			return service.memAcceptNo(params, root);
 		}else {
-			HashMap<String, Object> map = new HashMap<>();
+			HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("msg", "관리자 아이디가 아닙니다.");
 			return map;
 		}

@@ -388,7 +388,7 @@ public class CompanyService {
 	   }
 
 	   public HashMap<String, Object> companyWrite(String seq) {
-	      HashMap<String,Object> map=new HashMap<>();
+	      HashMap<String,Object> map=new HashMap<String, Object>();
 	      CompanyDTO dto=apiDetail(seq);
 	      
 	      if(dto.getCompany_addr() == null) {

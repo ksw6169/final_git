@@ -284,7 +284,7 @@ public class MemberService {
 
 	//회사 승인 리스트
 	public HashMap<String, Object> memAcceptList(Map<String, String> params) {
-		HashMap<String, Object> map=  new HashMap<>();
+		HashMap<String, Object> map=  new HashMap<String, Object>();
 		inter = sqlSession.getMapper(MemberInter.class);
 		ArrayList<MemberDTO> list = inter.memAcception(params);
 		int listCnt = inter.memAcceptListCnt();
@@ -384,7 +384,7 @@ public class MemberService {
 
 	//회사 승인 거부
 	public HashMap<String, Object> memAcceptNo(Map<String, String> params, String root) {
-		HashMap<String, Object> map = new HashMap<>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		MemberDTO dto = inter.member(params.get("id"));
 		logger.info(dto.getMember_email());
 		String email = dto.getMember_email();
