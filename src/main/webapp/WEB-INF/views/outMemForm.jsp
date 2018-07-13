@@ -159,6 +159,7 @@
 	   $("#wrong").hide();
 	   $("#out").click(function(){
 	      if($("#inputId").val() == userId){
+	    	 alert("탈퇴가 완료 되었습니다.");
 	         location.href="./outMem";
 	      }else{
 	         $("#wrong").show();
