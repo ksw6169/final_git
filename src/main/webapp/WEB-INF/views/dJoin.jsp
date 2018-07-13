@@ -6,7 +6,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
    	 	<meta name="viewport" content="width=device-width, initial-scale=1">
-		
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
       
 		<style>
 		body { padding-top: 70px; }
@@ -173,6 +173,64 @@
 		.btn_group {
 			margin-bottom: 50px;
 		}
+		
+		#myModalLabel {
+			font-family: "bareun";
+		}
+		
+		/* modal search-bar */
+		#modal-search-bar {
+            font-size:13px;
+            padding:10px;
+            width: 350px;
+            height: 50px;
+            line-height: 40px;
+            outline:none;
+            margin: 5px 0;
+            display: inline;
+            float: left;
+        }
+		
+		.table-hover {
+			visibility: hidden;
+		}
+		
+		.table-hover thead tr th {
+			border: 1px solid white;
+			text-align: center;
+			font-weight: bold;
+		}
+		
+		.table-hover tbody tr td {
+			background-color: #E4EEF0;
+			border: 1px solid white;
+			text-align: center;
+			font-family: "NanumL";
+			font-size: 14px;
+			font-weight:bold;
+		}
+		
+		/* loading */
+        #loading {
+          position: absolute;
+          left: 47%;
+		  display: inline-block;
+		  width: 75px;							/* 원 가로 길이 */
+		  height: 75px;						/* 원 세로 길이 */
+		  border: 5px solid #E4EEF0;	/* 원의 테두리 색 */
+		  border-radius: 50%;			
+		  border-top-color: #FF8000;	/* 원 회전 색 */
+		  animation: spin 1s ease-in-out infinite;
+		  -webkit-animation: spin 1s ease-in-out infinite;
+		}
+	
+		@keyframes spin {
+		  to { -webkit-transform: rotate(360deg); }
+		}
+		@-webkit-keyframes spin {
+		  to { -webkit-transform: rotate(360deg); }
+		}
+		
     </style>
     <body>
    	 <jsp:include page="menubar.jsp" flush="false"/>
@@ -226,13 +284,43 @@
 					<!-- 기업명 -->
 	                <div>
 			            <div class="joinForm">기업명</div>
-			            <input id="company" name="company" type="text" placeholder="기업명 입력"/>
-			            <label class="company_btn">기업명 버튼</label>
+			            <input id="company" name="company" type="text" placeholder="기업명" style="background-color:#121F27; color:white; border: 0px; " readonly />
+			            <label class="company_btn" data-toggle="modal" data-target="#bs-example-modal-lg">기업 검색</label>
 	                	<div><span id="companyMsg" class="warn">　</span></div>
 		            </div>
 		            <!-- 기업 캡쳐파일 부분 -->               
 	                <div class="company_photo">기업 웹메일 <br/>사이트 캡쳐사진</div>
 		            <input id="fileName" type="text" placeholder="파일명" readonly>
+					
+				    <!-- Modal -->
+					<div class="modal fade" id="bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+					  <div class="modal-dialog modal-lg">
+					    <div class="modal-content">
+					      <div class="modal-header" style="height: 75px;">
+					        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				        	<input class="form-control" id="inputdefault" placeholder="기업명을 입력해주세요." style="display:inline-block; width:85%; height: 100%; "/>
+					        <button class="btn btn-primary btn-md" onclick="company_search()" style="display:inline-block; width:10%; height:100%; font-family:'bareun'; background-color: #121F27; border: 0px; ">검색</button>
+					      </div>
+					      <div class="modal-body">
+						      <table class="table table-hover">
+						          <thead style="background-color: #121F27; color: white; font-family:'NanumL'; font-size: 14px; text-align: center;">
+							      	<tr>
+							      		<th class="center" style="width:50px;">선택</th>
+							            <th class="center">기업명</th>
+							            <th class="center" style="width:300px;">기업주소</th>
+							     	</tr>
+							      </thead>
+							      <tbody id="list"></tbody>
+					          </table>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal" style="font-family:'bareun'; ">닫기</button>
+					        <button type="button" class="btn btn-primary" onclick="companyWrite()" style="font-family:'bareun'; background-color: #FF8000; border: 0px; ">완료</button>
+					      	<!-- data-dismiss="modal" -->
+					      </div>
+					    </div> <!-- 모달 콘텐츠 -->
+					  </div> <!-- 모달 다이얼로그 -->
+					</div> <!-- 모달 전체 윈도우 -->
 					
 					<!-- 파일 첨부 버튼-->
 		            <label for="upload" class=file_btn>파일 첨부</label>
@@ -257,6 +345,91 @@
     <script>
 		var chk = false;			// 아이디 중복값 체크
 		var emailChk = false;	// 이메일 체크 변수
+    
+    	/* 기업명 search - 재광 */
+    	function company_search() {
+    	    $(".table-hover").css("visibility", "hidden");	// 테이블 숨김
+    	    $("#list").empty();
+    	    $(".modal-body").prepend("<div id='loading'></div>");
+    	    
+    	    var search_keyword = $("#inputdefault").val();
+    	    
+    		$.ajax({
+    		      type : "GET",
+    		      url : "./apiList",
+    		      data : {
+    		         company_name : search_keyword
+    		      },
+    		      dataType : "JSON",
+    		      success : function(data) {
+    		         if (data.success) {
+    		        	$(".table-hover").css("visibility", "visible");
+    		        	$("#loading").remove();
+    		            console.log(data.companyList);
+    		            apiListPrint(data.companyList);
+    		         } else {
+     		            $("#loading").remove();
+    		            alert(data.msg);
+    		         }
+    		      },
+    		      error : function(error) {
+    		         console.log(error);
+  		            $("#loading").remove();
+    		         alert("List 불러오기 실행 오류!");
+    		      }
+    		   });
+    	}
+    	
+    	/* 회사 리스트 출력 - 재광 */
+    	 function apiListPrint(companyList){
+    	      $("#list tr").remove();	// 요소 전부 지우고
+    	      console.log(companyList);
+    	      var content;
+    	      companyList.forEach(function(companyDTO,idx){
+    	         content="";
+    	         content+="<tr>";
+    	         content+="<td><input type='radio' name='seq' value='"+companyDTO.company_no+"'></td>";
+    	         content+="<td>"+companyDTO.company_name+"</td>";
+    	         if(companyDTO.company_addr==null){
+    	            content+="<td>"+"-"+"</td>";
+    	         }else{
+    	            content+="<td>"+companyDTO.company_addr+"</td>";
+    	         }
+    	         content+="</tr>";
+    	         $("#list").append(content);
+    	      });
+   	   }
+   	 
+     /* 회사 정보 입력 - 재광 */
+   	 function companyWrite(){
+   	       var seq=$("input[name='seq']:checked").val();
+   	       
+   	       if(seq != null) {
+	   	       console.log("seq: "+seq);
+	   	       $('#bs-example-modal-lg').modal('hide');	// 모달 숨기기
+				
+	   	       $.ajax({
+	   	            type : "GET",
+	   	            url : "./companyWrite",
+	   	            data : {
+	   	               seq : seq
+	   	            },
+	   	            dataType : "JSON",
+	   	            success : function(data) {
+	   	               console.log(data);
+	   	               if(data.companyDTO!=null){
+	   	                  $("#company").val(data.companyDTO.company_name);
+	   	               }
+	   	            },
+	   	            error : function(error) {
+	   	               console.log(error);
+	   	               alert("DB 저장 실행 오류!");
+	   	            }
+	   	         });
+   	       } else {
+   	    	   alert("기업을 선택해주세요.");
+   	       }
+   	    }
 		
 		// ID 중복 확인(onkeyup 이벤트)
 		function overlay() {

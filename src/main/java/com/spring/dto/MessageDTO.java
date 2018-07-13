@@ -6,7 +6,7 @@ public class MessageDTO {
 
 	private int message_no;
 	private String member_id;
-	private String message_recieve;
+	private String message_receive;
 	private String message_content;
 	private String message_read;
 	private Timestamp message_date;
@@ -22,11 +22,11 @@ public class MessageDTO {
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
 	}
-	public String getMessage_recieve() {
-		return message_recieve;
+	public String getMessage_receive() {
+		return message_receive;
 	}
-	public void setMessage_recieve(String message_recieve) {
-		this.message_recieve = message_recieve;
+	public void setMessage_receive(String message_receive) {
+		this.message_receive = message_receive;
 	}
 	public String getMessage_content() {
 		return message_content;

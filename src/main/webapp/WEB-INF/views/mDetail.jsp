@@ -43,6 +43,12 @@
 			.container {
 				margin-top: 100px;
 			}
+			
+			/* submenuBar 링크 글자 색상 */
+		.submenubar_button a{ color: white;}
+		.submenubar_button_last a{color: white;}
+		.submenubar_button a:hover{color: #FF8000; background-color: #121F27;text-decoration: none;}
+		.submenubar_button_last a:hover{color: #FF8000; background-color: #121F27; text-decoration: none;}
     	</style>
   </head>
   <body>
@@ -56,9 +62,9 @@
                 </tr>
             </table>
         </div>
-        <span class="submenubar_button_last">쪽지 작성</span>
-        <span class="submenubar_button">보낸 쪽지함</span>
-        <span class="submenubar_button">받은 쪽지함</span>
+	        <span class="submenubar_button_last"><a href="./pageMove?page=mWrite">쪽지 작성</a></span>
+	        <span class="submenubar_button"><a href="./pageMove?page=getMlist">보낸 쪽지함</a></span>
+	        <span class="submenubar_button"><a href="./pageMove?page=sendMlist">받은 쪽지함</a></span>
     </div>
   
   <div class="container">
@@ -73,17 +79,41 @@
                        <th colspan="2">내용</th>
                      </tr>
                      <tr>
-                       <td class="contents" colspan="2">안녕하세요. 관리자입니다.</td>
+                       <td class="contents" colspan="2">${message.message_content}</td>
                      </tr>
                 </table>
             </div>    
             <div class="button-group">
-                <button class="btn btn-default pull-right">답장</button>
-                <button class="btn btn-default pull-right">목록</button>       
+                <button class="btn btn-default pull-right" onclick="reply()" id="re">답장</button>
+                <button class="btn btn-default pull-right" onclick="list()">목록</button>       
             </div>
         </div>
     </div>
 </body>
 	<script>
+	
+	check();
+	
+	//답장 버튼 관리자 활성화 
+	function check(){
+		var id = "${sessionScope.loginId}";
+		
+		if(id != 'admin'){
+			$("#re").hide();
+		}else{
+			$("#re").show();
+		}
+
+	}
+	function list(){
+		location.href ="./messageListForm";
+	}
+	
+	function reply(){
+		location.href = "./messagewrite"	
+	}
+	
+	
+	
 	</script>
 </html>

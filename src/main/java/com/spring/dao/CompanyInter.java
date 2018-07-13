@@ -31,4 +31,6 @@ public interface CompanyInter {
 	void companyUpHit(String company_no);
 	
 	int memberEvalCnt(String member_id,int plus);
+
+	int companyCount(String company_name);
 }

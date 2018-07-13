@@ -5,7 +5,55 @@
     
 <!-- namespace = 연결되는 인터페이스 -->    
 <mapper namespace="com.spring.dao.MessageInter">
+
+	<!-- 번호, 내용, 작성일자 , 쪽지 리스트  //사용자가 보낸 쪽지 리스트
+	message_no / message_content / message_date -->
+	<select id="messageList" parameterType="hashMap" resultType="com.spring.dto.MessageDTO">
+		SELECT message_no,message_content,message_date 
+		FROM 
+			(SELECT message_no,message_content,message_date, 
+				ROW_NUMBER() OVER(ORDER BY message_no DESC) 
+				AS rnum FROM message WHERE member_id=#{loginId}
+				) WHERE rnum BETWEEN #{sPage} AND #{ePage} ORDER BY message_date DESC
+	</select>
 	
+	<select id="GmessageList" parameterType="hashMap" resultType="com.spring.dto.MessageDTO">
+		SELECT message_no,message_content,message_date 
+		FROM 
+			(SELECT message_no,message_content,message_date, 
+				ROW_NUMBER() OVER(ORDER BY message_no DESC) 
+				AS rnum FROM message WHERE message_receive=#{loginId}
+				) WHERE rnum BETWEEN #{sPage} AND #{ePage} ORDER BY message_date DESC
+	</select>
+	
+	<!-- 쪽지함 리스트 갯수  -->
+	<select id="listCnt" parameterType="hashMap" resultType="int">
+		SELECT COUNT(*) FROM message
+	</select>
+	
+	
+	<!-- 쪽지 작성 -->
+	<!-- message_no,member_id,message_receive,message_content,message_read,message_date -->
+	<insert id="messagewrite" parameterType="com.spring.dto.MessageDTO">
+		INSERT INTO message 
+		(message_no,member_id,message_receive,message_content,message_read,message_date) 
+		VALUES(message_seq.NEXTVAL,#{member_id},'admin',#{message_content},'n',SYSDATE) 
+	</insert>
+	
+
+	<select id="UmessageDetail" resultType="com.spring.dto.MessageDTO">
+	 	SELECT * FROM message WHERE message_no=#{param1}
+	</select>
+	
+	<!--  쪽지 삭제 --> 
+	
+	<delete id="messagedetail">
+		DELETE FROM message WHERE message_no = #{param1}
+	</delete>
+	
+	<select id="messageCount" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM message WHERE message_receive = #{param1}
+	</select>
 
 	
 </mapper>

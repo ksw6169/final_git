@@ -1,13 +1,19 @@
 package com.spring.service;
 
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.spring.dao.MemberInter;
 import com.spring.dao.MessageInter;
+import com.spring.dto.MessageDTO;
 @Service
 public class MessageService {
 
@@ -18,11 +24,80 @@ public class MessageService {
 	
 	MessageInter inter  = null;
 
-	public void main() {
-		
-		logger.info("MessageService 접속");
-		
+	// 사용자가 보낸 쪽지함 리스트
+	public HashMap<String, Object> messageList(HashMap<String, Object> map) {
+		inter = sqlSession.getMapper(MessageInter.class);
+		HashMap<String, Object> param = new HashMap<>();
+		ArrayList<MessageDTO> messageList = inter.messageList(map);
+		int listAll = inter.listCnt(map);
+		param.put("listAll", listAll);
+		param.put("messageList",messageList);
+		return param;
 	}
 	
+	// 사용자가 받은 쪽지함 리스트
+	public HashMap<String, Object> GmessageList(HashMap<String, Object> map) {
+		inter = sqlSession.getMapper(MessageInter.class);
+		HashMap<String, Object> param = new HashMap<>();
+		ArrayList<MessageDTO> GmessageList = inter.GmessageList(map);
+		int listAll = inter.listCnt(map);
+		param.put("listAll", listAll);
+		param.put("GmessageList",GmessageList);
+		return param;
+	}
 	
+	//쪽지 작성
+	public ModelAndView messagewrite(HashMap<String, String> map) {
+		logger.info("쪽지 작성 서비스");
+		inter = sqlSession.getMapper(MessageInter.class);
+		ModelAndView mav = new ModelAndView();
+		MessageDTO dto = new MessageDTO();
+		//세션값 가져와 member_id에 지정 
+		dto.setMember_id(map.get("loginId"));
+		dto.setMessage_content(map.get("message_content"));
+		int success = inter.messagewrite(dto);
+		logger.info(dto.getMember_id());
+		String page = "messagewrite";
+		if(success>0) {
+			page = "sendMlist";
+		}
+		mav.setViewName(page);
+		return mav;
+	}
+
+	//user 쪽지 상세보기 
+	public ModelAndView UmessageDetail(String message_no) {
+		inter = sqlSession.getMapper(MessageInter.class);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("message", inter.UmessageDetail(message_no));
+		mav.setViewName("mDetail");
+		return mav;
+	}
+
+	//쪽지 선택 삭제 
+	public ModelAndView messagedetail(String message_no) {
+		inter = sqlSession.getMapper(MessageInter.class);
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("message", inter.messagedetail(message_no));
+		mav.setViewName("redirect:/");
+		
+		
+		return mav;
+	}
+
+	/* menubar - 안 읽은 쪽지 개수 알림 */
+	public @ResponseBody HashMap<String, Integer> messageCount(String id) {
+		inter = sqlSession.getMapper(MessageInter.class);
+		
+		HashMap<String, Integer> resultMap = new HashMap<>();
+		
+		int msgCnt = inter.messageCount(id);
+		resultMap.put("msgCnt", msgCnt);
+		
+		logger.info("메시지 개수 : "+msgCnt);
+		
+		return resultMap;
+	}
+
 }
