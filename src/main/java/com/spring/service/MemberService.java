@@ -314,27 +314,29 @@ public class MemberService {
 		String email = dto.getMember_email();
 		String content = "대리 등급 신청이 승인 되었습니다.";
 		String subject = "김과장이 왜 그럴까 대리 승인";
-		sendEmail(subject, content, email);
-		String photo = dto.getMember_capture();
-		int success = inter.memAcceptOk(id);
-		if(success >0) {
-			try {
-				String delFile = root+"resources/upload/"+photo;
-				File del = new File(delFile);
-				if(del.exists()) { //삭제할 파일이 있으면
-					del.delete();
-				}else{
-					logger.info("이미 삭제된 사진");
+		if(sendEmail(subject, content, email) > 0) { //메일 전송이 성공하면
+			String photo = dto.getMember_capture();
+			int success = inter.memAcceptOk(id);
+			if(success >0) {
+				try {
+					String delFile = root+"resources/upload/"+photo; //지울파일 위치와 파일명
+					File del = new File(delFile);
+					if(del.exists()) { //삭제할 파일이 있으면
+						del.delete();
+					}else{
+						logger.info("이미 삭제된 사진");
+					}
+				}catch (Exception e) {
+					System.out.println(e);
 				}
-			}catch (Exception e) {
-				System.out.println(e);
 			}
 		}
 		return page;
 	}
 	
 	/*메일 전송*/
-	public void sendEmail(String subject, String content, String email) {
+	public int sendEmail(String subject, String content, String email) {//인자값으로 제목,내용, 보낼 주소 받음
+		int send = 0;
 		Properties props = new Properties(); 
 		
 		props.put("mail.smtp.host", "smtp.gmail.com"); 
@@ -354,7 +356,7 @@ public class MemberService {
 	           }});
 	           try{
 	               Message message = new MimeMessage(session); 
-	               message.setFrom(new InternetAddress("yjo53272@gmail.com", "김과장이 왜 그럴까"));// 
+	               message.setFrom(new InternetAddress("yjo53272@gmail.com", "김과장이 왜 그럴까"));// 보낼 메일주소와 이름
 	               message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email)); 
 	               message.setSubject(subject);
 	               message.setText(content);//내용 
@@ -362,9 +364,12 @@ public class MemberService {
 	               System.out.println("send!!!");
 	               Transport.send(message); 
 	               System.out.println("SEND");
+	               send = 1;
 	           } catch(Exception e){
 	               e.printStackTrace();
+	               send = 0;
 	           }
+	     return send;
 	}
 
 	//회사 인증 거절 페이지
@@ -383,21 +388,22 @@ public class MemberService {
 		MemberDTO dto = inter.member(params.get("id"));
 		logger.info(dto.getMember_email());
 		String email = dto.getMember_email();
-		sendEmail(params.get("subject"), params.get("content"), email);
-		String photo = dto.getMember_capture();
-		int success = inter.memAcceptNo(params.get("id"));
-		if(success >0) {
-			try {
-				String delFile = root+"resources/upload/"+photo;
-				File del = new File(delFile);
-				if(del.exists()) { //삭제할 파일이 있으면
-					del.delete();
-				}else{
-					logger.info("이미 삭제된 사진");
+		if(sendEmail(params.get("subject"), params.get("content"), email) > 0) { //메일 전송이 성공이면
+			String photo = dto.getMember_capture(); //파일 이름
+			int success = inter.memAcceptNo(params.get("id"));	//DB수정
+			if(success >0) {
+				try {
+					String delFile = root+"resources/upload/"+photo;
+					File del = new File(delFile);
+					if(del.exists()) { //삭제할 파일이 있으면
+						del.delete(); //파일 삭제
+					}else{
+						logger.info("이미 삭제된 사진");
+					}
+					map.put("success", success);
+				}catch (Exception e) {
+					System.out.println(e);
 				}
-				map.put("success", success);
-			}catch (Exception e) {
-				System.out.println(e);
 			}
 		}
 		return map;
