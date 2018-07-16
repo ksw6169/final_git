@@ -7,13 +7,9 @@
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
    	 	<meta name="viewport" content="width=device-width, initial-scale=1">
 		
+ 	<!-- 반응형 웹 수정 완료(0715) -->
     <style>
         body { padding-top: 70px; }
-        
-        .container {
-            padding-top: 25px;
-            background: #E4EEF0;
-        }
         
         .content {
             font-family: "bareun";
@@ -29,71 +25,79 @@
             height: 100px;
         }
         
-        .clear {
-            clear: both;
+        .loginBackground {
+            padding-top: 25px;
+            margin-top: 50px;
+            background: #E4EEF0;
         }
         
         input[type='text'], input[type='password'] {
             font-size:13px;
             padding:10px;
-            width: 350px;
+            width: 100%;
             height: 50px;
             line-height: 40px;
             outline:none;
             margin: 5px 0;
-            display: inline;
-            float: left;
-            text-align: center;
+            text-align: ce	nter;
         }
         
         .login_btn {
           font-family: "bareun";
           color: #fff;
           background-color: #121F27;
-          width: 75px;
-          height: 110px;
-          font-size: 14px;
-          margin: 5px 0 0 5px;
+          width: 100%;
+          height: 50px;
+          font-size: 16px;
+          margin: 5px 0 0 0px;
           border: 0px;
         }
         
-        .login_group {
-            width: 450px;
-        }
-        
         .join_btn {
-            width: 430px;
+            width: 100%;
             height: 50px;
             font-size: 16px;
-            margin: 10px 0 0 0px;
+            margin: 5px 0 0 0px;
             border: 0px;
             background-color: #FF8000;
             color: white;
             font-family: "bareun";
         }
-        
-        div.col-md-4.col-md-offset-4 {
-        	margin-top: 50px;
-        }
-        
     </style>
 	</head>
 	<body>
 		<jsp:include page="menubar.jsp"/>
 	
-		<div class="col-md-4 col-md-offset-4">
-			<form action="" method="POST">
-	            <div class="login_group">    
-	                <h1 class="content">로그인</h1>
-	                <input name="id" type="text" placeholder="아이디를 입력해주세요.">
-	                <input name="pw" type="password" placeholder="비밀번호를 입력해주세요.">
-	                <button class="login_btn" onclick="login()">로그인</button>
-	            </div>
-            </form>
-            <div class="btn_group">
-                <button class="join_btn" onclick="joinMove('iJoinForm')">인턴(비직장인 회원) 회원가입</button>
-                <button class="join_btn" onclick="joinMove('dJoinForm')">대리(직장인 회원) 회원가입</button>
-            </div>
+		<div class="container">
+			<div class="row">
+				<div class="loginBackground col-md-10 col-md-push-1 center-block">
+					<form action="" method="POST">
+						<div class="row">
+							<div class="col-md-4 col-md-push-4 center-block"><h1 class="content">로그인</h1></div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-md-push-3 center-block">
+								<input name="id" type="text" placeholder="아이디를 입력해주세요."/>
+							</div>
+						</div>
+						<div class="row">	
+							<div class="col-md-6 col-md-push-3 center-block">
+								<input name="pw" type="password" placeholder="비밀번호를 입력해주세요."/>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-md-push-3 center-block"><button class="login_btn" onclick="login()">로그인</button></div>
+						</div>
+		            </form>
+	            	<div class="row">
+	            		<div class="col-md-6 col-md-push-3 center-block"><button class="join_btn" onclick="joinMove('iJoinForm')">인턴(비직장인 회원) 회원가입</button></div>
+					</div>
+					<div class="row" style="margin-bottom: 50px;">
+	            		<div class="col-md-6 col-md-push-3 center-block"><button class="join_btn" onclick="joinMove('dJoinForm')">대리(직장인 회원) 회원가입</button></div>
+					</div>
+				</div>
+			</div>
+				
     	</div>
 	</body>
 	<script>

@@ -20,30 +20,46 @@
    	 	<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 
+		<!-- 반응형 완료(0715) -->
 		<style>
 			 body { padding-top: 70px; text-align: center;}
-			 .container {
 			 
-	            padding-top: 70px;
-	            padding-bottom: 25px;
-        	}
-        	.content{font-family: "bareun";
+			 .joinBackground {
+           	 	padding-top: 25px;
+           	 	padding-bottom: 50px;
+           	 	margin-top: 50px;
+            	background: #E4EEF0;
+            	
+			 }
+			 
+        	.content{
+        		font-family: "bareun";
             	text-align: center;
-            	margin-bottom: 50px;}
+            	width: 100%;
+            	margin-bottom: 50px;
+            }
+        	
         	/* 버튼 */
-        	.join_btn{width:500px; height: 100px; margin: 5px; background-color: #FF8000; color: white; font-family: "bareun"; border: 0; font-size: 25px;}
-
+        	.join_btn{width:100%; height: 100px; margin: 5px; background-color: #FF8000; color: white; font-family: "bareun"; border: 0; font-size: 25px;}
 		</style>
 	</head>
 	<body>
 		<jsp:include page="menubar.jsp"/>
 	
 		<div>
-	        <div class="container col-md-4 col-md-offset-4">
-	        	<h1 class="content">회원가입</h1>
-	        	<div class="btn_set">
-	        		<button class="join_btn" onclick="joinMove('iJoinForm')">인턴(비직장인 회원) 회원가입</button>
-	            	<button class="join_btn" onclick="joinMove('dJoinForm')">대리(직장인 회원) 회원가입</button>
+	        <div class="container">
+	        	<div class="row">
+	        		<div class="col-md-8 col-md-push-2 joinBackground">
+	        			<div class="row">
+	        				<div class="col-md-4 col-md-push-4 center-block"><h1 class="content">회원가입</h1></div>
+	        			</div>
+	        			<div class="row">
+	        				<div class="col-md-8 col-md-push-2"><button class="join_btn" onclick="joinMove('iJoinForm')">인턴(비직장인 회원) 회원가입</button></div>
+	        			</div>
+	        			<div class="row">
+	        				<div class="col-md-8 col-md-push-2"><button class="join_btn" onclick="joinMove('dJoinForm')">대리(직장인 회원) 회원가입</button></div>
+	        			</div>
+	        		</div>
 	        	</div>
 	        </div>
     	</div>

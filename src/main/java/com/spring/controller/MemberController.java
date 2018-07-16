@@ -149,7 +149,7 @@ public class MemberController {
 	}
 	
 	/*회사 정보 수정*/
-	@RequestMapping(value = "/companyUpdate")
+	@RequestMapping(value = "/companyUpdate", method = {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView companyUpdate(MultipartFile file, HttpSession session, @RequestParam("companyName") String companyName, @RequestParam("jobSel") String jobSel) {
 		logger.info("회사 정보 수정");
 		logger.info(companyName);

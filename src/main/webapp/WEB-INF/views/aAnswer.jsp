@@ -65,19 +65,18 @@
   	<div class="container">
         <div class="detail_div">
             <div class="table_div">
+            <form action="mesageReply" method="post">
                 <table class="table">
-                     <tr>
-                       <th>받는 사람</th>
-                       <td class="subject">user111</td>
-                     </tr>
                      <tr>
                        <th colspan="2">내용</th>
                      </tr>
                      <tr>
-						<td class="write_content" colspan="2"><textarea class="form-control" rows="15" placeholder="내용을 입력해주세요."></textarea></td>
+						<td class="write_content" colspan="2"><textarea class="form-control" rows="15" placeholder="내용을 입력해주세요." name="message_content"></textarea></td>
 					 </tr>
                 </table>
-            <button class="btn btn-default pull-right">작성 완료</button>
+                <input type="hidden" value="${message.member_id}" name="message_receive"/>           
+                <button class="btn btn-default pull-right">작성 완료</button>
+            </form>
             </div>    
             <div class="button-group">
                 <button class="btn btn-default pull-right">목록</button>       
