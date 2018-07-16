@@ -110,7 +110,7 @@
 	}
 	
 	function reply(){
-		location.href = "./messagewrite"	
+		location.href = "./messagereplyForm?message_no=${message.message_no}";
 	}
 	
 	

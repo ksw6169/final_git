@@ -19,9 +19,11 @@ public interface MessageInter {
 	
 	MessageDTO UmessageDetail(String message_no);
 	
-	int messagedetail(String message_no);
+	int messagedelete(String del);
 
 	int messageCount(String id);
+	
+	int readChk(String message_no); //쪽지 읽음 여부 변경
 
 
 }

@@ -78,7 +78,7 @@
                 <table class="table">
                      <tr>
                        <th>받는 사람</th>
-                       <td class="subject" >관리자</td>
+                       <td class="subject" ><input type="hidden" value="admin" name="message_receive"/>관리자</td>
                      </tr>
                      <tr>
                        <th colspan="2">내용</th>

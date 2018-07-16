@@ -3,6 +3,7 @@ package com.spring.controller;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,12 +73,22 @@ public class MessageController {
 
 	}
 	
-	@RequestMapping(value="/messagedetail")
-	public ModelAndView messagedetail(String message_no) {
+	@RequestMapping(value="/messagedelete")
+	public @ResponseBody HashMap<String, Object> messagedelete(@RequestParam (value="Chkdel[]") String[] delList ) {
 		logger.info("쪽지 선택 삭제 ");
-
-		return service.messagedetail(message_no);
+		for(String delChk : delList) {
+			logger.info(delChk);
+		}
+		return service.messagedelete(delList);
 	}
+	
+	//관리자가 받은 쪽지 폼 이동 
+	@RequestMapping(value="/AgetmessageListForm")
+	public String AgetmessageListForm() {
+		logger.info("관리자 리스트 폼 ");
+		return "AgetMlist";
+	}
+	
 	
 
 	/* menubar - 안 읽은 쪽지 개수 알림 */
@@ -86,5 +97,30 @@ public class MessageController {
 		
 		return service.messageCount(String.valueOf(map.get("id")));
 	}
+	
+	/*쪽지 답장 폼*/
+	@RequestMapping(value = "/messagereplyForm")
+	public ModelAndView messagereplyForm(@RequestParam("message_no") String message_no) {
+		
+		return service.messagereplyForm(message_no);
+	}
+	
+	/*쪽지 답장*/
+	@RequestMapping(value = "/mesageReply")
+	public ModelAndView mesageReply(@RequestParam HashMap<String, String> map, HttpServletRequest request) {
+		logger.info("쪽지 작성 컨트롤러");
+		//접속중인 아이디 
+		String member_id = (String) request.getSession().getAttribute("loginId");
+		map.put("loginId", member_id);
+		//쪽지 작성시 저장될 내용 
+		String message_content = map.get("message_content");
+		logger.info(member_id +" : 접속 중" );
+		logger.info("쪽지 내용 : " +message_content );
+		return service.messagewrite(map);
+	}
 
+	
+	
+	
+	
 }

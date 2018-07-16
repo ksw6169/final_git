@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -55,9 +56,10 @@ public class MessageService {
 		//세션값 가져와 member_id에 지정 
 		dto.setMember_id(map.get("loginId"));
 		dto.setMessage_content(map.get("message_content"));
+		dto.setMessage_receive(map.get("message_receive"));
 		int success = inter.messagewrite(dto);
 		logger.info(dto.getMember_id());
-		String page = "messagewrite";
+		String page = "pageMove?page=mWrite";
 		if(success>0) {
 			page = "sendMlist";
 		}
@@ -65,26 +67,37 @@ public class MessageService {
 		return mav;
 	}
 
-	//user 쪽지 상세보기 
+	//user 쪽지 상세보기
+	@Transactional
 	public ModelAndView UmessageDetail(String message_no) {
 		inter = sqlSession.getMapper(MessageInter.class);
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("message", inter.UmessageDetail(message_no));
+		if(inter.readChk(message_no) >0) {
+			mav.addObject("message", inter.UmessageDetail(message_no));
+		}
 		mav.setViewName("mDetail");
 		return mav;
 	}
 
 	//쪽지 선택 삭제 
-	public ModelAndView messagedetail(String message_no) {
+	public HashMap<String, Object> messagedelete(String[] delList) {
 		inter = sqlSession.getMapper(MessageInter.class);
-		ModelAndView mav = new ModelAndView();
+		boolean success = false;
+		int cnt = 0;
+		for (String del : delList) {
+			inter.messagedelete(del);
+			cnt++;
+		}
+		if(delList.length == cnt) {
+			success = true;
+		}
 		
-		mav.addObject("message", inter.messagedetail(message_no));
-		mav.setViewName("redirect:/");
-		
-		
-		return mav;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("success", success);
+		return map;
 	}
+	
+
 
 	/* menubar - 안 읽은 쪽지 개수 알림 */
 	public @ResponseBody HashMap<String, Integer> messageCount(String id) {
@@ -99,5 +112,14 @@ public class MessageService {
 		
 		return resultMap;
 	}
+
+	public ModelAndView messagereplyForm(String message_no) {
+		ModelAndView mav = new ModelAndView();
+		inter = sqlSession.getMapper(MessageInter.class);
+		mav.addObject("message", inter.UmessageDetail(message_no));
+		mav.setViewName("aAnswer");
+		return mav;
+	}
+
 
 }
