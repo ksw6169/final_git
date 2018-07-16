@@ -51,7 +51,7 @@
 	                </tr>
 	            </table>
 	        </div>
-	        <span class="submenubar_button_last"><a href="./pageMove?page=mWrite">쪽지 작성</a></span>
+	        <span id="AdminWrite" class="submenubar_button_last"><a href="./pageMove?page=mWrite">쪽지 작성</a></span>
 	        <span class="submenubar_button"><a href="./pageMove?page=sendMlist">보낸 쪽지함</a></span>
 	        <span class="submenubar_button"><a href="./pageMove?page=getMlist">받은 쪽지함</a></span>
 	    </div>
@@ -68,10 +68,10 @@
 	            </thead>
 	             <tbody id="list"></tbody>
 	        </table>
-	        <button class="btn btn-default pull-right">삭제</button>
+	        <button id="del" class="btn btn-default pull-right">삭제</button>
 	        <div class="paging_button">
 	          <ul class="pagination">
-	            <li id="pre" class="page-item disabled">
+	            <li id="pre" class="page-item disabled" >
 	              <a class="page-link" href="#" tabindex="-1">이전 페이지</a>
 	            </li>
 	            <li id="next" class="page-item">
@@ -94,6 +94,7 @@
 	
 	
 	listCall();
+	adminCK(); 
 	
 	obj.error=function(e){console.log(e)};
 	obj.dataType="JSON";
@@ -103,6 +104,18 @@
 	function ajaxCall(obj){
 		$.ajax(obj)
 	};
+	
+	//관리자 접속 체크 및 공지사항 작성 버튼 활성/비활성화 
+	 function adminCK(){
+		 	var id = "${sessionScope.loginId}"
+			var div = "${sessionScope.membe_div}"
+				console.log(id +"/"+div);
+			if(id != "admin" && div != "관리자"){
+				$("#AdminWrite").show();
+			}else{
+				$("#AdminWrite").hide();
+				}
+		}
 	
 	function listCall(){
 		obj.url = "./UgetmessageList";
@@ -135,7 +148,7 @@
 		//체크박스,번호, 제목, 작성일
 		GmessageList.forEach(function(item,message_no){
 				content += "<tr>";
-				content += "<td><input type='checkbox'/></td>";
+				content += "<td><input class='Chk' name='RowCheck' type='checkbox' value='"+item.message_no+"'/></td>";
 				content += "<td>"+item.message_no+"</td>";
 				content += "<td id='readChk'><a href='./UmessageDetail?message_no="+item.message_no+"''>"+item.message_content+"</a></td>";
 				//날짜 변경 
@@ -153,20 +166,76 @@
 	//다음 버튼 클릭시 
 	$("#next").click(function(){
 		 if($("#next").attr('class') != "page-item disabled"){
-			sPge +=10;
+			sPage +=10;
 			ePage +=10;
 			listCall();
 		 }
 	});
+	
 	//이전 버튼 클릭시 
 	$("#pre").click(function(){
 		 if($("#pre").attr('class') != "page-item disabled"){
 			//이전 목록 활성화 시키기
-			sPge -=10;
+			sPage -=10;
 			ePage -=10;
 			listCall();
 		 }
 	});
+	
+	
+	
+	//체크박스 전체 선택 
+	 function allChk(obj){
+	      var chkObj = document.getElementsByName("RowCheck");
+	      var rowCnt = chkObj.length - 1; //상단에 있는 갯수 -1 
+	      var check = obj.checked;
+			console.log(rowCnt);
+			if(check) {﻿
+				for (var i=0; i<=rowCnt; i++){
+					if(chkObj[i].type == "checkbox")
+						chkObj[i].checked = true;
+					
+					}
+			}else{
+				for (var i=0; i<=rowCnt; i++) {
+					if(chkObj[i].type == "checkbox"){
+						chkObj[i].checked = false; 
+						}
+					}
+				}
+			} 
+	
+	$("#del").click(function(){
+		var con_check = confirm("정말 삭제하시겠습니까?");
+		if(con_check ==true){
+			obj.url = "./messagedelete";
+			var checked = [];
+			
+			$("input[name='RowCheck']:checked").each(function(){
+				checked.push($(this).val());
+			});
+			console.log(checked);
+			obj.data={
+					"Chkdel":checked
+					
+			};
+			
+			obj.success = function(data){	
+				if(data.success){
+						alert("삭제 되었습니다.");
+						location.href = "./pageMove?page=getMlist";
+				}else{
+					alert("삭제되지 않았습니다.");
+					location.href = "./pageMove?page=getMlist";
+				}
+			}
+			ajaxCall(obj);
+		}else{
+			alert("삭제되지 않았습니다.");
+		}
+
+	});
+	
 	
 	
 	

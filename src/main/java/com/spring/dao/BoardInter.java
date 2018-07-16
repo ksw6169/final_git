@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.spring.dto.BoardDTO;
-import com.spring.dto.MemberDTO;
+import com.spring.dto.ReplyDTO;
 
 public interface BoardInter {
 	ArrayList<BoardDTO> nBoardList(Map<String, Object> param); //공지사항 리스트
@@ -38,6 +38,27 @@ public interface BoardInter {
 	ArrayList<BoardDTO> kimsayboardlist(String string);
 
 	int kimSayDelete(String board_no);
+
+	int kimSayUpdate(String category, String board_title, String board_content, String board_no);
+
+	int kimSayWrite(String category, String board_title, String board_content, String member_id);
+
+
+	boolean myLikeCount(String loginId);
+	
+	int likeCount(int board_no);
+	
+	int myLikeUp(String id, int board_no);	// recommand 테이블에 추가
+
+	int myLikeDown(String id, int board_no);	// recommand 테이블에서 삭제
+	
+	int upLike(boolean myLike, int board_no);
+
+	int replyWrite(String loginId, int board_no, String replyContent);
+
+	ArrayList<ReplyDTO> replyList(int parseInt);
+
+	int replyUpdate(int reply_no, String reply_content);
 
 	
 

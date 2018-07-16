@@ -18,9 +18,12 @@
 			
 			<!-- 제외할 페이지 -->
 			<mvc:exclude-mapping path="/"/>
+			<mvc:exclude-mapping path="/likeCount"/>
+			<mvc:exclude-mapping path="/like"/>
+			<mvc:exclude-mapping path="/kimSayWrite"/>	
+			<mvc:exclude-mapping path="/kimSayList"/>		
 			<mvc:exclude-mapping path="/apiList"/>
 			<mvc:exclude-mapping path="/companyWrite"/>
-			<mvc:exclude-mapping path="/"/>
 			<mvc:exclude-mapping path="/login"/>
 			<mvc:exclude-mapping path="/loginForm"/>
 			<mvc:exclude-mapping path="/join"/>

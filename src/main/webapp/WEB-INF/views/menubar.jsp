@@ -106,7 +106,7 @@
 	        	$("#mypage_btn").css("display", "none");
 	    	}
 		});
-		
+
 		/* 쪽지 개수 받아서 tooltip 출력(toggle X) */ 
 		function messageCount() {
 			$.ajax({

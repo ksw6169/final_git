@@ -163,7 +163,7 @@
 				<option value="업무질문">&nbsp;&nbsp;&nbsp;&nbsp;업무질문</option>
 			</select>
 		</span>
-        <span class="submenubar_button">글 작성</span>
+        <span id="write" class="submenubar_button" onclick="location.href='./pageMove?page=kimSayWrite'">글 작성</span>
     </div>
 
 	<div class="container">
@@ -176,7 +176,7 @@
 				<option value="업무 질문">&nbsp;&nbsp;업무 질문</option>
 			</select>
 			
-			<input type="text" placeholder="검색어를 입력해주세요.">
+			<input id="search_text" type="text" placeholder="검색어를 입력해주세요.">
 			<button class="search_btn">검색</button>
 		</div>
         <div class="paging_button">
@@ -192,6 +192,7 @@
     var obj={};
     var pagingEnd=15;
     var keyword="";
+    
     ajaxCall(obj,keyword,pagingEnd);
     
     $("#more").click(function(){
@@ -200,15 +201,14 @@
     });
     
     $(".search_btn").click(function(){
-        pagingEnd=15;
         keyword=$("#search_text").val();
-        ajaxCall(obj,keyword,pagingEnd);
+        ajaxCall(obj,keyword);
     });
     
-    function ajaxCall(obj,keyword,pagingEnd){
+    
+    function ajaxCall(obj,keyword){
         obj.data={
             "keyword":keyword,
-            "pagingEnd":pagingEnd
         };
         obj.success=function(data){
         	

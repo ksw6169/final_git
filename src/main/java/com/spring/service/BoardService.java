@@ -13,11 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.dao.BoardInter;
-import com.spring.dao.CompanyInter;
-import com.spring.dao.MemberInter;
 import com.spring.dto.BoardDTO;
-import com.spring.dto.EvaluationDTO;
-import com.spring.dto.MemberDTO;
+import com.spring.dto.ReplyDTO;
 @Service
 public class BoardService {
 
@@ -49,14 +46,32 @@ public class BoardService {
 	//트랜잭션 처리 요구 구간
 	@Transactional
 	public ModelAndView kimSayDetail(String board_no) {
-		logger.info("조회수 올리기");
 		inter = sqlSession.getMapper(BoardInter.class);	
-		//inter.upHit(idx);
 		logger.info("상세보기");		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("board", inter.kimSayDetail(board_no));
 		mav.setViewName("kimSayDetail");
 		return(mav);
+	}
+	
+	//김대리의 한마디 글 작성
+	public ModelAndView kimSayWrite(HashMap<String, String> params) {
+		ModelAndView mav = new ModelAndView();
+		String category = params.get("category");
+		String member_id = params.get("member_id");
+		String board_content = params.get("board_content");
+		String board_title = params.get("board_title");
+		logger.info("ID : "+member_id);
+		logger.info(member_id+"/"+category+"/"+board_content+"/"+board_title);//logger는 문자열만 가능, 숫자 뽑아오려면 뒤에 문자열 추가
+		inter = sqlSession.getMapper(BoardInter.class);
+		String page = "redirect:/";
+		//2. 수정 쿼리 실행
+		int success = inter.kimSayWrite(category, board_title, board_content, member_id);
+		if(success > 0) {
+			page = "kimSayList";
+		}
+		mav.setViewName(page);
+		return mav;
 	}
 	
 	//김대리의 한마디 수정 폼
@@ -78,13 +93,25 @@ public class BoardService {
 		return mav;
 	}
 	
-	/*public HashMap<String, Object> evalDelete(String board_no) {
-		inter=sqlSession.getMapper(BoardInter.class);
-		BoardDTO dto=inter.kimSayDetail(board_no);
-		HashMap<String, Object> map=new HashMap<String, Object>();
-		map.put("success",success);
-		return map;
-	}*/
+	//김대리의 한마디 게시글 수정
+	public ModelAndView kimSayUpdate(HashMap<String, String> params) {
+		ModelAndView mav = new ModelAndView();
+		//1. 파라메터 값을 받아온다.
+		String category = params.get("category");
+		String board_no = params.get("board_no");
+		String board_content = params.get("board_content");
+		String board_title = params.get("board_title");
+		logger.info(board_no+"/"+board_content+"/"+board_title);//logger는 문자열만 가능, 숫자 뽑아오려면 뒤에 문자열 추가
+		inter = sqlSession.getMapper(BoardInter.class);
+		String page = "redirect:/kimSayDetail?board_no="+board_no;
+		//2. 수정 쿼리 실행
+		int success = inter.kimSayUpdate(category, board_title, board_content, board_no);
+		if(success > 1) {
+			page = "redirect:/kimSayUpdateForm?board_no="+board_no;
+		}
+		mav.setViewName(page);
+		return mav;
+	}
 	
 	//공지사항 리스트 
 	public HashMap<String, Object> nBoardList(Map<String, Object> param) {	
@@ -187,5 +214,106 @@ public class BoardService {
 		mav.setViewName(page);
 		return mav;
 	}
+
+	/* 추천수 요청 */
+	public HashMap<String, Object> likeCount(Map<String, String> params) {
+		inter = sqlSession.getMapper(BoardInter.class);
+		String loginId = String.valueOf(params.get("loginId"));
+		int board_no = Integer.parseInt(params.get("board_no"));
+
+		// 1) 내가 추천 했는지 여부
+		boolean myLike = inter.myLikeCount(loginId);
+		
+		// 2) 게시글의 추천수 가져오기
+		int likeCount = inter.likeCount(board_no);
+		
+		logger.info("myLike  : "+myLike);
+		logger.info("게시물 추천수 : "+likeCount);
+		
+		HashMap<String, Object> resultMap = new HashMap<>();
+		resultMap.put("myLike", myLike);
+		resultMap.put("likeCount", likeCount);
+		
+		return resultMap;
+	}
 	
+	
+	/* 추천 요청 */
+	@Transactional
+	public HashMap<String, Object> like(Map<String, String> params) {
+		inter = sqlSession.getMapper(BoardInter.class);
+		String id = String.valueOf(params.get("loginId"));
+		int board_no = Integer.parseInt(params.get("board_no"));
+		boolean myLike = Boolean.parseBoolean(params.get("myLike"));
+		
+		if(myLike != true) {
+			logger.info("recommand 테이블에서 생성 "+inter.myLikeUp(id, board_no));
+		} else {
+			logger.info("recommand 테이블에서 날림 "+inter.myLikeDown(id, board_no));
+		}
+		
+		logger.info("추천수 증가 or 감소: "+inter.upLike(myLike, board_no));
+
+		boolean like = inter.myLikeCount(id);
+		int likeCount = inter.likeCount(board_no);
+		
+		HashMap<String, Object> resultMap = new HashMap<>();
+
+		resultMap.put("likeCount", likeCount);
+		resultMap.put("like", like);
+		
+		return resultMap;
+	}
+
+	/* 댓글 작성 */
+	public HashMap<String, Object> replyWrite(Map<String, String> params) {
+		inter = sqlSession.getMapper(BoardInter.class);
+		String loginId = String.valueOf(params.get("loginId"));
+		int board_no = Integer.parseInt(params.get("board_no"));
+		String replyContent = String.valueOf(params.get("replyContent"));
+		
+		int success = 0;
+		
+		success = inter.replyWrite(loginId, board_no, replyContent);
+		
+		HashMap<String, Object> resultMap = new HashMap<>();
+		
+		
+		resultMap.put("msg", "댓글 작성 실패");
+		if(success > 0) {
+			resultMap.put("msg", "댓글 작성 성공");
+		}
+		
+		return resultMap;
+	}
+
+	/* 댓글 리스트 요청 */
+	public HashMap<String, Object> replyList(Map<String, String> params) {
+		HashMap<String, Object> resultMap = new HashMap<>();
+		inter = sqlSession.getMapper(BoardInter.class);
+		
+		ArrayList<ReplyDTO> list = inter.replyList(Integer.parseInt(params.get("board_no")));
+		resultMap.put("list", list);
+		
+		return resultMap;
+	}
+
+	/* 댓글 수정 요청 */
+	public HashMap<String, Object> replyUpdate(Map<String, String> params) {
+		HashMap<String, Object> resultMap = new HashMap<>();
+		inter = sqlSession.getMapper(BoardInter.class);
+		int reply_no = Integer.parseInt(params.get("reply_no"));
+		String reply_content = String.valueOf(params.get("reply_content"));
+		
+		int success = 0;
+		
+		success = inter.replyUpdate(reply_no, reply_content);
+
+		resultMap.put("msg", "댓글 수정 실패");
+		if(success > 0) {
+			resultMap.put("msg", "댓글 수정 성공");
+		}
+		
+		return resultMap;
+	}
 }
