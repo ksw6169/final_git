@@ -7,134 +7,160 @@
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
    	 	<meta name="viewport" content="width=device-width, initial-scale=1">
       
+      	<!-- 반응형 완료(0715) -->
 		<style>
-		body { padding-top: 70px; }
-        
-        .container {
-            padding-top: 25px;
-            background: #E4EEF0;
-        }
-        
-        .content {
-            font-family: "bareun";
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        .btn-lg.btn-default {
-            font-family: "bareun";
-            color: white;
-            background: #121F27;
-            border: 0px;
-            height: 100px;
-        }
-        
-        .clear {
-            clear: both;
-        }
-        
-        input[type='text'], input[type='password'] {
-            font-size:13px;
-            padding:10px;
-            width: 435px;
-            height: 50px;
-            line-height: 40px;
-            outline:none;
-            margin: 5px 0;
-            display: inline;
-            float: right;
-            padding-left: 20px;
-            font-family: "bareun";
-        
-        }
-        .comment{
-        	font-family: "bareun";
-        	margin-left: 115px;
-            font-size: 11px;
-        }
-        
-        .joinForm {
-          font-family: "bareun";
-          color: #fff;
-          background-color: #121F27;
-          width: 100px;
-          height: 50px;
-          font-size: 14px;
-          margin: 5px 0;
-          float:left;
-          border: 0px;
-          text-align: center;
-          padding-top: 15px;
-        }
-        
-        .login_group {
-            width: 550px;
-        }
-        
-        .join_btn {
-            width: 300px;
-            height: 50px;
-            font-size: 16px;
-			margin: 30px 0 0 125px;
-            border: 0px;
-            background-color: #FF8000;
-            color: white;
-            font-family: "bareun";
-        }
-        .warn{
-        	color : red;
-        	font-family: "bareun";
-        	margin-left: 115px;
-        }
-
-		div.col-md-4.col-md-offset-4 {
-			margin-top: 50px;
-		}
-
+			body { padding-top: 70px; }
+	        
+	        .container {
+	        	margin-top: 50px;
+	        	margin-bottom: 50px;
+	            padding-top: 25px;
+	            padding-bottom: 25px;
+	            background: #E4EEF0;
+	        }
+	        
+	        .content {
+	            font-family: "bareun";
+	            text-align: center;
+	            margin-bottom: 50px;
+	        }
+	        
+	        .inputHeader {
+	        	width: 100%;
+				height: 50px;
+	        	line-height: 50px;
+	        	font-family: "bareun";
+	            background: #121F27;
+				margin-top: 5px;
+				color: white;
+				text-align: center;
+				font-size: 13px;
+				padding: 0px;
+				margin-left: 10px;
+	        }
+	        
+	        .inputTag {
+				width: 100%;
+				height: 50px;
+	        	line-height: 50px;
+	        	font-family: "bareun";
+	            background: white;
+	            border: 0px;
+	            outline:none;
+				margin-top: 5px;
+				color: black;
+				text-align: center;
+				font-size: 13px;
+				padding: 0px;
+				margin-left: -10px;
+	        }
+	        
+	        .comment{
+	        	font-family: "bareun";
+	        	text-align: left;
+	            font-size: 11px;
+	            margin-top: 10px;
+	        }
+	        
+	        .joinForm {
+	          font-family: "bareun";
+	          color: #fff;
+	          background-color: #121F27;
+	          height: 50px;
+	          font-size: 14px;
+	          margin: 5px 0;
+	          border: 0px;
+	          text-align: center;
+	          padding-top: 15px;
+	        }
+	        
+	        .join_btn {
+	            width: 100%;
+	            height: 50px;
+	            font-size: 16px;
+	            border: 0px;
+	            background-color: #FF8000;
+	            color: white;
+	            font-family: "bareun";
+	            margin-top: 50px;
+	        }
+	        
+	        .warn{
+	        	color : red;
+	        	font-family: "bareun";
+	        	text-align: left;
+	        	margin-top: 15px;
+	        	margin-bottom: 15px;
+	        }
 		</style>
 	</head>
 	<body>
 	    <jsp:include page="menubar.jsp" flush="false"/>
-
-		<div class="col-md-4 col-md-offset-4">
-            <div class="login_group">    
-                <h1 class="content">[인턴(비직장인 회원) 회원가입]</h1>
-                <!-- 아이디 입력 -->
-                <div>
-                <div class="joinForm">아이디 </div>
-                <input id="userId" name="id" type="text" placeholder="아이디 (10자 이상,영소문자+숫자로 구성) 입력" onkeyup="overlay()" />
-                <span id="userIdMsg" class="warn">　</span></div>
-                
-				<!-- 비밀번호 -->
-				<div>
-                <div class="joinForm">비밀번호</div>  
-                <input id="userPw" name="pw" type="password" placeholder="비밀번호 8자 이상 입력" onkeyup="lengthChk()" />
-                <span id="userPwMsg" class="warn">　</span></div>
-                <!-- 비밀번호 확인 -->
-                <div>
-                <div class="joinForm">비밀번호 확인</div>
-                <input id="userPw_re" type="password" placeholder="비밀번호 확인 입력" onkeyup="pwOverlay()"/>
-                <span id="userPwReMsg" class="warn">　</span></div>
-                <!-- 이메일 -->
-                <div>
-                <div class="joinForm">이메일</div>
-                <input id="userEmail" name="email" type="text" placeholder="이메일 입력" onkeyup="emailCheck()" />
-                <span id="userEmailMsg" class="warn">　</span></div>
-                <!-- 성 -->
-                <div>
-	                <div class="joinForm">성씨 입력</div>
-	                <input id="userFamily" name="family" type="text" placeholder="성씨입력" >
-	           		<div><b class="comment">*입력한 성씨는 '김인턴,박인턴' 과 같은 호칭에 사용됩니다.</b></div>
-	                <div><b class="comment">*호칭은 본인 외 다른사람이 볼 수 없습니다. </b></div>
-               </div>
+		
+		<div class="container">
+			<div class="row">
+				<div class="col-md-10 col-md-push-1">
+					<div class="row">
+						<div class="col-md-10 col-md-push-1"><h1 class="content">[인턴(비직장인 회원) 회원가입]</h1></div>
+					</div>
+					<div class="row">
+						<div class="col-md-10 col-md-push-1">
+		              		<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">아이디</h3></div>
+		               		<div class="col-md-push-1 col-md-7">
+		               			<input id="userId" class="inputTag" name="id" type="text" placeholder="아이디 (10자 이상,영소문자+숫자로 구성) 입력" onkeyup="overlay()" />
+		            			<span id="userIdMsg" class="warn">　</span>
+		            		</div>
+		            	</div>
+					</div>
+					<div class="row">
+						<div class="col-md-10 col-md-push-1">
+							<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">비밀번호</h3></div>
+			               	<div class="col-md-push-1 col-md-7">
+			               		<input id="userPw" class="inputTag" name="pw" type="password" placeholder="비밀번호 8자 이상 입력" onkeyup="lengthChk()" />
+	                			<span id="userPwMsg" class="warn">　</span>
+	                		</div>
+                		</div>
+					</div>
+					<div class="row">
+						<div class="col-md-10 col-md-push-1">
+							<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">비밀번호 확인</h3></div>
+			               	<div class="col-md-push-1 col-md-7">
+			               		<input id="userPw_re" class="inputTag" type="password" placeholder="비밀번호 확인 입력" onkeyup="pwOverlay()"/>
+                				<span id="userPwReMsg" class="warn">　</span>
+	                		</div>
+                		</div>
+					</div>
+					<div class="row">
+						<div class="col-md-10 col-md-push-1">
+							<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">이메일</h3></div>
+			               	<div class="col-md-push-1 col-md-7">
+			               		<input id="userEmail" class="inputTag" name="email" type="text" placeholder="이메일 입력" onkeyup="emailCheck()" />
+                				<span id="userEmailMsg" class="warn">　</span>
+	                		</div>
+                		</div>
+					</div>
+					<div class="row">
+						<div class="col-md-10 col-md-push-1">
+							<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">성씨 입력</h3></div>
+			               	<div class="col-md-push-1 col-md-7">
+			               		<input id="userFamily" class="inputTag" name="family" type="text" placeholder="성씨입력" >
+				           		<div class="row">
+				           			<div class="col-md-12"><b class="comment">*입력한 성씨는 '김인턴,박인턴' 과 같은 호칭에 사용됩니다.</b></div>
+				           		</div>
+				           		<div class="row">
+				                	<div class="col-md-12"><b class="comment">*호칭은 본인 외 다른사람이 볼 수 없습니다. </b></div>
+				                </div>
+	                		</div>
+                		</div>
+					</div>
+					<input id="member_div" name="member_div" type="hidden" value="인턴"/>
+				</div>
 			</div>
 			
-            <input id="member_div" name="member_div" type="hidden" value="인턴"/>
-			
-            <div class="btn_group">
+			<div class="col-md-6 col-md-push-3">
                 <button id="joinBtn" class="join_btn">인턴(비직장인 회원) 회원가입</button>
             </div>
-    	</div>
+		</div>
 	</body>
 	<script>
 		var chk = false;			// 아이디 중복값 체크
