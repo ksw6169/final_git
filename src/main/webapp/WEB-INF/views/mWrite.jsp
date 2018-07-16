@@ -66,7 +66,7 @@
                 </tr>
             </table>
         </div>
-	        <span class="submenubar_button_last"><a href="./pageMove?page=mWrite">쪽지 작성</a></span>
+	        <span id="AdminWrite" class="submenubar_button_last"><a href="./pageMove?page=mWrite">쪽지 작성</a></span>
 	        <span class="submenubar_button"><a href="./pageMove?page=sendMlist">보낸 쪽지함</a></span>
 	        <span class="submenubar_button"><a href="./pageMove?page=getMlist">받은 쪽지함</a></span>
     </div>
@@ -99,9 +99,11 @@
 </body>
 <script>
 
+
+
 		$(document).ready(function(){ 
 			session();
-			
+			adminCK();
 		});
 
 	function session(){
@@ -110,6 +112,18 @@
 		
 		
 	}
+	
+	//관리자 접속 체크 및 공지사항 작성 버튼 활성/비활성화 
+	 function adminCK(){
+		 	var id = "${sessionScope.loginId}"
+			var div = "${sessionScope.membe_div}"
+				console.log(id +"/"+div);
+			if(id != "admin" && div != "관리자"){
+				$("#AdminWrite").show();
+			}else{
+				$("#AdminWrite").hide();
+				}
+		}
 
 </script>
 

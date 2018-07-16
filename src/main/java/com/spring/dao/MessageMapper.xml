@@ -59,6 +59,8 @@
 	<select id="messageCount" parameterType="String" resultType="int">
 		SELECT COUNT(*) FROM message WHERE message_receive = #{param1}
 	</select>
+	
+	
 
 
 	

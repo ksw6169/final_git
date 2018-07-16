@@ -51,7 +51,7 @@
 	                </tr>
 	            </table>
 	        </div>
-	        <span class="submenubar_button_last"><a href="./pageMove?page=mWrite">쪽지 작성</a></span>
+	        <span id="AdminWrite" class="submenubar_button_last"><a href="./pageMove?page=mWrite">쪽지 작성</a></span>
 	        <span class="submenubar_button"><a href="./pageMove?page=sendMlist">보낸 쪽지함</a></span>
 	        <span class="submenubar_button"><a href="./pageMove?page=getMlist">받은 쪽지함</a></span>
 	    </div>
@@ -68,7 +68,7 @@
 	            </thead>
 	             <tbody id="list"></tbody>
 	        </table>
-	        <button class="btn btn-default pull-right">삭제</button>
+	        <button id="del" class="btn btn-default pull-right">삭제</button>
 	        <div class="paging_button">
 	          <ul class="pagination">
 	            <li id="pre" class="page-item disabled" >
@@ -94,6 +94,7 @@
 	
 	
 	listCall();
+	adminCK(); 
 	
 	obj.error=function(e){console.log(e)};
 	obj.dataType="JSON";
@@ -103,6 +104,18 @@
 	function ajaxCall(obj){
 		$.ajax(obj)
 	};
+	
+	//관리자 접속 체크 및 공지사항 작성 버튼 활성/비활성화 
+	 function adminCK(){
+		 	var id = "${sessionScope.loginId}"
+			var div = "${sessionScope.membe_div}"
+				console.log(id +"/"+div);
+			if(id != "admin" && div != "관리자"){
+				$("#AdminWrite").show();
+			}else{
+				$("#AdminWrite").hide();
+				}
+		}
 	
 	function listCall(){
 		obj.url = "./UgetmessageList";
@@ -193,26 +206,34 @@
 			} 
 	
 	$("#del").click(function(){
-		obj.url = "./messagedelete";
-		var checked = [];
-		$("input[name='RowCheck']:checked").each(function(){
-			checked.push($(this).val());
-		});
-		console.log(checked);
-		obj.data={
-				"Chkdel":checked
-				
-		};
-		obj.success = function(data){
-			if(data.success){
-				alert("삭제 완료");
-				location.href = "./pageMove?page=getMlist";
-			}else{
-				alert("삭제되지 않았습니다.");
-				location.href = "./pageMove?page=getMlist";
+		var con_check = confirm("정말 삭제하시겠습니까?");
+		if(con_check ==true){
+			obj.url = "./messagedelete";
+			var checked = [];
+			
+			$("input[name='RowCheck']:checked").each(function(){
+				checked.push($(this).val());
+			});
+			console.log(checked);
+			obj.data={
+					"Chkdel":checked
+					
+			};
+			
+			obj.success = function(data){	
+				if(data.success){
+						alert("삭제 되었습니다.");
+						location.href = "./pageMove?page=getMlist";
+				}else{
+					alert("삭제되지 않았습니다.");
+					location.href = "./pageMove?page=getMlist";
+				}
 			}
+			ajaxCall(obj);
+		}else{
+			alert("삭제되지 않았습니다.");
 		}
-		ajaxCall(obj);
+
 	});
 	
 	
