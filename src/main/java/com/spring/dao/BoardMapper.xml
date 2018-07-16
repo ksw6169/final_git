@@ -47,7 +47,8 @@
 		SELECT board_no,board_title,board_content,board_date,board_bHit 
 			FROM 
 			(SELECT board_no,board_title,board_content,board_date,board_bHit, 
-					ROW_NUMBER() OVER(ORDER BY board_no DESC) AS rnum FROM board
+					ROW_NUMBER() OVER(ORDER BY board_no DESC) 
+					AS rnum FROM board
  				<where>
 					<if test="keyword !=null || !keyword.equals('')">
 						board_title LIKE '%'||#{keyword}||'%'  OR board_content LIKE '%'||#{keyword}||'%'

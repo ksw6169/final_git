@@ -32,6 +32,12 @@
         .container {
        		margin-top: 150px;
        	}
+       	
+       	/* submenuBar 링크 글자 색상 */
+		.submenubar_button a{ color: white;}
+		.submenubar_button_last a{color: white;}
+		.submenubar_button a:hover{color: #FF8000; background-color: #121F27;text-decoration: none;}
+		.submenubar_button_last a:hover{color: #FF8000; background-color: #121F27; text-decoration: none;}
     </style>
 	</head>
 	<body>
@@ -45,11 +51,10 @@
 	                </tr>
 	            </table>
 	        </div>
-	        <span class="submenubar_button_last">쪽지 작성</span>
-	        <span class="submenubar_button">보낸 쪽지함</span>
-	        <span class="submenubar_button">받은 쪽지함</span>
+	        <span id="AdminWrite" class="submenubar_button_last"><a href="./pageMove?page=mWrite">쪽지 작성</a></span>
+	        <span class="submenubar_button"><a href="./pageMove?page=sendMlist">보낸 쪽지함</a></span>
+	        <span class="submenubar_button"><a href="./pageMove?page=getMlist">받은 쪽지함</a></span>
 	    </div>
-		
 	    <div class="container">
 	        <h1 class="content">받은 쪽지함</h1>
 	        <table class="table table-hover">
@@ -61,74 +66,15 @@
 	               <th class="center">작성일자</th>
 	             </tr>
 	            </thead>
-	             <tr>
-	               <td><input type="checkbox"/></td>
-	               <td>1</td>
-	               <td><a href="#">내용내용내용내용내용내용내용내용내용내용내용내용내용내용</a></td>
-	               <td>2018-09-10 10:50</td>
-	             </tr>
-	             <tr>
-	               <td><input type="checkbox"/></td>
-	               <td>2</td>
-	               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-	               <td>2018-09-10 10:49</td>
-	             </tr>
-	             <tr>
-	               <td><input type="checkbox"/></td>
-	               <td>3</td>
-	               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-	               <td>2018-09-10 10:48</td>
-	             </tr>
-	             <tr>
-	               <td><input type="checkbox"/></td>
-	               <td>4</td>
-	               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-	               <td>2018-09-10 10:48</td>
-	             </tr>
-	             <tr>
-	               <td><input type="checkbox"/></td>
-	               <td>5</td>
-	               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-	               <td>2018-09-10 10:48</td>
-	             </tr>
-	             <tr>
-	               <td><input type="checkbox"/></td>
-	               <td>6</td>
-	               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-	               <td>2018-09-10 10:48</td>
-	             </tr>
-	             <tr>
-	               <td><input type="checkbox"/></td>
-	               <td>7</td>
-	               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-	               <td>2018-09-10 10:48</td>
-	             </tr>
-	             <tr>
-	               <td><input type="checkbox"/></td>
-	               <td>8</td>
-	               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-	               <td>2018-09-10 10:48</td>
-	             </tr>
-	             <tr>
-	               <td><input type="checkbox"/></td>
-	               <td>9</td>
-	               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-	               <td>2018-09-10 10:48</td>
-	             </tr>
-	             <tr>
-	               <td><input type="checkbox"/></td>
-	               <td>10</td>
-	               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-	               <td>2018-09-10 10:48</td>
-	             </tr>
+	             <tbody id="list"></tbody>
 	        </table>
-	        <button class="btn btn-default pull-right">삭제</button>
+	        <button id="del" class="btn btn-default pull-right">삭제</button>
 	        <div class="paging_button">
 	          <ul class="pagination">
-	            <li class="page-item disabled">
+	            <li id="pre" class="page-item disabled" >
 	              <a class="page-link" href="#" tabindex="-1">이전 페이지</a>
 	            </li>
-	            <li class="page-item">
+	            <li id="next" class="page-item">
 	              <a class="page-link" href="#">다음 페이지</a>
 	            </li>
 	          </ul>
@@ -136,5 +82,162 @@
 	    </div>		
 	</body>
 	<script>
+	
+	var obj = {};
+	var sPage =1;
+	var ePage = 10;
+	var page = 0;
+	var readCK = "N";
+	
+	var id = "${sessionScope.loginId}";
+	console.log(id);
+	
+	
+	listCall();
+	adminCK(); 
+	
+	obj.error=function(e){console.log(e)};
+	obj.dataType="JSON";
+	obj.type="POST";
+	
+	//ajax 실행 
+	function ajaxCall(obj){
+		$.ajax(obj)
+	};
+	
+	//관리자 접속 체크 및 공지사항 작성 버튼 활성/비활성화 
+	 function adminCK(){
+		 	var id = "${sessionScope.loginId}"
+			var div = "${sessionScope.membe_div}"
+				console.log(id +"/"+div);
+			if(id != "admin" && div != "관리자"){
+				$("#AdminWrite").show();
+			}else{
+				$("#AdminWrite").hide();
+				}
+		}
+	
+	function listCall(){
+		obj.url = "./UgetmessageList";
+		obj.data = {
+				"sPage":sPage,
+				"ePage":ePage
+		};
+		obj.success=function(data){
+			console.log(data);
+			listPrint(data.GmessageList); //리스트 뿌린후
+			page = data.listAll;
+			if(ePage >= page){
+				$("#next").addClass('disabled');
+			}else{
+				$("#next").removeClass('disabled');
+			}
+			if(sPage==1){
+				$("#pre").addClass('disabled');
+			}else{
+				$("#pre").removeClass('disabled');
+			}
+		};
+		ajaxCall(obj);
+	}
+	
+	
+	//리스트 그리기
+	function listPrint(GmessageList){
+		var content ="";
+		//체크박스,번호, 제목, 작성일
+		GmessageList.forEach(function(item,message_no){
+				content += "<tr>";
+				content += "<td><input class='Chk' name='RowCheck' type='checkbox' value='"+item.message_no+"'/></td>";
+				content += "<td>"+item.message_no+"</td>";
+				content += "<td id='readChk'><a href='./UmessageDetail?message_no="+item.message_no+"''>"+item.message_content+"</a></td>";
+				//날짜 변경 
+				var date = new Date(item.message_date);
+				content += "<td>"+date.toLocaleDateString("ko-KR")+"</td>";
+				content += "</tr>";
+			});
+		$("#list").empty();
+		$("#list").append(content);
+	}
+	
+	
+	
+	
+	//다음 버튼 클릭시 
+	$("#next").click(function(){
+		 if($("#next").attr('class') != "page-item disabled"){
+			sPage +=10;
+			ePage +=10;
+			listCall();
+		 }
+	});
+	
+	//이전 버튼 클릭시 
+	$("#pre").click(function(){
+		 if($("#pre").attr('class') != "page-item disabled"){
+			//이전 목록 활성화 시키기
+			sPage -=10;
+			ePage -=10;
+			listCall();
+		 }
+	});
+	
+	
+	
+	//체크박스 전체 선택 
+	 function allChk(obj){
+	      var chkObj = document.getElementsByName("RowCheck");
+	      var rowCnt = chkObj.length - 1; //상단에 있는 갯수 -1 
+	      var check = obj.checked;
+			console.log(rowCnt);
+			if(check) {﻿
+				for (var i=0; i<=rowCnt; i++){
+					if(chkObj[i].type == "checkbox")
+						chkObj[i].checked = true;
+					
+					}
+			}else{
+				for (var i=0; i<=rowCnt; i++) {
+					if(chkObj[i].type == "checkbox"){
+						chkObj[i].checked = false; 
+						}
+					}
+				}
+			} 
+	
+	$("#del").click(function(){
+		var con_check = confirm("정말 삭제하시겠습니까?");
+		if(con_check ==true){
+			obj.url = "./messagedelete";
+			var checked = [];
+			
+			$("input[name='RowCheck']:checked").each(function(){
+				checked.push($(this).val());
+			});
+			console.log(checked);
+			obj.data={
+					"Chkdel":checked
+					
+			};
+			
+			obj.success = function(data){	
+				if(data.success){
+						alert("삭제 되었습니다.");
+						location.href = "./pageMove?page=getMlist";
+				}else{
+					alert("삭제되지 않았습니다.");
+					location.href = "./pageMove?page=getMlist";
+				}
+			}
+			ajaxCall(obj);
+		}else{
+			alert("삭제되지 않았습니다.");
+		}
+
+	});
+	
+	
+	
+	
 	</script>
 </html>

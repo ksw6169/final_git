@@ -7,12 +7,12 @@
 <mapper namespace="com.spring.dao.MemberInter">
 	<insert id="join" parameterType="com.spring.dto.MemberDTO">
 		<if test="div == '인턴 회원가입 요청'">
-			INSERT INTO member(member_id, member_pw, member_email, member_family, member_div) 
-				VALUES (#{member_id}, #{member_pw}, #{member_email}, #{member_family}, #{member_div})
+			INSERT INTO member(member_id, member_pw, member_email, member_family, member_div, member_eval) 
+				VALUES (#{member_id}, #{member_pw}, #{member_email}, #{member_family}, #{member_div}, 0)
 		</if>	
 		<if test="div == '대리 회원가입 요청'">
 			INSERT INTO member(member_id, job_no, member_pw, member_email, member_family, member_company, member_div, member_cert, member_eval, member_capture) 
-				VALUES (#{member_id}, #{job_no}, #{member_pw}, #{member_email}, #{member_family}, #{member_company}, #{member_div}, 'N', 1, #{member_capture})
+				VALUES (#{member_id}, #{job_no}, #{member_pw}, #{member_email}, #{member_family}, #{member_company}, #{member_div}, 'N', 0, #{member_capture})
 		</if>
 	</insert>
 	
@@ -48,7 +48,7 @@
 	 
 	 <!-- 회사 수정 -->
 	 <update id="companyUpdate">
-	 	UPDATE member SET member_company = #{param1}, member_capture = #{param2}, job_no = #{param3} WHERE member_id = #{param4}
+	 	UPDATE member SET member_company = #{param1}, member_capture = #{param2}, job_no = #{param3}, member_cert = 'N' WHERE member_id = #{param4}
 	 </update>
 	 
 	 <!-- 회사 승인 리스트 -->
@@ -65,7 +65,7 @@
 	 
 	 <!-- 회사 인증 승인 -->
 	 <update id="memAcceptOk">
-	 	UPDATE member SET member_capture = null, member_div = '대리', member_cert = 'Y', member_eval = member_eval+1 WHERE member_id = #{param1}
+	 	UPDATE member SET member_capture = null, member_div = '대리', member_cert = 'Y', member_eval = 0 WHERE member_id = #{param1}
 	 </update>
 	 
 	 <!-- 회사 인증 거부 -->

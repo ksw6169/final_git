@@ -60,66 +60,8 @@
                <th>작성일자</th>
              </tr>
              </thead>
-             <tr>
-               <td><input type="checkbox"/></td>
-               <td>1</td>
-               <td><a href="#">내용내용내용내용내용내용내용내용내용내용내용내용내용내용</a></td>
-               <td>2018-09-10 10:50</td>
-             </tr>
-             <tr>
-               <td><input type="checkbox"/></td>
-               <td>2</td>
-               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-               <td>2018-09-10 10:49</td>
-             </tr>
-             <tr>
-               <td><input type="checkbox"/></td>
-               <td>3</td>
-               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-               <td>2018-09-10 10:48</td>
-             </tr>
-             <tr>
-               <td><input type="checkbox"/></td>
-               <td>4</td>
-               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-               <td>2018-09-10 10:48</td>
-             </tr>
-             <tr>
-               <td><input type="checkbox"/></td>
-               <td>5</td>
-               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-               <td>2018-09-10 10:48</td>
-             </tr>
-             <tr>
-               <td><input type="checkbox"/></td>
-               <td>6</td>
-               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-               <td>2018-09-10 10:48</td>
-             </tr>
-             <tr>
-               <td><input type="checkbox"/></td>
-               <td>7</td>
-               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-               <td>2018-09-10 10:48</td>
-             </tr>
-             <tr>
-               <td><input type="checkbox"/></td>
-               <td>8</td>
-               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-               <td>2018-09-10 10:48</td>
-             </tr>
-             <tr>
-               <td><input type="checkbox"/></td>
-               <td>9</td>
-               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-               <td>2018-09-10 10:48</td>
-             </tr>
-             <tr>
-               <td><input type="checkbox"/></td>
-               <td>10</td>
-               <td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-               <td>2018-09-10 10:48</td>
-             </tr>
+             <tbody id="list"></tbody>
+
         </table>
         <button class="btn btn-default pull-right">삭제</button>
         <div class="paging_button">
@@ -135,5 +77,90 @@
     </div>
 </body>
 	<script>
+	
+	var obj = {};
+	var sPage =1;
+	var ePage = 10;
+	var page = 0;
+	var id = "${sessionScope.loginId}";
+	console.log(id);
+	
+	//리스트 실행
+	listCall();
+	//allChk(obj);
+
+	
+	obj.error=function(e){console.log(e)};
+	obj.dataType="JSON";
+	obj.type="POST";
+	
+	//ajax 실행 
+	function ajaxCall(obj){
+		$.ajax(obj)
+	};
+	
+	function listCall(){
+		obj.url = "./UmessageList";
+		obj.data = {
+				"sPage":sPage,
+				"ePage":ePage
+				};
+		obj.success=function(data){
+			console.log(data);
+			listPrint(data.messageList); //리스트 뿌린후
+			page = data.listAll;
+			if(ePage >= page){
+				$("#next").addClass('disabled');
+			}else{
+				$("#next").removeClass('disabled');
+			}
+			if(sPage==1){
+				$("#pre").addClass('disabled');
+			}else{
+				$("#pre").removeClass('disabled');
+			}
+		};
+		ajaxCall(obj);
+	}
+	
+	
+	//리스트 그리기
+	function listPrint(messageList){
+		var content ="";
+		//체크박스,번호, 제목, 작성일
+		messageList.forEach(function(item,message_no){
+				content += "<tr>";
+				content += "<td><input name='RowCheck' type='checkbox'/></td>";
+				content += "<td>"+item.message_no+"</td>";
+				content += "<td>"+item.message_content+"</a></td>";
+				//날짜 변경 
+				var date = new Date(item.message_date);
+				content += "<td>"+date.toLocaleDateString("ko-KR")+"</td>";
+				content += "</tr>";
+			});
+		$("#list").empty();
+		$("#list").append(content);
+	}
+	
+	
+	
+	//다음 버튼 클릭시 
+	$("#next").click(function(){
+		 if($("#next").attr('class') != "page-item disabled"){
+			sPage +=10;
+			ePage +=10;
+			listCall();
+		 }
+	});
+	//이전 버튼 클릭시 
+	$("#pre").click(function(){
+		 if($("#pre").attr('class') != "page-item disabled"){
+			//이전 목록 활성화 시키기
+			sPage -=10;
+			ePage -=10;
+			listCall();
+		 }
+	});
+	
 	</script>
 </html>

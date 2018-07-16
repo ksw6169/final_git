@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	String loginId = request.getParameter("member_id");
+	
+%> 
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -43,6 +47,12 @@
 			.container {
 				margin-top: 100px;
 			}
+			
+			/* submenuBar 링크 글자 색상 */
+		.submenubar_button a{ color: white;}
+		.submenubar_button_last a{color: white;}
+		.submenubar_button a:hover{color: #FF8000; background-color: #121F27;text-decoration: none;}
+		.submenubar_button_last a:hover{color: #FF8000; background-color: #121F27; text-decoration: none;}
     	</style>
   </head>
   <body>
@@ -56,32 +66,65 @@
                 </tr>
             </table>
         </div>
-        <span class="submenubar_button_last">쪽지 작성</span>
-        <span class="submenubar_button">보낸 쪽지함</span>
-        <span class="submenubar_button">받은 쪽지함</span>
+	        <span id="AdminWrite" class="submenubar_button_last"><a href="./pageMove?page=mWrite">쪽지 작성</a></span>
+	        <span class="submenubar_button"><a href="./pageMove?page=sendMlist">보낸 쪽지함</a></span>
+	        <span class="submenubar_button"><a href="./pageMove?page=getMlist">받은 쪽지함</a></span>
     </div>
   
   <div class="container">
         <div class="detail_div">
+        <form action="./messagewrite" method="post">
             <div class="table_div">
                 <table class="table">
                      <tr>
                        <th>받는 사람</th>
-                       <td class="subject">관리자</td>
+                       <td class="subject" ><input type="hidden" value="admin" name="message_receive"/>관리자</td>
                      </tr>
                      <tr>
                        <th colspan="2">내용</th>
                      </tr>
                      <tr>
-						<td class="write_content" colspan="2"><textarea class="form-control" rows="15" placeholder="내용을 입력해주세요."></textarea></td>
+						<td class="write_content" colspan="2">
+						<textarea class="form-control" rows="15" placeholder="내용을 입력해주세요." name="message_content"></textarea></td>
 					 </tr>
                 </table>
             <button class="btn btn-default pull-right">작성 완료</button>
-            </div>    
+            </div>   
+            </form> 
             <div class="button-group">
                 <button class="btn btn-default pull-right">목록</button>       
             </div>
         </div>
     </div>
 </body>
+<script>
+
+
+
+		$(document).ready(function(){ 
+			session();
+			adminCK();
+		});
+
+	function session(){
+		var id = "${sessionScope.loginId}";
+		console.log(id);
+		
+		
+	}
+	
+	//관리자 접속 체크 및 공지사항 작성 버튼 활성/비활성화 
+	 function adminCK(){
+		 	var id = "${sessionScope.loginId}"
+			var div = "${sessionScope.membe_div}"
+				console.log(id +"/"+div);
+			if(id != "admin" && div != "관리자"){
+				$("#AdminWrite").show();
+			}else{
+				$("#AdminWrite").hide();
+				}
+		}
+
+</script>
+
 </html>
