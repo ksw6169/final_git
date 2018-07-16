@@ -12,22 +12,35 @@
 	</select>
 	<select id="kimsayboardlist" resultType="com.spring.dto.BoardDTO">
 		SELECT * FROM board WHERE member_id=#{param1}
+		<!-- <where>
+			<if test="keyword!=null and !keyword.equals('')">
+				board_category LIKE '%'||#{keyword}||'%'
+			</if>
+		</where> -->
 	</select>
 	
 	<!-- 김대리의 한마디 상세보기 -->
 	<select id="kimSayDetail" resultType="com.spring.dto.BoardDTO">
-		SELECT board_no, board_category, board_title, board_date, board_content from board where board_no=#{param1}
+		SELECT board_no, board_category, board_title, board_date, board_content, board_recom from board where board_no=#{param1}
 	</select>
 	
-	<!-- 김대리의 한마디 수정(매퍼만 추가해놓은 상태)-->	
+	<!-- 김대리의 한마디 글 작성 -->
+	<insert id="kimSayWrite">
+		INSERT INTO board(board_no, board_category, member_id, board_title, board_content) 
+			VALUES(board_seq.NEXTVAL,#{param1},#{param4},#{param2},#{param3})
+	</insert>
+	
+	<!-- param 순서 = inter 순서 -->
+	<!-- 김대리의 한마디 수정-->	
 	<update id="kimSayUpdate">
-	UPDATE board SET board_title=#{param1}, board_content=#{param2} WHERE board_no=${param3}
-	</update>
+	 	UPDATE board SET board_category = #{param1}, board_title = #{param2}, board_content = #{param3} WHERE board_no = #{param4}
+	 </update>
 	
 	<!-- 김대리의 한마디 삭제 -->
 	<delete id="kimSayDelete" >
 		DELETE FROM board WHERE board_no = #{param1} 
 	</delete>
+	
 	
 	<!-- 공지사항 리스트 및 검색-->
 	<select id="nBoardList" parameterType="hashMap" resultType="com.spring.dto.BoardDTO">
@@ -120,5 +133,43 @@
    			member_id = #{userId}
    		</where>
 	</select>
+	
+	<select id="myLikeCount" resultType="boolean" parameterType="String">
+		SELECT COUNT(*) FROM recommand WHERE member_id = #{param1}
+	</select>
+	
+	<select id="likeCount" resultType="int" parameterType="int">
+		SELECT board_recom FROM board WHERE board_no = #{param1}
+	</select>
+	
+	<insert id="myLikeUp">
+		INSERT INTO recommand VALUES(#{param2}, #{param1})
+	</insert>
+	
+	<delete id="myLikeDown">
+		DELETE FROM recommand WHERE member_id = #{param1} AND board_no = #{param2}
+	</delete>
+	
+	<!-- 추천수 증가 -->
+	<update id="upLike">
+		<if test="param1 != true">
+			UPDATE board SET board_recom = board_recom+1 WHERE board_no = #{param2}
+		</if>
+		<if test="param1 == true">
+			UPDATE board SET board_recom = board_recom-1 WHERE board_no = #{param2}
+		</if>
+	</update> 
+	
+	<insert id="replyWrite">
+		INSERT INTO reply VALUES (reply_seq.NEXTVAL, #{param2}, #{param1}, #{param3}, SYSDATE) 
+	</insert>
+
+	<select id="replyList" resultType="com.spring.dto.ReplyDTO" parameterType="int">
+		SELECT * FROM reply WHERE board_no = #{param1}
+	</select>
+	
+	<update id="replyUpdate">
+		UPDATE reply SET reply_content = #{param2} WHERE reply_no = #{param1}
+	</update>
 	
 </mapper>

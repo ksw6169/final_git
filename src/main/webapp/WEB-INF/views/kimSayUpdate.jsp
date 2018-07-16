@@ -85,45 +85,41 @@
                 </tr>
             </table>
         </div>
-		<span class="submenubar_button_last">
-			<select name="category">
-				<option value="" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IT</option>
-				<option value="잡담">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;잡담</option>
-				<option value="이직">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이직</option>
-				<option value="업무질문">&nbsp;&nbsp;&nbsp;&nbsp;업무질문</option>
-			</select>
-		</span>
-        <span class="submenubar_button">글 작성</span>
     </div>
-  
   <div class="container">
         <div class="detail_div">
+        <form id="sendForm" action="kimSayUpdate" method="post"> 
             <div class="table_div">
                 <table class="table">
                      <tr>
-						   <select class="category" style="margin-bottom: 0px;">
-						      <option value="">카테고리</option>
+						   <select name="category" class="category" style="margin-bottom: 0px;">
+						      <option value="" selected="selected">카테고리</option>
 							  <option value="잡담">&nbsp;&nbsp;잡담</option>
-							  <option value="이직" selected="selected">&nbsp;&nbsp;이직</option>
+							  <option value="이직">&nbsp;&nbsp;이직</option>
 							  <option value="업무질문">업무질문</option>
 						   </select>
                      </tr>
+                     <!-- <tr>
+                       <th id="board_category" colspan="2"></th>
+                     </tr> -->
+                     <input name="board_no" type="hidden" value="${param.board_no}"/>
                      <tr>
                        <th>제목</th>
-                       <td id="board_title" class="subject"><textarea id="title_textarea" class="form-control subject" rows="1" style="padding-bottom: 11px;"></textarea></td>
+                       <td id="board_title" class="subject"><textarea name="board_title" id="title_textarea" class="form-control subject" rows="1" style="padding-bottom: 11px;"></textarea></td>
                      </tr>
                      <tr>
                        <th colspan="2">내용</th>
 					 </tr>
 					<tr>
-						<td id="board_content" class="write_content" colspan="2"><textarea id="content_textarea" class="form-control" rows="15"></textarea></td>
+						<td id="board_content" class="write_content" colspan="2"><textarea name="board_content" id="content_textarea" class="form-control" rows="15"></textarea></td>
 					</tr>
                 </table>
                 
-				<button class="btn btn-default pull-right">수정 완료</button>
-            </div>    
+				<button id="update" class="btn btn-default pull-right">수정 완료</button>
+            </div>
+            </form>    
             <div class="button-group">
-                <button class="btn btn-default pull-right">목록</button>       
+                <button class="btn btn-default pull-right" onclick="location.href='./pageMove?page=kimSayList'">목록</button>       
             </div>
         </div>
     </div>
@@ -139,9 +135,22 @@
     
     function BoardPrint(board){
         console.log(board);
-        //$("#board_category").html(board.board_category);
+       // $("#board_category").text(board.board_category);
         $("#title_textarea").text(board.board_title);
         $("#content_textarea").text(board.board_content);
     }
+    
+    $("#update").click(function(){
+		if($("#title_textarea").val()==""){
+			alert("제목을 입력해주세요.");
+			location.href="./kimSayUpdateForm?board_no="+${board.board_no};
+			console.log("제목 미입력");
+		}else if($("#content_textarea").val() == ""){
+			alert("내용을 입력해주세요");
+		}else{
+			$("#sendForm").submit();
+		}
+	});
+    
 	</script>
 </html>

@@ -40,6 +40,16 @@ public class BoardController {
         return service.kimSayDetail(board_no);
     }
 	
+	//김대리의 한마디 글쓰기 폼
+	@RequestMapping(value="/kimSayWrite")
+	public ModelAndView kimSayWrite(@RequestParam HashMap<String, String> map, HttpServletRequest request) {
+		logger.info("게시글 작성 실행");
+		String loginId = (String) request.getSession().getAttribute("loginId");
+		map.put("loginId", loginId);
+		
+		return service.kimSayWrite(map);
+	}
+	
 	/*김대리의 한마디 수정 폼*/
 	@RequestMapping(value = "/kimSayUpdateForm")
     public ModelAndView kimSayUpdate(@RequestParam("board_no") String board_no, HttpServletRequest request) {
@@ -50,12 +60,12 @@ public class BoardController {
         return service.kimSayUpdateForm(board_no);
     }
 	
-	/*public @ResponseBody HashMap<String, Object> kimSayDelete(@RequestParam("board_no") String board_no, HttpServletRequest request){
-		String board_no=(String) request.getSession().getAttribute("board_no");
-		logger.info(board_no);
-		
-		return service.kimSayDelete(board_no);
-	}*/
+	//김대리의 한마디 게시글 수정
+	@RequestMapping(value="/kimSayUpdate")
+	public ModelAndView kimSayUpdate(@RequestParam HashMap<String,String> params) {
+		logger.info("게시글 수정 요청");
+		return service.kimSayUpdate(params);
+	}
 	
 	//김대리의 한마디 게시글 삭제
 	@RequestMapping(value="/kimSayDelete")
@@ -156,5 +166,43 @@ public class BoardController {
 		params.put("userId", userId); //map에 담음
 		
 		return service.myReplyList(params); //담은 map을 서비스로 넘김
+	}
+	
+	@RequestMapping(value = "/likeCount")
+	public @ResponseBody HashMap<String, Object> likeCount(@RequestParam Map<String, String> params) {
+		logger.info("추천수 요청");
+		
+		return service.likeCount(params);
+	}
+	
+	@RequestMapping(value = "/like")
+	public @ResponseBody HashMap<String, Object> like(@RequestParam Map<String, String> params) {
+		logger.info("추천 요청");
+		
+		return service.like(params);
+	}
+	
+	/* 댓글 작성 */
+	@RequestMapping(value = "/replyWrite")
+	public @ResponseBody HashMap<String, Object> replyWrite(@RequestParam Map<String, String> params) {
+		logger.info("댓글 작성 요청");
+		
+		return service.replyWrite(params);
+	}
+	
+	/* 댓글 리스트 불러오기 */
+	@RequestMapping(value = "/replyList")
+	public @ResponseBody HashMap<String, Object> replyList(@RequestParam Map<String, String> params) {
+		logger.info("댓글 리스트 요청");
+		
+		return service.replyList(params);
+	}
+	
+	/* 댓글 수정 */
+	@RequestMapping(value = "/replyUpdate")
+	public @ResponseBody HashMap<String, Object> replyUpdate(@RequestParam Map<String, String> params) {
+		logger.info("댓글 수정 요청");
+		
+		return service.replyUpdate(params);
 	}
 }

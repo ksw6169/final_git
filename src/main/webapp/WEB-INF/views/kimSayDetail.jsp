@@ -32,7 +32,7 @@
 	        .table>tbody>tr>th { text-align: center; }
 	        .button-group { margin-top: 15px;}
 	
-	        .like { background-color: #FF8000; margin: 15px 0 0 15px; }
+	        .like { background-color: white; margin: 15px 0 0 15px; }
 	
 	        .reply { background-color: #121F27; color: white; }
 	        .subject, .date { width: 750px; text-align: center; color: #121F27; background-color: #FFFFFF; }
@@ -43,9 +43,9 @@
 			td.reply_updel { background-color: #FFFFFF; border: 1px #FFFFFF; width: 80px; }
 	        .detail_div { margin-top: 50px;}
 	        .table_div { background-color: #E4EEF0; padding: 50px; text-align: center; margin-bottom: 50px; }
-			.table>tbody>tr>td.reply_date { vertical-align: middle; border: 1px white; }
+			.table>tbody>tr>td.reply_date { vertical-align: middle; border: 0.25px solid #DDDDDD; }
 			.table>tbody>tr>td.reply_updel { padding: 0px; border-top: 0px; }
-			
+				
 			.button_group {
 				width: 100px;
 				height: 37.5px;
@@ -113,7 +113,7 @@
                      </tr>
                 </table>
 
-                <button id="like" class="btn like_btn"></button>
+                <button id="like" class="btn like_btn" onclick="like()"></button>
             </div>    
             <div class="button-group">
                 <button id="delete" class="btn btn-default pull-right">삭제</button>
@@ -129,7 +129,7 @@
 	<div class="container">
         <div class="detail_div">
             <div class="table_div">
-                <table class="table">
+                <table class="table replyTable">
                      <tr>
                        <th class="reply" colspan="4">댓글 3</th>
                      </tr>
@@ -138,17 +138,8 @@
 					   <th>작성일자</th>
 					   <th>수정/삭제</th>
                      </tr>
-                     <tr>
-                       <td class="reply_contents" colspan="2">너무 걱정하지 마세요~ ^0^</td>
-					   <td class="reply_date">2018-06-26 15:20</td>
-					   <td class="reply_updel">
-						<button class="btn btn-default pull-right" style="border-top-width: 0px;">수정</button>
-						<br>
-                		<button class="btn btn-default pull-right">삭제</button>
-					   </td>
-                     </tr>
                 </table>
-				<textarea class="form-control" rows="5" ></textarea>
+				<textarea class="form-control replyContent" rows="5" ></textarea>
 				<div class="button-group">
                 <button class="btn btn-default pull-right replyWrite">댓글 작성</button>
 				</div>
@@ -157,6 +148,112 @@
     </div>
 </body>
 	<script>
+		var loginId = "${sessionScope.loginId}";
+		var board_no = "${param.board_no}";
+		var myLike;
+		
+		/* 게시물의 추천수 + 내가 추천했는지 여부 */
+		$(document).ready(function() {
+			$.ajax({
+				type : "post",
+				url : "./likeCount",
+				data : { 
+					loginId : loginId,
+					board_no : board_no
+				},
+				dataType : "json",
+				success : function(data) {
+					console.log(data.likeCount);
+					// 추천 여부 - data.myLike
+					myLike = data.myLike;
+					
+					if(data.myLike == true) {
+						$("#like.btn.like_btn").css("background", "#FF8000");
+						$("#like.btn.like_btn").css("color", "white");
+					} else {
+						$("#like.btn.like_btn").css("background", "white");
+						$("#like.btn.like_btn").css("color", "black");
+					}
+					
+					 $("#like.btn.like_btn").html("추천 "+data.likeCount);
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
+			
+			/* 댓글 리스트 불러오기 */
+			$.ajax({
+				type : "post",
+				url : "./replyList",
+				data : { 
+					board_no : board_no
+				},
+				dataType : "json",
+				success : function(data) {
+					console.log(data);
+					$(".reply").html("댓글 "+data.list.length);
+					
+					var content = "";
+					for(var i=0; i<data.list.length; i++) {
+						content += "<tr>";
+						content += "<td class='reply_contents' colspan='2' style='padding: 0px;'><textarea id='replyContent"+data.list[i].reply_no+"' style='width: 100%; height: 100%;' readonly='readonly'>"+data.list[i].reply_content+"</textarea></td>";
+						var date = new Date(data.list[i].reply_date);
+						content += "<td class='reply_date' style='0.25px solid #DDDDDD;'>"+date.toLocaleDateString("ko-KR")+"</td>";
+						content += "<td class='reply_updel'>";
+						content += "<button class='btn btn-default pull-right updateBtn"+data.list[i].reply_no+"' onclick='replyUpdate("+data.list[i].reply_no+")' style='border-top-width: 0px;'>수정</button>";
+						content += "<br/>";
+						content += "<button class='btn btn-default pull-right'>삭제</button>";
+						content += "</td>";
+						content += "</tr>";
+					}
+					
+					$(".replyTable").append(content);
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
+		});
+		
+		
+		/* 추천수 올리기 */
+		function like() {
+			console.log("myLike : "+myLike);
+			
+			$.ajax({
+				type : "post",
+				url : "./like",
+				data : { 
+					loginId : loginId,
+					board_no : board_no,
+					myLike : myLike
+				},
+				dataType : "json",
+				success : function(data) {
+					console.log("추천 성공성공");
+					if(myLike == true) {
+						myLike = false;
+					} else {
+						myLike = true;
+					}
+					
+					if(data.like == true) {
+						$("#like.btn.like_btn").css("background", "#FF8000");
+						$("#like.btn.like_btn").css("color", "white");
+					} else {
+						$("#like.btn.like_btn").css("background", "white");
+						$("#like.btn.like_btn").css("color", "black");
+					}
+					
+					$("#like.btn.like_btn").html("추천 "+data.likeCount);
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
+		}
+	
     var dto={
             board_title:"${board.board_title}",
             board_date:"${board.board_date}",
@@ -174,15 +271,71 @@
         $("#board_title.subject").html(board.board_title);
         $("#board_date.date").html(board.board_date);
         $("#board_content.contents").html(board.board_content);
-        $("#like.btn.like_btn").html("추천 "+board.board_recom);
     }
     
     $("#update").click(function(){
+    	//아이디 일치 체크 빠짐
 		location.href="./kimSayUpdateForm?board_no="+${board.board_no};
 	});
     
     $("#delete").click(function(){
 		location.href="./kimSayDelete?board_no="+${board.board_no};
 	});
+    
+    // 댓글 작성 버튼 클릭시
+    $(".replyWrite").click(function() {
+    	console.log($(".replyContent").val());
+    	
+    	$.ajax({
+			type : "post",
+			url : "./replyWrite",
+			data : { 
+				loginId : loginId,
+				board_no : board_no,
+				replyContent : $(".replyContent").val()
+			},
+			dataType : "json",
+			success : function(data) {
+				alert(data.msg);
+				location.href = "./kimSayDetail?board_no="+board_no;
+			},
+			error : function(error) {
+				console.log(error);
+			}
+		});
+    });
+    
+    // 댓글 수정 버튼 클릭시
+    function replyUpdate(reply_no) {
+		$("#replyContent"+reply_no).attr("readonly", false);
+    	$(".updateBtn"+reply_no).after("<button class='btn btn-default pull-right completeBtn"+reply_no+"' onclick='replyUpdateComplete("+reply_no+")' style='border-top-width: 0px; background: #FF8000; color: white;'>완료</button>");
+    	$(".updateBtn"+reply_no).hide();
+    }
+    
+    // 댓글 수정 완료 버튼 클릭시
+    function replyUpdateComplete(reply_no) {
+		$("#replyContent"+reply_no).attr("readonly", true);
+    	$(".completeBtn"+reply_no).hide();
+    	$(".updateBtn"+reply_no).show();
+    	
+    	var updateContent = $("#replyContent"+reply_no).val();
+    	
+    	$.ajax({
+			type : "post",
+			url : "./replyUpdate",
+			data : { 
+				reply_no : reply_no,
+				reply_content : updateContent
+			},
+			dataType : "json",
+			success : function(data) {
+				console.log(data);
+			},
+			error : function(error) {
+				console.log(error);
+			}
+		});
+    }
+    
 	</script>
 </html>

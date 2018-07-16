@@ -89,56 +89,35 @@
         <span class="submenubar_button">글 작성</span>
     </div>  
   
-  
-    <div class="submenubar_background">
-        <div class="submenubar_header">
-            <table>
-                <tr>
-                    <td class="submenubar_name">김대리의 한마디<b class="submenubar_detail">오늘도 수고한 대리들의 뒷이야기</b></td>
-                </tr>
-                <tr>
-                    <td class="submenubar_description">*대리 회원(직장인 회원)만 글 작성, 열람이 가능합니다.</td>
-                </tr>
-            </table>
-        </div>
-		<span class="submenubar_button_last">
-			<select name="category">
-				<option value="" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IT</option>
-				<option value="잡담">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;잡담</option>
-				<option value="이직">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이직</option>
-				<option value="업무질문">&nbsp;&nbsp;&nbsp;&nbsp;업무질문</option>
-			</select>
-		</span>
-        <span class="submenubar_button">글 작성</span>
-    </div>
-  
   <div class="container">
         <div class="detail_div">
+        <form id="sendForm" method="post">
             <div class="table_div">
                 <table class="table">
                      <tr>
-						   <select class="category" style="margin-bottom: 0px;">
+						   <select name="category" class="category" style="margin-bottom: 0px;">
 						      <option value="" selected="selected">카테고리</option>
 							  <option value="잡담">&nbsp;&nbsp;잡담</option>
 							  <option value="이직">&nbsp;&nbsp;이직</option>
 							  <option value="업무질문">업무질문</option>
 						   </select>
-					   
                      </tr>
+                     <input name="member_id" type="hidden" value="${sessionScope.loginId}"/>
                      <tr>
                        <th>제목</th>
-                       <td class="subject"><textarea class="form-control subject" rows="1" placeholder="제목을 입력해주세요." style="padding-bottom: 11px;"></textarea></td>
+                       <td class="subject"><textarea name="board_title" id="title_textarea" class="form-control subject" rows="1" placeholder="제목을 입력해주세요." style="padding-bottom: 11px;"></textarea></td>
                      </tr>
                      <tr>
                        <th colspan="2">내용</th>
 					 </tr>
 					<tr>
-						<td class="write_content" colspan="2"><textarea class="form-control" rows="15" placeholder="내용을 입력해주세요."></textarea></td>
+						<td class="write_content" colspan="2"><textarea name="board_content" id="content_textarea" class="form-control" rows="15" placeholder="내용을 입력해주세요."></textarea></td>
 					</tr>
                 </table>
                 
-				<button class="btn btn-default pull-right">작성 완료</button>
-            </div>    
+				<button id="save" class="btn btn-default pull-right">작성 완료</button>
+            </div>
+            </form>    
             <div class="button-group">
                 <button class="btn btn-default pull-right">목록</button>       
             </div>
@@ -146,5 +125,23 @@
     </div>
 </body>
 	<script>
+		$(document).ready(function() {
+	        var loginId = "${sessionScope.loginId}";
+	        console.log(loginId);
+		});
+		
+		$("#save").click(function(){
+			if($("#title_textarea").val()==""){
+				alert("제목을 입력해주세요.");
+				$("#title_textarea").focus();
+			}else if($("#content_textarea").val() == ""){
+				alert("내용을 입력해주세요");
+			}else{
+				console.log("전송");
+				$("#sendForm").attr("action", "./kimSayWrite");
+				$("#sendForm").submit();
+			}
+		});
+	
 	</script>
 </html>
