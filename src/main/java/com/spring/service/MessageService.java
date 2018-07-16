@@ -47,7 +47,7 @@ public class MessageService {
 		return param;
 	}
 	
-	//쪽지 작성
+	//쪽지 작성, 답장
 	public ModelAndView messagewrite(HashMap<String, String> map) {
 		logger.info("쪽지 작성 서비스");
 		inter = sqlSession.getMapper(MessageInter.class);
@@ -72,7 +72,7 @@ public class MessageService {
 	public ModelAndView UmessageDetail(String message_no) {
 		inter = sqlSession.getMapper(MessageInter.class);
 		ModelAndView mav = new ModelAndView();
-		if(inter.readChk(message_no) >0) {
+		if(inter.readChk(message_no) >0) { //상세보기시 message_read update 'y' 변경 
 			mav.addObject("message", inter.UmessageDetail(message_no));
 		}
 		mav.setViewName("mDetail");
@@ -113,6 +113,7 @@ public class MessageService {
 		return resultMap;
 	}
 
+	/*쪽지 답장 폼이동 */
 	public ModelAndView messagereplyForm(String message_no) {
 		ModelAndView mav = new ModelAndView();
 		inter = sqlSession.getMapper(MessageInter.class);

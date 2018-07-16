@@ -40,20 +40,21 @@
 		VALUES(message_seq.NEXTVAL,#{member_id},#{message_receive},#{message_content},'n') 
 	</insert>
 	
-
+	<!-- 상세보기 -->
 	<select id="UmessageDetail" resultType="com.spring.dto.MessageDTO">
 	 	SELECT * FROM message WHERE message_no=#{param1}
 	</select>
 	
+	<!-- 읽음 여부 변경 -->
 	<update id="readChk">
 		UPDATE message SET message_read = 'y' WHERE message_no = #{param1}
 	</update>
 	
 	<!--  쪽지 삭제 --> 
-	
 	<delete id="messagedelete" parameterType="list">
 		DELETE FROM message WHERE message_no = #{param1}
 	</delete>
+	
 	
 	<select id="messageCount" parameterType="String" resultType="int">
 		SELECT COUNT(*) FROM message WHERE message_receive = #{param1}

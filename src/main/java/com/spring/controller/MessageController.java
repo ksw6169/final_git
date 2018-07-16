@@ -3,7 +3,6 @@ package com.spring.controller;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +23,7 @@ public class MessageController {
 	
 	@Autowired MessageService service;
 	
-	//main페이지 접속
+	/*쪽지 리스트 폼*/
 	@RequestMapping(value = "/messageListForm")
 	public String messageListForm() {
 		logger.info("받은 쪽지함 컨트롤러 실행");
@@ -32,7 +31,7 @@ public class MessageController {
 		return "getMlist";
 	}
 	
-	//사용자가 보낸 쪽지함 리스트 
+	/*보낸 쪽지함 리스트*/
 	@RequestMapping(value = "/UmessageList")
 	public @ResponseBody HashMap<String, Object> messageList(@RequestParam HashMap<String, Object> map, HttpServletRequest request){
 		logger.info("사용자가 보낸 쪽지함 리스트 실행");
@@ -42,7 +41,7 @@ public class MessageController {
 		return service.messageList(map);
 	}
 	
-	//사용자가 받은 쪽지함 리스트 
+	/*받은 쪽지함 리스트*/
 	@RequestMapping(value = "/UgetmessageList")
 	public @ResponseBody HashMap<String, Object> GmessageList(@RequestParam HashMap<String, Object> map, HttpServletRequest request){
 		logger.info("사용자가 보낸 쪽지함 리스트 실행");
@@ -52,7 +51,7 @@ public class MessageController {
 		return service.GmessageList(map);
 	}
 	
-	//사용자 쪽지 보내기 => 완료 
+	/*쪽지 보내기 , 답장 */
 	@RequestMapping(value="/messagewrite")
 	public ModelAndView messagewrite(@RequestParam HashMap<String, String> map,HttpServletRequest request) {
 		logger.info("쪽지 작성 컨트롤러");
@@ -66,6 +65,7 @@ public class MessageController {
 		return service.messagewrite(map);
 	}
 
+	/*쪽지 상세보기*/
 	@RequestMapping(value="/UmessageDetail")
 	public ModelAndView UmessageDetail(@RequestParam("message_no") String message_no) {
 		logger.info("쪽지 상세보기 실행");
@@ -73,6 +73,7 @@ public class MessageController {
 
 	}
 	
+	/*쪽지 삭제*/
 	@RequestMapping(value="/messagedelete")
 	public @ResponseBody HashMap<String, Object> messagedelete(@RequestParam (value="Chkdel[]") String[] delList ) {
 		logger.info("쪽지 선택 삭제 ");
@@ -82,15 +83,13 @@ public class MessageController {
 		return service.messagedelete(delList);
 	}
 	
-	//관리자가 받은 쪽지 폼 이동 
+	/*관리자 쪽지 리스트 폼*/ 
 	@RequestMapping(value="/AgetmessageListForm")
 	public String AgetmessageListForm() {
 		logger.info("관리자 리스트 폼 ");
 		return "AgetMlist";
 	}
 	
-	
-
 	/* menubar - 안 읽은 쪽지 개수 알림 */
 	@RequestMapping(value = "/messageCount")
 	public @ResponseBody HashMap<String, Integer> messageCount(@RequestParam HashMap<String, Object> map) {
