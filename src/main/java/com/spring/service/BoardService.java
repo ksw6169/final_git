@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.dao.BoardInter;
@@ -26,14 +27,14 @@ public class BoardService {
 	String photo = null;
 
 	// 김대리의 한마디 글 리스트 요청
-	public HashMap<String, Object> kimSayCall() {
+	public HashMap<String, Object> kimSayCall(@RequestParam Map<String, Object> params) {
 		logger.info("김대리의 한마디 리스트 서비스 접근");
 		inter = sqlSession.getMapper(BoardInter.class);
 		ArrayList<String> list1 = inter.kimsaymemberlist();
 		logger.info("아이디 1번 :"+list1.get(0));
 		ArrayList<ArrayList<BoardDTO>> list = new ArrayList<ArrayList<BoardDTO>>();
 		for(int i =0;i<list1.size();i++) {
-			list.add(inter.kimsayboardlist(list1.get(i)));
+			list.add(inter.kimsayboardlist(list1.get(i), Integer.parseInt((String) params.get("job_no"))));
 		}
 		//ArrayList<BoardDTO> list = inter.kimSayList();
 		//logger.info("list : "+list.size());
@@ -61,12 +62,15 @@ public class BoardService {
 		String member_id = params.get("member_id");
 		String board_content = params.get("board_content");
 		String board_title = params.get("board_title");
+		int job_no = Integer.parseInt(params.get("job_no"));
+		
+		logger.info("잡넘버: "+job_no);
 		logger.info("ID : "+member_id);
 		logger.info(member_id+"/"+category+"/"+board_content+"/"+board_title);//logger는 문자열만 가능, 숫자 뽑아오려면 뒤에 문자열 추가
 		inter = sqlSession.getMapper(BoardInter.class);
 		String page = "redirect:/";
 		//2. 수정 쿼리 실행
-		int success = inter.kimSayWrite(category, board_title, board_content, member_id);
+		int success = inter.kimSayWrite(category, board_title, board_content, member_id, job_no);
 		if(success > 0) {
 			page = "kimSayList";
 		}
@@ -351,16 +355,14 @@ public class BoardService {
 	public HashMap<String, Object> kimSaySearchList(Map<String, String> params) {
 		HashMap<String, Object> resultMap = new HashMap<>();
 		inter = sqlSession.getMapper(BoardInter.class);
-		String board_title = String.valueOf(params.get("keyword"));
+		String keyword = String.valueOf(params.get("keyword"));
 		String board_category = String.valueOf(params.get("category"));
+		int job_no = Integer.parseInt(params.get("job_no"));
 		
-		int success = 0;
+		ArrayList<BoardDTO> list = inter.kimSaySearchList(keyword,board_category, job_no);
 		
-		success = inter.kimSaySearchList(board_title,board_category);
-		resultMap.put("msg", "검색 기능 실패");
-		if(success > 0) {
-			resultMap.put("msg", "검색 기능 성공");
-		}
+		resultMap.put("list", list);
+		
 		return resultMap;
 	}
 }

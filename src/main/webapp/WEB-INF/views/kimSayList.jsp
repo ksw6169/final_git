@@ -16,9 +16,9 @@
 	        .submenubar_detail { font-size: 12px; margin-left: 5px; color: #323838; }
 	        .submenubar_description {text-align: left;  font-family: "fallM"; background-color: #E4EEF0; border: 1px solid #E4EEF0;  font-size: 12px; height: 15px; margin-top: 10px; color: #121F27; }
 	        .submenubar_button { width: 120px; height: 50px; line-height: 50px; color: white; font-family: "fallM"; font-size: 15px; text-align: center; margin-top: 25px;
-				margin-right: 10px; float: right; background-color: #121F27; cursor: pointer; }
-	        .submenubar_button_last { width: 120px; height: 50px; line-height: 50px; color: white; font-family: "fallM"; font-size: 15px; text-align: center; margin-top: 25px;
-				margin-right: 100px; float: right; background-color: #121F27; cursor: pointer; }
+				margin-right: 20px; float: right; background-color: #121F27; cursor: pointer; }
+	        .submenubar_button_last { width: 305px; height: 50px; line-height: 50px; color: white; font-family: "fallM"; font-size: 15px; text-align: center; margin-top: 25px;
+				margin-right: 50px; float: right; background-color: #121F27; cursor: pointer; }
 			select { width: 100%; height: 100%; background-color: #121F27; color: white; font-family: "fallM"; border-radius: 0px; appearance: none; outline: none; 
 				display: inline-block; }
 			
@@ -108,12 +108,26 @@
 				width: 200px;
 			}
 			
-			
 			.custom_select {
+				width: 100%; /* 원하는 너비설정 */ 
+				height: 50px;
+				line-height: 50px;
+				font-family: "fallM"; /* 폰트 상속 */ 
+				border: 0px;
+				border-radius: 0px; /* iOS 둥근모서리 제거 */
+				appearance: none;
+				display: inline-block;
+			  	margin: 0px 5px 0px 0;
+			  	float: left;
+			  	font-size: 14px;
+			  	color: white;
+			}
+			
+			.custom_select2 {
 				width: 100px; /* 원하는 너비설정 */ 
 				height: 50px;
 				font-family: "fallM"; /* 폰트 상속 */ 
-				border: 1px solid #999; 
+				border: 0px;
 				border-radius: 0px; /* iOS 둥근모서리 제거 */ 
 				appearance: none;
 				display: inline-block;
@@ -121,6 +135,7 @@
 			  	float: left;
 			  	color: white;
 			}
+			
 			
 			.caption_date {
 				margin: 0 auto;
@@ -156,20 +171,26 @@
             </table>
         </div>
 		<span class="submenubar_button_last">
-			<select name="category">
-				<option value="" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IT</option>
-				<option value="잡담">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;잡담</option>
-				<option value="이직">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이직</option>
-				<option value="업무질문">&nbsp;&nbsp;&nbsp;&nbsp;업무질문</option>
+			<select id="job_no" name="category" class="custom_select"> 
+				<option value="1" style="text-align: center;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;경영, 사무, 금융, 보험직</option> 
+				<option value="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;연구직 및 공학기술직</option> 
+				<option value="3">&nbsp;&nbsp;교육, 법률, 사회복지, 경찰, 소방직 및 군인</option> 
+				<option value="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;보건, 의료직</option>
+				<option value="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예술, 디자인, 방송, 스포츠직</option>
+				<option value="6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;미용, 여행, 숙박, 음식, 경비, 청소직</option>
+				<option value="7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;영업, 판매, 운전, 운송직</option>
+				<option value="8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;건설, 채굴직</option>
+				<option value="9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;설치, 정비, 생산직</option>
+				<option value="10">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;농림어업직</option>
 			</select>
 		</span>
-        <span id="write" class="submenubar_button" onclick="location.href='./pageMove?page=kimSayWrite'">글 작성</span>
+        <span id="write" class="submenubar_button" onclick="writeForm()">글 작성</span>
     </div>
 
 	<div class="container">
 		<div id="search_div" class="center-block search_div">
 			
-			<select id="category" class="custom_select"> 
+			<select id="category" class="custom_select2"> 
 				<option value="잡담" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;잡담</option> 
 				<option value="이직">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이직</option> 
 				<option value="업무 질문">&nbsp;&nbsp;업무 질문</option>
@@ -198,32 +219,60 @@
         ajaxCall(obj,keyword,pagingEnd);
     });
     
+    /* 키워드 검색 */
     $(".search_btn").click(function(){
     	console.log($("#search_text").val());
-    	console.log($("#category").val());
-	    $.ajax({
-			type : "post",
-			url : "./kimSaySearchList",
-			data : {
-				keyword : $("#search_text").val(),
-				category : $("#category").val()
-			},
-			dataType : "json",
-			success : function(data) {
-				console.log(data);
-			},
-			error : function(error) {
-				console.log(error);
-			}
-		});
+    	console.log($(".custom_select2 option:selected").val());
+    	
+    	if($("#search_text").val() == "") {
+    		alert("검색 키워드를 입력하세요.");
+    	} else {
+    		$(".col-md-4").remove();
+    		$.ajax({
+    			type : "post",
+    			url : "./kimSaySearchList",
+    			data : {
+    				keyword : $("#search_text").val(),
+    				category : $(".custom_select2 option:selected").val(),
+    				job_no : job_no
+    			},
+    			dataType : "json",
+    			success : function(data) {
+    				
+    				// boardPrint(data.list);
+    				
+    				var str = "";
+    				for(var i=0; i<data.list.length; i++) {
+    					str+="<div class='col-md-4'>";
+	    	            str+="<div class='thumbnail'>";
+	    	            str+="<a href='./kimSayDetail?board_no="+data.list[i].board_no+"'><div id='title' class='thumbnail_header'><p class='thumbnail_contents'>"+data.list[i].board_title+"</p></div></a>";
+	    	            var date = new Date(data.list[i].board_date);	
+	    	            str+="<span class='caption_date'>작성일자: <b>"+date.toLocaleDateString("ko-KR")+"</b></span>";
+	    	            str+="<span class='caption_detail'>조회<br/><b>"+data.list[i].board_bHit+"</b></span>";
+	    	            str+="<span class='caption_detail'>추천<br/><b>"+data.list[i].board_recom+"</b></span>";
+	    	            str+="<span class='caption_detail'>댓글<br/><b>"+data.list[i].board_comm+"</b></span>";
+	    	            str+="</div>";
+	    	            str+="</div>";
+    				}
+    				$("#search_div").after(str);
+    			},
+    			error : function(error) {
+    				console.log(error);
+    			}
+    		});	
+    	}
     });
     
     var member_div = "${sessionScope.member_div}";
+    var job_no;
     
     /* 게시판 접근 권한 체크 */ 
 	$(document).ready(function() {
         var loginId = "${sessionScope.loginId}";
         var member_div = "${sessionScope.member_div}";
+        job_no = "${sessionScope.job_no}";
+        
+        $("option[value='"+job_no+"']").attr("selected", "selected");
         
         if(member_div == "관리자" || member_div == "대리"){
             kimSayList();
@@ -238,6 +287,9 @@
 		$.ajax({
 			type : "get",
 			url : "./kimSayCall",
+			data : {
+				job_no: job_no
+			},
 			success : function(data) {
 				console.log(data);
 				boardPrint(data.list);
@@ -268,6 +320,17 @@
 		$("#search_div").after(str);
 	}
     
+    // 직종 select 값이 바뀌면
+    $(".custom_select").change(function() {
+    	job_no = $(".custom_select option:selected").val();
+    	$(".col-md-4").remove();
+    	
+    	kimSayList();
+    });
     
+    function writeForm() {
+    	console.log(job_no);
+    	location.href='./pageMove?page=kimSayWrite&job_no='+job_no;
+    }
 	</script>
 </html>

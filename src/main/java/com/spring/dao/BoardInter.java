@@ -35,13 +35,13 @@ public interface BoardInter {
 
 	ArrayList<String> kimsaymemberlist();
 
-	ArrayList<BoardDTO> kimsayboardlist(String string);
+	ArrayList<BoardDTO> kimsayboardlist(String string, int job_no);
 
 	int kimSayDelete(String board_no);
 
 	int kimSayUpdate(String category, String board_title, String board_content, String board_no);
 
-	int kimSayWrite(String category, String board_title, String board_content, String member_id);
+	int kimSayWrite(String category, String board_title, String board_content, String member_id, int job_no);
 
 
 	boolean myLikeCount(String loginId);
@@ -62,7 +62,7 @@ public interface BoardInter {
 
 	int replyDelete(int reply_no);
 
-	int kimSaySearchList(String board_title, String board_category);
+	ArrayList<BoardDTO> kimSaySearchList(String keyword, String board_category, int job_no);
 	
 	int replyCountUp(int board_no);
 

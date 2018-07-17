@@ -25,15 +25,17 @@ public class BoardController {
 	
 	/*김대리의 한마디 리스트*/
 	@RequestMapping(value = "/kimSayCall")
-	public @ResponseBody HashMap<String, Object> kimSayCallCall() {
+	public @ResponseBody HashMap<String, Object> kimSayCall(@RequestParam Map<String, Object> params) {
 		logger.info("김대리의 한마디 글 리스트 요청");
-		return service.kimSayCall();
+		
+		return service.kimSayCall(params);
 	}
 	
 	/*김대리의 한마디 리스트*/
 	@RequestMapping(value = "/kimSaySearchList")
 	public @ResponseBody HashMap<String, Object> kimSaySearchList(@RequestParam Map<String, String> params) {
 		logger.info("김대리의 한마디 검색 기능 요청");
+		
 		return service.kimSaySearchList(params);
 	}
 	

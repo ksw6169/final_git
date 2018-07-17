@@ -120,6 +120,7 @@ public class MemberService {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		String hash = "";
 		String member_div = null;
+		int job_no = 0;
 		boolean success = false;
 		
 		MemberDTO dto = new MemberDTO();
@@ -130,7 +131,10 @@ public class MemberService {
 			hash = dto.getMember_pw();						// 암호화된 pw 가져옴
 			member_div = dto.getMember_div();			// 사용자 권한 가져옴
 			success = encoder.matches(pw, hash);		// 입력한 pw와 암호화된 pw 비교
+			job_no = dto.getJob_no();
 		}
+		
+		logger.info("잡넘버 "+job_no);
 		
 		ModelAndView mav = new ModelAndView();
 		String msg = "ID와 비밀번호를 다시 입력해주세요.";
@@ -141,6 +145,7 @@ public class MemberService {
 			mav.setViewName("redirect:/");
 			session.setAttribute("loginId", id);
 			session.setAttribute("member_div", member_div);
+			session.setAttribute("job_no", job_no);
 		}
 		
 		mav.addObject("msg", msg);
