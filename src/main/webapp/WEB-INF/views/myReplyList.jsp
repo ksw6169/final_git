@@ -168,9 +168,10 @@
 		function listPrint(list){
 			var content = "";
 			list.forEach(function(item, idx){
+				console.log(item);
 				content += "<tr class='listVal'>";
 				content += "<td>"+item.rnum+"</td>";
-				content += "<td><a class='boardLink' href='#'>"+item.reply_content+"</a></td>";
+				content += "<td><a class='boardLink' href='./kimSayDetail?board_no="+item.board_no+"'>"+item.reply_content+"</a></td>";
 				
 				//millisecond 로 나올경우
 				var date = new Date(item.reply_date);

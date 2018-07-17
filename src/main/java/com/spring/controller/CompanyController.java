@@ -167,7 +167,7 @@ public class CompanyController {
 	
 	@RequestMapping(value = "/companyWrite")
     public @ResponseBody HashMap<String, Object> companyWrite(@RequestParam HashMap<String, Object> params){
-      HashMap<String,Object> map=new HashMap<>();
+      HashMap<String,Object> map=new HashMap<String,Object>();
       String seq=(String) params.get("seq");
       logger.info("[companyWrite] seq : "+seq);
       

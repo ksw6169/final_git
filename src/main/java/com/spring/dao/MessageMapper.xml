@@ -57,7 +57,7 @@
 	
 	
 	<select id="messageCount" parameterType="String" resultType="int">
-		SELECT COUNT(*) FROM message WHERE message_receive = #{param1}
+		SELECT COUNT(*) FROM message WHERE message_receive = #{param1} AND message_read = 'n'
 	</select>
 	
 	

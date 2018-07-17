@@ -28,7 +28,7 @@ public class MessageService {
 	// 사용자가 보낸 쪽지함 리스트
 	public HashMap<String, Object> messageList(HashMap<String, Object> map) {
 		inter = sqlSession.getMapper(MessageInter.class);
-		HashMap<String, Object> param = new HashMap<>();
+		HashMap<String, Object> param = new HashMap<String, Object>();
 		ArrayList<MessageDTO> messageList = inter.messageList(map);
 		int listAll = inter.listCnt(map);
 		param.put("listAll", listAll);
@@ -39,7 +39,7 @@ public class MessageService {
 	// 사용자가 받은 쪽지함 리스트
 	public HashMap<String, Object> GmessageList(HashMap<String, Object> map) {
 		inter = sqlSession.getMapper(MessageInter.class);
-		HashMap<String, Object> param = new HashMap<>();
+		HashMap<String, Object> param = new HashMap<String, Object>();
 		ArrayList<MessageDTO> GmessageList = inter.GmessageList(map);
 		int listAll = inter.listCnt(map);
 		param.put("listAll", listAll);
@@ -103,7 +103,7 @@ public class MessageService {
 	public @ResponseBody HashMap<String, Integer> messageCount(String id) {
 		inter = sqlSession.getMapper(MessageInter.class);
 		
-		HashMap<String, Integer> resultMap = new HashMap<>();
+		HashMap<String, Integer> resultMap = new HashMap<String, Integer>();
 		
 		int msgCnt = inter.messageCount(id);
 		resultMap.put("msgCnt", msgCnt);
