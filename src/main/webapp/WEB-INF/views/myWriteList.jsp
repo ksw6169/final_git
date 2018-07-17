@@ -166,7 +166,7 @@
 			list.forEach(function(item, idx){
 				content += "<tr class='listVal'>";
 				content += "<td>"+item.rnum+"</td>";
-				content += "<td><a class='boardLink' href='#'>"+item.board_title+"</a></td>";
+				content += "<td><a class='boardLink' href='./kimSayDetail?board_no="+item.board_no+"'>"+item.board_title+"</a></td>";
 				
 				//millisecond 로 나올경우
 				var date = new Date(item.board_date);
