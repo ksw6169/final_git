@@ -62,6 +62,10 @@ public interface BoardInter {
 
 	int replyDelete(int reply_no);
 
+	int replyCountUp(int board_no);
+
+	int replyCountDown(int board_no);
+
 	
 
 

@@ -342,11 +342,14 @@
     
     /* 댓글 삭제 */
     function replyDelete(reply_no) {
+    	board_no = "${param.board_no}";
+    	
     	$.ajax({
 			type : "post",
 			url : "./replyDelete",
 			data : { 
-				reply_no : reply_no
+				reply_no : reply_no,
+				board_no : board_no
 			},
 			dataType : "json",
 			success : function(data) {

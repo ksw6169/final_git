@@ -170,8 +170,7 @@
 		<div id="search_div" class="center-block search_div">
 			
 			<select class="custom_select"> 
-				<option value="전체" selected>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;전체</option> 
-				<option value="잡담">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;잡담</option> 
+				<option value="잡담" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;잡담</option> 
 				<option value="이직">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이직</option> 
 				<option value="업무 질문">&nbsp;&nbsp;업무 질문</option>
 			</select>
@@ -179,14 +178,16 @@
 			<input id="search_text" type="text" placeholder="검색어를 입력해주세요.">
 			<button class="search_btn">검색</button>
 		</div>
-        <div class="paging_button">
-          <ul class="pagination pagination-lg">
-            <li class="page-item disabled">
-              <a id="more" class="page-link" href="#" tabindex="-1">더보기</a>
-            </li>
-          </ul>
-        </div>
     </div>
+    <div class="container-fluid">
+		<div class="paging_button">
+		  <ul class="pagination pagination-lg">
+		    <li class="page-item disabled">
+		      <a id="more" class="page-link" href="#" tabindex="-1">더보기</a>
+		    </li>
+		  </ul>
+		</div>
+	</div>
 </body>
 	<script>
     var obj={};
@@ -216,6 +217,7 @@
         $.ajax(obj);
     }
     
+    /* 게시판 접근 권한 체크 */ 
 	$(document).ready(function() {
         var loginId = "${sessionScope.loginId}";
         var member_div = "${sessionScope.member_div}";
@@ -228,6 +230,7 @@
         }
 	});
 	
+    /* 게시글 리스트 호출 */
 	function kimSayList(){
 		$.ajax({
 			type : "get",
@@ -241,6 +244,8 @@
 			}
 		});
 	}
+	
+    /* 게시글 리스트 출력 */
 	function boardPrint(list){
 		var str = "";
 		list.forEach(function(i){
@@ -248,16 +253,18 @@
 				str+="<div class='col-md-4'>";
 	            str+="<div class='thumbnail'>";
 	            str+="<a href='./kimSayDetail?board_no="+item.board_no+"'><div id='title' class='thumbnail_header'><p class='thumbnail_contents'>"+item.board_title+"</p></div></a>";
-	            var date = new Date(item.board_date);
+	            var date = new Date(item.board_date);	
 	            str+="<span class='caption_date'>작성일자: <b>"+date.toLocaleDateString("ko-KR")+"</b></span>";
 	            str+="<span class='caption_detail'>조회<br/><b>"+item.board_bHit+"</b></span>";
 	            str+="<span class='caption_detail'>추천<br/><b>"+item.board_recom+"</b></span>";
+	            str+="<span class='caption_detail'>댓글<br/><b>"+item.board_comm+"</b></span>";
 	            str+="</div>";
 	            str+="</div>";
 			})
 		})
 		$("#search_div").after(str);
-		
 	}
+    
+    
 	</script>
 </html>
