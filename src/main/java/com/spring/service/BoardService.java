@@ -334,4 +334,20 @@ public class BoardService {
 		
 		return resultMap;
 	}
+
+	public HashMap<String, Object> kimSaySearchList(Map<String, String> params) {
+		HashMap<String, Object> resultMap = new HashMap<>();
+		inter = sqlSession.getMapper(BoardInter.class);
+		String board_title = String.valueOf(params.get("keyword"));
+		String board_category = String.valueOf(params.get("category"));
+		
+		int success = 0;
+		
+		success = inter.kimSaySearchList(board_title,board_category);
+		resultMap.put("msg", "검색 기능 실패");
+		if(success > 0) {
+			resultMap.put("msg", "검색 기능 성공");
+		}
+		return resultMap;
+	}
 }

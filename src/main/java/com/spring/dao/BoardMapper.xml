@@ -19,6 +19,10 @@
 		</where> -->
 	</select>
 	
+	<select id="kimSaySearchList" resultType="int">
+		SELECT board_title, board_category FROM board WHERE board_title=#{param1}
+	</select>
+	
 	<!-- 김대리의 한마디 상세보기 -->
 	<select id="kimSayDetail" resultType="com.spring.dto.BoardDTO">
 		SELECT board_no, board_category, board_title, board_date, board_content, board_recom from board where board_no=#{param1}

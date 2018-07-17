@@ -169,7 +169,7 @@
 	<div class="container">
 		<div id="search_div" class="center-block search_div">
 			
-			<select class="custom_select"> 
+			<select id="category" class="custom_select"> 
 				<option value="전체" selected>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;전체</option> 
 				<option value="잡담">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;잡담</option> 
 				<option value="이직">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이직</option> 
@@ -191,9 +191,6 @@
 	<script>
     var obj={};
     var pagingEnd=15;
-    var keyword="";
-    
-    ajaxCall(obj,keyword,pagingEnd);
     
     $("#more").click(function(){
         pagingEnd+=15;
@@ -201,20 +198,26 @@
     });
     
     $(".search_btn").click(function(){
-        keyword=$("#search_text").val();
-        ajaxCall(obj,keyword);
+    	console.log($("#search_text").val());
+    	console.log($("#category").val());
+	    $.ajax({
+			type : "post",
+			url : "./kimSaySearchList",
+			data : {
+				keyword : $("#search_text").val(),
+				category : $("#category").val()
+			},
+			dataType : "json",
+			success : function(data) {
+				console.log(data);
+			},
+			error : function(error) {
+				console.log(error);
+			}
+		});
     });
     
-    
-    function ajaxCall(obj,keyword){
-        obj.data={
-            "keyword":keyword,
-        };
-        obj.success=function(data){
-        	
-        };
-        $.ajax(obj);
-    }
+    var member_div = "${sessionScope.member_div}";
     
 	$(document).ready(function() {
         var loginId = "${sessionScope.loginId}";

@@ -62,6 +62,8 @@ public interface BoardInter {
 
 	int replyDelete(int reply_no);
 
+	int kimSaySearchList(String board_title, String board_category);
+
 	
 
 

@@ -15,7 +15,7 @@
 	        .submenubar_detail { font-size: 12px; margin-left: 5px; color: #323838; }
 	        .submenubar_description {text-align: left; font-family: "fallM"; background-color: #E4EEF0; border: 1px solid #E4EEF0;  font-size: 12px; height: 15px; margin-top: 10px; color: #121F27; }
 	        .submenubar_button { width: 120px; height: 50px; line-height: 50px; color: white; font-family: "fallM"; font-size: 15px; text-align: center; margin-top: 25px;
-				margin-right: 10px; float: right; background-color: #121F27; cursor: pointer; }
+				margin-right: 230px; float: right; background-color: #121F27; cursor: pointer; }
 	        .submenubar_button_last { width: 120px; height: 50px; line-height: 50px; color: white; font-family: "fallM"; font-size: 15px; text-align: center; margin-top: 25px;
 				margin-right: 100px; float: right; background-color: #121F27; cursor: pointer; }
 			select { width: 100%; height: 100%; background-color: #121F27; color: white; font-family: "fallM"; border-radius: 0px; appearance: none; outline: none; 
@@ -78,14 +78,6 @@
                 </tr>
             </table>
         </div>
-		<span class="submenubar_button_last">
-			<select name="category">
-				<option value="" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IT</option>
-				<option value="잡담">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;잡담</option>
-				<option value="이직">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이직</option>
-				<option value="업무질문">&nbsp;&nbsp;&nbsp;&nbsp;업무질문</option>
-			</select>
-		</span>
         <span class="submenubar_button">글 작성</span>
     </div>  
   
