@@ -173,4 +173,8 @@
 		UPDATE reply SET reply_content = #{param2} WHERE reply_no = #{param1}
 	</update>
 	
+	<delete id="replyDelete">
+		DELETE FROM reply WHERE reply_no = #{param1}
+	</delete>
+	
 </mapper>

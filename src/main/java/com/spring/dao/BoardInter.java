@@ -60,6 +60,8 @@ public interface BoardInter {
 
 	int replyUpdate(int reply_no, String reply_content);
 
+	int replyDelete(int reply_no);
+
 	
 
 

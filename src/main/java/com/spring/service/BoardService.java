@@ -309,9 +309,27 @@ public class BoardService {
 		
 		success = inter.replyUpdate(reply_no, reply_content);
 
-		resultMap.put("msg", "댓글 수정 실패");
+		resultMap.put("msg", "댓글 수정에 실패했습니다.");
 		if(success > 0) {
-			resultMap.put("msg", "댓글 수정 성공");
+			resultMap.put("msg", "댓글 수정에 성공했습니다.");
+		}
+		
+		return resultMap;
+	}
+
+	/* 댓글 삭제 요청 */
+	public HashMap<String, Object> replyDelete(Map<String, String> params) {
+		HashMap<String, Object> resultMap = new HashMap<>();
+		inter = sqlSession.getMapper(BoardInter.class);
+		int reply_no = Integer.parseInt(params.get("reply_no"));
+
+		int success = 0;
+		
+		success = inter.replyDelete(reply_no);
+		
+		resultMap.put("msg", "댓글 삭제에 실패했습니다.");
+		if(success > 0) {
+			resultMap.put("msg", "댓글 삭제에 성공했습니다.");
 		}
 		
 		return resultMap;

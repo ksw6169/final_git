@@ -205,4 +205,12 @@ public class BoardController {
 		
 		return service.replyUpdate(params);
 	}
+	
+	/* 댓글 삭제 */
+	@RequestMapping(value = "/replyDelete")
+	public @ResponseBody HashMap<String, Object> replyDelete(@RequestParam Map<String, String> params) {
+		logger.info("댓글 수정 요청");
+		
+		return service.replyDelete(params);
+	}
 }

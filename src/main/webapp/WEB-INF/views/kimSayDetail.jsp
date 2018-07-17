@@ -136,7 +136,7 @@
                      <tr>
                        <th colspan="2">내용</th>
 					   <th>작성일자</th>
-					   <th>수정/삭제</th>
+					   <th style="width: 100px;">수정/삭제</th>
                      </tr>
                 </table>
 				<textarea class="form-control replyContent" rows="5" ></textarea>
@@ -151,6 +151,7 @@
 		var loginId = "${sessionScope.loginId}";
 		var board_no = "${param.board_no}";
 		var myLike;
+		var replyId;
 		
 		/* 게시물의 추천수 + 내가 추천했는지 여부 */
 		$(document).ready(function() {
@@ -200,11 +201,13 @@
 						content += "<td class='reply_contents' colspan='2' style='padding: 0px;'><textarea id='replyContent"+data.list[i].reply_no+"' style='width: 100%; height: 100%;' readonly='readonly'>"+data.list[i].reply_content+"</textarea></td>";
 						var date = new Date(data.list[i].reply_date);
 						content += "<td class='reply_date' style='0.25px solid #DDDDDD;'>"+date.toLocaleDateString("ko-KR")+"</td>";
-						content += "<td class='reply_updel'>";
-						content += "<button class='btn btn-default pull-right updateBtn"+data.list[i].reply_no+"' onclick='replyUpdate("+data.list[i].reply_no+")' style='border-top-width: 0px;'>수정</button>";
-						content += "<br/>";
-						content += "<button class='btn btn-default pull-right'>삭제</button>";
-						content += "</td>";
+						if(data.list[i].member_id == loginId) {
+							content += "<td class='reply_updel' style='width: 100px;'>";
+							content += "<button class='btn btn-default pull-right updateBtn"+data.list[i].reply_no+"' onclick='replyUpdate("+data.list[i].reply_no+")' style='border-top-width: 0px;'>수정</button>";
+							content += "<br/>";
+							content += "<button class='btn btn-default pull-right' onclick='replyDelete("+data.list[i].reply_no+")'>삭제</button>";
+							content += "</td>";
+						}
 						content += "</tr>";
 					}
 					
@@ -329,7 +332,26 @@
 			},
 			dataType : "json",
 			success : function(data) {
-				console.log(data);
+				alert(data.msg);
+			},
+			error : function(error) {
+				console.log(error);
+			}
+		});
+    }
+    
+    /* 댓글 삭제 */
+    function replyDelete(reply_no) {
+    	$.ajax({
+			type : "post",
+			url : "./replyDelete",
+			data : { 
+				reply_no : reply_no
+			},
+			dataType : "json",
+			success : function(data) {
+				alert(data.msg);
+				location.href = "./kimSayDetail?board_no="+board_no;
 			},
 			error : function(error) {
 				console.log(error);

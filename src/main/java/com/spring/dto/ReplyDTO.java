@@ -8,9 +8,15 @@ public class ReplyDTO {
 	private int board_no;
 	private String reply_content;
 	private Timestamp reply_date;
+	private String member_id;
 	private int rnum;
 	
-	
+	public String getMember_id() {
+		return member_id;
+	}
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
+	}
 	public int getRnum() {
 		return rnum;
 	}
