@@ -16,9 +16,15 @@ public class BoardDTO {
 	private int board_bHit;
 	private Timestamp board_date;
 	private int board_recom;
+	private int board_comm;
 	private int rnum;
 	
-	
+	public int getBoard_comm() {
+		return board_comm;
+	}
+	public void setBoard_comm(int board_comm) {
+		this.board_comm = board_comm;
+	}
 	public int getRnum() {
 		return rnum;
 	}

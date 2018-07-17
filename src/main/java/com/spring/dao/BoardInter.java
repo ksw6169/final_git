@@ -63,6 +63,10 @@ public interface BoardInter {
 	int replyDelete(int reply_no);
 
 	int kimSaySearchList(String board_title, String board_category);
+	
+	int replyCountUp(int board_no);
+
+	int replyCountDown(int board_no);
 
 	
 

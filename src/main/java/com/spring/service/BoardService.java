@@ -266,6 +266,7 @@ public class BoardService {
 	}
 
 	/* 댓글 작성 */
+	@Transactional
 	public HashMap<String, Object> replyWrite(Map<String, String> params) {
 		inter = sqlSession.getMapper(BoardInter.class);
 		String loginId = String.valueOf(params.get("loginId"));
@@ -274,6 +275,11 @@ public class BoardService {
 		
 		int success = 0;
 		
+		// 1) 댓글 수 증가
+		success = inter.replyCountUp(board_no);
+		logger.info("댓글 수 증가 성공여부 : "+success);
+		
+		// 2) 댓글 테이블에 등록
 		success = inter.replyWrite(loginId, board_no, replyContent);
 		
 		HashMap<String, Object> resultMap = new HashMap<>();
@@ -318,13 +324,20 @@ public class BoardService {
 	}
 
 	/* 댓글 삭제 요청 */
+	@Transactional
 	public HashMap<String, Object> replyDelete(Map<String, String> params) {
 		HashMap<String, Object> resultMap = new HashMap<>();
 		inter = sqlSession.getMapper(BoardInter.class);
 		int reply_no = Integer.parseInt(params.get("reply_no"));
-
+		int board_no = Integer.parseInt(params.get("board_no"));
+		
 		int success = 0;
 		
+		// 1) 댓글 수 감소
+		success = inter.replyCountDown(board_no);
+		logger.info("댓글 수 감소 확인 : "+success);
+		
+		// 2) 댓글 제거
 		success = inter.replyDelete(reply_no);
 		
 		resultMap.put("msg", "댓글 삭제에 실패했습니다.");

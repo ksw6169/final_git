@@ -169,8 +169,12 @@
 		INSERT INTO reply VALUES (reply_seq.NEXTVAL, #{param2}, #{param1}, #{param3}, SYSDATE) 
 	</insert>
 
+	<update id="replyCountUp">
+		UPDATE board SET board_comm = board_comm+1 WHERE board_no = #{param1}
+	</update>
+
 	<select id="replyList" resultType="com.spring.dto.ReplyDTO" parameterType="int">
-		SELECT * FROM reply WHERE board_no = #{param1}
+		SELECT * FROM reply WHERE board_no = #{param1} ORDER BY reply_no ASC 
 	</select>
 	
 	<update id="replyUpdate">
@@ -180,5 +184,9 @@
 	<delete id="replyDelete">
 		DELETE FROM reply WHERE reply_no = #{param1}
 	</delete>
+	
+	<update id="replyCountDown">
+		UPDATE board SET board_comm = board_comm-1 WHERE board_no = #{param1}
+	</update>
 	
 </mapper>
