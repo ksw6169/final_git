@@ -232,8 +232,14 @@ public class BoardService {
 		int board_no = Integer.parseInt(params.get("board_no"));
 
 		// 1) 내가 추천 했는지 여부
-		boolean myLike = inter.myLikeCount(loginId);
+		boolean myLike;
+		if(inter.myLikeCount(loginId, board_no) > 0) {
+			myLike = true;
+		} else {
+			myLike = false;
+		}
 		
+		logger.info(loginId+" / "+board_no);
 		// 2) 게시글의 추천수 가져오기
 		int likeCount = inter.likeCount(board_no);
 		
@@ -264,7 +270,12 @@ public class BoardService {
 		
 		logger.info("추천수 증가 or 감소: "+inter.upLike(myLike, board_no));
 
-		boolean like = inter.myLikeCount(id);
+		boolean like;
+		if(inter.myLikeCount(id, board_no) > 0) {
+			like = true;
+		} else {
+			like = false;
+		}
 		int likeCount = inter.likeCount(board_no);
 		
 		HashMap<String, Object> resultMap = new HashMap<>();

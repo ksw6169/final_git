@@ -146,8 +146,8 @@
    		</where>
 	</select>
 	
-	<select id="myLikeCount" resultType="boolean" parameterType="String">
-		SELECT COUNT(*) FROM recommand WHERE member_id = #{param1}
+	<select id="myLikeCount" resultType="int">
+		SELECT COUNT(*) FROM recommand WHERE member_id = #{param1} AND board_no = #{param2}
 	</select>
 	
 	<select id="likeCount" resultType="int" parameterType="int">
