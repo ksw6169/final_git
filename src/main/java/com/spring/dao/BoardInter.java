@@ -33,16 +33,15 @@ public interface BoardInter {
 
 	int myReplyListCnt(Map<String, String> params); //내가 쓴 댓글 리스트 갯수
 
-	ArrayList<String> kimsaymemberlist();
+	ArrayList<BoardDTO> kimSayList(int job_no, int startPage, int endPage);	// '김대리의 한마디' 리스트 요청
+	
+	ArrayList<BoardDTO> kimSaySearchList(String keyword, String board_category, int job_no, int startPage, int endPage);	// '김대리의 한마디' 검색 리스트 요청
+	
+	int kimSayDelete(String board_no);	// '김대리의 한마디' 삭제
 
-	ArrayList<BoardDTO> kimsayboardlist(String string, int job_no);
+	int kimSayUpdate(String category, String board_title, String board_content, String board_no); // '김대리의 한마디' 수정
 
-	int kimSayDelete(String board_no);
-
-	int kimSayUpdate(String category, String board_title, String board_content, String board_no);
-
-	int kimSayWrite(String category, String board_title, String board_content, String member_id, int job_no);
-
+	int kimSayWrite(String category, String board_title, String board_content, String member_id, int job_no); // '김대리의 한마디' 작성
 
 	boolean myLikeCount(String loginId);
 	
@@ -62,11 +61,14 @@ public interface BoardInter {
 
 	int replyDelete(int reply_no);
 
-	ArrayList<BoardDTO> kimSaySearchList(String keyword, String board_category, int job_no);
 	
 	int replyCountUp(int board_no);
 
 	int replyCountDown(int board_no);
+
+	int kimSayListCnt(int job_no);
+
+	int kimSaySearchListCnt(String keyword, String board_category, int job_no);
 
 	
 

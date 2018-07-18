@@ -7,11 +7,8 @@
 <mapper namespace="com.spring.dao.BoardInter">
 
 	<!-- 김대리의 한마디 글 리스트 -->
-	<select id="kimsaymemberlist" resultType="String">
-		SELECT member_id FROM member WHERE member_div='대리'
-	</select>
-	<select id="kimsayboardlist" resultType="com.spring.dto.BoardDTO">
-		SELECT * FROM board WHERE member_id=#{param1} AND job_no = #{param2}
+	<select id="kimSayList" resultType="com.spring.dto.BoardDTO">
+		SELECT * FROM (SELECT board_no, board_title, board_content, board_category, board_date, board_bHit, job_no, ROW_NUMBER() OVER(ORDER BY board_no DESC) AS rnum FROM board) WHERE (board_category = '잡담' OR board_category = '이직' OR board_category = '업무질문') AND job_no = #{param1} AND rnum BETWEEN #{param2} AND #{param3} ORDER BY board_date DESC
 		<!-- <where>
 			<if test="keyword!=null and !keyword.equals('')">
 				board_category LIKE '%'||#{keyword}||'%'
@@ -19,8 +16,21 @@
 		</where> -->
 	</select>
 
+	<select id="kimSayListCnt" resultType="int">
+		SELECT COUNT(*) FROM board WHERE (board_category = '잡담' OR board_category = '이직' OR board_category = '업무질문') AND job_no = #{param1}
+	</select>
+
+	<!-- 내용 검색도 가능하게 수정(0717 - 성원) -->
 	<select id="kimSaySearchList" resultType="com.spring.dto.BoardDTO">
-		SELECT * FROM board WHERE board_category=#{param2} AND job_no=#{param3} AND board_title LIKE '%'||#{param1}||'%'
+		SELECT * FROM (SELECT board_no, board_title, board_content, board_category, board_date, board_bHit, job_no,
+        	ROW_NUMBER() OVER(ORDER BY board_no DESC) AS rnum FROM board)
+            	WHERE (board_category=#{param2} AND job_no=#{param3}) AND (board_title LIKE '%'||#{param1}||'%' OR board_content LIKE '%'||#{param1}||'%')
+                	AND rnum BETWEEN #{param4} AND #{param5} ORDER BY board_date DESC
+	</select>
+	
+	<select id="kimSaySearchListCnt" resultType="int">
+		SELECT COUNT(*) FROM board
+			WHERE (board_category=#{param2} AND job_no=#{param3}) AND (board_title LIKE '%'||#{param1}||'%' OR board_content LIKE '%'||#{param1}||'%')
 	</select>
 	
 	<!-- 김대리의 한마디 상세보기 -->

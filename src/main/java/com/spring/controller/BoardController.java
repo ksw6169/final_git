@@ -24,11 +24,11 @@ public class BoardController {
 	@Autowired BoardService service;
 	
 	/*김대리의 한마디 리스트*/
-	@RequestMapping(value = "/kimSayCall")
-	public @ResponseBody HashMap<String, Object> kimSayCall(@RequestParam Map<String, Object> params) {
+	@RequestMapping(value = "/kimSayList")
+	public @ResponseBody HashMap<String, Object> kimSayList(@RequestParam HashMap<String, Object> params) {
 		logger.info("김대리의 한마디 글 리스트 요청");
 		
-		return service.kimSayCall(params);
+		return service.kimSayList(params);
 	}
 	
 	/*김대리의 한마디 리스트*/
