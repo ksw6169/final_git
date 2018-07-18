@@ -18,6 +18,15 @@
 		</where>
 		) WHERE rnum BETWEEN 1 AND #{pagingEnd} ORDER BY rnum ASC
 	</select>
+	
+	<select id="companyListCnt" parameterType="hashMap" resultType="int">
+		SELECT COUNT(*) FROM company
+		<where>
+			<if test="keyword!=null and !keyword.equals('')">
+				company_name LIKE '%'||#{keyword}||'%'
+			</if>
+		</where>
+	</select>
 
 	<select id="companyDetail"
 		resultType="com.spring.dto.CompanyDTO">

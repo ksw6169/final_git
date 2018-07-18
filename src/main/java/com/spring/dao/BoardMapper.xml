@@ -107,10 +107,7 @@
 	</update> 	
 	
 	<select id="listCnt" parameterType="hashMap" resultType="int">
-		SELECT COUNT(*) FROM board 
-<!-- 		<where>
-			member_id = #{loginId}
-		</where> -->
+		SELECT COUNT(*) FROM board WHERE member_id = #{loginId}
 	</select>
 	
 	
