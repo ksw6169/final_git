@@ -111,7 +111,7 @@
             </div>
             </form>    
             <div class="button-group">
-                <button class="btn btn-default pull-right">목록</button>       
+                <button id="list" class="btn btn-default pull-right">목록</button>       
             </div>
         </div>
     </div>
@@ -134,6 +134,9 @@
 				$("#sendForm").submit();
 			}
 		});
-	
+		
+		$("#list").click(function(){
+			location.href='./pageMove?page=kimSayList';
+		});
 	</script>
 </html>

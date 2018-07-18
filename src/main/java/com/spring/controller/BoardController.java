@@ -86,7 +86,53 @@ public class BoardController {
 		return service.kimSayDelete(board_no);
 		
 	}
-
+	
+	/*모르면 물어봐 리스트*/
+	@RequestMapping(value = "/qnaList")
+	public @ResponseBody HashMap<String, Object> qnaList(@RequestParam HashMap<String, Object> params) {
+		logger.info("모르면 물어봐 글 리스트 요청");
+		
+		return service.qnaList(params);
+	}
+	
+	/*모르면 물어봐 검색 리스트*/
+	@RequestMapping(value = "/qnaSearchList")
+	public @ResponseBody HashMap<String, Object> qnaSearchList(@RequestParam Map<String, String> params) {
+		logger.info("모르면 물어봐 검색 기능 요청");
+		
+		return service.qnaSearchList(params);
+	}
+	
+	//모르면 물어봐 글쓰기 폼
+	@RequestMapping(value="/qnaWrite")
+	public ModelAndView qnaWrite(@RequestParam HashMap<String, String> map, HttpServletRequest request) {
+		logger.info("게시글 작성 실행");
+		String loginId = (String) request.getSession().getAttribute("loginId");
+		map.put("loginId", loginId);
+		
+		return service.qnaWrite(map);
+	}
+	
+	/*모르면 물어봐 상세보기*/
+	@RequestMapping(value = "/qnaDetail")
+    public ModelAndView qnaDetail(@RequestParam("board_no") String board_no, HttpServletRequest request) {
+        ModelAndView mav=new ModelAndView();
+        logger.info("board_no"+board_no);
+        mav.addObject("board_no", board_no);
+        mav.setViewName("qnaDetail");
+        return service.qnaDetail(board_no);
+    }
+	
+	/*모르면 물어봐 수정 폼(미완성)*/
+	@RequestMapping(value = "/qnaUpdateForm")
+    public ModelAndView qmaUpdate(@RequestParam("board_no") String board_no, HttpServletRequest request) {
+        ModelAndView mav=new ModelAndView();
+        logger.info("board_no"+board_no);
+        mav.addObject("board_no", board_no);
+        mav.setViewName("kimSayUpdateForm");
+        return service.qnaUpdateForm(board_no);
+    }
+	
 	//공지사항리스트 폼
 	@RequestMapping(value="/nBoardListForm")
 	public String nBoardListForm() {

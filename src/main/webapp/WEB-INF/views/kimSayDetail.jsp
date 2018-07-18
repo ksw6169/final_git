@@ -117,13 +117,12 @@
     
     <div class="clear2"></div>
     
-    <!-- 댓글 부분 미구현 -->  
 	<div class="container">
         <div class="detail_div">
             <div class="table_div">
                 <table class="table replyTable">
                      <tr>
-                       <th class="reply" colspan="4">댓글 3</th>
+                       <th class="reply" colspan="4"></th>
                      </tr>
                      <tr>
                        <th colspan="2">내용</th>

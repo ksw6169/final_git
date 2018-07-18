@@ -160,7 +160,7 @@
 	<div class="container">
 		<div class="center-block search_div">
 			<input id="search_text" type="text" placeholder="검색어를 입력해주세요.">
-			<button class="search_btn" onclick="kimSaySearch()">검색</button>
+			<button class="search_btn" onclick="qnaSearch()">검색</button>
 		</div>
 		<div id="pagingAdd"></div>		
 	</div>
@@ -177,24 +177,35 @@
 	<script>
 	/* 회원 권한 & 페이징 변수 */
     var member_div = "${sessionScope.member_div}";		
-    var job_no;	
     
     /* 페이징 변수 */
     var startPage = 1;
     var endPage = 15;
     
+    /* 추천, 조회순 정렬(like or hit) */
+    var align_div = "false";
+    
     /* 더보기 요청 구분 */
     var search_div = false;
     
+    /* 권한 */
+    $(document).ready(function() {
+        qnaList();
+	});
+    
     /* 게시글 리스트 호출 */
-	function kimSayList(){
+	function qnaList(){
+		search_div = false; 
+		
+    	console.log("qnaList: "+startPage+"/"+endPage+"/"+align_div);
+    	
 		$.ajax({
 			type : "get",
-			url : "./kimSayList",
+			url : "./qnaList",
 			data : {
-				job_no: job_no,
 				startPage: startPage,
-				endPage: endPage
+				endPage: endPage,
+				align_div: align_div
 			},
 			success : function(data) {
 				boardPrint(data.list);
@@ -217,7 +228,7 @@
 		for(var i=0; i<list.length; i++) {
 			str+="<div class='col-md-4'>";
 	        str+="<div class='thumbnail'>";
-	        str+="<a href='./kimSayDetail?board_no="+list[i].board_no+"'><div id='title' class='thumbnail_header'><p class='thumbnail_contents'>"+list[i].board_title+"</p></div></a>";
+	        str+="<a href='./qnaDetail?board_no="+list[i].board_no+"'><div id='title' class='thumbnail_header'><p class='thumbnail_contents'>"+list[i].board_title+"</p></div></a>";
 	        var date = new Date(list[i].board_date);	
 	        str+="<span class='caption_date'>작성일자: <b>"+date.toLocaleDateString("ko-KR")+"</b></span>";
 	        str+="<span class='caption_detail'>조회<br/><b>"+list[i].board_bHit+"</b></span>";
@@ -237,16 +248,16 @@
 
     	console.log("search_div: "+search_div);
     	if(search_div) {
-    		console.log("김세이서치 더보기 호출");
-    		kimSaySearch();
+    		console.log("물어봐 서치 더보기 호출");
+    		qnaSearch();
     	} else {
-    		console.log("김세이리스트 더보기 호출");
-    		kimSayList();
+    		console.log("물어봐 리스트 더보기 호출");
+    		qnaList();
     	}
     });
     
     /* 키워드 검색 */
-    function kimSaySearch() {
+    function qnaSearch() {
 		$(".page-link").focus();
     	search_div = true; 
     	if($("#search_text").val() == "") {
@@ -255,11 +266,10 @@
     		$(".col-md-4").remove();
     		$.ajax({
     			type : "post",
-    			url : "./kimSaySearchList",
+    			url : "./qnaSearchList",
     			data : {
     				keyword : $("#search_text").val(),
     				category : $(".custom_select2 option:selected").val(),
-    				job_no : job_no,
     				startPage : startPage,
  					endPage : endPage   				
     			},
@@ -287,12 +297,12 @@
     	
     	startPage = 1;
     	endPage = 15;
-    	kimSayList();
+    	qnaList();
     });
     
     /* 글쓰기 폼으로 이동 */
     function writeForm() {
-    	location.href='./pageMove?page=kimSayWrite&job_no='+job_no;
+    	location.href='./pageMove?page=qnaWrite';
     }
 	
 	</script>
