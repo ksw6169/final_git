@@ -11,18 +11,17 @@
 		
 			/* submenubar css */
 			.submenubar_background{position:absolute;width:100%;height:100px;background-color:#E4EEF0}
-			.submenubar_header{font-family:fallM;margin-left:40px;width:500px;height:50px;display:inline-block;margin-top:30px;float:left;}
+			.submenubar_header{font-family:fallM;margin-left:40px;width:150px;height:50px;display:inline-block;margin-top:30px;float:left;}
 			td.submenubar_name{font-family:"fallM"; font-size:30px;color:#121F27; background-color: #E4EEF0; border: 1px solid #E4EEF0; }
 			.submenubar_detail{font-size:10px;margin-left:5px;}
 			.submenubar_description{font-size:10px;height:15px;margin-top:10px;}
 			.submenubar_button,.submenubar_button_last{width:130px;height:50px;line-height:50px;color:#fff;font-family:fallM;font-size:15px;text-align:center;
 				margin-top:25px;float:right;background-color:#121F27;cursor:pointer;}
 			.submenubar_button{margin-right:10px;}
-			.submenubar_button_last{margin-right:100px};
+			.submenubar_button_last{margin-right:3%};
 			
 	        body {padding-top: 70px;}
 	        .content {font-family: "bareun"; margin-bottom: 50px; text-align: center;}
-	        .updateForm{font-family: "bareun"; color: #fff;background-color: #121F27; width: 120px;height: 50px;
 	          font-size: 14px; margin: 5px 0; float:left;border: 0px;text-align: center;padding-top: 15px;}
 	        input[type='text'], input[type='password'] {font-size:13px;padding:10px;width: 500px;height: 50px;
 	            line-height: 40px; outline:none;margin: 5px 0;display: inline;padding-left: 20px;margin-left: 15px;
@@ -37,12 +36,14 @@
 	        /* 성 밑에 설명 */
 	        #info{font-family: "bareun"; margin-left: 140px;}
 	        /* 버튼 */
-	        #mUpdate{font-family: "bareun";font-size:18; padding: 10px 60px; text-align: center; background-color: #FF8000; border: 0; color: white;}
 	        #btnC{text-align: center;}
 	        
-	        div.col-md-4.col-md-offset-4 {
-				margin-right: 50px;
+	         .container {
 	        	margin-top: 150px;
+	        	margin-bottom: 50px;
+	            padding-top: 25px;
+	            padding-bottom: 25px;
+	            background: #E4EEF0;
 	        }
 	        
 	        #updateForm_id {
@@ -55,6 +56,56 @@
 			.submenubar_button_last a{color: white;}
 			.submenubar_button a:hover{color: #FF8000; background-color: #121F27;text-decoration: none;}
 			.submenubar_button_last a:hover{color: #FF8000; background-color: #121F27; text-decoration: none;}
+			
+			.inputHeader {
+	        	width: 100%;
+				height: 50px;
+	        	line-height: 50px;
+	        	font-family: "bareun";
+	            background: #121F27;
+				margin-top: 5px;
+				color: white;
+				text-align: center;
+				font-size: 13px;
+				padding: 0px;
+				margin-left: 10px;
+	        }
+	        
+	        .inputTag {
+				width: 100%;
+				height: 50px;
+	        	line-height: 50px;
+	        	font-family: "bareun";
+	            background: white;
+	            border: 0px;
+	            outline:none;
+				margin-top: 5px;
+				color: black;
+				text-align: center;
+				font-size: 13px;
+				padding: 0px;
+				margin-left: -10px;
+	        }
+
+	        #mUpdate {
+	            width: 100%;
+	            height: 50px;
+	            font-size: 16px;
+	            border: 0px;
+	            background-color: #FF8000;
+	            color: white;
+	            font-family: "bareun";
+	            margin-top: 50px;
+	            margin-bottom: 20px;
+	        }
+	        
+	        .comment{
+	        	font-family: "bareun";
+	        	text-align: left;
+	            font-size: 11px;
+	            margin-top: 10px;
+	        }
+	        
 		</style>
 	</head>
 
@@ -78,40 +129,71 @@
 	    </div>
 		
 		<!-- 개인정보 수정 페이지 -->
-	    <div class="col-md-4 col-md-offset-4">   
-	        <form method="post">
-				<div class="center-block">
-				<h1 class="content">개인정보 수정</h1>
-					<!-- 아이디 수정 -->
-			        <div class="updateForm">아이디</div>
-					<input id="updateForm_id" type="text" readonly="readonly" value="${member.member_id}"/>
-	
-			       <!-- 비밀번호 수정 -->
-			        <div class="updateForm">새 비밀번호</div>  
-		            <input type="password" id="pw" placeholder="비밀번호 입력" name="pw">
-		            <div><span id="pwChkMsg" class="warn">　</span></div>
-		            
-			        <!-- 비밀번호 확인 수정 -->
-			        <div class="updateForm">새 비밀번호 확인</div>  
-		            <input type="password" id="pwChk" placeholder="비밀번호 입력">
-		            <div><span id="pwChkReMsg" class="warn">　</span></div>
-	
-			       <!--  이메일 수정 -->
-			        <div class="updateForm">이메일</div>  
-		            <input type="text" placeholder="이메일 입력" value="${member.member_email }" name="email">
-		            
-			        <!-- 성씨 수정 -->
-			        <div class="updateForm">성씨 입력</div>  
-		            <input type="text" placeholder="성씨 입력" value="${member.member_family }" name="family">
-			        <div><span id="info">*입력한 성씨는 '김인턴, 박인턴'과 같은 호칭에 사용됩니다.</span></div>
-			        <div><span id="info">*호칭은 본인 외 다른 사람들은 볼 수 없습니다.</span></div>
-		        </div>
-		        <br/>
-			    <div id="btnC" class="center-block">
-			    	<button id="mUpdate">개인정보 수정</button>
-			    </div>
-	        </form>
-	    </div>
+	    <div class="container">
+	    	<form method="post">
+				<div class="row">
+					<div class="col-md-10 col-md-push-1">
+						<div class="row">
+							<div class="col-md-10 col-md-push-1"><h1 class="content">개인정보 수정</h1></div>
+						</div>
+						<div class="row">
+							<div class="col-md-10 col-md-push-1">
+			              		<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">아이디</h3></div>
+			               		<div class="col-md-push-1 col-md-7">
+			               			<input id="updateForm_id" class="inputTag" readonly="readonly" value="${member.member_id}" type="text" />
+			            		</div>
+			            	</div>
+						</div>
+						<div class="row">
+							<div class="col-md-10 col-md-push-1">
+								<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">새 비밀번호</h3></div>
+				               	<div class="col-md-push-1 col-md-7">
+				               		<input id="pw" class="inputTag" name="pw" type="password" placeholder="비밀번호 입력" />
+		                			<span id="pwChkMsg" class="warn">　</span>
+		                		</div>
+	                		</div>
+						</div>
+						<div class="row">
+							<div class="col-md-10 col-md-push-1">
+								<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">새 비밀번호 확인</h3></div>
+				               	<div class="col-md-push-1 col-md-7">
+				               		<input id="pwChk" class="inputTag" type="password" placeholder="비밀번호 확인 입력"/>
+	                				<span id="pwChkReMsg" class="warn">　</span>
+		                		</div>
+	                		</div>
+						</div>
+						<div class="row">
+							<div class="col-md-10 col-md-push-1">
+								<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">이메일</h3></div>
+				               	<div class="col-md-push-1 col-md-7">
+				               		<input value="${member.member_email }" class="inputTag" name="email" type="text" placeholder="이메일 입력" onkeyup="emailCheck()" />
+	                				<span id="userEmailMsg" class="warn">　</span>
+		                		</div>
+	                		</div>
+						</div>
+						<div class="row">
+							<div class="col-md-10 col-md-push-1">
+								<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">성씨 입력</h3></div>
+				               	<div class="col-md-push-1 col-md-7">
+				               		<input class="inputTag" name="family" type="text" placeholder="성씨입력" value="${member.member_family}" />
+					           		<div class="row">
+					           			<div class="col-md-12"><b class="comment">*입력한 성씨는 '김인턴,박인턴' 과 같은 호칭에 사용됩니다.</b></div>
+					           		</div>
+					           		<div class="row">
+					                	<div class="col-md-12"><b class="comment">*호칭은 본인 외 다른사람이 볼 수 없습니다. </b></div>
+					                </div>
+		                		</div>
+	                		</div>
+						</div>
+						<input id="member_div" name="member_div" type="hidden" value="인턴"/>
+					</div>
+				</div>
+			
+				<div class="col-md-6 col-md-push-3">
+	                <button id="mUpdate">개인정보 수정</button>
+	            </div>
+	    	</form>
+		</div>
 	</body>
 	<script>
 		// 서브 메뉴바

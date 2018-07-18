@@ -162,6 +162,165 @@
 			<input id="search_text" type="text" placeholder="검색어를 입력해주세요.">
 			<button class="search_btn" onclick="qnaSearch()">검색</button>
 		</div>
+        <div class="row">
+			<div class="col-md-4">
+				<div class="thumbnail">
+					<a href="#"><div class="thumbnail_header"><p class="thumbnail_contents">안녕안녕안녕안녕안녕
+						안녕안녕안녕안녕안녕</p></div></a>
+					<span class="caption_date">작성일자: <b>2018-07-03 13:07</b></span>
+					<span class="caption_detail">조회<br/><b>1</b></span>
+					<span class="caption_detail">추천<br/><b>1</b></span>
+					<span class="caption_detail">댓글<br/><b>1</b></span>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="thumbnail">
+					<a href="#"><div class="thumbnail_header"><p class="thumbnail_contents">안녕안녕안녕안녕안녕
+						안녕안녕안녕안녕안녕</p></div></a>
+					<span class="caption_date">작성일자: <b>2018-07-03 13:07</b></span>
+					<span class="caption_detail">조회<br/><b>1</b></span>
+					<span class="caption_detail">추천<br/><b>1</b></span>
+					<span class="caption_detail">댓글<br/><b>1</b></span>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="thumbnail">
+					<a href="#"><div class="thumbnail_header"><p class="thumbnail_contents">안녕안녕안녕안녕안녕
+						안녕안녕안녕안녕안녕</p></div></a>
+					<span class="caption_date">작성일자: <b>2018-07-03 13:07</b></span>
+					<span class="caption_detail">조회<br/><b>1</b></span>
+					<span class="caption_detail">추천<br/><b>1</b></span>
+					<span class="caption_detail">댓글<br/><b>1</b></span>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="thumbnail">
+					<a href="#"><div class="thumbnail_header"><p class="thumbnail_contents">안녕안녕안녕안녕안녕
+						안녕안녕안녕안녕안녕</p></div></a>
+					<span class="caption_date">작성일자: <b>2018-07-03 13:07</b></span>
+					<span class="caption_detail">조회<br/><b>1</b></span>
+					<span class="caption_detail">추천<br/><b>1</b></span>
+					<span class="caption_detail">댓글<br/><b>1</b></span>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="thumbnail">
+					<a href="#"><div class="thumbnail_header"><p class="thumbnail_contents">안녕안녕안녕안녕안녕
+						안녕안녕안녕안녕안녕</p></div></a>
+					<span class="caption_date">작성일자: <b>2018-07-03 13:07</b></span>
+					<span class="caption_detail">조회<br/><b>1</b></span>
+					<span class="caption_detail">추천<br/><b>1</b></span>
+					<span class="caption_detail">댓글<br/><b>1</b></span>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="thumbnail">
+					<a href="#"><div class="thumbnail_header"><p class="thumbnail_contents">안녕안녕안녕안녕안녕
+						안녕안녕안녕안녕안녕</p></div></a>
+					<span class="caption_date">작성일자: <b>2018-07-03 13:07</b></span>
+					<span class="caption_detail">조회<br/><b>1</b></span>
+					<span class="caption_detail">추천<br/><b>1</b></span>
+					<span class="caption_detail">댓글<br/><b>1</b></span>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="thumbnail">
+					<a href="#"><div class="thumbnail_header"><p class="thumbnail_contents">안녕안녕안녕안녕안녕
+						안녕안녕안녕안녕안녕</p></div></a>
+					<span class="caption_date">작성일자: <b>2018-07-03 13:07</b></span>
+					<span class="caption_detail">조회<br/><b>1</b></span>
+					<span class="caption_detail">추천<br/><b>1</b></span>
+					<span class="caption_detail">댓글<br/><b>1</b></span>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="thumbnail">
+					<a href="#"><div class="thumbnail_header"><p class="thumbnail_contents">안녕안녕안녕안녕안녕
+						안녕안녕안녕안녕안녕</p></div></a>
+					<span class="caption_date">작성일자: <b>2018-07-03 13:07</b></span>
+					<span class="caption_detail">조회<br/><b>1</b></span>
+					<span class="caption_detail">추천<br/><b>1</b></span>
+					<span class="caption_detail">댓글<br/><b>1</b></span>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="thumbnail">
+					<a href="#"><div class="thumbnail_header"><p class="thumbnail_contents">안녕안녕안녕안녕안녕
+						안녕안녕안녕안녕안녕</p></div></a>
+					<span class="caption_date">작성일자: <b>2018-07-03 13:07</b></span>
+					<span class="caption_detail">조회<br/><b>1</b></span>
+					<span class="caption_detail">추천<br/><b>1</b></span>
+					<span class="caption_detail">댓글<br/><b>1</b></span>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="thumbnail">
+					<a href="#"><div class="thumbnail_header"><p class="thumbnail_contents">안녕안녕안녕안녕안녕
+						안녕안녕안녕안녕안녕</p></div></a>
+					<span class="caption_date">작성일자: <b>2018-07-03 13:07</b></span>
+					<span class="caption_detail">조회<br/><b>1</b></span>
+					<span class="caption_detail">추천<br/><b>1</b></span>
+					<span class="caption_detail">댓글<br/><b>1</b></span>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="thumbnail">
+					<a href="#"><div class="thumbnail_header"><p class="thumbnail_contents">안녕안녕안녕안녕안녕
+						안녕안녕안녕안녕안녕</p></div></a>
+					<span class="caption_date">작성일자: <b>2018-07-03 13:07</b></span>
+					<span class="caption_detail">조회<br/><b>1</b></span>
+					<span class="caption_detail">추천<br/><b>1</b></span>
+					<span class="caption_detail">댓글<br/><b>1</b></span>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="thumbnail">
+					<a href="#"><div class="thumbnail_header"><p class="thumbnail_contents">안녕안녕안녕안녕안녕
+						안녕안녕안녕안녕안녕</p></div></a>
+					<span class="caption_date">작성일자: <b>2018-07-03 13:07</b></span>
+					<span class="caption_detail">조회<br/><b>1</b></span>
+					<span class="caption_detail">추천<br/><b>1</b></span>
+					<span class="caption_detail">댓글<br/><b>1</b></span>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="thumbnail">
+					<a href="#"><div class="thumbnail_header"><p class="thumbnail_contents">안녕안녕안녕안녕안녕
+						안녕안녕안녕안녕안녕</p></div></a>
+					<span class="caption_date">작성일자: <b>2018-07-03 13:07</b></span>
+					<span class="caption_detail">조회<br/><b>1</b></span>
+					<span class="caption_detail">추천<br/><b>1</b></span>
+					<span class="caption_detail">댓글<br/><b>1</b></span>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="thumbnail">
+					<a href="#"><div class="thumbnail_header"><p class="thumbnail_contents">안녕안녕안녕안녕안녕
+						안녕안녕안녕안녕안녕</p></div></a>
+					<span class="caption_date">작성일자: <b>2018-07-03 13:07</b></span>
+					<span class="caption_detail">조회<br/><b>1</b></span>
+					<span class="caption_detail">추천<br/><b>1</b></span>
+					<span class="caption_detail">댓글<br/><b>1</b></span>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="thumbnail">
+					<a href="#"><div class="thumbnail_header"><p class="thumbnail_contents">안녕안녕안녕안녕안녕
+						안녕안녕안녕안녕안녕</p></div></a>
+					<span class="caption_date">작성일자: <b>2018-07-03 13:07</b></span>
+					<span class="caption_detail">조회<br/><b>1</b></span>
+					<span class="caption_detail">추천<br/><b>1</b></span>
+					<span class="caption_detail">댓글<br/><b>1</b></span>
+				</div>
+			</div>
 		<div id="pagingAdd"></div>		
 	</div>
 	<div class="container-fluid">
@@ -173,6 +332,7 @@
 		  </ul>
 		</div>
 	</div>
+</div>
 </body>
 	<script>
 	/* 회원 권한 & 페이징 변수 */
