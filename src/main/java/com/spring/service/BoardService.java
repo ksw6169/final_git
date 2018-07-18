@@ -54,8 +54,9 @@ public class BoardService {
 	@Transactional
 	public ModelAndView kimSayDetail(String board_no) {
 		inter = sqlSession.getMapper(BoardInter.class);	
-		logger.info("상세보기");		
+		logger.info("상세보기");
 		ModelAndView mav = new ModelAndView();
+		inter.upHit(board_no);
 		mav.addObject("board", inter.kimSayDetail(board_no));
 		mav.setViewName("kimSayDetail");
 		return(mav);
