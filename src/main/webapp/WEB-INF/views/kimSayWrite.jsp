@@ -94,6 +94,7 @@
 						   </select>
                      </tr>
                      <input name="member_id" type="hidden" value="${sessionScope.loginId}"/>
+                     <input name="job_no" type="hidden" value="${param.job_no}"/>
                      <tr>
                        <th>제목</th>
                        <td class="subject"><textarea name="board_title" id="title_textarea" class="form-control subject" rows="1" placeholder="제목을 입력해주세요." style="padding-bottom: 11px;"></textarea></td>

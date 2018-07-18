@@ -8,7 +8,6 @@
    	 	<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		<style>
-		
 			/* submenubar css */
 	        .submenubar_background { position: absolute; width: 100%; height: 100px; background-color: #E4EEF0; }
 	        .submenubar_header { font-family: "fallM"; margin-left: 40px; width: 400px; height: 50px; display: inline-block; margin-top: 25px; float: left; }
@@ -16,9 +15,9 @@
 	        .submenubar_detail { font-size: 12px; margin-left: 5px; color: #323838; }
 	        .submenubar_description {text-align: left;  font-family: "fallM"; background-color: #E4EEF0; border: 1px solid #E4EEF0;  font-size: 12px; height: 15px; margin-top: 10px; color: #121F27; }
 	        .submenubar_button { width: 120px; height: 50px; line-height: 50px; color: white; font-family: "fallM"; font-size: 15px; text-align: center; margin-top: 25px;
-				margin-right: 10px; float: right; background-color: #121F27; cursor: pointer; }
-	        .submenubar_button_last { width: 120px; height: 50px; line-height: 50px; color: white; font-family: "fallM"; font-size: 15px; text-align: center; margin-top: 25px;
-				margin-right: 100px; float: right; background-color: #121F27; cursor: pointer; }
+				margin-right: 20px; float: right; background-color: #121F27; cursor: pointer; }
+	        .submenubar_button_last { width: 305px; height: 50px; line-height: 50px; color: white; font-family: "fallM"; font-size: 15px; text-align: center; margin-top: 25px;
+				margin-right: 50px; float: right; background-color: #121F27; cursor: pointer; }
 			select { width: 100%; height: 100%; background-color: #121F27; color: white; font-family: "fallM"; border-radius: 0px; appearance: none; outline: none; 
 				display: inline-block; }
 			
@@ -108,12 +107,26 @@
 				width: 200px;
 			}
 			
-			
 			.custom_select {
+				width: 100%; /* 원하는 너비설정 */ 
+				height: 50px;
+				line-height: 50px;
+				font-family: "fallM"; /* 폰트 상속 */ 
+				border: 0px;
+				border-radius: 0px; /* iOS 둥근모서리 제거 */
+				appearance: none;
+				display: inline-block;
+			  	margin: 0px 5px 0px 0;
+			  	float: left;
+			  	font-size: 14px;
+			  	color: white;
+			}
+			
+			.custom_select2 {
 				width: 100px; /* 원하는 너비설정 */ 
 				height: 50px;
 				font-family: "fallM"; /* 폰트 상속 */ 
-				border: 1px solid #999; 
+				border: 0px;
 				border-radius: 0px; /* iOS 둥근모서리 제거 */ 
 				appearance: none;
 				display: inline-block;
@@ -121,6 +134,7 @@
 			  	float: left;
 			  	color: white;
 			}
+			
 			
 			.caption_date {
 				margin: 0 auto;
@@ -156,28 +170,35 @@
             </table>
         </div>
 		<span class="submenubar_button_last">
-			<select name="category">
-				<option value="" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IT</option>
-				<option value="잡담">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;잡담</option>
-				<option value="이직">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이직</option>
-				<option value="업무질문">&nbsp;&nbsp;&nbsp;&nbsp;업무질문</option>
+			<select id="job_no" name="category" class="custom_select"> 
+				<option value="1" style="text-align: center;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;경영, 사무, 금융, 보험직</option> 
+				<option value="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;연구직 및 공학기술직</option> 
+				<option value="3">&nbsp;&nbsp;교육, 법률, 사회복지, 경찰, 소방직 및 군인</option> 
+				<option value="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;보건, 의료직</option>
+				<option value="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예술, 디자인, 방송, 스포츠직</option>
+				<option value="6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;미용, 여행, 숙박, 음식, 경비, 청소직</option>
+				<option value="7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;영업, 판매, 운전, 운송직</option>
+				<option value="8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;건설, 채굴직</option>
+				<option value="9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;설치, 정비, 생산직</option>
+				<option value="10">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;농림어업직</option>
 			</select>
 		</span>
-        <span id="write" class="submenubar_button" onclick="location.href='./pageMove?page=kimSayWrite'">글 작성</span>
+        <span id="write" class="submenubar_button" onclick="writeForm()">글 작성</span>
     </div>
 
 	<div class="container">
 		<div id="search_div" class="center-block search_div">
 			
-			<select id="category" class="custom_select"> 
+			<select id="category" class="custom_select2"> 
 				<option value="잡담" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;잡담</option> 
 				<option value="이직">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이직</option> 
-				<option value="업무 질문">&nbsp;&nbsp;업무 질문</option>
+				<option value="업무질문">&nbsp;&nbsp;업무 질문</option>
 			</select>
 			
 			<input id="search_text" type="text" placeholder="검색어를 입력해주세요.">
-			<button class="search_btn">검색</button>
+			<button class="search_btn" onclick="kimSaySearch()">검색</button>
 		</div>
+		<div id="pagingAdd"></div>
     </div>
     <div class="container-fluid">
 		<div class="paging_button">
@@ -190,84 +211,140 @@
 	</div>
 </body>
 	<script>
-    var obj={};
-    var pagingEnd=15;
-    
-    $("#more").click(function(){
-        pagingEnd+=15;
-        ajaxCall(obj,keyword,pagingEnd);
-    });
-    
-    $(".search_btn").click(function(){
-    	console.log($("#search_text").val());
-    	console.log($("#category").val());
-	    $.ajax({
-			type : "post",
-			url : "./kimSaySearchList",
-			data : {
-				keyword : $("#search_text").val(),
-				category : $("#category").val()
-			},
-			dataType : "json",
-			success : function(data) {
-				console.log(data);
-			},
-			error : function(error) {
-				console.log(error);
-			}
+		/* 회원 권한 & 페이징 변수 */
+	    var member_div = "${sessionScope.member_div}";		
+	    var job_no;	
+	    
+	    /* 페이징 변수 */
+	    var startPage = 1;
+	    var endPage = 15;
+	    
+	    /* 더보기 요청 구분 */
+	    var search_div = false;
+	    
+	    /* 게시판 접근 권한 체크 */ 
+		$(document).ready(function() {
+	        var loginId = "${sessionScope.loginId}";
+	        var member_div = "${sessionScope.member_div}";
+	        job_no = "${sessionScope.job_no}";
+	        
+	        $("option[value='"+job_no+"']").attr("selected", "selected");
+	        
+	        if(member_div == "관리자" || member_div == "대리"){
+	            kimSayList();
+	        } else if(member_div == "인턴"){
+	        	alert("대리 회원만 이용 가능합니다.");
+	        	location.href='./';
+	        }
 		});
-    });
-    
-    var member_div = "${sessionScope.member_div}";
-    
-    /* 게시판 접근 권한 체크 */ 
-	$(document).ready(function() {
-        var loginId = "${sessionScope.loginId}";
-        var member_div = "${sessionScope.member_div}";
-        
-        if(member_div == "관리자" || member_div == "대리"){
-            kimSayList();
-        } else if(member_div == "인턴"){
-        	alert("대리 회원만 이용 가능합니다.");
-        	location.href='./';
-        }
-	});
-	
-    /* 게시글 리스트 호출 */
-	function kimSayList(){
-		$.ajax({
-			type : "get",
-			url : "./kimSayCall",
-			success : function(data) {
-				console.log(data);
-				boardPrint(data.list);
-			},
-			error : function(e) {
-				console.log(e);
-			}
-		});
-	}
-	
-    /* 게시글 리스트 출력 */
-	function boardPrint(list){
-		var str = "";
-		list.forEach(function(i){
-			i.forEach(function(item){
+	    
+	    /* 게시글 리스트 호출 */
+		function kimSayList(){
+			$.ajax({
+				type : "get",
+				url : "./kimSayList",
+				data : {
+					job_no: job_no,
+					startPage: startPage,
+					endPage: endPage
+				},
+				success : function(data) {
+					boardPrint(data.list);
+					
+					if((data.listCnt)-1 >= endPage) {
+						$(".page-item").removeClass("disabled");
+    				} else {
+    					$(".page-item").addClass("disabled");
+    				}
+				},
+				error : function(e) {
+					console.log(e);
+				}
+			});
+		}
+		
+	    /* 게시글 리스트 출력 */
+		function boardPrint(list){
+			var str = "";
+			for(var i=0; i<list.length; i++) {
 				str+="<div class='col-md-4'>";
-	            str+="<div class='thumbnail'>";
-	            str+="<a href='./kimSayDetail?board_no="+item.board_no+"'><div id='title' class='thumbnail_header'><p class='thumbnail_contents'>"+item.board_title+"</p></div></a>";
-	            var date = new Date(item.board_date);	
-	            str+="<span class='caption_date'>작성일자: <b>"+date.toLocaleDateString("ko-KR")+"</b></span>";
-	            str+="<span class='caption_detail'>조회<br/><b>"+item.board_bHit+"</b></span>";
-	            str+="<span class='caption_detail'>추천<br/><b>"+item.board_recom+"</b></span>";
-	            str+="<span class='caption_detail'>댓글<br/><b>"+item.board_comm+"</b></span>";
-	            str+="</div>";
-	            str+="</div>";
-			})
-		})
-		$("#search_div").after(str);
-	}
-    
-    
+		        str+="<div class='thumbnail'>";
+		        str+="<a href='./kimSayDetail?board_no="+list[i].board_no+"'><div id='title' class='thumbnail_header'><p class='thumbnail_contents'>"+list[i].board_title+"</p></div></a>";
+		        var date = new Date(list[i].board_date);	
+		        str+="<span class='caption_date'>작성일자: <b>"+date.toLocaleDateString("ko-KR")+"</b></span>";
+		        str+="<span class='caption_detail'>조회<br/><b>"+list[i].board_bHit+"</b></span>";
+		        str+="<span class='caption_detail'>추천<br/><b>"+list[i].board_recom+"</b></span>";
+		        str+="<span class='caption_detail'>댓글<br/><b>"+list[i].board_comm+"</b></span>";
+		        str+="</div>";
+		        str+="</div>";
+			}
+			$("#pagingAdd").append(str);
+			// $(".page-link").focus();
+		}
+	    
+	    /* 더보기 버튼 클릭 시 */
+	    $("#more").click(function(){
+	    	startPage += 15;
+	    	endPage += 15;
+
+	    	console.log("search_div: "+search_div);
+	    	if(search_div) {
+	    		console.log("김세이서치 더보기 호출");
+	    		kimSaySearch();
+	    	} else {
+	    		console.log("김세이리스트 더보기 호출");
+	    		kimSayList();
+	    	}
+	    });
+	    
+	    /* 키워드 검색 */
+	    function kimSaySearch() {
+			$(".page-link").focus();
+	    	search_div = true; 
+	    	if($("#search_text").val() == "") {
+	    		alert("검색 키워드를 입력하세요.");
+	    	} else {
+	    		$(".col-md-4").remove();
+	    		$.ajax({
+	    			type : "post",
+	    			url : "./kimSaySearchList",
+	    			data : {
+	    				keyword : $("#search_text").val(),
+	    				category : $(".custom_select2 option:selected").val(),
+	    				job_no : job_no,
+	    				startPage : startPage,
+	 					endPage : endPage   				
+	    			},
+	    			dataType : "json",
+	    			success : function(data) {
+	    				boardPrint(data.list);
+	    				
+	    				if((data.listSearchCnt)-1 >= endPage) {
+	    					$(".page-item").removeClass("disabled");
+	    				} else {
+	    					$(".page-item").addClass("disabled");
+	    				}
+	    			},
+	    			error : function(error) {
+	    				console.log(error);
+	    			}
+	    		});	
+	    	}
+	    }
+	    
+	    /* 상단의 직종 select 값이 바뀌면, 게시글 리스트를 비우고, 직종 값에 맞게 리스트 불러옴 */
+	    $(".custom_select").change(function() {
+	    	job_no = $(".custom_select option:selected").val();
+	    	$(".col-md-4").remove();
+	    	
+	    	startPage = 1;
+	    	endPage = 15;
+	    	kimSayList();
+	    });
+	    
+	    /* 글쓰기 폼으로 이동 */
+	    function writeForm() {
+	    	location.href='./pageMove?page=kimSayWrite&job_no='+job_no;
+	    }
 	</script>
 </html>
