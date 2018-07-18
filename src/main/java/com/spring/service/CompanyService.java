@@ -48,6 +48,9 @@ public class CompanyService {
 
 		inter = sqlSession.getMapper(CompanyInter.class);
 		ArrayList<CompanyDTO> list = inter.companyList(params);
+		int companyListCnt = inter.companyListCnt(params);
+		
+		map.put("companyListCnt", companyListCnt);
 		map.put("companyList", list);
 
 		return map;

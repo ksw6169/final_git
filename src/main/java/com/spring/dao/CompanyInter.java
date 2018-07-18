@@ -33,4 +33,6 @@ public interface CompanyInter {
 	int memberEvalCnt(String member_id,int plus);
 
 	int companyCount(String company_name);
+
+	int companyListCnt(HashMap<String, String> params);
 }

@@ -121,7 +121,9 @@
 			margin-top: 100px;
 		}
 		
-		#more:hover{cursor: pointer;}
+		.page-item {
+			cursor: pointer;
+		}
     </style>
   </head>
 <body>
@@ -186,6 +188,12 @@
             };
             obj.success=function(data){
                 listPrint(data.companyList);
+                console.log("리스트 카운트: "+data.companyListCnt);
+                if(data.companyListCnt >= pagingEnd ) {
+                	$(".page-item").removeClass("disabled");
+                } else {
+                	$(".page-item").addClass("disabled");
+                }
             };
             $.ajax(obj);
     	}
