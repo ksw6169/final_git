@@ -35,10 +35,11 @@ public class BoardService {
 		int job_no = Integer.parseInt((String) params.get("job_no"));
 		int startPage = Integer.parseInt((String) params.get("startPage"));
 		int endPage = Integer.parseInt((String) params.get("endPage"));
+		String align_div = String.valueOf(params.get("align_div"));
 		
-		logger.info("변수 확인: "+job_no+"/"+startPage+"/"+endPage);
+		logger.info("변수 확인: "+job_no+"/"+startPage+"/"+endPage+"/"+align_div);
 		
-		ArrayList<BoardDTO> list = inter.kimSayList(job_no, startPage, endPage);
+		ArrayList<BoardDTO> list = inter.kimSayList(job_no, startPage, endPage, align_div);
 		int listCnt = inter.kimSayListCnt(job_no);
 		
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
@@ -367,8 +368,9 @@ public class BoardService {
 		int job_no = Integer.parseInt(params.get("job_no"));
 		int startPage = Integer.parseInt(params.get("startPage"));
 		int endPage = Integer.parseInt(params.get("endPage"));
+		String align_div = String.valueOf(params.get("align_div"));
 		
-		ArrayList<BoardDTO> list = inter.kimSaySearchList(keyword, board_category, job_no, startPage, endPage);
+		ArrayList<BoardDTO> list = inter.kimSaySearchList(keyword, board_category, job_no, startPage, endPage, align_div);
 		int listSearchCnt = inter.kimSaySearchListCnt(keyword, board_category, job_no);
 		
 		resultMap.put("list", list);
