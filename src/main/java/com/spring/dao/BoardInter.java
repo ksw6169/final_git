@@ -43,7 +43,7 @@ public interface BoardInter {
 
 	int kimSayWrite(String category, String board_title, String board_content, String member_id, int job_no); // '김대리의 한마디' 작성
 
-	boolean myLikeCount(String loginId);
+	int myLikeCount(String loginId, int board_no);
 	
 	int likeCount(int board_no);
 	

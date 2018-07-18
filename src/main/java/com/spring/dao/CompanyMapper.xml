@@ -9,14 +9,14 @@
 		resultType="com.spring.dto.CompanyDTO">
 		SELECT rnum, company_no, company_name, company_eval, company_bHit
 		FROM(SELECT
-		ROW_NUMBER() OVER(ORDER BY company_no DESC) AS rnum, company_no,
+		ROW_NUMBER() OVER(ORDER BY company_name ASC) AS rnum, company_no,
 		company_name, company_eval, company_bHit FROM company
 		<where>
 			<if test="keyword!=null and !keyword.equals('')">
 				company_name LIKE '%'||#{keyword}||'%'
 			</if>
 		</where>
-		) WHERE rnum BETWEEN 1 AND #{pagingEnd} ORDER BY company_name ASC
+		) WHERE rnum BETWEEN 1 AND #{pagingEnd} ORDER BY rnum ASC
 	</select>
 	
 	<select id="companyListCnt" parameterType="hashMap" resultType="int">
