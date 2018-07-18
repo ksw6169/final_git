@@ -319,7 +319,7 @@ public class CompanyService {
 	      return list;
 	   }
 	      
-	      public CompanyDTO apiDetail(String seq) {
+	   public CompanyDTO apiDetail(String seq) {
 	         CompanyDTO dto=null;
 	         String serviceKey = "VthZIBoSyW7Y1PT4scsIWQw5px3VOj1pr5aawkg0Pn3sKP2zNSYuhDR1qN1v7WC0UrNRarwwSFxwQ%2FwMIiNf%2Fg%3D%3D";
 	         String subAddr = "http://apis.data.go.kr/B552015/NpsBplcInfoInqireService/getDetailInfoSearch";

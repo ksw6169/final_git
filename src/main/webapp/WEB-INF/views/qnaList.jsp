@@ -154,17 +154,14 @@
                 </tr>
             </table>
         </div>
-        <span class="submenubar_button_last">글 작성</span>
+        <span id="write" class="submenubar_button" onclick="writeForm()">글 작성</span>
     </div>
 
 	<div class="container">
 		<div class="center-block search_div">
-			<input type="text" placeholder="검색어를 입력해주세요.">
-			<button class="search_btn">검색</button>
+			<input id="search_text" type="text" placeholder="검색어를 입력해주세요.">
+			<button class="search_btn" onclick="kimSaySearch()">검색</button>
 		</div>
-		
-		
-		
         <div class="row">
 			<div class="col-md-4">
 				<div class="thumbnail">
@@ -324,17 +321,139 @@
 					<span class="caption_detail">댓글<br/><b>1</b></span>
 				</div>
 			</div>
+		<div id="pagingAdd"></div>		
+	</div>
+	<div class="container-fluid">
+		<div class="paging_button">
+		  <ul class="pagination pagination-lg">
+		    <li class="page-item disabled">
+		      <a id="more" class="page-link" href="#" tabindex="-1">더보기</a>
+		    </li>
+		  </ul>
 		</div>
-		
-        <div class="paging_button">
-          <ul class="pagination pagination-lg">
-            <li class="page-item disabled">
-              <a class="page-link" href="#" tabindex="-1">더보기</a>
-            </li>
-          </ul>
-        </div>
-    </div>
+	</div>
+</div>
 </body>
 	<script>
+	/* 회원 권한 & 페이징 변수 */
+    var member_div = "${sessionScope.member_div}";		
+    var job_no;	
+    
+    /* 페이징 변수 */
+    var startPage = 1;
+    var endPage = 15;
+    
+    /* 더보기 요청 구분 */
+    var search_div = false;
+    
+    /* 게시글 리스트 호출 */
+	function kimSayList(){
+		$.ajax({
+			type : "get",
+			url : "./kimSayList",
+			data : {
+				job_no: job_no,
+				startPage: startPage,
+				endPage: endPage
+			},
+			success : function(data) {
+				boardPrint(data.list);
+				
+				if((data.listCnt)-1 >= endPage) {
+					$(".page-item").removeClass("disabled");
+				} else {
+					$(".page-item").addClass("disabled");
+				}
+			},
+			error : function(e) {
+				console.log(e);
+			}
+		});
+	}
+	
+    /* 게시글 리스트 출력 */
+	function boardPrint(list){
+		var str = "";
+		for(var i=0; i<list.length; i++) {
+			str+="<div class='col-md-4'>";
+	        str+="<div class='thumbnail'>";
+	        str+="<a href='./kimSayDetail?board_no="+list[i].board_no+"'><div id='title' class='thumbnail_header'><p class='thumbnail_contents'>"+list[i].board_title+"</p></div></a>";
+	        var date = new Date(list[i].board_date);	
+	        str+="<span class='caption_date'>작성일자: <b>"+date.toLocaleDateString("ko-KR")+"</b></span>";
+	        str+="<span class='caption_detail'>조회<br/><b>"+list[i].board_bHit+"</b></span>";
+	        str+="<span class='caption_detail'>추천<br/><b>"+list[i].board_recom+"</b></span>";
+	        str+="<span class='caption_detail'>댓글<br/><b>"+list[i].board_comm+"</b></span>";
+	        str+="</div>";
+	        str+="</div>";
+		}
+		$("#pagingAdd").append(str);
+		// $(".page-link").focus();
+	}
+    
+    /* 더보기 버튼 클릭 시 */
+    $("#more").click(function(){
+    	startPage += 15;
+    	endPage += 15;
+
+    	console.log("search_div: "+search_div);
+    	if(search_div) {
+    		console.log("김세이서치 더보기 호출");
+    		kimSaySearch();
+    	} else {
+    		console.log("김세이리스트 더보기 호출");
+    		kimSayList();
+    	}
+    });
+    
+    /* 키워드 검색 */
+    function kimSaySearch() {
+		$(".page-link").focus();
+    	search_div = true; 
+    	if($("#search_text").val() == "") {
+    		alert("검색 키워드를 입력하세요.");
+    	} else {
+    		$(".col-md-4").remove();
+    		$.ajax({
+    			type : "post",
+    			url : "./kimSaySearchList",
+    			data : {
+    				keyword : $("#search_text").val(),
+    				category : $(".custom_select2 option:selected").val(),
+    				job_no : job_no,
+    				startPage : startPage,
+ 					endPage : endPage   				
+    			},
+    			dataType : "json",
+    			success : function(data) {
+    				boardPrint(data.list);
+    				
+    				if((data.listSearchCnt)-1 >= endPage) {
+    					$(".page-item").removeClass("disabled");
+    				} else {
+    					$(".page-item").addClass("disabled");
+    				}
+    			},
+    			error : function(error) {
+    				console.log(error);
+    			}
+    		});	
+    	}
+    }
+    
+    /* 상단의 직종 select 값이 바뀌면, 게시글 리스트를 비우고, 직종 값에 맞게 리스트 불러옴 */
+    $(".custom_select").change(function() {
+    	job_no = $(".custom_select option:selected").val();
+    	$(".col-md-4").remove();
+    	
+    	startPage = 1;
+    	endPage = 15;
+    	kimSayList();
+    });
+    
+    /* 글쓰기 폼으로 이동 */
+    function writeForm() {
+    	location.href='./pageMove?page=kimSayWrite&job_no='+job_no;
+    }
+	
 	</script>
 </html>

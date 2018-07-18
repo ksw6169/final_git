@@ -10,14 +10,14 @@
     <style>
 		/* submenubar css */
         .submenubar_background{position:absolute;width:100%;height:100px;background-color:#E4EEF0;}
-		.submenubar_header{font-family:fallM;margin-left:40px;width:500px;height:50px;display:inline-block;margin-top:35px;float:left;}
+		.submenubar_header{font-family:fallM;margin-left:40px;width:150px;height:50px;display:inline-block;margin-top:35px;float:left;}
 		td.submenubar_name{font-family:"fallM"; font-size:30px;color:#121F27; background-color: #E4EEF0; border: 1px solid #E4EEF0; }
 		.submenubar_detail{font-size:10px;margin-left:5px;}
 		.submenubar_description{font-size:10px;height:15px;margin-top:10px;}
 		.submenubar_button,.submenubar_button_last{width:130px;height:50px;line-height:50px;color:#fff;font-family:fallM;font-size:15px;text-align:center;
 			margin-top:25px;float:right;background-color:#121F27;cursor:pointer;}
 		.submenubar_button{margin-right:10px;}
-		.submenubar_button_last{margin-right:100px;}
+		.submenubar_button_last{margin-right:3%;}
     
     
         body { padding-top: 100px; }
@@ -52,8 +52,8 @@
 	            </table>
 	        </div>
 	        <span id="AdminWrite" class="submenubar_button_last"><a href="./pageMove?page=mWrite">쪽지 작성</a></span>
-	        <span class="submenubar_button"><a href="./pageMove?page=sendMlist">보낸 쪽지함</a></span>
-	        <span class="submenubar_button"><a href="./pageMove?page=getMlist">받은 쪽지함</a></span>
+	        <span id="sendM" class="submenubar_button"><a href="./pageMove?page=sendMlist">보낸 쪽지함</a></span>
+	        <span id="getM" class="submenubar_button"><a href="./pageMove?page=getMlist">받은 쪽지함</a></span>
 	    </div>
 	    <div class="container">
 	        <h1 class="content">받은 쪽지함</h1>
@@ -113,6 +113,7 @@
 			if(id != "admin" && div != "관리자"){
 				$("#AdminWrite").show();
 			}else{
+				$("#sendM").removeClass("submenubar_button").addClass('submenubar_button_last');
 				$("#AdminWrite").hide();
 				}
 		}

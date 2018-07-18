@@ -206,7 +206,7 @@
     </div>
 
 	<div class="container">
-		<div id="search_div" class="center-block search_div">
+		<div class="center-block search_div">
 			
 			<select id="category" class="custom_select2"> 
 				<option value="잡담" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;잡담</option> 
@@ -304,6 +304,7 @@
 	    /* 게시글 리스트 출력 */
 		function boardPrint(list){
 			var str = "";
+			console.log(list);
 			for(var i=0; i<list.length; i++) {
 				str+="<div class='col-md-4'>";
 		        str+="<div class='thumbnail'>";
