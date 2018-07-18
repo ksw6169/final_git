@@ -163,6 +163,8 @@
 			<button class="search_btn">검색</button>
 		</div>
 		
+		
+		
         <div class="row">
 			<div class="col-md-4">
 				<div class="thumbnail">

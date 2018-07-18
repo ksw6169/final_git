@@ -39,7 +39,7 @@
             line-height: 40px;
             outline:none;
             margin: 5px 0;
-            text-align: ce	nter;
+            text-align: center;
         }
         
         .login_btn {
