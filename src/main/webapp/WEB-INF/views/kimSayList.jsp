@@ -103,6 +103,25 @@
 	          border: 0px;
 	        }
 			
+			/* 정렬 버튼 */
+			.align_btn {
+	          font-family: "bareun";
+	          color: black;
+	          background-color: #E4EEF0;
+			  width: 45%;
+	          height: 50px;
+	          line-height: 50px;
+	          font-size: 14px;
+			  margin-right: 5px;
+			  margin-left: 3%;
+	          border: 0px;
+	          margin-bottom: 50px;
+	          text-align: center;
+	          font-size: 16px;
+	          display: inline-block;
+	          cursor: pointer;
+			}
+			
 			.page-link {
 				width: 200px;
 			}
@@ -187,7 +206,7 @@
     </div>
 
 	<div class="container">
-		<div id="search_div" class="center-block search_div">
+		<div class="center-block search_div">
 			
 			<select id="category" class="custom_select2"> 
 				<option value="잡담" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;잡담</option> 
@@ -198,6 +217,17 @@
 			<input id="search_text" type="text" placeholder="검색어를 입력해주세요.">
 			<button class="search_btn" onclick="kimSaySearch()">검색</button>
 		</div>
+		
+		<!-- 추천순, 조회순 정렬 버튼 -->
+		<div class="row">
+			<div class="col-md-6 col-md-push-3">
+				<div class="col-md-12">
+					<div id="likeBtn" class="align_btn">추천순</div>
+					<div id="hitBtn" class="align_btn">조회순</div>
+				</div>
+			</div>
+		</div>
+		
 		<div id="pagingAdd"></div>
     </div>
     <div class="container-fluid">
@@ -222,6 +252,9 @@
 	    /* 더보기 요청 구분 */
 	    var search_div = false;
 	    
+	    /* 추천, 조회순 정렬(like or hit) */
+	    var align_div = "false";
+	    
 	    /* 게시판 접근 권한 체크 */ 
 		$(document).ready(function() {
 	        var loginId = "${sessionScope.loginId}";
@@ -240,13 +273,18 @@
 	    
 	    /* 게시글 리스트 호출 */
 		function kimSayList(){
+			search_div = false; 
+			
+	    	console.log("kimsayList: "+startPage+"/"+endPage+"/"+align_div);
+			
 			$.ajax({
 				type : "get",
 				url : "./kimSayList",
 				data : {
 					job_no: job_no,
 					startPage: startPage,
-					endPage: endPage
+					endPage: endPage,
+					align_div: align_div
 				},
 				success : function(data) {
 					boardPrint(data.list);
@@ -266,6 +304,7 @@
 	    /* 게시글 리스트 출력 */
 		function boardPrint(list){
 			var str = "";
+			console.log(list);
 			for(var i=0; i<list.length; i++) {
 				str+="<div class='col-md-4'>";
 		        str+="<div class='thumbnail'>";
@@ -287,20 +326,26 @@
 	    	startPage += 15;
 	    	endPage += 15;
 
-	    	console.log("search_div: "+search_div);
 	    	if(search_div) {
-	    		console.log("김세이서치 더보기 호출");
 	    		kimSaySearch();
 	    	} else {
-	    		console.log("김세이리스트 더보기 호출");
 	    		kimSayList();
 	    	}
 	    });
 	    
 	    /* 키워드 검색 */
 	    function kimSaySearch() {
-			$(".page-link").focus();
+	    	if(search_div != true) {
+	    		$("#likeBtn").css("color", "black");
+	    		$("#likeBtn").css("background", "#E4EEF0");
+	    		$("#hitBtn").css("color", "black");
+	    		$("#hitBtn").css("background", "#E4EEF0");
+	    	}
+	    	
 	    	search_div = true; 
+	    	
+	    	console.log("kimsaySearch: "+startPage+"/"+endPage+"/"+align_div);
+	    
 	    	if($("#search_text").val() == "") {
 	    		alert("검색 키워드를 입력하세요.");
 	    	} else {
@@ -313,7 +358,8 @@
 	    				category : $(".custom_select2 option:selected").val(),
 	    				job_no : job_no,
 	    				startPage : startPage,
-	 					endPage : endPage   				
+	 					endPage : endPage,
+	 					align_div: align_div
 	    			},
 	    			dataType : "json",
 	    			success : function(data) {
@@ -337,6 +383,14 @@
 	    	job_no = $(".custom_select option:selected").val();
 	    	$(".col-md-4").remove();
 	    	
+	    	align_div = "false";
+	    	
+	    	// 추천, 조회순 버튼 초기화
+	    	$("#likeBtn").css("color", "black");
+    		$("#likeBtn").css("background", "#E4EEF0");
+    		$("#hitBtn").css("color", "black");
+    		$("#hitBtn").css("background", "#E4EEF0");
+	    	
 	    	startPage = 1;
 	    	endPage = 15;
 	    	kimSayList();
@@ -346,5 +400,37 @@
 	    function writeForm() {
 	    	location.href='./pageMove?page=kimSayWrite&job_no='+job_no;
 	    }
+	    
+	    /* 추천순, 조회순 정렬 */
+	    $(".align_btn").click(function() {
+	    	if($(".col-md-4").length > 0) {	// 현재 게시글이 1개 이상일 경우, 추천/조회수 정렬 가능	
+	    		if($(this).attr("id") == "likeBtn") {
+		    		$("#likeBtn").css("color", "white");
+		    		$("#likeBtn").css("background", "#FF8000");
+		    		$("#hitBtn").css("color", "black");
+		    		$("#hitBtn").css("background", "#E4EEF0");
+		    		
+		    		align_div = "like";
+		    	} else {
+		    		$("#hitBtn").css("color", "white");
+		    		$("#hitBtn").css("background", "#FF8000");
+		    		$("#likeBtn").css("color", "black");
+		    		$("#likeBtn").css("background", "#E4EEF0");
+
+		    		align_div = "hit";
+		    	}
+		    	
+	    		startPage = 1;	// 첫번째부터 더보기를 누른 현재 endPage까지 추천순으로 정렬해 가져오기 위함
+	    		$(".col-md-4").remove();
+	    		
+	    		if(search_div) {
+	    			console.log("서치 호출");
+	    			kimSaySearch();
+	    		} else {
+	    			console.log("리스트 호출");
+	    			kimSayList();
+	    		}
+	    	}
+	    });
 	</script>
 </html>

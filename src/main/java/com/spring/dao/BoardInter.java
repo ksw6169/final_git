@@ -33,9 +33,9 @@ public interface BoardInter {
 
 	int myReplyListCnt(Map<String, String> params); //내가 쓴 댓글 리스트 갯수
 
-	ArrayList<BoardDTO> kimSayList(int job_no, int startPage, int endPage);	// '김대리의 한마디' 리스트 요청
+	ArrayList<BoardDTO> kimSayList(int job_no, int startPage, int endPage, String align_div);	// '김대리의 한마디' 리스트 요청
 	
-	ArrayList<BoardDTO> kimSaySearchList(String keyword, String board_category, int job_no, int startPage, int endPage);	// '김대리의 한마디' 검색 리스트 요청
+	ArrayList<BoardDTO> kimSaySearchList(String keyword, String board_category, int job_no, int startPage, int endPage, String align_div);	// '김대리의 한마디' 검색 리스트 요청
 	
 	int kimSayDelete(String board_no);	// '김대리의 한마디' 삭제
 
@@ -43,7 +43,7 @@ public interface BoardInter {
 
 	int kimSayWrite(String category, String board_title, String board_content, String member_id, int job_no); // '김대리의 한마디' 작성
 
-	boolean myLikeCount(String loginId);
+	int myLikeCount(String loginId, int board_no);
 	
 	int likeCount(int board_no);
 	

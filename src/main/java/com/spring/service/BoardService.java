@@ -35,10 +35,11 @@ public class BoardService {
 		int job_no = Integer.parseInt((String) params.get("job_no"));
 		int startPage = Integer.parseInt((String) params.get("startPage"));
 		int endPage = Integer.parseInt((String) params.get("endPage"));
+		String align_div = String.valueOf(params.get("align_div"));
 		
-		logger.info("변수 확인: "+job_no+"/"+startPage+"/"+endPage);
+		logger.info("변수 확인: "+job_no+"/"+startPage+"/"+endPage+"/"+align_div);
 		
-		ArrayList<BoardDTO> list = inter.kimSayList(job_no, startPage, endPage);
+		ArrayList<BoardDTO> list = inter.kimSayList(job_no, startPage, endPage, align_div);
 		int listCnt = inter.kimSayListCnt(job_no);
 		
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
@@ -54,8 +55,9 @@ public class BoardService {
 	@Transactional
 	public ModelAndView kimSayDetail(String board_no) {
 		inter = sqlSession.getMapper(BoardInter.class);	
-		logger.info("상세보기");		
+		logger.info("상세보기");
 		ModelAndView mav = new ModelAndView();
+		inter.upHit(board_no);
 		mav.addObject("board", inter.kimSayDetail(board_no));
 		mav.setViewName("kimSayDetail");
 		return(mav);
@@ -232,8 +234,14 @@ public class BoardService {
 		int board_no = Integer.parseInt(params.get("board_no"));
 
 		// 1) 내가 추천 했는지 여부
-		boolean myLike = inter.myLikeCount(loginId);
+		boolean myLike;
+		if(inter.myLikeCount(loginId, board_no) > 0) {
+			myLike = true;
+		} else {
+			myLike = false;
+		}
 		
+		logger.info(loginId+" / "+board_no);
 		// 2) 게시글의 추천수 가져오기
 		int likeCount = inter.likeCount(board_no);
 		
@@ -264,7 +272,12 @@ public class BoardService {
 		
 		logger.info("추천수 증가 or 감소: "+inter.upLike(myLike, board_no));
 
-		boolean like = inter.myLikeCount(id);
+		boolean like;
+		if(inter.myLikeCount(id, board_no) > 0) {
+			like = true;
+		} else {
+			like = false;
+		}
 		int likeCount = inter.likeCount(board_no);
 		
 		HashMap<String, Object> resultMap = new HashMap<>();
@@ -367,8 +380,9 @@ public class BoardService {
 		int job_no = Integer.parseInt(params.get("job_no"));
 		int startPage = Integer.parseInt(params.get("startPage"));
 		int endPage = Integer.parseInt(params.get("endPage"));
+		String align_div = String.valueOf(params.get("align_div"));
 		
-		ArrayList<BoardDTO> list = inter.kimSaySearchList(keyword, board_category, job_no, startPage, endPage);
+		ArrayList<BoardDTO> list = inter.kimSaySearchList(keyword, board_category, job_no, startPage, endPage, align_div);
 		int listSearchCnt = inter.kimSaySearchListCnt(keyword, board_category, job_no);
 		
 		resultMap.put("list", list);

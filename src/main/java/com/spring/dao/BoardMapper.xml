@@ -5,15 +5,21 @@
     
 <!-- namespace = 연결되는 인터페이스 -->    
 <mapper namespace="com.spring.dao.BoardInter">
-
 	<!-- 김대리의 한마디 글 리스트 -->
 	<select id="kimSayList" resultType="com.spring.dto.BoardDTO">
-		SELECT * FROM (SELECT board_no, board_title, board_content, board_category, board_date, board_bHit, job_no, ROW_NUMBER() OVER(ORDER BY board_no DESC) AS rnum FROM board) WHERE (board_category = '잡담' OR board_category = '이직' OR board_category = '업무질문') AND job_no = #{param1} AND rnum BETWEEN #{param2} AND #{param3} ORDER BY board_date DESC
-		<!-- <where>
-			<if test="keyword!=null and !keyword.equals('')">
-				board_category LIKE '%'||#{keyword}||'%'
-			</if>
-		</where> -->
+		SELECT * FROM (SELECT board_no, board_title, board_recom, board_content, board_category, board_date, board_bHit, job_no, 
+			ROW_NUMBER() OVER(ORDER BY board_no DESC) AS rnum FROM board) 
+				WHERE (board_category = '잡담' OR board_category = '이직' OR board_category = '업무질문') 
+					AND job_no = #{param1} AND rnum BETWEEN #{param2} AND #{param3} 
+						<if test="param4 == ''">
+							ORDER BY board_date DESC
+						</if>
+						<if test = "param4 == 'like'">
+							ORDER BY board_recom DESC
+						</if>
+						<if test = "param4 == 'hit'">
+							ORDER BY board_bHit DESC
+						</if>
 	</select>
 
 	<select id="kimSayListCnt" resultType="int">
@@ -22,10 +28,19 @@
 
 	<!-- 내용 검색도 가능하게 수정(0717 - 성원) -->
 	<select id="kimSaySearchList" resultType="com.spring.dto.BoardDTO">
-		SELECT * FROM (SELECT board_no, board_title, board_content, board_category, board_date, board_bHit, job_no,
+		SELECT * FROM (SELECT board_no, board_recom, board_title, board_content, board_category, board_date, board_bHit, job_no,
         	ROW_NUMBER() OVER(ORDER BY board_no DESC) AS rnum FROM board)
             	WHERE (board_category=#{param2} AND job_no=#{param3}) AND (board_title LIKE '%'||#{param1}||'%' OR board_content LIKE '%'||#{param1}||'%')
-                	AND rnum BETWEEN #{param4} AND #{param5} ORDER BY board_date DESC
+                	AND rnum BETWEEN #{param4} AND #{param5} 
+	                	<if test="param6 == ''">
+							ORDER BY board_date DESC
+						</if>
+						<if test = "param6 == 'like'">
+							ORDER BY board_recom DESC
+						</if>
+						<if test = "param6 == 'hit'">
+							ORDER BY board_bHit DESC
+						</if>
 	</select>
 	
 	<select id="kimSaySearchListCnt" resultType="int">
@@ -146,8 +161,8 @@
    		</where>
 	</select>
 	
-	<select id="myLikeCount" resultType="boolean" parameterType="String">
-		SELECT COUNT(*) FROM recommand WHERE member_id = #{param1}
+	<select id="myLikeCount" resultType="int">
+		SELECT COUNT(*) FROM recommand WHERE member_id = #{param1} AND board_no = #{param2}
 	</select>
 	
 	<select id="likeCount" resultType="int" parameterType="int">
