@@ -27,18 +27,18 @@
 	        .table>tbody>tr>th { text-align: center; }
 	        .button-group { margin-top: 15px;}
 	
-	        .like { background-color: #FF8000; margin: 15px 0 0 15px; }
+	        .like { background-color: white; margin: 15px 0 0 15px; }
 	
 	        .reply { background-color: #121F27; color: white; }
-	        .subject, .date { text-align: left; color: #121F27; background-color: #FFFFFF; }
+	        .subject, .date { width: 750px; text-align: center; color: #121F27; background-color: #FFFFFF; }
 	        .contents { color: #121F27; background-color: #FFFFFF; height: 200px; line-height: 100px; text-align: left; } 
 	
 	        .reply_contents { color: #121F27; background-color: #FFFFFF; height: 75px; line-height: 75px; text-align: left; }
 	        .reply_date { color: #121F27; background-color: #FFFFFF; width: 280px; height: 75px; line-height: 75px; text-align: center; }
 			td.reply_updel { background-color: #FFFFFF; border: 1px #FFFFFF; width: 80px; }
 	        .detail_div { margin-top: 50px;}
-	        .table_div { background-color: #E4EEF0; padding: 50px; text-align: center;}
-			.table>tbody>tr>td.reply_date { vertical-align: middle; border: 1px white; }
+	        .table_div { background-color: #E4EEF0; padding: 50px; text-align: center; margin-bottom: 50px; }
+			.table>tbody>tr>td.reply_date { vertical-align: middle; border: 0.25px solid #DDDDDD; }
 			.table>tbody>tr>td.reply_updel { padding: 0px; border-top: 0px; }
 			
 			.button_group {
@@ -50,17 +50,16 @@
 			}
 			
 			.clear1 {
-				margin-top: 100px;
+				margin-top: 150px;
 			}
 			
 			.clear2 {
 				margin-top: 50px;
 			}
-			
     	</style>
   </head>
   <body>
-  <jsp:include page="menubar.jsp"/>
+  	<jsp:include page="menubar.jsp"/>
   
     <div class="submenubar_background">
         <div class="submenubar_header">
@@ -123,7 +122,7 @@
 					   <th style="width: 100px;">수정/삭제</th>
                      </tr>
                 </table>
-				<textarea class="form-control" rows="5" name="replyContent"></textarea>
+				<textarea id="write_replyContent" class="form-control replyContent" rows="5" name="replyContent"></textarea>
 				<div class="button-group">
                 <button class="btn btn-default pull-right replyWrite">댓글 작성</button>
 				</div>
@@ -151,6 +150,11 @@
 				console.log(data.likeCount);
 				// 추천 여부 - data.myLike
 				myLike = data.myLike;
+				
+				if(loginId != "${board.member_id}"){
+					$("#update").css("display", "none");
+					$("#delete").css("display", "none");
+				} 
 				
 				if(data.myLike == true) {
 					$("#like.btn.like_btn").css("background", "#FF8000");
@@ -182,7 +186,7 @@
 				var content = "";
 				for(var i=0; i<data.list.length; i++) {
 					content += "<tr>";
-					content += "<td class='reply_contents' colspan='2' style='padding: 0px;'><textarea id='replyContent"+data.list[i].reply_no+"' style='width: 100%; height: 100%;' readonly='readonly'>"+data.list[i].reply_content+"</textarea></td>";
+					content += "<td class='reply_contents' colspan='2' style='padding: 0px;'><textarea name='replyContent' id='replyContent"+data.list[i].reply_no+"' style='width: 100%; height: 100%;' readonly='readonly'>"+data.list[i].reply_content+"</textarea></td>";
 					var date = new Date(data.list[i].reply_date);
 					content += "<td class='reply_date' style='0.25px solid #DDDDDD;'>"+dateForm(date)+"</td>";
 					if(data.list[i].member_id == loginId) {
@@ -280,6 +284,14 @@
 		}
 	});
 	
+	//글자수 제한
+    $("#write_replyContent").on('keyup',function(){
+        if($(this).val().length > 100) {
+            $(this).val($(this).val().substring(0, 100));
+            alert("글자수를 초과하셨습니다 !");
+        }
+    });
+	
 	// 댓글 작성 버튼 클릭시
 	$(".replyWrite").click(function() {
 		console.log($(".replyContent").val());
@@ -290,7 +302,7 @@
 			data : { 
 				loginId : loginId,
 				board_no : board_no,
-				replyContent : $(".replyContent").val()
+				reply_content : $(".replyContent").val()
 			},
 			dataType : "json",
 			success : function(data) {
