@@ -187,8 +187,9 @@
 		</if>
 	</update> 
 	
-	<insert id="replyWrite">
-		INSERT INTO reply VALUES (reply_seq.NEXTVAL, #{param2}, #{param1}, #{param3}, SYSDATE) 
+	<insert id="replyWrite" parameterType="com.spring.dto.ReplyDTO">
+		INSERT INTO reply(reply_no,board_no,member_id,reply_content,reply_date) 
+		VALUES (reply_seq.NEXTVAL, #{param2}, #{param1}, #{param3}, SYSDATE) 
 	</insert>
 
 	<update id="replyCountUp">
@@ -210,5 +211,58 @@
 	<update id="replyCountDown">
 		UPDATE board SET board_comm = board_comm-1 WHERE board_no = #{param1}
 	</update>
+	
+	<!-- 모르면 물어봐 글 리스트 -->
+	<select id="qnaList" resultType="com.spring.dto.BoardDTO">
+		SELECT * FROM (SELECT board_no, board_title, board_recom, board_content,board_date, board_bHit, board_category,
+			ROW_NUMBER() OVER(ORDER BY board_no DESC) AS rnum FROM board) 
+				WHERE (board_category = '물어봐') AND rnum BETWEEN #{param2} AND #{param3} 
+						<if test="param4 == ''">
+							ORDER BY board_date DESC
+						</if>
+						<if test = "param4 == 'like'">
+							ORDER BY board_recom DESC
+						</if>
+						<if test = "param4 == 'hit'">
+							ORDER BY board_bHit DESC
+						</if>
+	</select>
+
+	<select id="qnaListCnt" resultType="int">
+		SELECT COUNT(*) FROM board WHERE (board_category = '물어봐')
+	</select>
+
+	<!-- 내용 검색도 가능하게 수정(0717 - 성원) -->
+	<select id="qnaSearchList" resultType="com.spring.dto.BoardDTO">
+		SELECT * FROM (SELECT board_no, board_recom, board_title, board_content, board_date, board_bHit,
+        	ROW_NUMBER() OVER(ORDER BY board_no DESC) AS rnum FROM board)
+            	WHERE (board_title LIKE '%'||#{param1}||'%' OR board_content LIKE '%'||#{param1}||'%')
+                	AND rnum BETWEEN #{param2} AND #{param3} 
+	                	<if test="param4 == ''">
+							ORDER BY board_date DESC
+						</if>
+						<if test = "param4 == 'like'">
+							ORDER BY board_recom DESC
+						</if>
+						<if test = "param4 == 'hit'">
+							ORDER BY board_bHit DESC
+						</if>
+	</select>
+	
+	<select id="qnaSearchListCnt" resultType="int">
+		SELECT COUNT(*) FROM board
+			WHERE (board_category='물어봐') AND (board_title LIKE '%'||#{param1}||'%' OR board_content LIKE '%'||#{param1}||'%')
+	</select>
+	
+	<!-- 모르면 물어봐 글 작성 -->
+	<insert id="qnaWrite">
+		INSERT INTO board(board_no, member_id, board_title, board_content, board_category) 
+			VALUES(board_seq.NEXTVAL,#{param3},#{param1},#{param2},#{param4})
+	</insert>
+	
+	<!-- 모르면 물어봐 상세보기 -->
+	<select id="qnaDetail" resultType="com.spring.dto.BoardDTO">
+		SELECT board_no, board_category, board_title, board_date, board_content, board_recom from board where board_no=#{param1}
+	</select>
 	
 </mapper>

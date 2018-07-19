@@ -70,6 +70,18 @@ public interface BoardInter {
 
 	int kimSaySearchListCnt(String keyword, String board_category, int job_no);
 
+	ArrayList<BoardDTO> qnaList(String board_category, int startPage, int endPage, String align_div);
+
+	int qnaListCnt();
+
+	ArrayList<BoardDTO> qnaSearchList(String keyword, int startPage, int endPage, String align_div);
+
+	int qnaSearchListCnt(String keyword);
+
+	int qnaWrite(String board_title, String board_content, String member_id, String board_category);
+
+	BoardDTO qnaDetail(String board_no);
+
 	
 
 

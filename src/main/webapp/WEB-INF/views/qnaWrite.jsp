@@ -66,22 +66,26 @@
   
   <div class="container">
         <div class="detail_div">
+        <form id="sendForm" method="post">
             <div class="table_div">
                 <table class="table">
+                     <input name="member_id" type="hidden" value="${sessionScope.loginId}"/>
+                     <input name="board_category" type="hidden" value="물어봐"/>
                      <tr>
                        <th>제목</th>
-                       <td class="subject"><textarea class="form-control subject" rows="1" placeholder="제목을 입력해주세요." style="padding-bottom: 11px;"></textarea></td>
+                       <td class="subject"><textarea name="board_title" id="title_textarea" class="form-control subject" rows="1" placeholder="제목을 입력해주세요." style="padding-bottom: 11px;"></textarea></td>
                      </tr>
                      <tr>
                        <th colspan="2">내용</th>
 					 </tr>
 					<tr>
-						<td class="write_content" colspan="2"><textarea class="form-control" rows="15" placeholder="내용을 입력해주세요."></textarea></td>
+						<td class="write_content" colspan="2"><textarea name="board_content" id="content_textarea" class="form-control" rows="15" placeholder="내용을 입력해주세요."></textarea></td>
 					</tr>
                 </table>
                 
-				<button class="btn btn-default pull-right">작성 완료</button>
-            </div>    
+				<button id="save" class="btn btn-default pull-right">작성 완료</button>
+            </div> 
+            </form>   
             <div class="button-group">
                 <button class="btn btn-default pull-right">목록</button>       
             </div>
@@ -89,5 +93,26 @@
     </div>
 </body>
 	<script>
+		$(document).ready(function() {
+	        var loginId = "${sessionScope.loginId}";
+	        console.log(loginId);
+		});
+		
+		$("#save").click(function(){
+			if($("#title_textarea").val()==""){
+				alert("제목을 입력해주세요.");
+				$("#title_textarea").focus();
+			}else if($("#content_textarea").val() == ""){
+				alert("내용을 입력해주세요");
+			}else{
+				console.log("전송");
+				$("#sendForm").attr("action", "./qnaWrite");
+				$("#sendForm").submit();
+			}
+		});
+		
+		$("#list").click(function(){
+			location.href='./pageMove?page=qnaList';
+		});
 	</script>
 </html>

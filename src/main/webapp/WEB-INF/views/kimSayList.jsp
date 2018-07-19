@@ -304,7 +304,6 @@
 	    /* 게시글 리스트 출력 */
 		function boardPrint(list){
 			var str = "";
-			console.log(list);
 			for(var i=0; i<list.length; i++) {
 				str+="<div class='col-md-4'>";
 		        str+="<div class='thumbnail'>";

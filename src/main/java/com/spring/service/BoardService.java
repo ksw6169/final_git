@@ -294,8 +294,9 @@ public class BoardService {
 		inter = sqlSession.getMapper(BoardInter.class);
 		String loginId = String.valueOf(params.get("loginId"));
 		int board_no = Integer.parseInt(params.get("board_no"));
-		String replyContent = String.valueOf(params.get("replyContent"));
-		
+		String replyContent = String.valueOf(params.get("reply_content"));
+		//String reply_content = params.get("reply_content");
+		logger.info("아이디 : "+loginId+"/ 게시글 번호 : "+board_no+"/ 댓글 내용 : "+replyContent);
 		int success = 0;
 		
 		// 1) 댓글 수 증가
@@ -306,7 +307,7 @@ public class BoardService {
 		success = inter.replyWrite(loginId, board_no, replyContent);
 		
 		HashMap<String, Object> resultMap = new HashMap<>();
-		
+		logger.info("reply_content : "+replyContent);
 		
 		resultMap.put("msg", "댓글 작성 실패");
 		if(success > 0) {
@@ -390,4 +391,89 @@ public class BoardService {
 		
 		return resultMap;
 	}
+
+	
+	
+	
+	/* 모르면 물어봐 리스트 */
+	public HashMap<String, Object> qnaList(HashMap<String, Object> params) {
+		logger.info("모르면 물어봐 서비스 접근");
+		inter = sqlSession.getMapper(BoardInter.class);
+		
+		String board_category = String.valueOf(params.get("board_category"));
+		int startPage = Integer.parseInt((String) params.get("startPage"));
+		int endPage = Integer.parseInt((String) params.get("endPage"));
+		String align_div = String.valueOf(params.get("align_div"));
+		
+		logger.info("변수 확인: "+board_category+"/"+startPage+"/"+endPage+"/"+align_div);
+		
+		ArrayList<BoardDTO> list = inter.qnaList(board_category, startPage, endPage, align_div);
+		int listCnt = inter.qnaListCnt();
+		
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		
+		resultMap.put("list", list);
+		resultMap.put("listCnt", listCnt);
+		
+		return resultMap;
+	}
+
+	public HashMap<String, Object> qnaSearchList(Map<String, String> params) {
+		HashMap<String, Object> resultMap = new HashMap<>();
+		inter = sqlSession.getMapper(BoardInter.class);
+		String keyword = String.valueOf(params.get("keyword"));
+		int startPage = Integer.parseInt(params.get("startPage"));
+		int endPage = Integer.parseInt(params.get("endPage"));
+		String align_div = String.valueOf(params.get("align_div"));
+		
+		ArrayList<BoardDTO> list = inter.qnaSearchList(keyword, startPage, endPage, align_div);
+		int listSearchCnt = inter.qnaSearchListCnt(keyword);
+		
+		resultMap.put("list", list);
+		resultMap.put("listSearchCnt", listSearchCnt);
+		
+		return resultMap;
+	}
+	
+	/* 모르면 물어봐 글 작성 */
+	public ModelAndView qnaWrite(HashMap<String, String> params) {
+		ModelAndView mav = new ModelAndView();
+		String member_id = params.get("member_id");
+		String board_content = params.get("board_content");
+		String board_title = params.get("board_title");
+		String board_category = params.get("board_category");
+		
+		logger.info("ID : "+member_id);
+		logger.info(member_id+"/"+board_content+"/"+board_title+"/"+board_category);//logger는 문자열만 가능, 숫자 뽑아오려면 뒤에 문자열 추가
+		inter = sqlSession.getMapper(BoardInter.class);
+		String page = "redirect:/";
+		//2. 수정 쿼리 실행
+		int success = inter.qnaWrite(board_title, board_content, member_id, board_category);
+		if(success > 0) {
+			page = "qnaList";
+		}
+		mav.setViewName(page);
+		return mav;
+	}
+	
+	/* 모르면 물어봐 상세보기 */
+	public ModelAndView qnaDetail(String board_no) {
+		inter = sqlSession.getMapper(BoardInter.class);	
+		logger.info("상세보기");
+		ModelAndView mav = new ModelAndView();
+		inter.upHit(board_no);
+		mav.addObject("board", inter.qnaDetail(board_no));
+		mav.setViewName("qnaDetail");
+		return(mav);
+	}
+	
+	/* 모르면 물어봐 글 수정 */
+	public ModelAndView qnaUpdateForm(String board_no) {
+		ModelAndView mav = new ModelAndView();
+		inter = sqlSession.getMapper(BoardInter.class);
+		mav.addObject("board", inter.qnaDetail(board_no));
+		mav.setViewName("qnaUpdate");
+		return mav;
+	}
+
 }
