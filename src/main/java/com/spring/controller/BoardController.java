@@ -123,15 +123,32 @@ public class BoardController {
         return service.qnaDetail(board_no);
     }
 	
-	/*모르면 물어봐 수정 폼(미완성)*/
+	/*모르면 물어봐 수정 폼*/
 	@RequestMapping(value = "/qnaUpdateForm")
-    public ModelAndView qmaUpdate(@RequestParam("board_no") String board_no, HttpServletRequest request) {
+    public ModelAndView qnaUpdate(@RequestParam("board_no") String board_no, HttpServletRequest request) {
         ModelAndView mav=new ModelAndView();
         logger.info("board_no"+board_no);
         mav.addObject("board_no", board_no);
-        mav.setViewName("kimSayUpdateForm");
+        mav.setViewName("qnaUpdateForm");
         return service.qnaUpdateForm(board_no);
     }
+	
+	//모르면 물어봐 게시글 수정
+	@RequestMapping(value="/qnaUpdate")
+	public ModelAndView qnaUpdate(@RequestParam HashMap<String,String> params) {
+		logger.info("게시글 수정 요청");
+		return service.qnaUpdate(params);
+	}
+	
+	//모르면 물어봐 게시글 삭제
+	@RequestMapping(value="/qnaDelete")
+	public ModelAndView qnaDelete(@RequestParam("board_no") String board_no, HttpServletRequest request) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("board_no", board_no);
+		logger.info("삭제 실행");
+		logger.info("board:{}" , board_no);
+		return service.qnaDelete(board_no);
+	}
 	
 	//공지사항리스트 폼
 	@RequestMapping(value="/nBoardListForm")

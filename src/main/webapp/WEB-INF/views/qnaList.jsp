@@ -319,6 +319,11 @@
     	}
     }
     
+    /* 글쓰기 폼으로 이동 */
+    function writeForm() {
+    	location.href='./pageMove?page=qnaWrite';
+    }
+    
     /* 추천순, 조회순 정렬 */
     $(".align_btn").click(function() {
     	if($(".col-md-4").length > 0) {	// 현재 게시글이 1개 이상일 경우, 추천/조회수 정렬 가능	

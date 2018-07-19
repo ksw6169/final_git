@@ -101,8 +101,8 @@
                 <button id="like" class="btn like_btn" onclick="like()"></button>
             </div>    
             <div class="button-group">
-                <button class="btn btn-default pull-right">삭제</button>
-                <button class="btn btn-default pull-right">수정</button>
+                <button id="delete" class="btn btn-default pull-right">삭제</button>
+                <button id="update" class="btn btn-default pull-right">수정</button>
                 <button class="btn btn-default pull-right" onclick="location.href='./pageMove?page=qnaList'">목록</button>       
             </div>
         </div>
@@ -247,7 +247,8 @@
 	        board_content:"${board.board_content}",
 	        board_recom:"${board.board_recom}",
 	        board_category:"${board.board_category}",
-	        board_no:"${board.board_no}"
+	        board_no:"${board.board_no}",
+            member_id:"${board.member_id}"
 	};
 	
 	BoardPrint(dto);
@@ -261,12 +262,19 @@
 	}
 	
 	$("#update").click(function(){
-		//아이디 일치 체크 빠짐
-		location.href="./qnaUpdateForm?board_no="+${board.board_no};
+		if(loginId == ("${board.member_id}")){
+			location.href="./qnaUpdateForm?board_no="+${board.board_no};
+		} else{
+			alert("수정 권한이 없습니다.");
+		}
 	});
 	
 	$("#delete").click(function(){
-		location.href="./qnaDelete?board_no="+${board.board_no};
+		if(loginId == ("${board.member_id}")){
+			location.href="./qnaDelete?board_no="+${board.board_no};
+		} else{
+			alert("삭제 권한이 없습니다.");
+		}
 	});
 	
 	// 댓글 작성 버튼 클릭시

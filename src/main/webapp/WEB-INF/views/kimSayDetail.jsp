@@ -255,11 +255,10 @@
             board_content:"${board.board_content}",
             board_recom:"${board.board_recom}",
             board_category:"${board.board_category}",
-            board_no:"${board.board_no}"
+            board_no:"${board.board_no}",
+            member_id:"${board.member_id}"
     };
-    
     BoardPrint(dto);
-    
     function BoardPrint(board){
         console.log(board);
         $("#board_category").html(board.board_category);
@@ -269,12 +268,19 @@
     }
     
     $("#update").click(function(){
-    	//아이디 일치 체크 빠짐
-		location.href="./kimSayUpdateForm?board_no="+${board.board_no};
+    	if(loginId == ("${board.member_id}")){
+			location.href="./kimSayUpdateForm?board_no="+${board.board_no};
+    	} else{
+    		alert("수정 권한이 없습니다.");
+    	}
 	});
     
     $("#delete").click(function(){
-		location.href="./kimSayDelete?board_no="+${board.board_no};
+    	if(loginId == ("${board.member_id}")){
+    		location.href="./kimSayDelete?board_no="+${board.board_no};
+    	} else{
+    		alert("삭제 권한이 없습니다.");
+    	}
 	});
     
     // 댓글 작성 버튼 클릭시

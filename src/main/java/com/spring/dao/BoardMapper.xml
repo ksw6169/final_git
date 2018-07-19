@@ -50,7 +50,7 @@
 	
 	<!-- 김대리의 한마디 상세보기 -->
 	<select id="kimSayDetail" resultType="com.spring.dto.BoardDTO">
-		SELECT board_no, board_category, board_title, board_date, board_content, board_recom from board where board_no=#{param1}
+		SELECT board_no, board_category, board_title, board_date, board_content, board_recom, member_id from board where board_no=#{param1}
 	</select>
 	
 	<!-- 김대리의 한마디 글 작성 -->
@@ -262,7 +262,17 @@
 	
 	<!-- 모르면 물어봐 상세보기 -->
 	<select id="qnaDetail" resultType="com.spring.dto.BoardDTO">
-		SELECT board_no, board_category, board_title, board_date, board_content, board_recom from board where board_no=#{param1}
+		SELECT board_no, board_category, board_title, board_date, board_content, board_recom, member_id from board where board_no=#{param1}
 	</select>
+	
+	<!-- 모르면 물어봐 글 수정-->	
+	<update id="qnaUpdate">
+	 	UPDATE board SET board_title = #{param1}, board_content = #{param2} WHERE board_no = #{param3}
+	 </update>
+	
+	<!-- 모르면 물어봐 글 삭제 -->
+	<delete id="qnaDelete" >
+		DELETE FROM board WHERE board_no = #{param1} 
+	</delete>
 	
 </mapper>
