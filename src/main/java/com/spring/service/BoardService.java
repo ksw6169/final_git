@@ -425,9 +425,9 @@ public class BoardService {
 		int startPage = Integer.parseInt(params.get("startPage"));
 		int endPage = Integer.parseInt(params.get("endPage"));
 		String align_div = String.valueOf(params.get("align_div"));
-		
 		ArrayList<BoardDTO> list = inter.qnaSearchList(keyword, startPage, endPage, align_div);
 		int listSearchCnt = inter.qnaSearchListCnt(keyword);
+		logger.info("list size : "+listSearchCnt);
 		
 		resultMap.put("list", list);
 		resultMap.put("listSearchCnt", listSearchCnt);
@@ -467,7 +467,7 @@ public class BoardService {
 		return(mav);
 	}
 	
-	/* 모르면 물어봐 글 수정 */
+	/* 모르면 물어봐 글 수정폼 */
 	public ModelAndView qnaUpdateForm(String board_no) {
 		ModelAndView mav = new ModelAndView();
 		inter = sqlSession.getMapper(BoardInter.class);
@@ -475,5 +475,32 @@ public class BoardService {
 		mav.setViewName("qnaUpdate");
 		return mav;
 	}
+	
+	//모르면 물어봐 게시글 수정
+	public ModelAndView qnaUpdate(HashMap<String, String> params) {
+		ModelAndView mav = new ModelAndView();
+		//1. 파라메터 값을 받아온다.
+		String board_no = params.get("board_no");
+		String board_content = params.get("board_content");
+		String board_title = params.get("board_title");
+		logger.info(board_no+"/"+board_content+"/"+board_title);//logger는 문자열만 가능, 숫자 뽑아오려면 뒤에 문자열 추가
+		inter = sqlSession.getMapper(BoardInter.class);
+		String page = "redirect:/qnaDetail?board_no="+board_no;
+		//2. 수정 쿼리 실행
+		int success = inter.qnaUpdate(board_title, board_content, board_no);
+		if(success > 1) {
+			page = "redirect:/qnaUpdateForm?board_no="+board_no;
+		}
+		mav.setViewName(page);
+		return mav;
+	}
 
+	public ModelAndView qnaDelete(String board_no) {
+		logger.info("게시글 삭제 서비스");
+		inter = sqlSession.getMapper(BoardInter.class);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("board", inter.qnaDelete(board_no));
+		mav.setViewName("qnaList");
+		return mav;
+	}
 }

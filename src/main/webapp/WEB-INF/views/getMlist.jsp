@@ -60,7 +60,7 @@
 	        <table class="table table-hover">
 	        	<thead>
 	             <tr>
-	               <th class="center"><input type="checkbox"/></th>
+	               <th class="center"><input type="checkbox"  id="allChk" onclick="allChk(this);"/></th>
 	               <th class="center">번 호</th>
 	               <th class="center">내   용</th>
 	               <th class="center">작성일자</th>
@@ -125,9 +125,9 @@
 				"ePage":ePage
 		};
 		obj.success=function(data){
-			console.log(data);
-			listPrint(data.GmessageList); //리스트 뿌린후
-			page = data.listAll;
+			console.log(data.GmessageList.length);
+			listPrint(data.GmessageList); 
+			page = data.GmessageList.length;
 			if(ePage >= page){
 				$("#next").addClass('disabled');
 			}else{

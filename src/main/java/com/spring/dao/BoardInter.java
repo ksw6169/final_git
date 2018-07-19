@@ -82,6 +82,10 @@ public interface BoardInter {
 
 	BoardDTO qnaDetail(String board_no);
 
+	int qnaUpdate(String board_title, String board_content, String board_no);
+
+	int qnaDelete(String board_no);
+
 	
 
 
