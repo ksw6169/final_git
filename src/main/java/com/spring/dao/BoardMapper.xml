@@ -237,21 +237,21 @@
 		SELECT * FROM (SELECT board_no, board_recom, board_title, board_content, board_date, board_bHit,
         	ROW_NUMBER() OVER(ORDER BY board_no DESC) AS rnum FROM board)
             	WHERE (board_title LIKE '%'||#{param1}||'%' OR board_content LIKE '%'||#{param1}||'%')
-                	AND rnum BETWEEN #{param4} AND #{param5} 
-	                	<if test="param6 == ''">
+                	AND rnum BETWEEN #{param2} AND #{param3} 
+	                	<if test="param4 == ''">
 							ORDER BY board_date DESC
 						</if>
-						<if test = "param6 == 'like'">
+						<if test = "param4 == 'like'">
 							ORDER BY board_recom DESC
 						</if>
-						<if test = "param6 == 'hit'">
+						<if test = "param4 == 'hit'">
 							ORDER BY board_bHit DESC
 						</if>
 	</select>
 	
 	<select id="qnaSearchListCnt" resultType="int">
 		SELECT COUNT(*) FROM board
-			WHERE (board_title LIKE '%'||#{param1}||'%' OR board_content LIKE '%'||#{param1}||'%')
+			WHERE (board_category='물어봐') AND (board_title LIKE '%'||#{param1}||'%' OR board_content LIKE '%'||#{param1}||'%')
 	</select>
 	
 	<!-- 모르면 물어봐 글 작성 -->
