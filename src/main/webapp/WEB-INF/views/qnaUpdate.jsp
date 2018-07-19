@@ -62,27 +62,29 @@
                 </tr>
             </table>
         </div>
-        <span class="submenubar_button_last">글 작성</span>
     </div>
   
   <div class="container">
         <div class="detail_div">
+        <form id="sendForm" action="qnaUpdate" method="post"> 
             <div class="table_div">
                 <table class="table">
+                     <input name="board_no" type="hidden" value="${param.board_no}"/>
                      <tr>
                        <th>제목</th>
-                       <td class="subject"><textarea class="form-control subject" rows="1" style="padding-bottom: 11px;">취업 질문</textarea></td>
+                       <td id="board_title" class="subject"><textarea name="board_title" id="title_textarea" class="form-control subject" rows="1" style="padding-bottom: 11px;"></textarea></td>
                      </tr>
                      <tr>
                        <th colspan="2">내용</th>
 					 </tr>
 					<tr>
-						<td class="write_content" colspan="2"><textarea class="form-control" rows="15">내용내용</textarea></td>
+						<td id="board_content" class="write_content" colspan="2"><textarea name="board_content" id="content_textarea" class="form-control" rows="15"></textarea></td>
 					</tr>
                 </table>
                 
-				<button class="btn btn-default pull-right">수정 완료</button>
+				<button id="update" class="btn btn-default pull-right">수정 완료</button>
             </div>    
+            </form>
             <div class="button-group">
                 <button class="btn btn-default pull-right">목록</button>       
             </div>
@@ -90,5 +92,29 @@
     </div>
 </body>
 	<script>
+	var dto={
+            board_title:"${board.board_title}",
+            board_content:"${board.board_content}",
+    };
+    
+    BoardPrint(dto);
+    
+    function BoardPrint(board){
+        console.log(board);
+        $("#title_textarea").text(board.board_title);
+        $("#content_textarea").text(board.board_content);
+    }
+    
+    $("#update").click(function(){
+		if($("#title_textarea").val()==""){
+			alert("제목을 입력해주세요.");
+			location.href="./qnaUpdateForm?board_no="+${board.board_no};
+			console.log("제목 미입력");
+		}else if($("#content_textarea").val() == ""){
+			alert("내용을 입력해주세요");
+		}else{
+			$("#sendForm").submit();
+		}
+	});
 	</script>
 </html>

@@ -85,7 +85,7 @@
                      </tr>
                      <tr>
 						<td class="write_content" colspan="2">
-						<textarea class="form-control" rows="15" placeholder="내용을 입력해주세요." name="message_content"></textarea></td>
+						<textarea id="message_content" class="form-control" rows="15" placeholder="내용을 입력해주세요." name="message_content"></textarea></td>
 					 </tr>
                 </table>
             <button class="btn btn-default pull-right">작성 완료</button>
@@ -104,6 +104,13 @@
 		$(document).ready(function(){ 
 			session();
 			adminCK();
+			//글자수 제한
+			$("#message_content").on('keyup',function(){
+				if($(this).val().length > 100) {
+		        	$(this).val($(this).val().substring(0, 100));
+		        	alert("글자수를 초과하셨습니다 !");
+		        }
+			});
 		});
 
 	function session(){
@@ -124,7 +131,7 @@
 				$("#AdminWrite").hide();
 				}
 		}
-
+	
 </script>
 
 </html>

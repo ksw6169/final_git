@@ -77,7 +77,7 @@
                 </tr>
             </table>
         </div>
-        <span class="submenubar_button" onclick="location.href='./pageMove?page=kimSayWrite'">글 작성</span>
+        <span class="submenubar_button" onclick="writeForm()">글 작성</span>
     </div>
   	
     <div class="clear1"></div>
@@ -159,6 +159,11 @@
 					console.log(data.likeCount);
 					// 추천 여부 - data.myLike
 					myLike = data.myLike;
+					
+					if(loginId != "${board.member_id}"){
+						$("#update").css("display", "none");
+						$("#delete").css("display", "none");
+					} 
 					
 					if(data.myLike == true) {
 						$("#like.btn.like_btn").css("background", "#FF8000");
@@ -257,11 +262,11 @@
             board_content:"${board.board_content}",
             board_recom:"${board.board_recom}",
             board_category:"${board.board_category}",
-            board_no:"${board.board_no}"
+            board_no:"${board.board_no}",
+            member_id:"${board.member_id}",
+            job_no:"${board.job_no}"
     };
-    
     BoardPrint(dto);
-    
     function BoardPrint(board){
         console.log(board);
         $("#board_category").html(board.board_category);
@@ -271,13 +276,17 @@
     }
     
     $("#update").click(function(){
-    	//아이디 일치 체크 빠짐
-		location.href="./kimSayUpdateForm?board_no="+${board.board_no};
-	});
+			location.href="./kimSayUpdateForm?board_no="+${board.board_no};
+   	});
     
     $("#delete").click(function(){
-		location.href="./kimSayDelete?board_no="+${board.board_no};
-	});
+    		location.href="./kimSayDelete?board_no="+${board.board_no};
+   	});
+    
+    /* 글쓰기 폼으로 이동 */
+    function writeForm() {
+    	location.href='./pageMove?page=kimSayWrite&job_no='+${board.job_no};
+    }
     
     // 댓글 작성 버튼 클릭시
     $(".replyWrite").click(function() {
