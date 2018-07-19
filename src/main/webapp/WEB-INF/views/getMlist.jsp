@@ -60,7 +60,7 @@
 	        <table class="table table-hover">
 	        	<thead>
 	             <tr>
-	               <th class="center"><input type="checkbox"/></th>
+	               <th class="center"><input type="checkbox"  id="allChk" onclick="allChk(this);"/></th>
 	               <th class="center">번 호</th>
 	               <th class="center">내   용</th>
 	               <th class="center">작성일자</th>
