@@ -20,95 +20,89 @@
 			.submenubar_button{margin-right:10px;}
 			.submenubar_button_last{margin-right:100px;}
 			
-	        .btn { width: 120px; height: 40px; background-color: #FF8000; border: none; vertical-align: middle; color:#fff; font-family: "fallB"; text-align: center; display: inline-block; font-size: 12px; }    
-	        button:hover { color: #121F27; }
-	        /* board_detail css */
-	        .content { font-family: "bareun"; text-align: center; margin-bottom: 50px; }
-	        th { font-family: "fallM"; text-align: center; background: #121F27; color: white; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; }
-	        td { font-family: "NanumM"; text-align: center; background: #121F27; color: white; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; }
-	        .table>tbody>tr>th { text-align: center; }
-	        .button-group { margin-top: 15px;}
-			.company { color: #121F27; background-color: #FFFFFF; }
-	        .subject { color: #121F27; background-color: #FFFFFF; }
-	        .contents { font-family: "fallM"; color: #121F27; font-weight: bold; background-color: #FFFFFF; height: 200px; line-height: 100px; text-align: center; } 
-	        .detail_div { margin-top: 50px;}
-	        .table_div { background-color: #E4EEF0; padding: 50px; text-align: center;}
-			.table>tbody>tr>td.contents { vertical-align: middle; }
-			button.pull { position: relative; left: 37%; }
-			.button_group {
-				width: 100px;
-				height: 37.5px;
-				background-color: white;
-				color: #121F27;
-				border: 0.25px solid #DDDDDD;
-			}
-			
+			/* CSS 수정(0719_성원) */
 			.container {
-				margin-top: 100px;
-			}
-			
-			#capture{
-				margin: 0px;
-				width: 1000px;
-				height: 500px;
-			}
+	        	margin-top: 150px;
+	        	margin-bottom: 50px;
+	            padding-top: 25px;
+	            padding-bottom: 25px;
+	            background: #E4EEF0;
+	        }
+	        .table { width: 100%; }
+	        .table>tbody>tr>th { font-family: "fallM"; text-align: center; background: #121F27; color: white; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; }
+			.table>tbody>tr>td { font-family: "fallM"; text-align: center; background: white; color: #121F27; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; }
+			.table>tbody>tr>td.contents { }
+			.btn { width: 100%; height: 40px; background-color: #FF8000; border: none; vertical-align: middle; color:#fff; font-family: "fallB"; text-align: center; display: inline-block; font-size: 12px; margin: 0px; padding: 0px;}
+	        button:hover { color: #121F27; }
+			#capture{ margin: 0px; width: 100%; height: auto; }
     	</style>
   </head>
   <body>
-  <jsp:include page="menubar.jsp"/>
+		<jsp:include page="menubar.jsp"/>
   
-    <div class="submenubar_background">
-        <div class="submenubar_header">
-            <table>
-                <tr>
-                    <td class="submenubar_name">인증신청관리</td>
-                </tr>
-            </table>
-        </div>
-    </div>
-  
-  <div class="container">
-        <div class="detail_div">
-            <div class="table_div">
-                <table class="table">
-                     <tr>
-                       <th colspan="2">회사명</th>
-                     </tr>
-                     <tr>
-                       <th class="company" colspan="2">${member.member_company }</th>
-                     </tr>
-                     <tr>
-                       <th colspan="2">사진</th>
-                     </tr>
-                     <tr>
-                       <td class="contents" colspan="2"><img id="capture" src="${path}" style="cursor: pointer;"/></td>
-                     </tr>
-                </table>
-            </div>    
-            <div class="button-group">
-                <button id="back" class="btn btn-default pull-right">목록</button>
-                <button id="ok" class="btn btn-default pull">승인</button>
-                <button id="no" class="btn btn-default pull">거절</button>   
-            </div>
-        </div>
-    </div>
+	    <div class="submenubar_background">
+	        <div class="submenubar_header">
+	            <table>
+	                <tr>
+	                    <td class="submenubar_name">인증신청관리</td>
+	                </tr>
+	            </table>
+	        </div>
+	    </div>
+	  
+	  	<div class="container">
+	  		<div class="row">
+		  		<div class="col-md-10 col-md-push-1">
+					<table class="table">
+						<tbody>
+		                	<tr>
+		                    	<th colspan="2">회사명</th>
+		                    </tr>
+		                    <tr>
+		                        <td colspan="2">${member.member_company}</th>
+		                    </tr>
+		                    <tr>
+		                        <th colspan="2">사진</th>
+		                    </tr>
+		                    <tr>
+		                        <td class="contents" colspan="2"><img id="capture" src="${path}" style="cursor: pointer;"/></td>
+		                    </tr>
+	                    </tbody>
+					</table>
+                </div>
+			</div>
+		<div class="row">
+			<div class="col-md-10 col-md-push-1">
+				<div class="col-md-2 pull-right">
+					<button id="back" class="btn btn-default">목록</button>
+				</div>
+				<div class="col-md-4 col-md-push-4">
+					<div class="col-md-6">
+                		<button id="ok" class="btn btn-default">승인</button>
+                	</div>
+                	<div class="col-md-6">
+                		<button id="no" class="btn btn-default">거절</button> 
+                	</div>
+                </div>
+			</div>
+		</div>
+	</div>
 </body>
 	<script>
-	$("#capture").click(function(){
-		window.open("${path}", "이미지", "width=800, height=700, toolbar=no, menubar=no, scrollbars=yes, resizable=yes" ); 
-
-	});
-	
-	$("#back").click(function(){
-		window.history.back();
-	});
-	
-	$("#ok").click(function(){
-		location.href="./memAcceptOk?id=${member.member_id}";
-	});
-	
-	$("#no").click(function(){
-		location.href="./reqEmail?id=${member.member_id}";
-	});
+		$("#capture").click(function(){
+			window.open("${path}", "이미지", "width=800, height=700, toolbar=no, menubar=no, scrollbars=yes, resizable=yes" ); 
+		});
+		
+		$("#back").click(function(){
+			window.history.back();
+		});
+		
+		$("#ok").click(function(){
+			location.href="./memAcceptOk?id=${member.member_id}";
+		});
+		
+		$("#no").click(function(){
+			location.href="./reqEmail?id=${member.member_id}";
+		});
 	</script>
 </html>

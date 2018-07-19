@@ -8,102 +8,104 @@
    	 	<meta name="viewport" content="width=device-width, initial-scale=1">
       
 		<style>
-		body { padding-top: 70px; }
+			body { padding-top: 70px; }
+	        
+	        .container {
+	        	margin-top: 50px;
+	        	margin-bottom: 50px;
+	            padding-top: 25px;
+	            padding-bottom: 25px;
+	            background: #E4EEF0;
+	        }
+	        
+	       	.content {
+	            font-family: "bareun";
+	            text-align: center;
+	            margin-bottom: 50px;
+	        }
+	        
+	        .inputHeader {
+	        	width: 100%;
+				height: 50px;
+	        	line-height: 50px;
+	        	font-family: "bareun";
+	            background: #121F27;
+				margin-top: 5px;
+				color: white;
+				text-align: center;
+				font-size: 13px;
+				padding: 0px;
+				margin-left: 10px;
+	        }
+	        
+	        .inputTag {
+				width: 100%;
+				height: 50px;
+	        	line-height: 50px;
+	        	font-family: "bareun";
+	            background: white;
+	            border: 0px;
+	            outline:none;
+				margin-top: 5px;
+				color: black;
+				text-align: center;
+				font-size: 13px;
+				padding: 0px;
+				margin-left: -10px;
+	        }
         
-        .container {
-            padding-top: 25px;
-            background: #E4EEF0;
-        }
-        
-        .content {
-            font-family: "bareun";
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        
-        input[type='text'], input[type='password'] {
-            font-size:13px;
-            padding:10px;
-            width: 435px;
-            height: 50px;
-            line-height: 40px;
-            outline:none;
-            margin: 50px 0 0 0;
-            display: inline;
-            float: right;
-            padding-left: 20px;
-            font-family: "bareun";
-        
-        }
-        input[type='text']{
-        	background-color: gray;
-        	color: white;
-        }
-        .joinForm {
-          font-family: "bareun";
-          color: #fff;
-          background-color: #121F27;
-          width: 100px;
-          height: 50px;
-          font-size: 14px;
-          margin: 50px 0 0 0;
-          float:left;
-          border: 0px;
-          text-align: center;
-          padding-top: 15px;
-          
-
-        }
-        
-        .chk_group {
-            width: 550px;
-        }
-        
-        .ckh_btn{
-            width: 300px;
-            height: 50px;
-            font-size: 16px;
-			margin: 30px 0 0 125px;
-            border: 0px;
-            background-color: #FF8000;
-            color: white;
-            font-family: "bareun";
-        }
-		
-		div.col-md-4.col-md-offset-4 {
-			margin-top: 50px;
-		}
-		
+	        .chk_btn{
+	            width: 100%;
+	            height: 50px;
+	            font-size: 16px;
+	            border: 0px;
+	            background-color: #FF8000;
+	            color: white;
+	            font-family: "bareun";
+	            margin-top: 50px;
+	            margin-bottom: 20px;
+	        }
 		</style>
 	</head>
 	<body>
 	    <jsp:include page="menubar.jsp" flush="false"/>
 
-		<div class="col-md-4 col-md-offset-4">
-	        <form method="post">
-	            <div class="chk_group">
-	                <h1 class="content">비밀번호 확인</h1>
-	                
-	                <!-- 아이디 입력 -->
-	                <div>
-		                <div class="joinForm">아이디 </div>
-		                <input id="userId" type="text" value="" readonly="readonly" name="userId"/>
-		            </div>
-	                
-					<!-- 비밀번호 -->
-					<div>
-		                <div class="joinForm">비밀번호</div>  
-		                	<input type="password" id="pw" placeholder="비밀번호 입력" name="userPw"></div>
-		                <div>
-	               	</div>
-	               	
-	               	<!-- 비밀번호 확인 버튼 -->
-		            <div class="btn_group">
-		                <button class="ckh_btn">비밀번호 확인</button>
-		            </div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-10 col-md-push-1">
+					<div class="row">
+						<div class="col-md-10 col-md-push-1"><h1 class="content">비밀번호 확인</h1></div>
+					</div>
+					
+					<form method="post">
+						<!-- ID -->
+			            <div class="row">
+							<div class="col-md-10 col-md-push-1">
+			              		<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">아이디</h3></div>
+			               		<div class="col-md-push-1 col-md-7">
+			               			<input id="userId" name="userId" class="inputTag" type="text" value="" readonly="readonly"/>
+			            		</div>
+			            	</div>
+						</div>
+			                
+						<!-- 비밀번호 -->
+			            <div class="row">
+							<div class="col-md-10 col-md-push-1">
+								<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">비밀번호</h3></div>
+				               	<div class="col-md-push-1 col-md-7">
+				               		<input id="pw" name="userPw" class="inputTag" type="password" placeholder="비밀번호 8자 이상 입력"/>
+		                		</div>
+	                		</div>
+						</div>    
+			            
+			            <!-- 비밀번호 확인 버튼 -->
+			            <div class="col-md-6 col-md-push-3">
+			                <button class="chk_btn">비밀번호 확인</button>
+			            </div>
+		            </form>
 		    	</div>
-	        </form>
-    	</div>
+	        </div>
+       </div>
 	</body>
 	<script>
 		var msg = "${msg}";	
@@ -117,7 +119,7 @@
 			$("#userId").val(userId);
 		});
 		
-		$(".ckh_btn").click(function(){					// 비밀번호 확인 버튼을 눌렀을 때,	
+		$(".chk_btn").click(function(){					// 비밀번호 확인 버튼을 눌렀을 때,	
 			$("form").attr("action", "checkPW");	// Controller로 checkPW 요청
 		});
 	</script>
