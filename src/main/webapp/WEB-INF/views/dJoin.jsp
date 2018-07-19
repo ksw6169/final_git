@@ -76,12 +76,6 @@
             margin-top: 10px;
         }
         
-        .comment_red{
-        	color : red;
-			font-size:11px;
-   			font-family: "bareun";
-        	margin-left: 115px;     	
-        }
         
         .company_join{
 	        font-family: "bareun";
@@ -168,8 +162,6 @@
             line-height: 50px;
             margin: 5px -35px 0 10px;
         }
-        
-        
         
 		.warn{
 	        	color : red;
@@ -271,156 +263,157 @@
    	 <jsp:include page="menubar.jsp" flush="false"/>
     
      		<div class="container">
-			<div class="row">
-				<div class="col-md-10 col-md-push-1">
-					<div class="row">
-						<div class="col-md-10 col-md-push-1"><h1 class="content">[대리(직장인 회원) 회원가입]</h1></div>
-					</div>
-					<div class="row">
-						<div class="col-md-10 col-md-push-1">
-		              		<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">아이디</h3></div>
-		               		<div class="col-md-push-1 col-md-7">
-		               			<input id="userId" class="inputTag" name="id" type="text" placeholder="아이디 (10자 이상, 영소문자+숫자로 구성) 입력" onkeyup="overlay()" />
-		            			<span id="userIdMsg" class="warn">　</span>
-		            		</div>
-		            	</div>
-					</div>
-					<div class="row">
-						<div class="col-md-10 col-md-push-1">
-		              		<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">비밀번호</h3></div>
-		               		<div class="col-md-push-1 col-md-7">
-				                <input id="userPw" class="inputTag" name="pw" type="password" placeholder="********" onkeyup="lengthChk()">
-				                <span id="userPwMsg" class="warn">　</span>
-		            		</div>
-		            	</div>
-					</div>
-					<div class="row">
-						<div class="col-md-10 col-md-push-1">
-		              		<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">비밀번호 확인</h3></div>
-		               		<div class="col-md-push-1 col-md-7">
-				                <input id="userPw_re" class="inputTag" type="password" placeholder="********" onkeyup="pwOverlay()">
-                				<span id="userPwReMsg" class="warn">　</span>
-		            		</div>
-		            	</div>
-					</div>
-					<div class="row">
-						<div class="col-md-10 col-md-push-1">
-		              		<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">이메일</h3></div>
-		               		<div class="col-md-push-1 col-md-7">
-				                <input id="userEmail" class="inputTag" name="email" type="text" placeholder="이메일 입력" onkeyup="emailCheck()">
-                				<span id="userEmailMsg" class="warn">　</span>
-		            		</div>
-		            	</div>
-					</div>
-					<div class="row">
-						<div class="col-md-10 col-md-push-1">
-		              		<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">성씨 입력</h3></div>
-		               		<div class="col-md-push-1 col-md-7">
-                				<input id="userFamily" class="inputTag" name="family" type="text" placeholder="성씨 입력">
-				                <div class="row">
-				                	<div class="col-md-12"><b class="comment">*입력한 성씨는 '김인턴,박인턴' 과 같은 호칭에 사용됩니다.</b></div>
-				                </div>
-				                <div class="row">
-	                				<div class="col-md-12"><b class="comment">*호칭은 본인 외 다른사람이 볼 수 없습니다. </b></div>
-	                			</div>
-		            		</div>
-		            	</div>
-					</div>
-					<div class="row">
-						<div class="col-md-10 col-md-push-1">
-						<div class="col-md-10 col-md-push-1">
-							<div class="col-md-12">
-			              		<select id="job_no" name="job_no" class="custom_select"> 
-									<option value="1" selected>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;경영, 사무, 금융, 보험직</option> 
-									<option value="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;연구직 및 공학기술직</option> 
-									<option value="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;교육, 법률, 사회복지, 경찰, 소방직 및 군인</option> 
-									<option value="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;보건, 의료직</option>
-									<option value="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예술, 디자인, 방송, 스포츠직</option>
-									<option value="6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;미용, 여행, 숙박, 음식, 경비, 청소직</option>
-									<option value="7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;영업, 판매, 운전, 운송직</option>
-									<option value="8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;건설, 채굴직</option>
-									<option value="9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;설치, 정비, 생산직</option>
-									<option value="10">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;농림어업직</option>
-								</select>
-							</div>
-		            	</div>
-					</div>
-					<div class="row">
-						<div class="col-md-10 col-md-push-1">
-							<div class="col-md-12">
-			              		<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">기업명</h3></div>
+				<div class="row">
+					<div class="col-md-10 col-md-push-1">
+						<div class="row">
+							<div class="col-md-10 col-md-push-1"><h1 class="content">[대리(직장인 회원) 회원가입]</h1></div>
+						</div>
+						<div class="row">
+							<div class="col-md-10 col-md-push-1">
+			              		<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">아이디</h3></div>
 			               		<div class="col-md-push-1 col-md-7">
-					                <input id="company" name="company" class="inputTag" name="email" type="text" placeholder="기업명" style="background-color:#121F27; color:white; border: 0px; " readonly />
+			               			<input id="userId" class="inputTag" name="id" type="text" placeholder="아이디 (10자 이상, 영소문자+숫자로 구성) 입력" onkeyup="overlay()" />
+			            			<span id="userIdMsg" class="warn">　</span>
 			            		</div>
-			            		<div class="col-md-2">
-			            			<label class="company_btn" data-toggle="modal" data-target="#bs-example-modal-lg">기업 검색</label>
-			            		</div>
-		            		</div>
-		            	</div>
-					</div>
-					
-					<div class="row">
-						<div class="col-md-10 col-md-push-1">
-							<div class="col-md-12">
-			              		<div class="col-md-push-1 col-md-3"><h3 class="inputHeader2">기업 웹메일 사이트 캡쳐사진</h3></div>
+			            	</div>
+						</div>
+						<div class="row">
+							<div class="col-md-10 col-md-push-1">
+			              		<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">비밀번호</h3></div>
 			               		<div class="col-md-push-1 col-md-7">
-					                <input id="fileName" class="inputTag" type="text" placeholder="파일명"  readonly />
-						            <div class="row">
-					                	<div class="col-md-12"><b class="comment" style="color: red;">*기업 웹메일 사이트에 로그인한 화면을 캡쳐하신 후 첨부해주세요.</b></div>
+					                <input id="userPw" class="inputTag" name="pw" type="password" placeholder="********" onkeyup="lengthChk()">
+					                <span id="userPwMsg" class="warn">　</span>
+			            		</div>
+			            	</div>
+						</div>
+						<div class="row">
+							<div class="col-md-10 col-md-push-1">
+			              		<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">비밀번호 확인</h3></div>
+			               		<div class="col-md-push-1 col-md-7">
+					                <input id="userPw_re" class="inputTag" type="password" placeholder="********" onkeyup="pwOverlay()">
+	                				<span id="userPwReMsg" class="warn">　</span>
+			            		</div>
+			            	</div>
+						</div>
+						<div class="row">
+							<div class="col-md-10 col-md-push-1">
+			              		<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">이메일</h3></div>
+			               		<div class="col-md-push-1 col-md-7">
+					                <input id="userEmail" class="inputTag" name="email" type="text" placeholder="이메일 입력" onkeyup="emailCheck()">
+	                				<span id="userEmailMsg" class="warn">　</span>
+			            		</div>
+			            	</div>
+						</div>
+						<div class="row">
+							<div class="col-md-10 col-md-push-1">
+			              		<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">성씨 입력</h3></div>
+			               		<div class="col-md-push-1 col-md-7">
+	                				<input id="userFamily" class="inputTag" name="family" type="text" placeholder="성씨 입력">
+					                <div class="row">
+					                	<div class="col-md-12"><b class="comment">*입력한 성씨는 '김인턴,박인턴' 과 같은 호칭에 사용됩니다.</b></div>
 					                </div>
 					                <div class="row">
-		                				<div class="col-md-12"><b class="comment" style="color: red;">*기업명과 첨부하신 로그인 화면은 가입 신청 승인 후 즉시 폐기되어</b></div>
-		                			</div>
-		                			<div class="row">
-		                				<div class="col-md-12"><b class="comment" style="color: red;">회원님의 익명을 절대 보장해 드립니다.</b></div>
+		                				<div class="col-md-12"><b class="comment">*호칭은 본인 외 다른사람이 볼 수 없습니다. </b></div>
 		                			</div>
 			            		</div>
-			            		<div class="col-md-2">
-			            			<label for="upload" class="file_btn">파일 첨부</label>
-			            			<form id="fileUpload" method="post" enctype="multipart/form-data">
-			            				<input type="file" id="upload" name="file" onchange="fileUpload()" />
-			            			</form>
+			            	</div>
+						</div>
+						<div class="row">
+							<div class="col-md-10 col-md-push-1">
+							<div class="col-md-10 col-md-push-1">
+								<div class="col-md-12">
+				              		<select id="job_no" name="job_no" class="custom_select"> 
+										<option value="1" selected>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;경영, 사무, 금융, 보험직</option> 
+										<option value="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;연구직 및 공학기술직</option> 
+										<option value="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;교육, 법률, 사회복지, 경찰, 소방직 및 군인</option> 
+										<option value="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;보건, 의료직</option>
+										<option value="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예술, 디자인, 방송, 스포츠직</option>
+										<option value="6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;미용, 여행, 숙박, 음식, 경비, 청소직</option>
+										<option value="7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;영업, 판매, 운전, 운송직</option>
+										<option value="8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;건설, 채굴직</option>
+										<option value="9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;설치, 정비, 생산직</option>
+										<option value="10">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;농림어업직</option>
+									</select>
+								</div>
+			            	</div>
+						</div>
+						<div class="row">
+							<div class="col-md-10 col-md-push-1">
+								<div class="col-md-12">
+				              		<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">기업명</h3></div>
+				               		<div class="col-md-push-1 col-md-7">
+						                <input id="company" name="company" class="inputTag" name="email" type="text" placeholder="기업명" style="background-color:#121F27; color:white; border: 0px; " readonly />
+				            		</div>
+				            		<div class="col-md-2">
+				            			<label class="company_btn" data-toggle="modal" data-target="#bs-example-modal-lg">기업 검색</label>
+				            		</div>
 			            		</div>
-		            		</div>
-		            	</div>
-					</div>
+			            	</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-md-10 col-md-push-1">
+								<div class="col-md-12">
+				              		<div class="col-md-push-1 col-md-3"><h3 class="inputHeader2">기업 웹메일 사이트 캡쳐사진</h3></div>
+				               		<div class="col-md-push-1 col-md-7">
+						                <input id="fileName" class="inputTag" type="text" placeholder="파일명"  readonly />
+							            <div class="row">
+						                	<div class="col-md-12"><b class="comment" style="color: red;">*기업 웹메일 사이트에 로그인한 화면을 캡쳐하신 후 첨부해주세요.</b></div>
+						                </div>
+						                <div class="row">
+			                				<div class="col-md-12"><b class="comment" style="color: red;">*기업명과 첨부하신 로그인 화면은 가입 신청 승인 후 즉시 폐기되어</b></div>
+			                			</div>
+			                			<div class="row">
+			                				<div class="col-md-12"><b class="comment" style="color: red;">회원님의 익명을 절대 보장해 드립니다.</b></div>
+			                			</div>
+				            		</div>
+				            		<div class="col-md-2">
+				            			<label for="upload" class="file_btn">파일 첨부</label>
+				            			<form id="fileUpload" method="post" enctype="multipart/form-data">
+				            				<input type="file" id="upload" name="file" onchange="fileUpload()" />
+				            			</form>
+				            		</div>
+			            		</div>
+			            	</div>
+						</div>
+						
+					  <!-- Modal -->
+					  <div class="modal fade" id="bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+					  <div class="modal-dialog modal-lg">
+					    <div class="modal-content">
+					      <div class="modal-header" style="height: 75px;">
+					        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				        	<input class="form-control" id="inputdefault" placeholder="기업명을 입력해주세요." style="display:inline-block; width:85%; height: 100%; "/>
+					        <button class="btn btn-primary btn-md" onclick="company_search()" style="display:inline-block; width:10%; height:100%; font-family:'bareun'; background-color: #121F27; border: 0px; ">검색</button>
+					      </div>
+					      <div class="modal-body">
+						      <table class="table table-hover">
+						          <thead style="background-color: #121F27; color: white; font-family:'NanumL'; font-size: 14px; text-align: center;">
+							      	<tr>
+							      		<th class="center" style="width:50px;">선택</th>
+							            <th class="center">기업명</th>
+							            <th class="center" style="width:300px;">기업주소</th>
+							     	</tr>
+							      </thead>
+							      <tbody id="list"></tbody>
+					          </table>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal" style="font-family:'bareun'; ">닫기</button>
+					        <button type="button" class="btn btn-primary" onclick="companyWrite()" style="font-family:'bareun'; background-color: #FF8000; border: 0px; ">완료</button>
+					      </div>
+					    </div> 
+					  </div> 
+					</div> 
 					
-				  <!-- Modal -->
-				  <div class="modal fade" id="bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-				  <div class="modal-dialog modal-lg">
-				    <div class="modal-content">
-				      <div class="modal-header" style="height: 75px;">
-				        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-			        	<input class="form-control" id="inputdefault" placeholder="기업명을 입력해주세요." style="display:inline-block; width:85%; height: 100%; "/>
-				        <button class="btn btn-primary btn-md" onclick="company_search()" style="display:inline-block; width:10%; height:100%; font-family:'bareun'; background-color: #121F27; border: 0px; ">검색</button>
-				      </div>
-				      <div class="modal-body">
-					      <table class="table table-hover">
-					          <thead style="background-color: #121F27; color: white; font-family:'NanumL'; font-size: 14px; text-align: center;">
-						      	<tr>
-						      		<th class="center" style="width:50px;">선택</th>
-						            <th class="center">기업명</th>
-						            <th class="center" style="width:300px;">기업주소</th>
-						     	</tr>
-						      </thead>
-						      <tbody id="list"></tbody>
-				          </table>
-				      </div>
-				      <div class="modal-footer">
-				        <button type="button" class="btn btn-default" data-dismiss="modal" style="font-family:'bareun'; ">닫기</button>
-				        <button type="button" class="btn btn-primary" onclick="companyWrite()" style="font-family:'bareun'; background-color: #FF8000; border: 0px; ">완료</button>
-				      </div>
-				    </div> 
-				  </div> 
-				</div> 
+					<input id="member_div" name="member_div" type="hidden" value="인턴"/>
+					
+					<div class="col-md-6 col-md-push-3">
+	                	<button id="joinBtn" class="join_btn">대리(직장인 회원) 회원가입</button>
+	            	</div>
 				
-				<input id="member_div" name="member_div" type="hidden" value="인턴"/>
-				
-				<div class="col-md-6 col-md-push-3">
-                	<button id="joinBtn" class="join_btn">대리(직장인 회원) 회원가입</button>
-            	</div>
-			
-				</div>			
+					</div>			
+				</div>
 			</div>
 		</div>
     </body>
