@@ -275,20 +275,20 @@
     	startPage += 15;
     	endPage += 15;
 
-    	console.log("search_div: "+search_div);
     	if(search_div) {
-    		console.log("물어봐 서치 더보기 호출");
     		qnaSearch();
     	} else {
-    		console.log("물어봐 리스트 더보기 호출");
     		qnaList();
     	}
     });
     
     /* 키워드 검색 */
     function qnaSearch() {
-		$(".page-link").focus();
     	search_div = true; 
+    	startPage = 1;
+    	
+    	console.log("kimsaySearch: "+startPage+"/"+endPage+"/"+align_div);
+    	
     	if($("#search_text").val() == "") {
     		alert("검색 키워드를 입력하세요.");
     	} else {

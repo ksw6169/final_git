@@ -425,9 +425,9 @@ public class BoardService {
 		int startPage = Integer.parseInt(params.get("startPage"));
 		int endPage = Integer.parseInt(params.get("endPage"));
 		String align_div = String.valueOf(params.get("align_div"));
-		
 		ArrayList<BoardDTO> list = inter.qnaSearchList(keyword, startPage, endPage, align_div);
 		int listSearchCnt = inter.qnaSearchListCnt(keyword);
+		logger.info("list size : "+listSearchCnt);
 		
 		resultMap.put("list", list);
 		resultMap.put("listSearchCnt", listSearchCnt);

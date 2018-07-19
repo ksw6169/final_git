@@ -134,7 +134,14 @@
     
     function BoardPrint(board){
         console.log(board);
-        $("#board_category").text(board.board_category);
+        
+        if(board.board_category == "잡담") {
+        	$("#talk").attr("selected", "selected");
+        } else if(board.board_category == "이직") {
+        	$("#trans").attr("selected", "selected");
+        } else {
+        	$("#que").attr("selected", "selected");
+        }
         $("#title_textarea").text(board.board_title);
         $("#content_textarea").text(board.board_content);
     }
