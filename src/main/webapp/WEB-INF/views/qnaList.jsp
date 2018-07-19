@@ -259,7 +259,7 @@
 	        str+="<div class='thumbnail'>";
 	        str+="<a href='./qnaDetail?board_no="+list[i].board_no+"'><div id='title' class='thumbnail_header'><p class='thumbnail_contents'>"+list[i].board_title+"</p></div></a>";
 	        var date = new Date(list[i].board_date);	
-	        str+="<span class='caption_date'>작성일자: <b>"+date.toLocaleDateString("ko-KR")+"</b></span>";
+	        str+="<span class='caption_date'>작성일자: <b>"+dateForm(date)+"</b></span>";
 	        str+="<span class='caption_detail'>조회<br/><b>"+list[i].board_bHit+"</b></span>";
 	        str+="<span class='caption_detail'>추천<br/><b>"+list[i].board_recom+"</b></span>";
 	        str+="<span class='caption_detail'>댓글<br/><b>"+list[i].board_comm+"</b></span>";
@@ -351,5 +351,21 @@
     	}
     });
     
+
+    /* 글쓰기 폼으로 이동 */
+    function writeForm() {
+    	location.href='./pageMove?page=qnaWrite';
+    }
+	
+	function dateForm(now){
+		year = "" + now.getFullYear();
+		month = "" + (now.getMonth() + 1); if (month.length == 1) { month = "0" + month; }
+		day = "" + now.getDate(); if (day.length == 1) { day = "0" + day; }
+		hour = "" + now.getHours(); if (hour.length == 1) { hour = "0" + hour; }
+		minute = "" + now.getMinutes(); if (minute.length == 1) { minute = "0" + minute; }
+		second = "" + now.getSeconds(); if (second.length == 1) { second = "0" + second; }
+		return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+	}
+
 	</script>
 </html>
