@@ -130,7 +130,7 @@
 					   <th style="width: 100px;">수정/삭제</th>
                      </tr>
                 </table>
-				<textarea class="form-control replyContent" rows="5" ></textarea>
+				<textarea class="form-control replyContent" rows="5" name ="replyContent"></textarea>
 				<div class="button-group">
                 <button class="btn btn-default pull-right replyWrite">댓글 작성</button>
 				</div>
@@ -143,6 +143,7 @@
 		var board_no = "${param.board_no}";
 		var myLike;
 		var replyId;
+
 		
 		/* 게시물의 추천수 + 내가 추천했는지 여부 */
 		$(document).ready(function() {
@@ -189,7 +190,7 @@
 					var content = "";
 					for(var i=0; i<data.list.length; i++) {
 						content += "<tr>";
-						content += "<td class='reply_contents' colspan='2' style='padding: 0px;'><textarea id='replyContent"+data.list[i].reply_no+"' style='width: 100%; height: 100%;' readonly='readonly'>"+data.list[i].reply_content+"</textarea></td>";
+						content += "<td class='reply_contents' colspan='2' style='padding: 0px;'><textarea name='replyContent' id='replyContent"+data.list[i].reply_no+"' style='width: 100%; height: 100%;' readonly='readonly'>"+data.list[i].reply_content+"</textarea></td>";
 						var date = new Date(data.list[i].reply_date);
 						content += "<td class='reply_date' style='0.25px solid #DDDDDD;'>"+date.toLocaleDateString("ko-KR")+"</td>";
 						if(data.list[i].member_id == loginId) {
@@ -286,7 +287,7 @@
 			data : { 
 				loginId : loginId,
 				board_no : board_no,
-				replyContent : $(".replyContent").val()
+				reply_content : $(".replyContent").val()
 			},
 			dataType : "json",
 			success : function(data) {

@@ -187,8 +187,9 @@
 		</if>
 	</update> 
 	
-	<insert id="replyWrite">
-		INSERT INTO reply VALUES (reply_seq.NEXTVAL, #{param2}, #{param1}, #{param3}, SYSDATE) 
+	<insert id="replyWrite" parameterType="com.spring.dto.ReplyDTO">
+		INSERT INTO reply(reply_no,board_no,member_id,reply_content,reply_date) 
+		VALUES (reply_seq.NEXTVAL, #{param2}, #{param1}, #{param3}, SYSDATE) 
 	</insert>
 
 	<update id="replyCountUp">

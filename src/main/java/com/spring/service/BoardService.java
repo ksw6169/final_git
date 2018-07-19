@@ -295,7 +295,8 @@ public class BoardService {
 		String loginId = String.valueOf(params.get("loginId"));
 		int board_no = Integer.parseInt(params.get("board_no"));
 		String replyContent = String.valueOf(params.get("reply_content"));
-		
+		//String reply_content = params.get("reply_content");
+		logger.info("아이디 : "+loginId+"/ 게시글 번호 : "+board_no+"/ 댓글 내용 : "+replyContent);
 		int success = 0;
 		
 		// 1) 댓글 수 증가
