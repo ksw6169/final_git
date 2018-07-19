@@ -23,6 +23,7 @@
         body { padding-top: 100px; }
         th { font-family: "NanumM"; background: #121F27; color: white; border: 1px solid white; height: 25px; line-height: 25px; }
         th.center{text-align: center;}
+        #date{width: 200px; position:relative; }
         td { font-family: "NanumM"; text-align: center; background: #E4EEF0; height: 25px; line-height: 25px; }
         .table>thead>tr>th { text-align: center; vertical-align: middle; }
         .paging_button { text-align: center;}
@@ -118,7 +119,7 @@
 	             <tr>
 	               <th class="center">번 호</th>
 	               <th class="center">제 목</th>
-	               <th class="center">작성일자</th>
+	               <th class="center" id="date">작성일자</th>
 	               <th class="center">조회수</th>
 	             </tr>
 	             </thead>
@@ -186,6 +187,7 @@
 					};
 			obj.success = function(data){
 				listPrint(data.nBoardList); //리스트 뿌리기 
+				console.log(data.nBoardList);
 				allPage = data.listAll; //이전 다음 버튼 disabled 설정
 				if(addPage >= allPage){
 					$("#next").addClass('disabled');

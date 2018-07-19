@@ -163,8 +163,8 @@ public class BoardController {
 	public @ResponseBody HashMap<String, Object> nBoardList(@RequestParam Map<String, Object> map, HttpServletRequest request) {
 		logger.info("공지사항 리스트 실행");
 
-		String loginId = (String) request.getSession().getAttribute("loginId");
-		map.put("loginId",loginId);
+		String member_id = (String) request.getSession().getAttribute("loginId");
+		map.put("loginId",member_id);
 		String keyword = (String) map.get("keyword");
 		return service.nBoardList(map);
 	}
