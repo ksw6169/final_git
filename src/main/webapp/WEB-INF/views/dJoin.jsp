@@ -272,7 +272,7 @@
 							<div class="col-md-10 col-md-push-1">
 			              		<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">아이디</h3></div>
 			               		<div class="col-md-push-1 col-md-7">
-			               			<input id="userId" class="inputTag" name="id" type="text" placeholder="아이디 (10자 이상, 영소문자+숫자로 구성) 입력" onkeyup="overlay()" />
+			               			<input id="userId" class="inputTag" name="id" type="text" placeholder="아이디 (5 - 20자, 영문+숫자로 구성) 입력" onkeyup="overlay()" />
 			            			<span id="userIdMsg" class="warn">　</span>
 			            		</div>
 			            	</div>
@@ -281,7 +281,7 @@
 							<div class="col-md-10 col-md-push-1">
 			              		<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">비밀번호</h3></div>
 			               		<div class="col-md-push-1 col-md-7">
-					                <input id="userPw" class="inputTag" name="pw" type="password" placeholder="********" onkeyup="lengthChk()">
+					                <input id="userPw" class="inputTag" name="pw" type="password" placeholder="비밀번호 8 - 12자 입력" onkeyup="lengthChk()">
 					                <span id="userPwMsg" class="warn">　</span>
 			            		</div>
 			            	</div>
@@ -290,7 +290,7 @@
 							<div class="col-md-10 col-md-push-1">
 			              		<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">비밀번호 확인</h3></div>
 			               		<div class="col-md-push-1 col-md-7">
-					                <input id="userPw_re" class="inputTag" type="password" placeholder="********" onkeyup="pwOverlay()">
+					                <input id="userPw_re" class="inputTag" type="password" placeholder="비밀번호 확인 입력" onkeyup="pwOverlay()">
 	                				<span id="userPwReMsg" class="warn">　</span>
 			            		</div>
 			            	</div>
@@ -525,6 +525,7 @@
 						msg.html("5~20자리 영문과 숫자만 가능합니다.");	
 						msg.css("color", "red");
 					}else if(data.msg == "중복된 ID 입니다."){
+						chk = false;
 						msg.html(data.msg);
 						msg.css("color", "red");
 					}else{
@@ -580,6 +581,7 @@
 			if(!exptext.test(email)) {	
 				msg.html("이메일 형식이 올바르지 않습니다.");
 				msg.css("color", "red");
+				emailChk = false;
 			} else {
 				msg.html("올바른 이메일 형식입니다.");
 				msg.css("color", "green");
@@ -639,6 +641,8 @@
 			} else if($("#userFamily").val()=="") {
 				alert("성을 입력해주세요.");
 				$("#userFamily").focus();
+			} else if($("#userFamily").val().length > 20) {
+				alert("성을 20자 이하로 입력해주세요.");
 			} else if($("#company").val()=="") {
 				alert("기업명을 입력해주세요.")
 				$("#company").focus();

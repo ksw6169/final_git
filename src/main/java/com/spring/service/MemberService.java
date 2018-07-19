@@ -123,6 +123,8 @@ public class MemberService {
 		int job_no = 0;
 		boolean success = false;
 		
+		logger.info("비어도 입력은 가나?"+pw);
+		
 		MemberDTO dto = new MemberDTO();
 		
 		dto = inter.login(id);
@@ -137,7 +139,7 @@ public class MemberService {
 		logger.info("잡넘버 "+job_no);
 		
 		ModelAndView mav = new ModelAndView();
-		String msg = "ID와 비밀번호를 다시 입력해주세요.";
+		String msg = "ID와 비밀번호가 일치하지 않습니다. 다시 입력해주세요.";
 		mav.setViewName("login");
 		
 		if(success) {
