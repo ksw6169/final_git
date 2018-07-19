@@ -19,51 +19,6 @@
 			.submenubar_button{margin-right:10px;}
 			.submenubar_button_last{margin-right:3%};
 			
-	        body { padding-top: 150px;}
-	        .content { font-family: "bareun";  margin-bottom: 50px; text-align: center; margin-right: 125px;}
-	        .updateForm{font-family: "bareun";color: #fff;background-color: #121F27;width: 100px;height: 50px;
-	          font-size: 14px;margin: 5px 0;float:left;border: 0px;text-align: center;padding-top: 15px;}
-	        input[type='text'], input[type='password'] {font-size:13px;padding:10px;width: 435px; height: 50px;line-height: 50px;
-	          outline:none;margin: 5px 0;padding-left: 20px;margin-left: 15px;display: inline; font-family: "bareun";}
-	       .company_photo{font-family: "bareun"; color: #fff; background-color: #121F27; width: 100px; height: 50px; 
-	          font-size: 12px;margin: 5px 0;float:left;border: 0px white;text-align: center;padding-top: 10px;}
-	        /*파일 버튼*/
-	        .file_btn, .company_btn {font-family: "bareun";color: #fff;background-color: #121F27;float: right;width: 120px;
-	            height: 50px;margin: 5px 5px 0 0;border: 0;cursor: pointer;text-align: center;line-height: 50px;}
-	        input[type='file']{position : absolute;clip:rect(0,0,0,0);overflow: hidden;border:0;}
-	         /* add */
-	        .center-block{ width: 700px;}
-	        #group{background: black; color: white; height: 15px; width: 150px; position: static;}
-	        #capture{background: black; color: white; height: 15px; width: 150px; font-size: 15px; padding: 2px 2px;}
-	        /* 캡쳐 밑에 설명 */
-	        #blink{height: 1px; background-color: white; border-color: white; width: 150px;}
-	        #info{font-family: "bareun"; color: red; margin-left: 115px;}
-	        /* 버튼 */
-	        #mUpdate{width: 300px;height: 50px;font-size: 16px;margin: 10px 0 0 0;border: 0px;background-color: #FF8000;
-	            color: white;font-family: "bareun";margin-left: 125px;}
-	        #btnC{text-align: center; }
-	        /* 파일 찾기 버튼 */
-	        #fileDiv{float: left; position: relative;}
-	        /*직무 div*/
-	        .duty{font-family: "bareun"; color: #fff; background-color: #121F27; width:550px; height:50px; border:0; text-align: center; line-height: 50px; float: left; margin : 0 100px 10px 0; font-size: 20px;}
-		
-			div.col-md-4.col-md-offset-4 {
-				margin-right: 50px;
-				margin-top: 150px; 
-			}
-		
-			.custom_select {
-				width: 100%; /* 원하는 너비설정 */ 
-				height: 100%;
-				font-family: "fallM"; /* 폰트 상속 */ 
-				border-radius: 0px; /* iOS 둥근모서리 제거 */ 
-				appearance: none;
-				display: inline-block;
-			  	float: left;
-			  	color: white;
-			  	background-color: #121F27;
-			}
-		
 			/* submenuBar 링크 글자 색상 */
 			.submenubar_button a{ color: white;}
 			.submenubar_button_last a{color: white;}
@@ -72,156 +27,165 @@
 			.submenubar_button a:active{color: #FF8000; background-color: #121F27;text-decoration: none;}
 			.submenubar_button_last a:active{color: #FF8000; background-color: #121F27;text-decoration: none;}
 			
-			/* modal search-bar */
-			#myModalLabel {
-				font-family: "bareun";
-			}
-			
-			#modal-search-bar {
-	            font-size:13px;
-	            padding:10px;
-	            width: 350px;
-	            height: 50px;
-	            line-height: 40px;
-	            outline:none;
-	            margin: 5px 0;
-	            display: inline;
-	            float: left;
-	        }
-			
-			.table-hover {
-				visibility: hidden;
-			}
-			
-			.table-hover thead tr th {
-				border: 1px solid white;
-				text-align: center;
-				font-weight: bold;
-			}
-			
-			.table-hover tbody tr td {
-				background-color: #E4EEF0;
-				border: 1px solid white;
-				text-align: center;
-				font-family: "NanumL";
-				font-size: 14px;
-				font-weight:bold;
-			}
-			
-			/* loading */
-	        #loading {
-	          position: absolute;
-	          left: 47%;
-			  display: inline-block;
-			  width: 75px;							/* 원 가로 길이 */
-			  height: 75px;							/* 원 세로 길이 */
-			  border: 5px solid #E4EEF0;	/* 원의 테두리 색 */
-			  border-radius: 50%;			
-			  border-top-color: #FF8000;	/* 원 회전 색 */
-			  animation: spin 1s ease-in-out infinite;
-			  -webkit-animation: spin 1s ease-in-out infinite;
-			}
-		
-			@keyframes spin {
-			  to { -webkit-transform: rotate(360deg); }
-			}
-			@-webkit-keyframes spin {
-			  to { -webkit-transform: rotate(360deg); }
-			}
+	        /* main css */
+	        .container{margin-top:150px;margin-bottom:50px;padding-top:25px;padding-bottom:25px;background:#E4EEF0;}
+	        .inputHeader,.inputHeader2{background:#121F27;color:#fff;margin-left:10px;}
+	        .content{font-family:bareun;text-align:center;margin-bottom:50px;}
+	        .custom_select{margin-top:25px;margin-bottom:10px;width:100%;height:50px;font-family:fallM;border-radius:0;appearance:none;display:inline-block;float:left;color:#fff;background-color:#121F27;}
+	        .inputHeader,.inputHeader2,.inputTag{width:100%;height:50px;line-height:50px;font-family:bareun;margin-top:5px;padding:0;text-align:center;}
+	        .inputHeader{font-size:13px;}
+	        .inputHeader2{font-size:8px;}
+	        .inputTag{background:#fff;border:0;outline:0;color:#000;font-size:13px;margin-left:-10px;}
+	        
+	        .company_btn, .file_btn{background-color:#121F27;float:right;cursor:pointer;}
+	        #mUpdate,.company_btn,.file_btn{width:100%;line-height:50px;border:0;color:#fff;font-family:bareun;height:50px;}
+	        .company_btn{text-align:center;margin:5px -35px 0 10px;}
+	        .comment{font-family:bareun;text-align:left;font-size:11px;margin-top:10px;}
+	        .file_btn{text-align:center;margin:5px -35px 0 10px;}
+	        input[type=file]{position:absolute;clip:rect(0,0,0,0);overflow:hidden;border:0;}
+	        #mUpdate{font-size:16px;margin:30px 0 20px;background-color:#FF8000;}
+	        
+	        /* Modal */
+	        .table-hover tbody tr td, .table-hover thead tr th{border:1px solid #fff;text-align:center;font-weight:700;}
+	        #myModalLabel{font-family:bareun;}
+	        #modal-search-bar{font-size:13px;padding:10px;width:350px;height:50px;line-height:40px;outline:0;margin:5px 0;display:inline;float:left;}
+	        .table-hover{visibility:hidden;}
+	        .table-hover tbody tr td{background-color:#E4EEF0;font-family:NanumL;font-size:14px;}
+	        
+	        /* loading */
+	        #loading{position:absolute;left:47%;display:inline-block;width:75px;height:75px;border:5px solid #E4EEF0;border-radius:50%;border-top-color:#FF8000;animation:spin 1s ease-in-out infinite;-webkit-animation:spin 1s ease-in-out infinite;}
+	        @keyframes spin{to{-webkit-transform:rotate(360deg);}}
+	        @-webkit-keyframes spin{to{-webkit-transform:rotate(360deg);}}
 		</style>
 	</head>
 	
 	<body>
 		<jsp:include page="menubar.jsp"/>
-	    
-	    <div class="submenubar_background">
-	        <div class="submenubar_header">
+		
+	    <!-- 서브메뉴바 -->
+   	    <div class="submenubar_background">
+	       <div class="submenubar_header">
 	            <table>
 	                <tr>
 	                    <td class="submenubar_name">마이페이지</td>
 	                </tr>
 	            </table>
-	        </div>
-           <span class="submenubar_button_last"><a href="./pageMove?page=outMemForm">회원탈퇴</a></span>
-           <span class="submenubar_button"><a href="./pageMove?page=myReplyList">내가 쓴 댓글 보기</a></span>
-           <span class="submenubar_button"><a href="./pageMove?page=myWriteList">내가 쓴 글 보기</a></span>
-           <span id="companyupdate_btn" class="submenubar_button"></span>
-           <span class="submenubar_button"><a href="./perUpdateForm">개인정보 수정</a></span>
+	       </div>
+           <span class="submenubar_button_last"><a href="./pageMove?page=outMemForm" style="color:white;">회원탈퇴</a></span>
+           <span class="submenubar_button"><a href="./pageMove?page=myReplyList" style="color:white;">내가 쓴 댓글 보기</a></span>
+           <span class="submenubar_button"><a href="./pageMove?page=myWriteList" style="color:white;">내가 쓴 글 보기</a></span>
+           <span id="companyupdate_btn" class="submenubar_button" style="color:white;"></span>
+           <span class="submenubar_button"><a href="./perUpdateForm" style="color:white;">개인정보 수정</a></span>
 	    </div>
-		
-		<div class="col-md-4 col-md-offset-4">
-		
-	        <form method="post" id="fileUpload" enctype="multipart/form-data">
-				<div class="center-block">
-				<h1 class="content">회사정보 수정</h1>
-					<div class="duty">
-						<!-- 미수정!(0705_성원) -->
-						<select class="custom_select" name="jobSel"> 
-							<option value="1" selected>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;경영, 사무, 금융, 보험직</option> 
-							<option value="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;연구직 및 공학기술직</option> 
-							<option value="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;교육, 법률, 사회복지, 경찰, 소방직 및 군인</option> 
-							<option value="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;보건, 의료직</option>
-							<option value="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예술, 디자인, 방송, 스포츠직</option>
-							<option value="6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;미용, 여행, 숙박, 음식, 경비, 청소직</option>
-							<option value="7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;영업, 판매, 운전, 운송직</option>
-							<option value="8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;건설, 채굴직</option>
-							<option value="9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;설치, 정비, 생산직</option>
-							<option value="10">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;농림어업직</option>
-						</select>
+	    
+	    <!-- 회사정보 수정 메인 페이지 -->
+	    <div class="container">
+	    	<form method="post" id="fileUpload" enctype="multipart/form-data">
+				<div class="row">
+					<div class="col-md-10 col-md-push-1">
+						<div class="row">
+							<div class="col-md-10 col-md-push-1"><h1 class="content">회사정보 수정</h1></div>
+						</div>
+						<div class="row">
+							<div class="col-md-10 col-md-push-1">
+								<div class="col-md-10 col-md-push-1">
+									<div class="col-md-12">
+					              		<select name="jobSel" class="custom_select"> 
+											<option value="1" selected>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;경영, 사무, 금융, 보험직</option> 
+											<option value="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;연구직 및 공학기술직</option> 
+											<option value="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;교육, 법률, 사회복지, 경찰, 소방직 및 군인</option> 
+											<option value="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;보건, 의료직</option>
+											<option value="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예술, 디자인, 방송, 스포츠직</option>
+											<option value="6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;미용, 여행, 숙박, 음식, 경비, 청소직</option>
+											<option value="7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;영업, 판매, 운전, 운송직</option>
+											<option value="8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;건설, 채굴직</option>
+											<option value="9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;설치, 정비, 생산직</option>
+											<option value="10">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;농림어업직</option>
+									</select>
+									</div>
+				            	</div>
+							</div>
+							
+							<!-- 기업명 검색 -->
+							<div class="row">
+								<div class="col-md-10 col-md-push-1">
+									<div class="col-md-12">
+					              		<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">기업명</h3></div>
+					               		<div class="col-md-push-1 col-md-7">
+							                <input id="comName" name="companyName" class="inputTag" name="email" type="text" placeholder="기업명" style="background-color:#121F27; color:white; border: 0px; " readonly />
+					            		</div>
+					            		<div class="col-md-2">
+					            			<label class="company_btn" data-toggle="modal" data-target="#bs-example-modal-lg">기업 검색</label>
+					            		</div>
+				            		</div>
+				            	</div>
+							</div>
+							
+							<!-- 기업 웹메일 사진 -->
+							<div class="row">
+								<div class="col-md-10 col-md-push-1">
+									<div class="col-md-12">
+					              		<div class="col-md-push-1 col-md-3"><h3 class="inputHeader2">기업 웹메일 사이트 캡쳐사진</h3></div>
+					               		<div class="col-md-push-1 col-md-7">
+							                <input id="fileName" class="inputTag" type="text" placeholder="파일명"  readonly />
+							                
+							                <!-- 코멘트 -->
+								            <div class="row">
+							                	<div class="col-md-12"><b class="comment" style="color: red;">*기업 웹메일 사이트에 로그인한 화면을 캡쳐하신 후 첨부해주세요.</b></div>
+							                </div>
+							                <div class="row">
+				                				<div class="col-md-12"><b class="comment" style="color: red;">*기업명과 첨부하신 로그인 화면은 가입 신청 승인 후 즉시 폐기되어</b></div>
+				                			</div>
+				                			<div class="row">
+				                				<div class="col-md-12"><b class="comment" style="color: red;">회원님의 익명을 절대 보장해 드립니다.</b></div>
+				                			</div>
+					            		</div>
+					            		
+					            		<!-- 파일 첨부 버튼 -->
+					            		<div class="col-md-2">
+					            			<label for="upload" class="file_btn">파일 첨부</label>
+				            				<input type="file" id="upload" name="file" onchange="fileUpload()" />
+					            		</div>
+				            		</div>
+				            	</div>
+							</div>
+						</div>
 					</div>
-				<!-- 기업명 수정 -->
-				<div>
-			        <div class="updateForm">기업명</div>
-			        <input type="text" id="comName" placeholder="기업명 입력" value="" name="companyName" style="background-color: #121F27; color: white; border: 0px; " readonly />
-				   	<label class="company_btn" data-toggle="modal" data-target="#bs-example-modal-lg">기업 검색</label>
-			    </div>
-			    
-			    <!-- 기업 웹메일 수정 -->
-			   	<div class="company_photo">기업 웹메일<br/> 사이트 캡쳐사진</div>
-			   	<input type="text" id="fileName" placeholder="파일명" readonly/>
-			   	<label for="upload" class="file_btn">파일 첨부</label>
-				<input type="file" id="upload" name="file" onchange="fileUpload()"/>
-			   	<!-- 코멘트 -->
-				<div><span id="info">*기업 웹메일 사이트에 로그인한 화면을 캡쳐하신 후 첨부해주세요.</span></div>
-			    <div><span id="info">*기업명과 첨부하신 로그인 화면은 수정 신청 승인 후 즉시 폐기되어</span></div>
-			    <div><span id="info">회원님의 익명을 절대 보장해드립니다.</span></div>
-			    </div>
-			    
-				<div class="center-block">
-				    <button id="mUpdate">회사정보 수정 요청</button>
-				</div>	    
-	        </form>
-	        
-	        <!-- Modal -->
-			<div class="modal fade" id="bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-			  <div class="modal-dialog modal-lg">
-			    <div class="modal-content">
-			      <div class="modal-header" style="height: 75px;">
-			        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-		        	<input class="form-control" id="inputdefault" placeholder="기업명을 입력해주세요." style="display:inline-block; width:85%; height: 100%; "/>
-			        <button class="btn btn-primary btn-md" onclick="company_search()" style="display:inline-block; width:10%; height:100%; font-family:'bareun'; background-color: #121F27; border: 0px; ">검색</button>
-			      </div>
-			      <div class="modal-body">
-				      <table class="table table-hover">
-				          <thead style="background-color: #121F27; color: white; font-family:'NanumL'; font-size: 14px; text-align: center;">
-					      	<tr>
-					      		<th class="center" style="width:50px;">선택</th>
-					            <th class="center">기업명</th>
-					            <th class="center" style="width:300px;">기업주소</th>
-					     	</tr>
-					      </thead>
-					      <tbody id="list"></tbody>
-			          </table>
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-default" data-dismiss="modal" style="font-family:'bareun'; ">닫기</button>
-			        <button type="button" class="btn btn-primary" onclick="companyWrite()" style="font-family:'bareun'; background-color: #FF8000; border: 0px; ">완료</button>
-			      	<!-- data-dismiss="modal" -->
-			      </div>
-			    </div> <!-- 모달 콘텐츠 -->
-			  </div> <!-- 모달 다이얼로그 -->
-			</div> <!-- 모달 전체 윈도우 -->
-			</div>
+				</div>
+				<div class="col-md-6 col-md-push-3">
+                	<button id="mUpdate">회사정보 수정 요청</button>
+            	</div>
+			</form>
+		</div>
+	    
+	    <!-- Modal -->
+	  	<div class="modal fade" id="bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-lg">
+		    <div class="modal-content">
+		      <div class="modal-header" style="height: 75px;">
+		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        	<input class="form-control" id="inputdefault" placeholder="기업명을 입력해주세요." style="display:inline-block; width:85%; height: 100%; "/>
+		        <button class="btn btn-primary btn-md" onclick="company_search()" style="display:inline-block; width:10%; height:100%; font-family:'bareun'; background-color: #121F27; border: 0px; ">검색</button>
+		      </div>
+		      <div class="modal-body">
+			      <table class="table table-hover">
+			          <thead style="background-color: #121F27; color: white; font-family:'NanumL'; font-size: 14px; text-align: center;">
+				      	<tr>
+				      		<th class="center" style="width:50px;">선택</th>
+				            <th class="center">기업명</th>
+				            <th class="center" style="width:300px;">기업주소</th>
+				     	</tr>
+				      </thead>
+				      <tbody id="list"></tbody>
+		          </table>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal" style="font-family:'bareun'; ">닫기</button>
+		        <button type="button" class="btn btn-primary" onclick="companyWrite()" style="font-family:'bareun'; background-color: #FF8000; border: 0px; ">완료</button>
+		      </div>
+		    </div> 
+		  </div> 
+		</div> 
 	</body>
 	<script>
 		// 서브 메뉴바
@@ -314,9 +278,9 @@
 		
 		$(document).ready(function(){
 			if(member_div == "인턴") {
-				$("#companyupdate_btn").html("<a href='./pageMove?page=companyUpdate'>회사정보 등록</a>");
+				$("#companyupdate_btn").html("<a href='./pageMove?page=companyUpdate' style='color:white;'>회사정보 등록</a>");
 			} else {
-				$("#companyupdate_btn").html("<a href='./pageMove?page=companyUpdate'>회사정보 수정</a>");
+				$("#companyupdate_btn").html("<a href='./pageMove?page=companyUpdate' style='color:white;'>회사정보 수정</a>");
 			}
 		});
 		

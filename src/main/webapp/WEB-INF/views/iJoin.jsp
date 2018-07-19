@@ -83,6 +83,7 @@
 	            color: white;
 	            font-family: "bareun";
 	            margin-top: 50px;
+	            margin-bottom: 20px;
 	        }
 	        
 	        .warn{

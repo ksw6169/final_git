@@ -184,7 +184,7 @@
 					content += "<tr>";
 					content += "<td class='reply_contents' colspan='2' style='padding: 0px;'><textarea id='replyContent"+data.list[i].reply_no+"' style='width: 100%; height: 100%;' readonly='readonly'>"+data.list[i].reply_content+"</textarea></td>";
 					var date = new Date(data.list[i].reply_date);
-					content += "<td class='reply_date' style='0.25px solid #DDDDDD;'>"+date.toLocaleDateString("ko-KR")+"</td>";
+					content += "<td class='reply_date' style='0.25px solid #DDDDDD;'>"+dateForm(date)+"</td>";
 					if(data.list[i].member_id == loginId) {
 						content += "<td class='reply_updel' style='width: 100px;'>";
 						content += "<button class='btn btn-default pull-right updateBtn"+data.list[i].reply_no+"' onclick='replyUpdate("+data.list[i].reply_no+")' style='border-top-width: 0px;'>수정</button>";
@@ -241,9 +241,12 @@
 		});
 	}
 
+	var date = "${board.board_date}";	//날짜 뒤 .0 자름
+	var afterStr = date.split('.');
 	var dto={
 	        board_title:"${board.board_title}",
-	        board_date:"${board.board_date}",
+	        //board_date:"${board.board_date}",
+	        board_date:afterStr[0],
 	        board_content:"${board.board_content}",
 	        board_recom:"${board.board_recom}",
 	        board_category:"${board.board_category}",
@@ -354,5 +357,14 @@
 		});
 	}
 	
+	function dateForm(now){
+		year = "" + now.getFullYear();
+		month = "" + (now.getMonth() + 1); if (month.length == 1) { month = "0" + month; }
+		day = "" + now.getDate(); if (day.length == 1) { day = "0" + day; }
+		hour = "" + now.getHours(); if (hour.length == 1) { hour = "0" + hour; }
+		minute = "" + now.getMinutes(); if (minute.length == 1) { minute = "0" + minute; }
+		second = "" + now.getSeconds(); if (second.length == 1) { second = "0" + second; }
+		return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+	}
 	</script>
 </html>
