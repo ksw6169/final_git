@@ -31,7 +31,7 @@
 	        .center-block{ width: 650px;}
 	        #group{background: black; color: white; height: 15px; width: 150px;}
 	        /* 비밀번호 확인 */
-	        .warn{ font-family: "bareun"; margin-left: 135px; display: none; }
+	        .warn{ font-family: "bareun"; margin-left: 135px; display: none; text-align: center;}
 	        #blink{height: 1px; background-color: white; border-color: white; width: 150px;}
 	        /* 성 밑에 설명 */
 	        #info{font-family: "bareun"; margin-left: 140px;}
@@ -167,7 +167,7 @@
 								<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">이메일</h3></div>
 				               	<div class="col-md-push-1 col-md-7">
 				               		<input value="${member.member_email }" class="inputTag" name="email" type="text" placeholder="이메일 입력" onkeyup="emailCheck()" />
-	                				<span id="userEmailMsg" class="warn">　</span>
+	                				<span id="userEmailMsg" class="warn" id="passWarn">　</span>
 		                		</div>
 	                		</div>
 						</div>
@@ -235,7 +235,7 @@
 		
 		// 개인정보 수정 버튼을 클릭했을 때, 
 		$("#mUpdate").click(function(){
-			if($("#pw").val() == "" || $("#pw").val().length < 8 || $("#pw").val().length > 12){
+			if($("#warnPass").css("display") == "none"){
 				alert("새 비밀번호를 다시 입력해주세요.");
 				$("#pw").focus();
 			} else if($("#pw").val() != $("#pwChk").val()) {
