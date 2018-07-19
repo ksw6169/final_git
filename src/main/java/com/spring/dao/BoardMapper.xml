@@ -77,11 +77,12 @@
 			FROM 
 			(SELECT board_no,board_title,board_content,board_date,board_bHit, 
 					ROW_NUMBER() OVER(ORDER BY board_no DESC) 
-					AS rnum FROM board
+					AS rnum FROM board 
  				<where>
+ 					(member_id=#{loginId}) AND
 					<if test="keyword !=null || !keyword.equals('')">
-						board_title LIKE '%'||#{keyword}||'%'  OR board_content LIKE '%'||#{keyword}||'%'
-					</if>
+						(board_title LIKE '%'||#{keyword}||'%'  OR board_content LIKE '%'||#{keyword}||'%')
+					</if>					
 				</where>    
 				) WHERE rnum BETWEEN #{startPage} AND #{addPage} ORDER BY board_date DESC
 	</select>

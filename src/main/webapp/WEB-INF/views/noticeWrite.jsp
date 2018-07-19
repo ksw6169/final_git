@@ -76,7 +76,7 @@
 					 </tr>
 					<tr>
 						<td class="write_content"  colspan="2">
-						<textarea  name="board_content" class="form-control" rows="15" placeholder="내용을 입력해주세요."></textarea></td>
+						<textarea id="board_content" name="board_content" class="form-control" rows="15" placeholder="내용을 입력해주세요."></textarea></td>
 					</tr>
                 </table>
                 
@@ -90,10 +90,27 @@
     </div>
 </body>
 	<script>
+	
+	
 		function list(){
 			location.href ="./nBoardListForm";
 			
 		}
+		
+		
+		//글자수 제한 
+		$(document).ready(function() {
+			$("#board_content").on('keyup',function(){
+				if($(this).val().length > 500) {
+		        	$(this).val($(this).val().substring(0, 500));
+		        	alert("글자수를 초과하셨습니다 !");
+		        }
+			});  
+		});
+			
+		
+		//글자수 제한 
+		
 	
 	</script>
 </html>

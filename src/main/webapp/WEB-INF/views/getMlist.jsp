@@ -125,9 +125,9 @@
 				"ePage":ePage
 		};
 		obj.success=function(data){
-			console.log(data);
-			listPrint(data.GmessageList); //리스트 뿌린후
-			page = data.listAll;
+			console.log(data.GmessageList.length);
+			listPrint(data.GmessageList); 
+			page = data.GmessageList.length;
 			if(ePage >= page){
 				$("#next").addClass('disabled');
 			}else{
