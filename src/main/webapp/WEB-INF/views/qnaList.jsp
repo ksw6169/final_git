@@ -220,6 +220,9 @@
     /* 권한 */
     $(document).ready(function() {
         qnaList();
+        if(member_div == "관리자"){
+			$(".submenubar_button").css("display", "none");
+		}
 	});
     
     /* 게시글 리스트 호출 */

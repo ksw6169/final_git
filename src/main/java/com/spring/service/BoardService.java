@@ -309,9 +309,9 @@ public class BoardService {
 		HashMap<String, Object> resultMap = new HashMap<>();
 		logger.info("reply_content : "+replyContent);
 		
-		resultMap.put("msg", "댓글 작성 실패");
+		resultMap.put("msg", "댓글 작성에 실패했습니다.");
 		if(success > 0) {
-			resultMap.put("msg", "댓글 작성 성공");
+			resultMap.put("msg", "댓글 작성에 성공했습니다.");
 		}
 		
 		return resultMap;
