@@ -275,6 +275,7 @@
 		function kimSayList(){
 			search_div = false; 
 			
+			
 	    	console.log("kimsayList: "+startPage+"/"+endPage+"/"+align_div);
 			
 			$.ajax({
@@ -304,6 +305,8 @@
 	    /* 게시글 리스트 출력 */
 		function boardPrint(list){
 			var str = "";
+			console.log(list);
+			console.log(list.length);
 			for(var i=0; i<list.length; i++) {
 				str+="<div class='col-md-4'>";
 		        str+="<div class='thumbnail'>";
@@ -342,6 +345,7 @@
 	    	}
 	    	
 	    	search_div = true; 
+	    	startPage = 1;
 	    	
 	    	console.log("kimsaySearch: "+startPage+"/"+endPage+"/"+align_div);
 	    

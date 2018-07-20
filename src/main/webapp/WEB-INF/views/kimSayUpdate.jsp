@@ -92,11 +92,10 @@
             <div class="table_div">
                 <table class="table">
                      <tr>
-						   <select name="category" class="category" style="margin-bottom: 0px;">
-						      <option value="" selected="selected">카테고리</option>
-							  <option value="잡담">&nbsp;&nbsp;잡담</option>
-							  <option value="이직">&nbsp;&nbsp;이직</option>
-							  <option value="업무질문">업무질문</option>
+						   <select id="board_category" name="category" class="category" style="margin-bottom: 0px;">
+							  <option id="talk" value="잡담">&nbsp;&nbsp;잡담</option>
+							  <option id="trans" value="이직">&nbsp;&nbsp;이직</option>
+							  <option id="que" value="업무질문">업무질문</option>
 						   </select>
                      </tr>
                      <!-- <tr>
@@ -135,7 +134,14 @@
     
     function BoardPrint(board){
         console.log(board);
-       // $("#board_category").text(board.board_category);
+        
+        if(board.board_category == "잡담") {
+        	$("#talk").attr("selected", "selected");
+        } else if(board.board_category == "이직") {
+        	$("#trans").attr("selected", "selected");
+        } else {
+        	$("#que").attr("selected", "selected");
+        }
         $("#title_textarea").text(board.board_title);
         $("#content_textarea").text(board.board_content);
     }
@@ -152,5 +158,19 @@
 		}
 	});
     
+  	//글자수 제한
+    $("#title_textarea").on('keyup',function(){
+        if($(this).val().length > 20) {
+            $(this).val($(this).val().substring(0, 20));
+            alert("글자수를 초과하셨습니다 !");
+        }
+    });
+    
+    $("#content_textarea").on('keyup',function(){
+        if($(this).val().length > 500) {
+            $(this).val($(this).val().substring(0, 500));
+            alert("글자수를 초과하셨습니다 !");
+        }
+    });
 	</script>
 </html>

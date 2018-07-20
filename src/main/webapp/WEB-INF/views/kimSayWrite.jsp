@@ -138,5 +138,21 @@
 		$("#list").click(function(){
 			location.href='./pageMove?page=kimSayList';
 		});
+		
+        //글자수 제한
+        $("#title_textarea").on('keyup',function(){
+            if($(this).val().length > 20) {
+                $(this).val($(this).val().substring(0, 20));
+                alert("글자수를 초과하셨습니다 !");
+            }
+        });
+        
+        $("#content_textarea").on('keyup',function(){
+            if($(this).val().length > 500) {
+                $(this).val($(this).val().substring(0, 500));
+                alert("글자수를 초과하셨습니다 !");
+            }
+        });
+
 	</script>
 </html>

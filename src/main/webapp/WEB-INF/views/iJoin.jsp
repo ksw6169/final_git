@@ -108,8 +108,8 @@
 						<div class="col-md-10 col-md-push-1">
 		              		<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">아이디</h3></div>
 		               		<div class="col-md-push-1 col-md-7">
-		               			<input id="userId" class="inputTag" name="id" type="text" placeholder="아이디 (10자 이상,영소문자+숫자로 구성) 입력" onkeyup="overlay()" />
-		            			<span id="userIdMsg" class="warn">　</span>
+		               			<input id="userId" class="inputTag" name="id" type="text" placeholder="아이디 (5 - 20자, 영문+숫자로 구성) 입력" onkeyup="overlay()" />
+		            			<span id="userIdMsg" class="warn">　</span>	
 		            		</div>
 		            	</div>
 					</div>
@@ -117,7 +117,7 @@
 						<div class="col-md-10 col-md-push-1">
 							<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">비밀번호</h3></div>
 			               	<div class="col-md-push-1 col-md-7">
-			               		<input id="userPw" class="inputTag" name="pw" type="password" placeholder="비밀번호 8자 이상 입력" onkeyup="lengthChk()" />
+			               		<input id="userPw" class="inputTag" name="pw" type="password" placeholder="비밀번호 8 - 12자 입력" onkeyup="lengthChk()" />
 	                			<span id="userPwMsg" class="warn">　</span>
 	                		</div>
                 		</div>
@@ -144,7 +144,7 @@
 						<div class="col-md-10 col-md-push-1">
 							<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">성씨 입력</h3></div>
 			               	<div class="col-md-push-1 col-md-7">
-			               		<input id="userFamily" class="inputTag" name="family" type="text" placeholder="성씨입력" >
+			               		<input id="userFamily" class="inputTag" name="family" type="text" placeholder="성씨 입력" >
 				           		<div class="row">
 				           			<div class="col-md-12"><b class="comment">*입력한 성씨는 '김인턴,박인턴' 과 같은 호칭에 사용됩니다.</b></div>
 				           		</div>
@@ -186,6 +186,7 @@
 						msg.html("5~20자리 영문과 숫자만 가능합니다.");	// 이 부분 수정
 						msg.css("color", "red");
 					}else if(data.msg == "중복된 ID 입니다."){
+						chk = false;
 						msg.html(data.msg);
 						msg.css("color", "red");
 					}else{
@@ -241,6 +242,7 @@
 			if(!exptext.test(email)) {	
 				msg.html("이메일 형식이 올바르지 않습니다.");
 				msg.css("color", "red");
+				emailChk = false;
 			} else {
 				msg.html("올바른 이메일 형식입니다.");
 				msg.css("color", "green");
@@ -260,6 +262,7 @@
 				alert("ID를 입력해주세요.");
 				$("#userId").focus();
 			}else if(chk==false){
+				chk = false;
 				alert("ID가 중복되었습니다.");
 				$("#userId").focus();
 			}else if(!idReg.test(userId)){
@@ -286,6 +289,8 @@
 			} else if($("#userFamily").val()=="") {
 				alert("성을 입력해주세요.");
 				$("#userFamily").focus();
+			} else if($("#userFamily").val().length > 20) {
+				alert("성을 20자 이하로 입력해주세요.");
 			} else{
 				$.ajax({
 					type : "post",
