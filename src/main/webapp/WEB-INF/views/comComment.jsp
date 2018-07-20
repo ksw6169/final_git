@@ -46,8 +46,8 @@
 	        .subject, .date { color: #121F27; background-color: #FFFFFF; }
 	        .contents { color: #121F27; background-color: #FFFFFF; height: 200px; line-height: 100px; text-align: left; } 
 	
-	        .reply_contents { color: #121F27; background-color: #FFFFFF; height: 75px; line-height: 75px; text-align: left; }
-	        .reply_date { color: #121F27; background-color: #FFFFFF; width: 280px; height: 75px; line-height: 75px; text-align: center; }
+	        .reply_contents { color: #121F27; background-color: #FFFFFF; width:250px; height: 75px; line-height: 75px; text-align: left; }
+	        .reply_date { color: #121F27; background-color: #FFFFFF; width:150px; height: 75px; line-height: 75px; text-align: center; } /* width 삭제 */
 			td.reply_updel { background-color: #FFFFFF; border: 1px #FFFFFF; width: 80px; }
 	        .detail_div { margin-top: 50px;}
 	        .table_div { background-color: #E4EEF0; padding: 50px; text-align: center;}

@@ -130,7 +130,7 @@
 					   <th style="width: 100px;">수정/삭제</th>
                      </tr>
                 </table>
-				<textarea class="form-control replyContent" rows="5" name ="replyContent"></textarea>
+				<textarea id="write_replyContent" class="form-control replyContent" rows="5" name ="replyContent"></textarea>
 				<div class="button-group">
                 <button class="btn btn-default pull-right replyWrite">댓글 작성</button>
 				</div>
@@ -207,7 +207,7 @@
 						}
 						content += "</tr>";
 					}
-					
+						
 					$(".replyTable").append(content);
 				},
 				error : function(error) {
@@ -276,17 +276,25 @@
     }
     
     $("#update").click(function(){
-			location.href="./kimSayUpdateForm?board_no="+${board.board_no};
+		location.href="./kimSayUpdateForm?board_no="+${board.board_no};
    	});
     
     $("#delete").click(function(){
-    		location.href="./kimSayDelete?board_no="+${board.board_no};
+    	location.href="./kimSayDelete?board_no="+${board.board_no};
    	});
     
     /* 글쓰기 폼으로 이동 */
     function writeForm() {
     	location.href='./pageMove?page=kimSayWrite&job_no='+${board.job_no};
     }
+    
+  	//글자수 제한
+    $("#write_replyContent").on('keyup',function(){
+        if($(this).val().length > 100) {
+            $(this).val($(this).val().substring(0, 100));
+            alert("글자수를 초과하셨습니다 !");
+        }
+    });
     
     // 댓글 작성 버튼 클릭시
     $(".replyWrite").click(function() {

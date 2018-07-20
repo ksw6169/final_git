@@ -60,7 +60,7 @@ public class CompanyService {
 	public ModelAndView companyDetail(String company_no, String member_id) {
 		ModelAndView mav = new ModelAndView();
 		if (certCheck(member_id)) {
-			mav.addObject("msg", "기업 인증을 진행하지 않으셨습니다.");
+			mav.addObject("msg", "기업 인증이 필요한 서비스입니다.");
 			mav.setViewName("howComList");
 
 			return mav;
@@ -198,9 +198,9 @@ public class CompanyService {
 			MemberInter memberInter = sqlSession.getMapper(MemberInter.class);
 			MemberDTO memberDTO = memberInter.member(member_id);
 			if (!memberDTO.getMember_cert().equals("Y")) {
-				msg = "기업 인증을 진행하지 않으셨습니다.";
+				msg = "기업 인증이 필요한 서비스입니다.";
 			} else if (memberDTO.getMember_eval()!=null&&Integer.parseInt(memberDTO.getMember_eval()) > 0) {
-				msg = "이미 기업평가를 하셨습니다.";
+				msg = "이미 기업평가를 작성 하셨습니다.";
 			} else if (!companyDTO.getCompany_name().equals(memberDTO.getMember_company())) {
 				msg = "해당 기업의 직원으로 인증되지 않으셨습니다.";
 			} else {
@@ -272,7 +272,9 @@ public class CompanyService {
 	         DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
 	         DocumentBuilder dBuilder;
 	         dBuilder = dbFactoty.newDocumentBuilder();
+	         logger.info("api(리스트) 실행...");
 	         Document doc = dBuilder.parse(addr);
+	         logger.info("api(리스트) 종료...");
 
 	         // root tag
 	         doc.getDocumentElement().normalize(); // Dom tree -> XML 정규화
@@ -364,7 +366,7 @@ public class CompanyService {
 	                */
 
 	               dto = new CompanyDTO();
-	               dto.setCompany_name(company_name);
+	               dto.setCompany_name(company_name.trim());
 	               dto.setCompany_salary(company_salary);
 	               dto.setCompany_user(company_user);
 	               dto.setCompany_money(company_money);
