@@ -290,7 +290,7 @@
 							<div class="col-md-10 col-md-push-1">
 			              		<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">비밀번호 확인</h3></div>
 			               		<div class="col-md-push-1 col-md-7">
-					                <input id="userPw_re" class="inputTag" type="password" placeholder="비밀번호 확인 입력" onkeyup="pwOverlay()">
+					                <input id="userPw_re" class="inputTag" type="password" placeholder="********" onkeyup="pwOverlay()">
 	                				<span id="userPwReMsg" class="warn">　</span>
 			            		</div>
 			            	</div>
@@ -647,7 +647,7 @@
 				alert("기업명을 입력해주세요.")
 				$("#company").focus();
 			} else if($("#fileName").val()=="") {
-				alert("회사 캡쳐 사진을 첨부해주세요.");
+				alert("기업 웹메일 사이트 캡쳐사진을 첨부해주세요.");
 				$("#fileName").focus();
 			} else {
 				$.ajax({

@@ -126,7 +126,7 @@
 						<div class="col-md-10 col-md-push-1">
 							<div class="col-md-push-1 col-md-3"><h3 class="inputHeader">비밀번호 확인</h3></div>
 			               	<div class="col-md-push-1 col-md-7">
-			               		<input id="userPw_re" class="inputTag" type="password" placeholder="비밀번호 확인 입력" onkeyup="pwOverlay()"/>
+			               		<input id="userPw_re" class="inputTag" type="password" placeholder="********" onkeyup="pwOverlay()"/>
                 				<span id="userPwReMsg" class="warn">　</span>
 	                		</div>
                 		</div>

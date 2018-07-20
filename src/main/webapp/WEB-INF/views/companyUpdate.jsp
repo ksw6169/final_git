@@ -9,7 +9,7 @@
 		
 		<style>
 			/* submenubar css */
-			.submenubar_background{position:absolute;width:100%;height:100px;background-color:#E4EEF0}
+			.submenubar_background{/* position:absolute; */width:100%;height:100px;background-color:#E4EEF0}
 			.submenubar_header{font-family:fallM;margin-left:40px;width:150px;height:50px;display:inline-block;margin-top:30px;float:left;}
 			td.submenubar_name{font-family:"fallM"; font-size:30px;color:#121F27; background-color: #E4EEF0; border: 1px solid #E4EEF0; }
 			.submenubar_detail{font-size:10px;margin-left:5px;}
@@ -19,16 +19,9 @@
 			.submenubar_button{margin-right:10px;}
 			.submenubar_button_last{margin-right:3%};
 			
-			/* submenuBar 링크 글자 색상 */
-			.submenubar_button a{ color: white;}
-			.submenubar_button_last a{color: white;}
-			.submenubar_button a:hover{color: #FF8000; background-color: #121F27;text-decoration: none;}
-			.submenubar_button_last a:hover{color: #FF8000; background-color: #121F27; text-decoration: none;}
-			.submenubar_button a:active{color: #FF8000; background-color: #121F27;text-decoration: none;}
-			.submenubar_button_last a:active{color: #FF8000; background-color: #121F27;text-decoration: none;}
-			
 	        /* main css */
-	        .container{margin-top:150px;margin-bottom:50px;padding-top:25px;padding-bottom:25px;background:#E4EEF0;}
+	        .clear { margin-top: 200px; }	/* 여백을 위한 div */
+	        .container{margin-top:50px; margin-bottom:50px; padding-top:25px; padding-bottom:25px; background:#E4EEF0;}
 	        .inputHeader,.inputHeader2{background:#121F27;color:#fff;margin-left:10px;}
 	        .content{font-family:bareun;text-align:center;margin-bottom:50px;}
 	        .custom_select{margin-top:25px;margin-bottom:10px;width:100%;height:50px;font-family:fallM;border-radius:0;appearance:none;display:inline-block;float:left;color:#fff;background-color:#121F27;}
@@ -56,6 +49,14 @@
 	        #loading{position:absolute;left:47%;display:inline-block;width:75px;height:75px;border:5px solid #E4EEF0;border-radius:50%;border-top-color:#FF8000;animation:spin 1s ease-in-out infinite;-webkit-animation:spin 1s ease-in-out infinite;}
 	        @keyframes spin{to{-webkit-transform:rotate(360deg);}}
 	        @-webkit-keyframes spin{to{-webkit-transform:rotate(360deg);}}
+	        
+			/* submenuBar 링크 글자 색상 */
+			.submenubar_button a{ color: white;}
+			.submenubar_button_last a{color: white;}
+			.submenubar_button a:hover{color: #FF8000; background-color: #121F27;text-decoration: none;}
+			.submenubar_button_last a:hover{color: #FF8000; background-color: #121F27; text-decoration: none;}
+			.submenubar_button a:active{color: #FF8000; background-color: #121F27;text-decoration: none;}
+			.submenubar_button_last a:active{color: #FF8000; background-color: #121F27;text-decoration: none;}
 		</style>
 	</head>
 	
@@ -71,12 +72,14 @@
 	                </tr>
 	            </table>
 	       </div>
-           <span class="submenubar_button_last"><a href="./pageMove?page=outMemForm" style="color:white;">회원탈퇴</a></span>
-           <span class="submenubar_button"><a href="./pageMove?page=myReplyList" style="color:white;">내가 쓴 댓글 보기</a></span>
-           <span class="submenubar_button"><a href="./pageMove?page=myWriteList" style="color:white;">내가 쓴 글 보기</a></span>
-           <span id="companyupdate_btn" class="submenubar_button" style="color:white;"></span>
-           <span class="submenubar_button"><a href="./perUpdateForm" style="color:white;">개인정보 수정</a></span>
+           <span class="submenubar_button_last"><a href="./pageMove?page=outMemForm">회원탈퇴</a></span>
+           <span class="submenubar_button"><a href="./pageMove?page=myReplyList">내가 쓴 댓글 보기</a></span>
+           <span class="submenubar_button"><a href="./pageMove?page=myWriteList">내가 쓴 글 보기</a></span>
+           <span id="companyupdate_btn" class="submenubar_button"></span>
+           <span class="submenubar_button"><a href="./perUpdateForm">개인정보 수정</a></span>
 	    </div>
+	    
+	    <div class="clear">　</div>
 	    
 	    <!-- 회사정보 수정 메인 페이지 -->
 	    <div class="container">
@@ -91,9 +94,9 @@
 								<div class="col-md-10 col-md-push-1">
 									<div class="col-md-12">
 					              		<select name="jobSel" class="custom_select"> 
-											<option value="1" selected>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;경영, 사무, 금융, 보험직</option> 
-											<option value="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;연구직 및 공학기술직</option> 
-											<option value="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;교육, 법률, 사회복지, 경찰, 소방직 및 군인</option> 
+											<option value="1" selected>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;경영, 사무, 금융, 보험직</option> 
+											<option value="2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;연구직 및 공학기술직</option>
+											<option value="3">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;교육, 법률, 사회복지, 경찰, 소방직 및 군인</option> 
 											<option value="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;보건, 의료직</option>
 											<option value="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예술, 디자인, 방송, 스포츠직</option>
 											<option value="6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;미용, 여행, 숙박, 음식, 경비, 청소직</option>
