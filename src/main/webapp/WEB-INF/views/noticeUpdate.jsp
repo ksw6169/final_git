@@ -84,7 +84,7 @@
             </div>
           </form> 
             <div class="button-group">
-                <button class="btn btn-default pull-right" onclick="location.href='nBoardList'">목록</button>       
+                <button class="btn btn-default pull-right" onclick="history.back()">목록</button>       
             </div>
         </div>
     </div>

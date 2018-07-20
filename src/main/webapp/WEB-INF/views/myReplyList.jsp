@@ -48,6 +48,11 @@
       .boardLink:hover{text-decoration: none; color: black;}
       .boardLink:active{text-decoration: none; color: black;}
       .boardLink:visited {text-decoration: none; color: black;}
+      
+      /*다음, 이전 목록 버튼*/
+		li a{
+			cursor: pointer;
+		}
     </style>
   </head>
 	<body>
