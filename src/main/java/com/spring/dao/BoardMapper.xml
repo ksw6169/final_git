@@ -71,18 +71,18 @@
 	
 	<!-- 공지사항 리스트 및 검색-->
 	<select id="nBoardList" parameterType="hashMap" resultType="com.spring.dto.BoardDTO">
-		SELECT board_no,board_title,board_content,board_date,board_bHit 
+		SELECT board_no,board_title,board_content,board_date,board_bHit, rnum 
 			FROM 
 			(SELECT board_no,board_title,board_content,board_date,board_bHit, 
 					ROW_NUMBER() OVER(ORDER BY board_no DESC) 
 					AS rnum FROM board 
  				<where>
- 					(member_id=#{loginId}) AND
+ 					(member_id='admin') AND
 					<if test="keyword !=null || !keyword.equals('')">
 						(board_title LIKE '%'||#{keyword}||'%'  OR board_content LIKE '%'||#{keyword}||'%')
 					</if>					
 				</where>    
-				) WHERE rnum BETWEEN #{startPage} AND #{addPage} ORDER BY board_date DESC
+				) WHERE rnum BETWEEN #{startPage} AND #{addPage}
 	</select>
 	
 	<!-- 공지사항 작성  -->
@@ -121,7 +121,7 @@
 	</update> 	
 	
 	<select id="listCnt" parameterType="hashMap" resultType="int">
-		SELECT COUNT(*) FROM board WHERE member_id = #{loginId}
+		SELECT COUNT(*) FROM board WHERE member_id = 'admin'
 	</select>
 	
 	
@@ -132,9 +132,10 @@
 		WHERE rnum BETWEEN #{sNum} AND #{eNum} -->
       
 		SELECT rnum, board_no, board_title, board_date, member_id 
-		FROM (SELECT ROW_NUMBER() OVER(ORDER BY board_date DESC) AS rnum, board_no, board_title, board_date, member_id FROM board) 
+		FROM (SELECT ROW_NUMBER() OVER(ORDER BY board_date DESC) AS rnum, board_no, board_title, board_date, member_id FROM board 
+		WHERE member_id = #{userId}) 
 		<where>
-			rnum BETWEEN #{sNum} AND #{eNum} AND member_id = #{userId}
+			rnum BETWEEN #{sNum} AND #{eNum}
 		</where>
 	</select>
    
@@ -147,9 +148,10 @@
 	
 	<select id="myReplyList" parameterType="map" resultType="com.spring.dto.ReplyDTO">
 		SELECT rnum, board_no, reply_content, reply_date, member_id 
-      	FROM (SELECT ROW_NUMBER() OVER(ORDER BY reply_date DESC) AS rnum, board_no, reply_content, reply_date, member_id FROM reply)
+      	FROM (SELECT ROW_NUMBER() OVER(ORDER BY reply_date DESC) AS rnum, board_no, reply_content, reply_date, member_id FROM reply
+      	WHERE member_id = #{userId})
       	<where>
-      		rnum BETWEEN #{sNum} AND #{eNum} AND member_id = #{userId}
+      		rnum BETWEEN #{sNum} AND #{eNum} 
       	</where>
 	</select>
 	

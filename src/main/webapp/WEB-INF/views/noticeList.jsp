@@ -91,6 +91,10 @@
 			margin-top: 150px;
 		}
 
+		/*다음, 이전 목록 버튼*/
+		li a{
+			cursor: pointer;
+		}
     </style>
   </head>
 	<body>
@@ -210,7 +214,7 @@
 			//번호, 제목, 작성일, 조회수
 			nBoardList.forEach(function(item,board_no){
 					content += "<tr>";
-					content += "<td>"+item.board_no+"</td>";
+					content += "<td>"+item.rnum+"</td>";
 					content += "<td><a href='./nBoardDetail?board_no="+item.board_no+"''>"+item.board_title+"</a></td>";
 					//날짜 변경 
 					var date = new Date(item.board_date);
