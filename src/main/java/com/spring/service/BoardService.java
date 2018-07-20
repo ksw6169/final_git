@@ -58,7 +58,12 @@ public class BoardService {
 		logger.info("상세보기");
 		ModelAndView mav = new ModelAndView();
 		inter.upHit(board_no);
-		mav.addObject("board", inter.kimSayDetail(board_no));
+		BoardDTO dto=inter.kimSayDetail(board_no);
+		String word=dto.getBoard_content();
+		word.replaceAll("\r\n", "<br/>");
+		logger.info("문자열 치환 : "+ word);
+		dto.setBoard_content(word);
+		mav.addObject("board", dto);
 		mav.setViewName("kimSayDetail");
 		return(mav);
 	}

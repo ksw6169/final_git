@@ -56,6 +56,10 @@
 			.clear2 {
 				margin-top: 50px;
 			}
+			
+			#board_content.contents {
+				width: 100%; height: 100%;
+			}
     	</style>
   </head>
   <body>

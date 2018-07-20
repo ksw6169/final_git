@@ -97,7 +97,7 @@
                      <input name="job_no" type="hidden" value="${param.job_no}"/>
                      <tr>
                        <th>제목</th>
-                       <td class="subject"><textarea name="board_title" id="title_textarea" class="form-control subject" rows="1" placeholder="제목을 입력해주세요." style="padding-bottom: 11px;"></textarea></td>
+                       <td class="subject"><textarea name="board_title" id="title_textarea" onKeyPress="javascript: if (event.keyCode==13) return false;" class="form-control subject" rows="1" placeholder="제목을 입력해주세요." style="padding-bottom: 11px;" ></textarea></td>
                      </tr>
                      <tr>
                        <th colspan="2">내용</th>
@@ -131,6 +131,9 @@
 			}else{
 				console.log("전송");
 				$("#sendForm").attr("action", "./kimSayWrite");
+				var word=$("#content_textarea").val();
+	        	word=word.replace(/\n/gi,"<br>");
+	        	$("#content_textarea").val(word);
 				$("#sendForm").submit();
 			}
 		});
@@ -148,10 +151,13 @@
         });
         
         $("#content_textarea").on('keyup',function(){
-            if($(this).val().length > 500) {
+        	if($(this).val().length > 500) {
                 $(this).val($(this).val().substring(0, 500));
                 alert("글자수를 초과하셨습니다 !");
             }
+        	/* if($(this).val()==<br>){
+        		$(this).val().replaceAll("\r\n","<br>");
+        	} */
         });
 
 	</script>

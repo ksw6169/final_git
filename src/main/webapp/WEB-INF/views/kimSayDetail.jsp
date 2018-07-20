@@ -61,6 +61,10 @@
 			.clear2 {
 				margin-top: 50px;
 			}
+			
+			#board_content.contents {
+				width: 100%; height: 100%;
+			}
     	</style>
   </head>
   <body>
@@ -265,7 +269,6 @@
 	var afterStr = date.split('.');
     var dto={
             board_title:"${board.board_title}",
-            //board_date:"${board.board_date}",
             board_date:afterStr[0],
             board_content:"${board.board_content}",
             board_recom:"${board.board_recom}",

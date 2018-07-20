@@ -73,7 +73,7 @@
                      <input name="board_category" type="hidden" value="물어봐"/>
                      <tr>
                        <th>제목</th>
-                       <td class="subject"><textarea name="board_title" id="title_textarea" class="form-control subject" rows="1" placeholder="제목을 입력해주세요." style="padding-bottom: 11px;"></textarea></td>
+                       <td class="subject"><textarea name="board_title" id="title_textarea" onKeyPress="javascript: if (event.keyCode==13) return false;" class="form-control subject" rows="1" placeholder="제목을 입력해주세요." style="padding-bottom: 11px;"></textarea></td>
                      </tr>
                      <tr>
                        <th colspan="2">내용</th>
@@ -87,7 +87,7 @@
             </div> 
             </form>   
             <div class="button-group">
-                <button class="btn btn-default pull-right">목록</button>       
+                <button id="list" class="btn btn-default pull-right">목록</button>       
             </div>
         </div>
     </div>
@@ -107,6 +107,9 @@
 			}else{
 				console.log("전송");
 				$("#sendForm").attr("action", "./qnaWrite");
+				var word=$("#content_textarea").val();
+	        	word=word.replace(/\n/gi,"<br>");
+	        	$("#content_textarea").val(word);
 				$("#sendForm").submit();
 			}
 		});
