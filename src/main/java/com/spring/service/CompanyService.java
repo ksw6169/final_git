@@ -230,7 +230,9 @@ public class CompanyService {
 	      HashMap<String, Object> map = new HashMap<String, Object>();
 
 	      logger.info("openAPIList 실행!");
-	      ArrayList<CompanyDTO> companyList = openAPIList(company_name, null);
+	      //파라메터 - company_name -> saxParser(약 17초)
+	    //파라메터 - company_name, null -> domParser(약 20초)
+	      ArrayList<CompanyDTO> companyList = openAPIList(company_name);
 	      logger.info("openAPIList 종료!");
 
 	      if (companyList != null&&companyList.size()>0) {
@@ -246,6 +248,7 @@ public class CompanyService {
 
 	   // 회사명이 잘못됬거나 exception 시 null 반환
 	   public ArrayList<CompanyDTO> openAPIList(String companyName, String companyNum) { // 회사명, 사업자번호(앞자리6자)
+		   logger.info("DOM parser 메서드 실행...");
 	      ArrayList<CompanyDTO> list=null;
 	      
 	      String addr = "http://apis.data.go.kr/B552015/NpsBplcInfoInqireService/getBassInfoSearch";
@@ -319,6 +322,28 @@ public class CompanyService {
 	         logger.info("API 실행 오류");
 	      }
 	      return list;
+	   }
+	   
+	   //saxParser
+	   public ArrayList<CompanyDTO> openAPIList(String companyName) {
+		   logger.info("SAX parser 메서드 실행...");
+		   String addr = "http://apis.data.go.kr/B552015/NpsBplcInfoInqireService/getBassInfoSearch";
+		      String serviceKey = "VthZIBoSyW7Y1PT4scsIWQw5px3VOj1pr5aawkg0Pn3sKP2zNSYuhDR1qN1v7WC0UrNRarwwSFxwQ%2FwMIiNf%2Fg%3D%3D";
+		      String encodingName = "";
+		      try {
+		         encodingName = URLEncoder.encode(companyName, "UTF-8");
+		      } catch (UnsupportedEncodingException e1) {
+		         e1.printStackTrace();
+		      }
+
+		      String param = "wkpl_nm=" + encodingName;
+		      param = param + "&" + "numOfRows=999"; // 데이터 12개:18초 , 데이터 1개:19초
+		      param = param + "&" + "serviceKey=" + serviceKey;
+		      addr = addr + "?" + param;
+		      
+		      XMLSAXParser saxParser=new XMLSAXParser(addr);
+		      
+		   return saxParser.parse();
 	   }
 	      
 	   public CompanyDTO apiDetail(String seq) {

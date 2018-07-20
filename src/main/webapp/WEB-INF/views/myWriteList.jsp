@@ -46,6 +46,10 @@
 		.submenubar_button a:active{color: #FF8000; background-color: #121F27;text-decoration: none;}
 		.submenubar_button_last a:active{color: #FF8000; background-color: #121F27;text-decoration: none;}
 		
+		/*다음, 이전 목록 버튼*/
+		li a{
+			cursor: pointer;
+		}
     </style>
   </head>
    <body>

@@ -37,7 +37,7 @@
 	        button:hover { color: #121F27; }
 	        /* board_detail css */
 	        .content { font-family: "bareun"; text-align: center; margin-bottom: 50px; }
-	        td { font-family: "NanumM"; text-align: center; background: #121F27; color: white; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; }
+	        td { font-family: "NanumM"; text-align: center; background: #121F27; color: white; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; word-break:break-all; }
 	        .table>thead>tr>th { font-family: "fallM"; text-align: center; vertical-align: middle;  background: #121F27; color: white; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; }
 	
 	        .like { background-color: #FF8000; margin: 15px 0 0 15px; }
