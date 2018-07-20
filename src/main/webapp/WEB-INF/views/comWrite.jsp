@@ -371,7 +371,7 @@
                     </div>
                 </div>
 	            <div class="col-md-6 col-md-offset-3 comment">코멘트</div>
-	            <textarea class="col-md-6 col-md-offset-3" name="evaluation_comment" rows="8"></textarea>
+	            <textarea id="comment_content" class="col-md-6 col-md-offset-3" name="evaluation_comment" rows="8"></textarea>
 	            <br />
 	            <div class="col-md-6 col-md-offset-3 button_group">
 	                <input type="button" onclick="before()" class="pull-right" value="이전"/>
@@ -384,6 +384,13 @@
         </body>
         <script src="./resources/js/star.js"></script>
         <script>
+        $("#comment_content").on('keyup',function(){
+			if($(this).val().length > 300) {
+	        	$(this).val($(this).val().substring(0, 300));
+	        	alert("글자수를 초과하셨습니다 !");
+	        }
+        });
+			
         evalCheck("${company_no}");
         
         $("#row1p1").attr('checked', true);

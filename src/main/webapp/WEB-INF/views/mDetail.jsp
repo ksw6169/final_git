@@ -63,8 +63,8 @@
             </table>
         </div>
 	        <span id="AdminWrite" class="submenubar_button_last"><a href="./pageMove?page=mWrite">쪽지 작성</a></span>
-	        <span class="submenubar_button"><a href="./pageMove?page=getMlist">보낸 쪽지함</a></span>
-	        <span class="submenubar_button"><a href="./pageMove?page=sendMlist">받은 쪽지함</a></span>
+	        <span class="submenubar_button"><a href="./pageMove?page=sendMlist">보낸 쪽지함</a></span>
+	        <span class="submenubar_button"><a href="./pageMove?page=getMlist">받은 쪽지함</a></span>
     </div>
   
   <div class="container">
