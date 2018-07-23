@@ -73,7 +73,7 @@
                      <input name="board_category" type="hidden" value="물어봐"/>
                      <tr>
                        <th>제목</th>
-                       <td class="subject"><textarea name="board_title" id="title_textarea" class="form-control subject" rows="1" placeholder="제목을 입력해주세요." style="padding-bottom: 11px;"></textarea></td>
+                       <td class="subject"><textarea name="board_title" id="title_textarea" onKeyPress="javascript: if (event.keyCode==13) return false;" class="form-control subject" rows="1" placeholder="제목을 입력해주세요." style="padding-bottom: 11px;"></textarea></td>
                      </tr>
                      <tr>
                        <th colspan="2">내용</th>
@@ -87,7 +87,7 @@
             </div> 
             </form>   
             <div class="button-group">
-                <button class="btn btn-default pull-right">목록</button>       
+                <button id="list" class="btn btn-default pull-right">목록</button>       
             </div>
         </div>
     </div>
@@ -101,12 +101,20 @@
 		$("#save").click(function(){
 			if($("#title_textarea").val()==""){
 				alert("제목을 입력해주세요.");
-				$("#title_textarea").focus();
+				setTimeout(function(){$("#title_textarea").focus();}, 1);
+				console.log("제목 미입력");
+				return false;
 			}else if($("#content_textarea").val() == ""){
 				alert("내용을 입력해주세요");
+				setTimeout(function(){$("#content_textarea").focus();}, 1);
+				console.log("내용 미입력");
+				return false;
 			}else{
 				console.log("전송");
 				$("#sendForm").attr("action", "./qnaWrite");
+				var word=$("#content_textarea").val();
+	        	word=word.replace(/\n/gi,"<br>");
+	        	$("#content_textarea").val(word);
 				$("#sendForm").submit();
 			}
 		});

@@ -104,7 +104,7 @@
                      <input name="board_no" type="hidden" value="${param.board_no}"/>
                      <tr>
                        <th>제목</th>
-                       <td id="board_title" class="subject"><textarea name="board_title" id="title_textarea" class="form-control subject" rows="1" style="padding-bottom: 11px;"></textarea></td>
+                       <td id="board_title" class="subject"><textarea name="board_title" id="title_textarea" onKeyPress="javascript: if (event.keyCode==13) return false;" class="form-control subject" rows="1" style="padding-bottom: 11px;"></textarea></td>
                      </tr>
                      <tr>
                        <th colspan="2">내용</th>
@@ -149,11 +149,19 @@
     $("#update").click(function(){
 		if($("#title_textarea").val()==""){
 			alert("제목을 입력해주세요.");
-			location.href="./kimSayUpdateForm?board_no="+${board.board_no};
+			setTimeout(function(){$("#title_textarea").focus();}, 1);
 			console.log("제목 미입력");
+			return false;
 		}else if($("#content_textarea").val() == ""){
 			alert("내용을 입력해주세요");
+			setTimeout(function(){$("#content_textarea").focus();}, 1);
+			console.log("내용 미입력");
+			return false;
 		}else{
+			$("#sendForm").attr("action", "./kimSayUpdate");
+			var word=$("#content_textarea").val();
+        	word=word.replace(/\n/gi,"<br>");
+        	$("#content_textarea").val(word);
 			$("#sendForm").submit();
 		}
 	});

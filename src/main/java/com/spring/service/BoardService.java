@@ -58,7 +58,12 @@ public class BoardService {
 		logger.info("상세보기");
 		ModelAndView mav = new ModelAndView();
 		inter.upHit(board_no);
-		mav.addObject("board", inter.kimSayDetail(board_no));
+		BoardDTO dto=inter.kimSayDetail(board_no);
+		String word=dto.getBoard_content();
+		word.replaceAll("\r\n", "<br/>");
+		logger.info("문자열 치환 : "+ word);
+		dto.setBoard_content(word);
+		mav.addObject("board", dto);
 		mav.setViewName("kimSayDetail");
 		return(mav);
 	}
@@ -309,9 +314,9 @@ public class BoardService {
 		HashMap<String, Object> resultMap = new HashMap<>();
 		logger.info("reply_content : "+replyContent);
 		
-		resultMap.put("msg", "댓글 작성 실패");
+		resultMap.put("msg", "댓글 작성에 실패했습니다.");
 		if(success > 0) {
-			resultMap.put("msg", "댓글 작성 성공");
+			resultMap.put("msg", "댓글 작성에 성공했습니다.");
 		}
 		
 		return resultMap;

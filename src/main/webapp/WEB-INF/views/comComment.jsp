@@ -43,14 +43,14 @@
 	        .reply_date { color: #121F27; background-color: #FFFFFF; width:75px; height: 75px; line-height: 75px; text-align: center; } /* width 삭제 */
 			.table>tbody>tr>td.reply_date { vertical-align: middle; border: 1px white; width: 75px;}
 			td.reply_updel { width: 75px; }
-			.button_group,.div_dont{background-color:#121F27;color:#fff;font-family:bareun; }
+			.button_group, .div_dont{background-color:#121F27;color:#fff;font-family:bareun; }
 			.button_group{width:100%;height:50%;border:.25px solid #fff; }
-			.div_dont,.td_star{width:100px;line-height:75px; }
+			.div_dont, .td_star{width:100px;line-height:75px; }
 			.div_dont{height:75px;border:1px solid #E4EEF0; }
 			.star_grade{height:15px; }
 			.td_star{color:#121F27;background-color:#FFF;height:75px;text-align:center;vertical-align:middle; }
 			
-			.container{margin-top:150px; }
+			.container{margin-top:150px; }			
     	</style>
   </head>
   <body>  

@@ -384,6 +384,13 @@
         </body>
         <script src="./resources/js/star.js"></script>
         <script>
+        $("#comment").on('keyup',function(){
+			if($(this).val().length > 300) {
+	        	$(this).val($(this).val().substring(0, 300));
+	        	alert("글자수를 초과하셨습니다 !");
+	        }
+        });
+        
         	$("#row1p"+"${evaluationDTO.evaluation_night}").attr('checked', true);
         	$("#row2p"+"${evaluationDTO.evaluation_rest}").attr('checked', true);
         	$("#row3p"+"${evaluationDTO.evaluation_intern}").attr('checked', true);

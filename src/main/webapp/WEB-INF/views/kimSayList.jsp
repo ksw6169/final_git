@@ -268,7 +268,11 @@
 	        } else if(member_div == "인턴"){
 	        	alert("대리 회원만 이용 가능합니다.");
 	        	location.href='./';
-	        }
+	        } 
+	        
+	        if(member_div == "관리자"){
+				$(".submenubar_button").css("display", "none");
+			}
 		});
 	    
 	    /* 게시글 리스트 호출 */

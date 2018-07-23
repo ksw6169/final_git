@@ -220,6 +220,9 @@
     /* 권한 */
     $(document).ready(function() {
         qnaList();
+        if(member_div == "관리자"){
+			$(".submenubar_button").css("display", "none");
+		}
 	});
     
     /* 게시글 리스트 호출 */
@@ -287,14 +290,14 @@
     	search_div = true; 
     	startPage = 1;
     	
-    	console.log("kimsaySearch: "+startPage+"/"+endPage+"/"+align_div);
+    	console.log("qnaSearch: "+startPage+"/"+endPage+"/"+align_div);
     	
     	if($("#search_text").val() == "") {
     		alert("검색 키워드를 입력하세요.");
     	} else {
     		$(".col-md-4").remove();
     		$.ajax({
-    			type : "post",
+    			type : "post",	
     			url : "./qnaSearchList",
     			data : {
     				keyword : $("#search_text").val(),

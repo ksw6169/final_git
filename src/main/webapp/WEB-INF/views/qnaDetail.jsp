@@ -56,6 +56,10 @@
 			.clear2 {
 				margin-top: 50px;
 			}
+			
+			#board_content.contents {
+				width: 100%; height: 100%;
+			}
     	</style>
   </head>
   <body>
@@ -124,7 +128,7 @@
                 </table>
 				<textarea id="write_replyContent" class="form-control replyContent" rows="5" name="replyContent"></textarea>
 				<div class="button-group">
-                <button class="btn btn-default pull-right replyWrite">댓글 작성</button>
+                <button id="replySave" class="btn btn-default pull-right replyWrite">댓글 작성</button>
 				</div>
             </div>
         </div>
@@ -154,7 +158,13 @@
 				if(loginId != "${board.member_id}"){
 					$("#update").css("display", "none");
 					$("#delete").css("display", "none");
-				} 
+				}
+				
+				if(member_div == "관리자"){
+					$(".submenubar_button").css("display", "none");
+					$("#replySave").css("display", "none");
+					$("#write_replyContent").css("display", "none");
+				}
 				
 				if(data.myLike == true) {
 					$("#like.btn.like_btn").css("background", "#FF8000");

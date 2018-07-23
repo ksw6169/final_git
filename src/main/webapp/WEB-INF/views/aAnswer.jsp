@@ -43,7 +43,11 @@
 			.container {
 				margin-top: 100px; 
 			}
-			
+		/* submenuBar 링크 글자 색상 */
+		.submenubar_button a{ color: white;}
+		.submenubar_button_last a{color: white;}
+		.submenubar_button a:hover{color: #FF8000; background-color: #121F27;text-decoration: none;}
+		.submenubar_button_last a:hover{color: #FF8000; background-color: #121F27; text-decoration: none;}
     	</style>
   	</head>
   	<body>
@@ -58,8 +62,8 @@
                 </tr>
             </table>
         </div>
-        <span class="submenubar_button_last">보낸 쪽지함</span>
-        <span class="submenubar_button">받은 쪽지함</span>
+			<span id="sendM" class="submenubar_button_last"><a href="./pageMove?page=sendMlist">보낸 쪽지함</a></span>
+	        <span id="getM" class="submenubar_button"><a href="./pageMove?page=getMlist">받은 쪽지함</a></span>
     </div>
   	
   	<div class="container">
@@ -79,7 +83,7 @@
             </form>
             </div>    
             <div class="button-group">
-                <button class="btn btn-default pull-right">목록</button>       
+                <button class="btn btn-default pull-right" onclick="location.href='./pageMove?page=getMlist'">목록</button>       
             </div>
         </div>
     </div>
