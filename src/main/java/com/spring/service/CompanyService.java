@@ -98,8 +98,9 @@ public class CompanyService {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
 		inter = sqlSession.getMapper(CompanyInter.class);
+		
 		ArrayList<EvaluationDTO> list = inter.companyCommentList(company_no, pagingEnd);
-
+		
 		map.put("evaluationList", list);
 		return map;
 	}

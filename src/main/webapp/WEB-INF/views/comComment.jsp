@@ -32,62 +32,31 @@
 			.submenubar_button{margin-right:10px;}
 			.submenubar_button_last{margin-right:3%;}
 			
-			
+			/* main css */
 	        button { width: 120px; height: 40px; background-color: #FF8000; border: none; vertical-align: middle; color:#fff; font-family: "fallB"; text-align: center; display: inline-block; font-size: 12px; }    
-	        button:hover { color: #121F27; }
-	        /* board_detail css */
-	        .content { font-family: "bareun"; text-align: center; margin-bottom: 50px; }
-	        td { font-family: "NanumM"; text-align: center; background: #121F27; color: white; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; word-break:break-all; }
-	        .table>thead>tr>th { font-family: "fallM"; text-align: center; vertical-align: middle;  background: #121F27; color: white; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; }
-	
-	        .like { background-color: #FF8000; margin: 15px 0 0 15px; }
-	
+	        button:hover { background-color: #FF8000; }
+
+	        td { font-family: "NanumL"; text-align: center; background: #121F27; color: white; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; }
+	        .table>thead>tr>th { font-family: "NanumL"; text-align: center; vertical-align: middle;  background: #121F27; color: white; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; font-size: 14px; }
 	        .reply { background-color: #E5EDF0; color: #121F27; border: 1px solid #DDDDDD;}
-	        .subject, .date { color: #121F27; background-color: #FFFFFF; }
-	        .contents { color: #121F27; background-color: #FFFFFF; height: 200px; line-height: 100px; text-align: left; } 
-	
-	        .reply_contents { color: #121F27; background-color: #FFFFFF; width:250px; height: 75px; line-height: 75px; text-align: left; }
-	        .reply_date { color: #121F27; background-color: #FFFFFF; width:150px; height: 75px; line-height: 75px; text-align: center; } /* width 삭제 */
-			td.reply_updel { background-color: #FFFFFF; border: 1px #FFFFFF; width: 80px; }
-	        .detail_div { margin-top: 50px;}
-	        .table_div { background-color: #E4EEF0; padding: 50px; text-align: center;}
-			.table>tbody>tr>td.reply_date { vertical-align: middle; border: 1px white; }
-	        .table>tbody>tr>td.td_star { vertical-align: middle; border: 1px solid #DDDDDD; }
-			.table>tbody>tr>td.reply_updel { padding: 0px; border-top: 0px; }
+	        .reply_contents { color: #121F27; background-color: #FFFFFF; width:500px; height: 75px; text-align: left; vertical-align: top; padding: 5px; word-break:break-all;}
+	        .reply_date { color: #121F27; background-color: #FFFFFF; width:75px; height: 75px; line-height: 75px; text-align: center; } /* width 삭제 */
+			.table>tbody>tr>td.reply_date { vertical-align: middle; border: 1px white; width: 75px;}
+			td.reply_updel { width: 75px; }
+			.button_group, .div_dont{background-color:#121F27;color:#fff;font-family:bareun; }
+			.button_group{width:100%;height:50%;border:.25px solid #fff; }
+			.div_dont, .td_star{width:100px;line-height:75px; }
+			.div_dont{height:75px;border:1px solid #E4EEF0; }
+			.star_grade{height:15px; }
+			.td_star{color:#121F27;background-color:#FFF;height:75px;text-align:center;vertical-align:middle; }
 			
-			.button_group {
-				width: 100px;
-				height: 37.5px;
-				background-color: #121F27;
-				color: white;
-				font-family: "bareun";
-				border: 1px solid #E4EEF0;
-			}
-			
-			.div_dont{
-				width: 100px;
-				height: 75px;
-				background-color: #121F27;
-				color: white;
-				font-family: "bareun";
-				border: 1px solid #E4EEF0;
-				line-height: 75px;
-			}
-	        
-	        .star_grade {
-	        	height: 15px;
-	        }
-	        
-	        .td_star { color: #121F27; background-color: #FFFFFF; width: 100px; height: 75px; line-height: 75px; text-align: center; vertical-align: middle; }
-    	
-    		.container {
-				margin-top: 100px; 
-			}
+			.container{margin-top:150px; }			
     	</style>
   </head>
   <body>  
   	<jsp:include page="menubar.jsp" flush="false"/>
   	
+  	<!-- Submenubar -->
  	<div class="submenubar_background">
         <div class="submenubar_header">
             <table>
@@ -101,144 +70,115 @@
         <span class="submenubar_button" onclick="location.href='./companyDetail?company_no=${company_no}'">기업평가 정보</span>
     </div>
   
-  
+ 
 	<div class="container">
-        <div class="detail_div">
-            <div class="table_div">
-                <!-- <table class="table">
-                	<thead>
-                     <tr>
-                       <th class="reply" colspan="7">코멘트 121</th>
-                     </tr>
-                     <tr>
-                       <th>작성일자</th>
-                       <th>내용</th>
-                       <th>주당야근횟수</th>
-                       <th>휴식시간</th>
-                       <th>인턴채용</th>
-                       <th>연차사용압력</th>
-					   <th>수정/삭제</th>
-                     </tr>
-                     </thead>
-                     <tr>
-					   <td class="reply_date">2018-06-26 15:20</td>
-                       <td class="reply_contents">너무 걱정하지 마세요~ ^0^</td>
-                       <td class="td_star"><img class="star_grade" src="./resources/image/star_1.png"/></td>
-                       <td class="td_star"><img class="star_grade" src="./resources/image/star_2.png"/></td>
-                       <td class="td_star"><img class="star_grade" src="./resources/image/star_3.png"/></td>
-                       <td class="td_star"><img class="star_grade" src="./resources/image/star_4.png"/></td>  
-					   <td class="reply_updel">
-						<button class="button_group pull-right">수정</button>
-						<br>
-                		<button class="button_group pull-right">삭제</button>
-					   </td>
-                     </tr>
-                </table> -->
-            </div>
-        </div>
-		
-    </div>
-</body>
+       	<table class="table">
+       		<thead>
+       			<tr>
+       				<th class="reply" colspan="7">코멘트</th>
+       			</tr>
+       			<tr>
+          			<th style="width: 200px;">작성일자</th>
+               		<th style="width: 200px;">내용</th>
+               		<th>주당야근횟수</th>
+               		<th>휴식시간</th>
+	                <th>인턴채용</th>
+	                <th>연차사용압력</th>
+					<th>수정/삭제</th>
+              </tr>
+       		</thead>
+       		<!-- append: thead.after() -->
+       	</table>
+   	</div>
+	</body>
 	<script>
-	var obj={};
-	var userID="${userID}";
+		var obj={};
+		var userID="${sessionScope.loginId}";
+		
+		createObj(obj);
+		ajaxCall(obj);
 	
-	createObj(obj);
-	ajaxCall(obj);
-	
-	 function createObj(obj){
-         obj.url="./companyCommentList";
-         obj.type="GET";
-         obj.dataType="JSON";
-         obj.error=function(e){console.log(e)};
-     }
-	 function ajaxCall(obj){
- 		obj.data={
-             "company_no":"${company_no}"
-         };
-         obj.success=function(data){
-             commentListPrint(data.evaluationList);
-         };
-         $.ajax(obj);
- 	}
-	 function commentUpdate(evaluation_no){
-		 location.href="./evalUpdateForm?evaluation_no="+evaluation_no;
-	 }
-	 function commentDelete(evaluation_no){
-		 var del={};
-		 createObj(del);
-		 del.url="./evalDelete?evaluation_no="+evaluation_no;
-		 del.success=function(data){
-			 if(data.success>0){console.log("삭제 성공");}
-			 else{console.log("삭제 실패");}
-			 
-			 ajaxCall(obj);
-		 };
-		 console.log(del);
-		 $.ajax(del);
-	 }
+		function createObj(obj){
+		       obj.url="./companyCommentList";
+		       obj.type="GET";
+		       obj.dataType="JSON";
+		       obj.error=function(e){console.log(e)};
+		}
+		
+		function ajaxCall(obj){
+			obj.data={
+		           "company_no":"${company_no}"
+		       };
+		       obj.success=function(data){
+		           commentListPrint(data.evaluationList);
+		       };
+		       $.ajax(obj);
+		}
 	 
-	 function commentListPrint(list){
-          $("table.table").remove();
-          var content="";
-          if(list.length==0){
-        	  content+="<table class='table'>";
-        	  content+="<thead>";
-        	  content+="<tr>";
-        	  content+="<th class='reply'>작성된 기업평가가 존재하지 않습니다.</th>";
-        	  content+="</tr>";
-        	  content+="</thead>";
-        	  content+="</table>";
-        	  $(".table_div").append(content);
-          }else{
-          
-	          //evaluationList[] - evaluation_comment, evaluation_night, evaluation_rest, evaluation_intern, evaluation_vacation
-	          list.forEach(function(evaluationDTO,idx){
-	        	  var date = new Date(evaluationDTO.evaluation_date);
-	        	  var month=date.getMonth()+1;
-	        	  
-	        	  content="";
-	        	  content+="<table class='table'>";
-	        	  content+="<thead>";
-	        	  content+="<tr>";
-	        	  content+="<th class='reply' colspan='7'>코멘트 "+evaluationDTO.evaluation_no+"</th>";
-	        	  content+="</tr>";
-	        	  content+="<tr>";
-	        	  content+="<th>작성일자</th>";
-	        	  content+="<th>내용</th>";
-	        	  content+="<th>주당야근횟수</th>";
-	        	  content+="<th>휴식시간</th>";
-	        	  content+="<th>인턴채용</th>";
-	        	  content+="<th>연차사용압력</th>";
-	        	  content+="<th>수정/삭제</th>";
-	        	  content+="</tr>";
-	        	  content+="</thead>";
-	        	  content+="<tr>";
-	        	  //content+="<td class='reply_date'>"+date.getFullYear()+"."+month+"."+date.getDate()+" "+date.getHours()+":"+date.getMinutes()+"</td>";
-	        	  content+="<td class='reply_date'>"+dateForm(date)+"</td>";
-	        	  content+="<td class='reply_contents'>"+evaluationDTO.evaluation_comment+"</td>";
-	        	  content+="<td class='td_star'><img class='star_grade' src='./resources/image/star_"+evaluationDTO.evaluation_night+".png'/></td>";
-	        	  content+="<td class='td_star'><img class='star_grade' src='./resources/image/star_"+evaluationDTO.evaluation_rest+".png'/></td>";
-	        	  content+="<td class='td_star'><img class='star_grade' src='./resources/image/star_"+evaluationDTO.evaluation_intern+".png'/></td>";
-	        	  content+="<td class='td_star'><img class='star_grade' src='./resources/image/star_"+evaluationDTO.evaluation_vacation+".png'/></td>"; 
-	        	  content+="<td class='reply_updel'>";
-	        	 if(userID!=null&&userID==evaluationDTO.member_id){
-		        	  content+="<button class='button_group pull-right' onclick='commentUpdate("+evaluationDTO.evaluation_no+")'>수정</button>";
-		        	  content+="<br>";
-		        	  content+="<button class='button_group pull-right' onclick='commentDelete("+evaluationDTO.evaluation_no+")'''>삭제</button>";
-	        	 }else if("${sessionScope.member_div}"=="관리자"){
-	        		 content+="<button class='div_dont pull-right' onclick='commentDelete("+evaluationDTO.evaluation_no+")'''>삭제</button>";
-	        	 }else{
-	        		 content+="<div class='div_dont'>수정 불가</div>";
-	        	 }
-	        	  content+="</td>";
-	        	  content+="</tr>";
-	        	  content+="</table>";
-	        	  $(".table_div").append(content);
-          });
+		/* 코멘트 수정 */
+		function commentUpdate(evaluation_no){
+			location.href="./evalUpdateForm?evaluation_no="+evaluation_no;
+		}
+	 
+		/* 코멘트 삭제 */
+		function commentDelete(evaluation_no){
+			var del={};
+			createObj(del);
+			del.url="./evalDelete?evaluation_no="+evaluation_no;
+			del.success=function(data){
+				if(data.success>0){
+					alert("댓글 삭제에 성공했습니다.");
+				} else { 
+					alert("댓글 삭제에 실패했습니다.");
+				}
+				ajaxCall(obj);
+			};
+			$.ajax(del);
+		}
+	 	
+		/* 코멘트 리스트 출력 */
+		function commentListPrint(list){
+			var content="";
+			
+			if(list.length==0){
+				content += "<tr>";
+				content += "<td colspan=7 style='height:300px; line-height: 300px; background: #E4EEF0; color: black; font-size: 25px; font-family: bareun;'>작성된 기업평가가 존재하지 않습니다.</td>";
+				content += "</tr>";
+				
+				$("thead").append(content);
+			} else {
+				var content = "";
+				
+				for(var i=0; i<list.length; i++) {
+					var date = new Date(list[i].evaluation_date);
+		        	var month = date.getMonth()+1;
+					
+		        	content += "<tr>";
+					content += "<td class='reply_date' style='width: 100px;'>"+dateForm(date)+"</td>"; 
+					content += "<td class='reply_contents'>"+list[i].evaluation_comment+"</td>";
+					content+="<td class='td_star'><img class='star_grade' src='./resources/image/star_"+list[i].evaluation_night+".png'/></td>";
+	        	    content+="<td class='td_star'><img class='star_grade' src='./resources/image/star_"+list[i].evaluation_rest+".png'/></td>";
+	        	    content+="<td class='td_star'><img class='star_grade' src='./resources/image/star_"+list[i].evaluation_intern+".png'/></td>";
+	        	    content+="<td class='td_star'><img class='star_grade' src='./resources/image/star_"+list[i].evaluation_vacation+".png'/></td>"; 
+					
+	        	    content += "<td class='reply_updel'>";
+	        	    
+					if(userID != null && userID == list[i].member_id){
+			        	  content+="<button class='button_group pull-right' onclick='commentUpdate("+list[i].evaluation_no+")'>수정</button>";
+			        	  content+="<br>";
+			        	  content+="<button class='button_group pull-right' onclick='commentDelete("+list[i].evaluation_no+")'''>삭제</button>";
+		        	 }else if("${sessionScope.member_div}"=="관리자"){
+		        		 content+="<button class='div_dont pull-right' onclick='commentDelete("+list[i].evaluation_no+")'''>삭제</button>";
+		        	 }else{
+		        		 content+="<div class='div_dont'>수정 불가</div>";
+		        	 }
+					 content += "</td>";
+					 content += "</tr>";
+				}
+				$("thead").after(content);
           }
       }
-	 
+	
 	 function evalCheck(company_no){
      	var chk={};
      	chk.url="./evalCheck";
@@ -262,6 +202,6 @@
 			minute = "" + now.getMinutes(); if (minute.length == 1) { minute = "0" + minute; }
 			second = "" + now.getSeconds(); if (second.length == 1) { second = "0" + second; }
 			return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
-		}
+		} 
 	</script>
 </html>

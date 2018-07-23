@@ -179,9 +179,23 @@ public class BoardService {
 	public HashMap<String, Object> myReplyList(Map<String, String> params) {
 		HashMap<String, Object> map = new HashMap<String, Object>();//담아서 보낼 HashMap 생성
 		inter = sqlSession.getMapper(BoardInter.class);
-		ArrayList<BoardDTO> list = inter.myReplyList(params);//ArrayList로 해당 아이디가 쓴 글 담기
-		logger.info(""+list.size());
+		ArrayList<ReplyDTO> list = inter.myReplyList(params);//ArrayList로 해당 아이디가 쓴 글 담기
+		logger.info("리스트 사이즈"+list.size());
 		int listCnt = inter.myReplyListCnt(params);//페이징을 위해 글 갯수 가져옴
+		logger.info("리스트 카운트: "+listCnt);
+		
+		/* 0723 추가 - 성원*/
+		ArrayList<BoardDTO> board_category_list = new ArrayList<>();
+		
+		for(int i=0; i<list.size(); i++) {
+			System.out.println("board_no: "+list.get(i).getBoard_no());
+			
+			BoardDTO dto = new BoardDTO();
+			dto = inter.myReplyBoardCategory(list.get(i).getBoard_no());
+			board_category_list.add(dto);
+		}
+		
+		map.put("board_category_list", board_category_list);
 		map.put("list", list);//보낼 리스트를 담음
 		map.put("listCnt", listCnt);//글 갯수 담음
 		return map;

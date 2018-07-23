@@ -27,7 +27,7 @@ public interface BoardInter {
 
 	int myWriteListCnt(Map<String, String> params); //내가 쓴 글 리스트 갯수
 
-	ArrayList<BoardDTO> myReplyList(Map<String, String> params);//내가 쓴 댓글 리스트
+	ArrayList<ReplyDTO> myReplyList(Map<String, String> params);//내가 쓴 댓글 리스트
 
 	BoardDTO kimSayDetail(String board_no);
 
@@ -85,6 +85,10 @@ public interface BoardInter {
 	int qnaUpdate(String board_title, String board_content, String board_no);
 
 	int qnaDelete(String board_no);
+
+	/* 내가 작성한 댓글의 board_category 추출 */
+	BoardDTO myReplyBoardCategory(int board_no);
+	
 
 	
 
