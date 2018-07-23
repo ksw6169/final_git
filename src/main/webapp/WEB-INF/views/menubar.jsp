@@ -25,11 +25,11 @@
 	        .navbar-brand { margin-right: 25px; }
 	        .menu a { font-family: "bareun"; text-align: center; color: white; margin-right: 25px; color: white; }
 	        .sub_menu { margin-right: 30px; margin-top: 10px; }
-	        .sub_menu_item { font-family: "fallM"; margin-right: 5px; font-size: 12px; text-align: center; color: white; margin-right: 25px; }
+	        .sub_menu_item { font-family: "fallM"; margin-right: 5px; font-size: 12px; text-align: center; color: white; margin-right: 10px; }
 	        .sub_menu_item a { font-family: "fallM"; margin-right: 5px; font-size: 12px; }
 	        .nav.navbar-nav li a { color: white; }
 	        .nav.navbar-nav li a:hover { color: #FF8000; background-color: #121F27; }
-	        #member_family { width: 500px; height: 20px; text-align: right; padding: 15px 15px 15px 15px; margin-right: 25px; font-size: 12px; font-family: "fallM"; color: white; line-height: 20px; }
+	        #member_family { width: 150px; height: 20px; text-align: right; padding: 15px 15px 15px 15px; margin-right: 10px; font-size: 12px; font-family: "fallM"; color: white; line-height: 20px; }
 	    	.nav.navbar-nav li .no_hover:hover { color: white; }
 	    	b, strong { font-weight: 100; }
 	    	

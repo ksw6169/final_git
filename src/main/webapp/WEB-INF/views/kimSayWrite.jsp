@@ -62,6 +62,10 @@
 				margin-top: 100px;
 			}
 			
+			#list {
+				margin-bottom: 50px;
+			}
+			
     	</style>
   </head>
   <body>

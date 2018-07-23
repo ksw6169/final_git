@@ -15,7 +15,7 @@
 			.submenubar_detail{font-size:12px;margin-left:5px;color:#323838;}
 			.submenubar_description{font-family: "fallM"; font-size:12px;height:15px;margin-top:10px;color:#121F27; background-color: #E4EEF0; border: 1px solid #E4EEF0; }
 			.submenubar_button,.submenubar_button_last{width:120px;height:50px;line-height:50px;color:#fff;font-family:fallM;font-size:15px;text-align:center;margin-top:25px;float:right;background-color:#121F27;cursor:pointer;}
-			.submenubar_button{margin-right:10px;}
+			.submenubar_button{margin-right:50px;}
 			.submenubar_button_last{margin-right:100px;}
 			
 	        .btn { width: 120px; height: 40px; background-color: #FF8000; border: none; vertical-align: middle; color:#fff; font-family: "fallB"; text-align: center; display: inline-block; font-size: 12px; }    
@@ -59,6 +59,7 @@
 			
 			#board_content.contents {
 				width: 100%; height: 100%;
+				word-break: break-all;
 			}
     	</style>
   </head>
