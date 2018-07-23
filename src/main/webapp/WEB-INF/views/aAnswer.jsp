@@ -75,10 +75,10 @@
                        <th colspan="2">내용</th>
                      </tr>
                      <tr>
-						<td class="write_content" colspan="2"><textarea class="form-control" rows="15" placeholder="내용을 입력해주세요." name="message_content"></textarea></td>
+						<td class="write_content" colspan="2"><textarea id="message_content" class="form-control" rows="15" placeholder="내용을 입력해주세요." name="message_content"></textarea></td>
 					 </tr>
                 </table>
-                <input type="hidden" value="${message.member_id}" name="message_receive"/>           
+                <input  type="hidden" value="${message.member_id}" name="message_receive"/>           
                 <button class="btn btn-default pull-right">작성 완료</button>
             </form>
             </div>    
@@ -89,6 +89,17 @@
     </div>
 </body>
 	<script>
+	
+	
+	$(document).ready(function(){ 
+		//글자수 제한
+		$("#message_content").on('keyup',function(){
+			if($(this).val().length > 100) {
+	        	$(this).val($(this).val().substring(0, 100));
+	        	alert("글자수를 초과하셨습니다 !");
+	        }
+		});
+	});
 		
 	</script>
 </html>
