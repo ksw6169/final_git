@@ -17,7 +17,7 @@
 	</insert>
 	
 	<select id="login" parameterType="String" resultType="com.spring.dto.MemberDTO">
-		SELECT member_pw, member_div, job_no FROM member WHERE member_id = #{param1}
+		SELECT member_pw, member_div, member_family, job_no FROM member WHERE member_id = #{param1}
 	</select>
 	
 	<!-- 중복 체크 -->

@@ -92,6 +92,7 @@ public class MemberController {
 		logger.info("로그아웃 요청");
 		session.removeAttribute("loginId");
 		session.removeAttribute("member_div");
+		session.removeAttribute("member_family");
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("msg", "로그아웃 되었습니다.");

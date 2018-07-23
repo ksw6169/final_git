@@ -120,6 +120,7 @@ public class MemberService {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		String hash = "";
 		String member_div = null;
+		String member_family = null;
 		int job_no = 0;
 		boolean success = false;
 		
@@ -134,6 +135,7 @@ public class MemberService {
 			member_div = dto.getMember_div();			// 사용자 권한 가져옴
 			success = encoder.matches(pw, hash);		// 입력한 pw와 암호화된 pw 비교
 			job_no = dto.getJob_no();
+			member_family = dto.getMember_family();
 		}
 		
 		logger.info("잡넘버 "+job_no);
@@ -148,6 +150,7 @@ public class MemberService {
 			session.setAttribute("loginId", id);
 			session.setAttribute("member_div", member_div);
 			session.setAttribute("job_no", job_no);
+			session.setAttribute("member_family", member_family);
 		}
 		
 		mav.addObject("msg", msg);

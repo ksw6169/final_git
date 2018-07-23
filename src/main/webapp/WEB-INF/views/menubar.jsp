@@ -25,10 +25,13 @@
 	        .navbar-brand { margin-right: 25px; }
 	        .menu a { font-family: "bareun"; text-align: center; color: white; margin-right: 25px; color: white; }
 	        .sub_menu { margin-right: 30px; margin-top: 10px; }
+	        .sub_menu_item { font-family: "fallM"; margin-right: 5px; font-size: 12px; text-align: center; color: white; margin-right: 25px; }
 	        .sub_menu_item a { font-family: "fallM"; margin-right: 5px; font-size: 12px; }
 	        .nav.navbar-nav li a { color: white; }
 	        .nav.navbar-nav li a:hover { color: #FF8000; background-color: #121F27; }
-	        #logout_btn, #req_btn, #mlist_btn, #mypage_btn { display: none; }
+	        #member_family { width: 500px; height: 20px; text-align: right; padding: 15px 15px 15px 15px; margin-right: 25px; font-size: 12px; font-family: "fallM"; color: white; line-height: 20px; }
+	    	.nav.navbar-nav li .no_hover:hover { color: white; }
+	    	b, strong { font-weight: 100; }
 	    	
 	    	/* 쪽지 알림용 툴팁*/    
 	    	#tooltip{display:none; }
@@ -62,6 +65,7 @@
 	                </div>
 	                <div class="navbar-right sub_menu">
 	                    <ul class="nav navbar-nav">
+	                      <li id="member_family" class="sub_menu_last_item"><b id="family" style="color:#FF8000;">00</b><b id="family_content">님 환영합니다.</b></li>
 	                      <li id="login_btn" class="sub_menu_item"><a href="./loginForm">로그인</a></li>
 	                      <li id="join_btn" class="sub_menu_item"><a href="./joinForm">회원가입</a></li>
 	                      <li id="logout_btn" class="sub_menu_item"><a href="./logout">로그아웃</a></li>
@@ -77,6 +81,7 @@
 	<script>
 		var loginId = "${sessionScope.loginId}";
 		var member_div = "${sessionScope.member_div}";
+		var member_family = "${sessionScope.member_family}";
 		var msgCnt;
 		
 		$(document).ready(function() {
@@ -88,6 +93,7 @@
 	        	$("#req_btn").css("display", "none");
 	        	$("#mypage_btn").css("display", "none");
 	        	$("#mlist_btn").css("display", "none");
+	    		$("#member_family").css("display", "none");
 	    	} else if(member_div == "인턴" || member_div == "대리"){
 	    		messageCount();
 	        	$("#logout_btn").css("display", "inline-block");
@@ -104,6 +110,22 @@
 	    		$("#login_btn").css("display", "none");
 	        	$("#join_btn").css("display", "none");
 	        	$("#mypage_btn").css("display", "none");
+	    	}
+	    	
+	    	if(member_family != "") {
+	    		console.log("성: "+member_family);
+	    		$("#member_family").css("display", "inline-block");
+	    		
+	    		if(member_div == "인턴") {
+	    			$("#family").html(member_family+"인턴");
+		    		$("#family_content").html("님 환영합니다.");
+	    		} else if(member_div == "대리") {
+	    			$("#family").html(member_family+"대리");
+		    		$("#family_content").html("님 환영합니다.");
+	    		} else if(member_div == "관리자"){
+	    			$("#family").html("관리자");
+		    		$("#family_content").html("님 환영합니다.");
+	    		}
 	    	}
 		});
 
