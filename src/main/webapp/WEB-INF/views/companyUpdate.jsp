@@ -24,7 +24,7 @@
 	        .container{margin-top:50px; margin-bottom:50px; padding-top:25px; padding-bottom:25px; background:#E4EEF0;}
 	        .inputHeader,.inputHeader2{background:#121F27;color:#fff;margin-left:10px;}
 	        .content{font-family:bareun;text-align:center;margin-bottom:50px;}
-	        .custom_select{margin-top:25px;margin-bottom:10px;width:100%;height:50px;font-family:fallM;border-radius:0;appearance:none;display:inline-block;float:left;color:#fff;background-color:#121F27;}
+	        .custom_select{margin-top:25px;margin-bottom:10px;width:100%;height:50px;font-family:fallM;border-radius:0;appearance:none;display:inline-block;float:left;color:#fff;background-color:#121F27;text-align-last: center;}
 	        .inputHeader,.inputHeader2,.inputTag{width:100%;height:50px;line-height:50px;font-family:bareun;margin-top:5px;padding:0;text-align:center;}
 	        .inputHeader{font-size:13px;}
 	        .inputHeader2{font-size:8px;}
@@ -93,17 +93,17 @@
 							<div class="col-md-10 col-md-push-1">
 								<div class="col-md-10 col-md-push-1">
 									<div class="col-md-12">
-					              		<select name="jobSel" class="custom_select"> 
-											<option value="1" selected>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;경영, 사무, 금융, 보험직</option> 
-											<option value="2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;연구직 및 공학기술직</option>
-											<option value="3">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;교육, 법률, 사회복지, 경찰, 소방직 및 군인</option> 
-											<option value="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;보건, 의료직</option>
-											<option value="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예술, 디자인, 방송, 스포츠직</option>
-											<option value="6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;미용, 여행, 숙박, 음식, 경비, 청소직</option>
-											<option value="7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;영업, 판매, 운전, 운송직</option>
-											<option value="8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;건설, 채굴직</option>
-											<option value="9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;설치, 정비, 생산직</option>
-											<option value="10">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;농림어업직</option>
+					              		<select name="jobSel" class="custom_select" id="sel"> 
+											<option value="1" selected>경영, 사무, 금융, 보험직</option> 
+											<option value="2">연구직 및 공학기술직</option>
+											<option value="3">교육, 법률, 사회복지, 경찰, 소방직 및 군인</option> 
+											<option value="4">보건, 의료직</option>
+											<option value="5">예술, 디자인, 방송, 스포츠직</option>
+											<option value="6">미용, 여행, 숙박, 음식, 경비, 청소직</option>
+											<option value="7">영업, 판매, 운전, 운송직</option>
+											<option value="8">건설, 채굴직</option>
+											<option value="9">설치, 정비, 생산직</option>
+											<option value="10">농림어업직</option>
 									</select>
 									</div>
 				            	</div>
@@ -304,5 +304,21 @@
 				$("form").attr("action", "companyUpdate");
 			}
 		});
+		
+		function sortDropDownListByText() {
+	        // Loop for each select element on the page.
+	        $("select").each(function() {             
+	            // Keep track of the selected option.
+	            var selectedValue = $(this).val();     
+	            // Sort all the options by text. I could easily sort these by val.
+	            $(this).html($("option", $(this)).sort(function(a, b) {
+	                return a.text == b.text ? 0 : a.text < b.text ? -1 : 1
+	            }));     
+	            // Select one option.
+	            $(this).val(selectedValue);
+	        });
+	    }
+	    
+	 $(document).ready(sortDropDownListByText);
 	</script>
 </html>
