@@ -38,6 +38,8 @@
 		.submenubar_button_last a{color: white;}
 		.submenubar_button a:hover{color: #FF8000; background-color: #121F27;text-decoration: none;}
 		.submenubar_button_last a:hover{color: #FF8000; background-color: #121F27; text-decoration: none;}
+
+ 		
     </style>
 	</head>
 	<body>
@@ -125,8 +127,9 @@
 				"ePage":ePage
 		};
 		obj.success=function(data){
-			console.log(data.GmessageList.length);
+			console.log(data.GmessageList);
 			listPrint(data.GmessageList); 
+
 			page = data.GmessageList.length;
 			if(ePage >= page){
 				$("#next").addClass('disabled');
@@ -142,24 +145,28 @@
 		ajaxCall(obj);
 	}
 	
-	
 	//리스트 그리기
 	function listPrint(GmessageList){
 		var content ="";
 		//체크박스,번호, 제목, 작성일
-		GmessageList.forEach(function(item,message_no){
-				content += "<tr>";
-				content += "<td><input class='Chk' name='RowCheck' type='checkbox' value='"+item.message_no+"'/></td>";
-				content += "<td>"+item.message_no+"</td>";
-				content += "<td id='readChk'><a href='./UmessageDetail?message_no="+item.message_no+"''>"+item.message_content+"</a></td>";
-				//날짜 변경 
-				var date = new Date(item.message_date);
-				/* content += "<td>"+date.toLocaleDateString("ko-KR")+"</td>"; */
-				content += "<td>"+dateForm(date)+"</td>";
-				content += "</tr>";
-			});
-		$("#list").empty();
-		$("#list").append(content);
+		GmessageList.forEach(function(GmessageList,message_no){
+					content += "<tr>";
+					content += "<td><input class='Chk' name='RowCheck' type='checkbox' value='"+GmessageList.message_no+"'/></td>";
+					content += "<td>"+GmessageList.message_no+"</td>";	
+					//읽은부분 텍스트 색상 변경 
+					if(GmessageList.message_read=='y'){
+						content += "<td><a style='color:black; text-decoration:none;' id='readChk' href='./UmessageDetail?message_no="+GmessageList.message_no+"''>"+GmessageList.message_content+"</a></td>";
+		   			}else{
+		   			content += "<td ><a id='readChk' href='./UmessageDetail?message_no="+GmessageList.message_no+"''>"+GmessageList.message_content+"</a></td>";
+		   			}
+					//날짜 변경 
+					var date = new Date(GmessageList.message_date);
+					content += "<td>"+dateForm(date)+"</td>";
+					content += "</tr>";
+		});
+			$("#list").empty();
+			$("#list").append(content);
+
 	}
 	
 	

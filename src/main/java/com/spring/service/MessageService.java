@@ -4,6 +4,8 @@ package com.spring.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.mail.Message;
+
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -121,6 +123,7 @@ public class MessageService {
 		mav.setViewName("aAnswer");
 		return mav;
 	}
+
 
 
 }

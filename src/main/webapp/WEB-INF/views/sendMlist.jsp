@@ -40,7 +40,6 @@
 		.submenubar_button_last a{color: white;}
 		.submenubar_button a:hover{color: #FF8000; background-color: #121F27;text-decoration: none;}
 		.submenubar_button_last a:hover{color: #FF8000; background-color: #121F27; text-decoration: none;}
-        
     </style>
   </head>
 	<body>
@@ -155,7 +154,7 @@
 		//체크박스,번호, 제목, 작성일
 		messageList.forEach(function(item,message_no){
 				content += "<tr>";
-				content += "<td><input class='Chk' name='RowCheck' type='checkbox' value='"+item.message_no+"'/></td>";
+				content += "<td id='readChk'><input class='Chk' name='RowCheck' type='checkbox' value='"+item.message_no+"'/></td>";
 				content += "<td>"+item.message_no+"</td>";
 				content += "<td>"+item.message_content+"</a></td>";
 				//날짜 변경 
@@ -170,7 +169,7 @@
 	
 	
 	//다음 버튼 클릭시 
-	$("#next").click(function(){
+	$("#next").click(function(){ 
 		 if($("#next").attr('class') != "page-item disabled"){
 			sPage +=10;
 			ePage +=10;
