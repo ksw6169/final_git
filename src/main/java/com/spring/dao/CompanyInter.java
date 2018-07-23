@@ -35,4 +35,6 @@ public interface CompanyInter {
 	int companyCount(String company_name);
 
 	int companyListCnt(HashMap<String, String> params);
+
+	int companyCommentListCnt(String company_no);	// 기업평가 코멘트 수
 }
