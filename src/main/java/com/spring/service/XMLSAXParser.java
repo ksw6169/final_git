@@ -28,6 +28,8 @@ public class XMLSAXParser extends DefaultHandler {
     // 끝 태그명
     private String endTagName;
     
+    private StringBuffer sBuffer=null;
+    
     private CompanyDTO dto=null;
     
     private HashMap<String, CompanyDTO> companyList = new HashMap<String, CompanyDTO>();
@@ -39,6 +41,7 @@ public class XMLSAXParser extends DefaultHandler {
         try {
             parserFactory = SAXParserFactory.newInstance();
             parser = parserFactory.newSAXParser();
+            sBuffer=new StringBuffer();
         } catch(Exception e) {
             System.out.println("Exception >> " + e.toString());
         }
@@ -60,6 +63,7 @@ public class XMLSAXParser extends DefaultHandler {
 		if(this.startTagName.equals("item")) {
 			this.dto= new CompanyDTO();
 		}
+		sBuffer.setLength(0);
 	}
 	
 	@Override
@@ -72,9 +76,13 @@ public class XMLSAXParser extends DefaultHandler {
 					 mapDto.setCompany_no(dto.getCompany_no());
 					 mapDto.setCompany_code(dto.getCompany_code());
                      companyList.put(mapDto.getCompany_name(), mapDto);
+                     
+                     //System.out.println(mapDto.getCompany_name());
                   }
 			}else {
                 companyList.put(dto.getCompany_name(), dto);
+                
+                //System.out.println(dto.getCompany_name());
              }
 		}
 		
@@ -83,20 +91,32 @@ public class XMLSAXParser extends DefaultHandler {
 	@Override
 	public void characters(char[] str, int start, int len) throws SAXException {
 		if(this.startTagName.equals("wkplNm")) {
-			String wkplNm=new String(str,start,len);
+			String wkplNm="";
+			sBuffer.append(new String(str,start,len));
+			wkplNm=sBuffer.toString().trim();
 			this.dto.setCompany_name(wkplNm);
 		}
 		if(this.startTagName.equals("dataCrtYm")) {
-			String dataCrtYm=new String(str,start,len);
+			String dataCrtYm="";
+			sBuffer.append(new String(str,start,len));
+			dataCrtYm=sBuffer.toString().trim();
 			this.dto.setCompany_code(Integer.parseInt(dataCrtYm));
 		}
 		if(this.startTagName.equals("seq")) {
-			String seq=new String(str,start,len);
+			String seq="";
+			sBuffer.append(new String(str,start,len));
+			seq=sBuffer.toString().trim();
 			this.dto.setCompany_no(Integer.parseInt(seq));
 		}
 		if(this.startTagName.equals("wkplRoadNmDtlAddr")) {
-			String wkplRoadNmDtlAddr=new String(str,start,len);
+			String wkplRoadNmDtlAddr="";
+			sBuffer.append(new String(str,start,len));
+			wkplRoadNmDtlAddr=sBuffer.toString().trim();
 			this.dto.setCompany_addr(wkplRoadNmDtlAddr);
+		}
+		if(this.startTagName.equals("errMsg")) {
+			sBuffer.append(new String(str,start,len));
+			System.out.println("API 에러 : "+sBuffer.toString().trim());
 		}
 	}
 

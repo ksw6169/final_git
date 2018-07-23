@@ -228,12 +228,18 @@ public class CompanyService {
 
 	public HashMap<String, Object> apiList(String company_name) {
 	      HashMap<String, Object> map = new HashMap<String, Object>();
+	      
 
+	      
+	      
 	      logger.info("openAPIList 실행!");
+	      long startTime= System.currentTimeMillis();
 	      //파라메터 - company_name -> saxParser(약 17초)
 	    //파라메터 - company_name, null -> domParser(약 20초)
-	      ArrayList<CompanyDTO> companyList = openAPIList(company_name);
+	      ArrayList<CompanyDTO> companyList = openAPIList(company_name,null);
+	      long endTime=System.currentTimeMillis();
 	      logger.info("openAPIList 종료!");
+	      logger.info("경과시간 : "+(endTime-startTime)/1000.0+" 초");
 
 	      if (companyList != null&&companyList.size()>0) {
 	         map.put("success", true);
