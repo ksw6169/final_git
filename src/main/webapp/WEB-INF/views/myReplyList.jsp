@@ -154,7 +154,7 @@
 		   	obj.success=function(data){ //성공시의 함수
 		   		console.log(data);
 		   		listCnt = data.listCnt;
-				listPrint(data.list);
+				listPrint(data.list, data.board_category_list);
 				if(eNum >= listCnt){
 					$("#nextLi").addClass('disabled');
 				}else{
@@ -170,20 +170,41 @@
 	   }
 	   
 		//받아온 리스트 그리기
-		function listPrint(list){
+		function listPrint(list, categoryList){
 			var content = "";
-			list.forEach(function(item, idx){
-				console.log(item);
+			
+			for(var i=0; i<list.length; i++) {
 				content += "<tr class='listVal'>";
-				content += "<td>"+item.rnum+"</td>";
-				content += "<td><a class='boardLink' href='./kimSayDetail?board_no="+item.board_no+"'>"+item.reply_content+"</a></td>";
+				content += "<td>"+list[i].rnum+"</td>";
+				
+				if(categoryList[i].board_category == "물어봐") {
+					content += "<td><a class='boardLink' href='./qnaDetail?board_no="+list[i].board_no+"'>"+list[i].reply_content+"</a></td>";
+				} else {
+					content += "<td><a class='boardLink' href='./kimSayDetail?board_no="+list[i].board_no+"'>"+list[i].reply_content+"</a></td>";
+				}
 				
 				//millisecond 로 나올경우
-				var date = new Date(item.reply_date);
+				var date = new Date(list[i].reply_date);
 				/* var dateF =  */
 				content += "<td>"+dateForm(date)+"</td>";
 				content += "</tr>";
-			});
+			}
+			
+			/* list.forEach(function(item, idx){
+				console.log(item);
+				content += "<tr class='listVal'>";
+				content += "<td>"+item.rnum+"</td>";
+				if(item.board_category == "물어봐") {
+					content += "<td><a class='boardLink' href='./qnaDetail?board_no="+item.board_no+"'>"+item.reply_content+"</a></td>";
+				} else {
+					content += "<td><a class='boardLink' href='./kimSayDetail?board_no="+item.board_no+"'>"+item.reply_content+"</a></td>";
+				}
+				//millisecond 로 나올경우
+				var date = new Date(item.reply_date);
+				/* var dateF =  */
+				/* content += "<td>"+dateForm(date)+"</td>";
+				content += "</tr>"; */
+			/* });  */
 			$("#list").empty();
 			$("#list").append(content);//내용 붙이기
 		}

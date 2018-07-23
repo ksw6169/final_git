@@ -45,8 +45,10 @@ public class CompanyController {
 	@RequestMapping(value = "/companyList")
 	public @ResponseBody HashMap<String, Object> companyList(@RequestParam HashMap<String, String> params){
 		String keyword=params.get("keyword");
-		String pagingEnd=params.get("pagingEnd");
-		logger.info("[companyList] keyword : "+keyword+" / pagingEnd : "+pagingEnd);
+		String startPage = params.get("startPage");
+		String endPage = params.get("endPage");
+
+		logger.info("[companyList] keyword : "+keyword+" / startPage : "+startPage+" / endPage : "+endPage);
 	
 		return service.companyList(params);
 		//companyList[] - company_no, company_name, 조회수, company_eval

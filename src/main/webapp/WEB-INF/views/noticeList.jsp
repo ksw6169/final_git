@@ -24,7 +24,7 @@
         th { font-family: "NanumM"; background: #121F27; color: white; border: 1px solid white; height: 25px; line-height: 25px; }
         th.center{text-align: center;}
         #date{width: 200px; position:relative; }
-        td { font-family: "NanumM"; text-align: center; background: #E4EEF0; height: 25px; line-height: 25px; }
+        td { font-family: "NanumM"; text-align: center; background: #E4EEF0; height: 25px; line-height: 25px; color:black;}
         .table>thead>tr>th { text-align: center; vertical-align: middle; }
         .paging_button { text-align: center;}
         .page-link { font-family: "bareun"; }
@@ -95,6 +95,7 @@
 		li a{
 			cursor: pointer;
 		}
+
     </style>
   </head>
 	<body>
@@ -215,7 +216,7 @@
 			nBoardList.forEach(function(item,board_no){
 					content += "<tr>";
 					content += "<td>"+item.rnum+"</td>";
-					content += "<td><a href='./nBoardDetail?board_no="+item.board_no+"''>"+item.board_title+"</a></td>";
+					content += "<td id='readChk'><a id='titleLink' href='./nBoardDetail?board_no="+item.board_no+"''>"+item.board_title+"</a></td>";
 					//날짜 변경 
 					var date = new Date(item.board_date);
 					//content += "<td>"+date.toLocaleDateString("ko-KR")+"</td>";

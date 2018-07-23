@@ -19,180 +19,134 @@
 			.submenubar_button{ margin-right:10px; }
 			.submenubar_button_last{ margin-right:100px; }
 			
-        body { padding-top: 100px; }
-        .content { font-family: "bareun"; text-align: center; margin-bottom: 50px; }
-        th { font-family: "NanumM"; text-align: center; background: #121F27; color: white; border: 1px solid white; height: 25px; line-height: 25px; }
-        td { font-family: "NanumM"; text-align: center; background: #E4EEF0;  height: 25px; }
-        .paging_button { text-align: center;}
-        .page-link { font-family: "bareun"; }
-		
-		/* a Link 속성(밑줄 등) 제거 */
-		a:link { color: #121F27; text-decoration: none;}
- 		a:visited { color: #121F27; text-decoration: none;}
- 		a:hover { color: #121F27; text-decoration: none;}
-		
-		.thumbnail_header {
-			text-align: center;
-			vertical-align: middle;
-			width: 100%;
-			height: 250px;
-			font-size: 15px;
-			font-family: "bareun";
-			border: 0.25px solid #DDDDDD;
-			background-color: #121F27;
-			color: white;
-		}
-		
-		.caption_detail {
-			margin: 0 auto;
-			float: left;
-			width: 50%;
-			height: 50px;
-			text-align: center;
-			font-family: "fallM";
-			font-size: 12px;
-			background-color: #E4EEF0;
-			white-space: pre-line;
-			padding-top: 7px;
-			border: 0.25px solid #DDDDDD;
-		}
-		
-		.thumbnail {
-			height: 310px;
-		}
-		
-		.thumbnail_contents {
-			width: 100%;
-			height: 200px;
-			margin-top: 105px;
-			text-align: center;
-			white-space: pre-line;
-		}
-		
-		.search_div {
-			margin-top: 50px;
-			margin-bottom: 150px;
-			text-align: center;
-			width: 450px;
-		}
-		
-		input[type='text'] {
-            font-size:13px;
-            padding:10px;
-            width: 350px;
-            height: 50px;
-            line-height: 40px;
-            outline:none;
-            margin: 5px 0;
-            display: inline;
-            float: left;
-        }
-		
-		.search_btn {
-          font-family: "bareun";
-          color: #fff;
-          background-color: #121F27;
-          width: 100px;
-          height: 50px;
-          font-size: 14px;
-		  float: left;
-		  margin: 5px 0 5px 0;
-          border: 0px;
-        }
-		
-		.page-link {
-			width: 200px;
-		}
+			/* main */
+	        body { padding-top: 100px; }
+	        th { font-family: "NanumM"; text-align: center; background: #121F27; color: white; border: 1px solid white; height: 25px; line-height: 25px; }
+	        td { font-family: "NanumM"; text-align: center; background: #E4EEF0;  height: 25px; }
+	        .paging_button { text-align: center;}
+	        .page-link { font-family: "bareun"; }
+			.container{margin-top:100px; }
+			.page-item{cursor:pointer; }
+			.center{text-align:center; }
 		
 		
-		select {
-			width: 100px; /* 원하는 너비설정 */ 
-			height: 50px;
-			font-family: inherit; /* 폰트 상속 */ 
-			border: 1px solid #999; 
-			border-radius: 0px; /* iOS 둥근모서리 제거 */ 
-			appearance: none;
-			display: inline-block;
-		  	margin: 5px 5px 5px 0;
-		  	float: left;
-		}
-		
-		.container {
-			margin-top: 100px;
-		}
-		
-		.page-item {
-			cursor: pointer;
-		}
-    </style>
-  </head>
-<body>
-	<jsp:include page="menubar.jsp" flush="false"/>
+			/* search bar */
+			.search_div{margin-top:50px;margin-bottom:150px;text-align:center;width:450px;}
+			input[type=text]{font-size:13px;padding:10px;width:350px;height:50px;line-height:40px;outline:0;margin:5px 0;display:inline;float:left;}
+			.search_btn{font-family:bareun;color:#fff;background-color:#121F27;width:100px;height:50px;font-size:14px;float:left;margin:5px 0;border:0;}
+			.page-link{width:200px;}
+    	</style>
+  	</head>
+	<body>
+		<jsp:include page="menubar.jsp" flush="false"/>
 
-    <div class="submenubar_background">
-        <div class="submenubar_header">
-            <table>
-                <tr>
-                    <td class="submenubar_name">너의 직장은?<b class="submenubar_detail">꿈의 직장, 아직 만난 적 없는 너를 찾고 있어</b></td>
-                </tr>
-                <tr>
-                    <td class="submenubar_description">*대리 회원(직장인 회원)만 글 작성, 열람이 가능합니다.</td>
-                </tr>
-				<tr>
-                    <td class="submenubar_description">*재직중인 기업만 기업평가 작성이 가능합니다.</td>
-				</tr>
-            </table>
-        </div>
-    </div>
-
-	<div class="container">
-		<div id="search_div" class="center-block search_div" >
-			<input id="search_text" type="text" placeholder="기업명을 입력해주세요.">
-			<button class="search_btn">기업명 검색</button>
-		</div>
-        <div class="paging_button">
-          <ul class="pagination pagination-lg">
-            <li class="page-item disabled">
-              <a id="more" class="page-link" tabindex="-1">더보기</a>
-            </li>
-          </ul>
-        </div>
-    </div>
-</body>
+		<!-- sub menubar -->
+	    <div class="submenubar_background">
+	        <div class="submenubar_header">
+	            <table>
+	                <tr>
+	                    <td class="submenubar_name">너의 직장은?<b class="submenubar_detail">꿈의 직장, 아직 만난 적 없는 너를 찾고 있어</b></td>
+	                </tr>
+	                <tr>
+	                    <td class="submenubar_description">*대리 회원(직장인 회원)만 글 작성, 열람이 가능합니다.</td>
+	                </tr>
+					<tr>
+	                    <td class="submenubar_description">*재직중인 기업만 기업평가 작성이 가능합니다.</td>
+					</tr>
+	            </table>
+	        </div>
+	    </div>
+		
+		<!-- main -->
+	    <div class="container">
+	        <div id="search_div" class="center-block search_div" >
+				<input id="search_text" type="text" placeholder="기업명을 입력해주세요.">
+				<button class="search_btn">기업명 검색</button>
+			</div>
+	        <table class="table table-hover" >
+	            <thead>
+	             <tr>
+	               <th class="center">회사명</th>
+	               <th class="center">조회수</th>
+	               <th class="center" id="date">평가수</th>
+	             </tr>
+	             </thead>
+	             <tbody id="list"></tbody>
+	        </table>
+	        
+	        <!-- paging -->
+	        <div class="paging_button">
+	          <ul class="pagination">
+	            <li class="page-item" id="pre">
+	              <a class="page-link" tabindex="-1">이전 페이지</a>
+	            </li>
+	            <li class="page-item"  id="next">
+	              <a class="page-link" >다음 페이지</a>
+	            </li>
+	          </ul>
+	        </div>
+	    </div>
+	</body>
 	<script>
         var obj={};
-        var pagingEnd=15;
+        var startPage = 1;
+        var endPage = 10;
+        
         var keyword="";
         createObj(obj);
         
         $(document).ready(function() {
-    		ajaxCall(obj,keyword,pagingEnd);
-    		if("${msg}"!=""){alert("${msg}");}
+    		ajaxCall(obj, keyword, startPage, endPage);
+    		if("${msg}"!=""){
+    			alert("${msg}");
+    		}
     	});
         
-        $("#more").click(function(){
-            pagingEnd+=15;
-            ajaxCall(obj,keyword,pagingEnd);
+        /* 이전 목록 버튼 클릭 시 */
+		$("#pre").click(function(){
+			if($("#pre").attr('class') != "page-item disabled") {
+				startPage -= 10;
+				endPage -= 10;
+				ajaxCall(obj, keyword, startPage, endPage);
+			}
+		});
+        
+        /* 다음 목록 버튼 클릭 시 */
+        $("#next").click(function(){
+			if($("#next").attr('class') != "page-item disabled") {
+				startPage += 10;
+				endPage += 10;
+				ajaxCall(obj, keyword, startPage, endPage);
+			}
         });
         
+        /* 검색 버튼 클릭 시 */
         $(".search_btn").click(function(){
-            pagingEnd=15;
+            startPage = 1;
+        	endPage = 10;
             keyword=$("#search_text").val();
-            ajaxCall(obj,keyword,pagingEnd);
+            ajaxCall(obj, keyword, startPage, endPage);
         });
         
         function ajaxCall(obj,keyword,pagingEnd){
     		obj.data={
-                "keyword":keyword,
-                "pagingEnd":pagingEnd
+                keyword: keyword,
+                startPage: startPage,
+                endPage: endPage
             };
             obj.success=function(data){
                 listPrint(data.companyList);
-                console.log("리스트 카운트: "+data.companyListCnt);
-                if(data.companyListCnt >= pagingEnd ) {
-                	$(".page-item").removeClass("disabled");
+                
+                if(data.companyListCnt >= endPage ) {
+                	$("#next").removeClass("disabled");
                 } else {
-                	$(".page-item").addClass("disabled");
+                	$("#next").addClass("disabled");
+                }
+                
+                if(endPage <= 10) {
+                	$("#pre").addClass("disabled");
+                } else {
+                	$("#pre").removeClass("disabled");
                 }
             };
             $.ajax(obj);
@@ -206,22 +160,18 @@
         }
         
         function listPrint(list){
-            $("div.row").remove();
+            $("#list").empty();
             
             var content="";
-            //companyList[] - company_no, company_name, 조회수, company_eval
-            list.forEach(function(companyDTO,idx){
-                if(idx==0||idx%3==0){content+="<div class='row'>";}
-                content+="<div class='col-md-4'>";
-                content+="<div class='thumbnail'>";
-                content+="<a href='./companyDetail?company_no="+companyDTO.company_no+"'><div class='thumbnail_header'><p class='thumbnail_contents'>"+companyDTO.company_name+"</p></div></a>";
-				content+="<span class='caption_detail'>조회<br/><b>"+companyDTO.company_bHit+"</b></span>";
-                content+="<span class='caption_detail'>평가수<br/><b>"+companyDTO.company_eval+"</b></span>";
-				content+="</div>";
-                content+="</div>";
-                if(idx%3==2||idx==list.length-1){content+="</div>";}
-            });
-            $("#search_div").after(content);
+            
+            for(var i=0; i<list.length; i++) {
+           		content += "<tr>";
+           		content += "<td class='center'><a href='./companyDetail?company_no="+list[i].company_no+"'>"+list[i].company_name+"</a></td>";
+           		content += "<td class='center'>"+list[i].company_bHit+"</td>";
+           		content += "<td class='center'>"+list[i].company_eval+"</td>";
+           		content += "</tr>";
+            }
+            $("#list").append(content);
         }
 	</script>
 </html>
