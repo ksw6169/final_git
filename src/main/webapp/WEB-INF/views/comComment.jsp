@@ -139,7 +139,7 @@
 		/* 코멘트 리스트 출력 */
 		function commentListPrint(list){
 			var content="";
-			
+			$("table.table > tr").remove();
 			if(list.length==0){
 				content += "<tr>";
 				content += "<td colspan=7 style='height:300px; line-height: 300px; background: #E4EEF0; color: black; font-size: 25px; font-family: bareun;'>작성된 기업평가가 존재하지 않습니다.</td>";

@@ -18,12 +18,12 @@
 	</select>
 	
 	<select id="GmessageList" parameterType="hashMap" resultType="com.spring.dto.MessageDTO">
-		SELECT message_no,message_content,message_date 
+		SELECT message_no,message_content,message_date,message_read, rnum
 		FROM 
-			(SELECT message_no,message_content,message_date, 
+			(SELECT message_no,message_content,message_date, message_read,
 				ROW_NUMBER() OVER(ORDER BY message_no DESC) 
 				AS rnum FROM message WHERE message_receive=#{loginId}
-				) WHERE rnum BETWEEN #{sPage} AND #{ePage} ORDER BY message_date DESC
+				) WHERE rnum BETWEEN #{sPage} AND #{ePage}
 	</select>
 	
 	<!-- 쪽지함 리스트 갯수  -->
