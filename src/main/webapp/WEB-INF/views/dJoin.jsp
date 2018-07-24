@@ -432,6 +432,7 @@
     		$.ajax({
     		      type : "GET",
     		      url : "./apiList",
+    		      timeout:60000,
     		      data : {
     		         company_name : search_keyword
     		      },
@@ -450,7 +451,11 @@
     		      error : function(error) {
     		         console.log(error);
   		            $("#loading").remove();
-    		         alert("List 불러오기 실행 오류!");
+  		            if(error.statusText=="timeout"){
+  		            	alert("서버 응답이 지연되었습니다. 다시 시도해 주세요.");
+  		            }else{
+  		            	//alert("Ajax 실행 오류");
+  		            }
     		      }
     		   });
     	}
