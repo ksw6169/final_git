@@ -28,6 +28,7 @@
 			.container{margin-top:100px; }
 			.page-item{cursor:pointer; }
 			.center{text-align:center; }
+			.td_content{width: 70%;}
 		
 			/* search bar */
 			.search_div{margin-top:50px;margin-bottom:150px;text-align:center;width:450px;}
@@ -165,7 +166,7 @@
             
             for(var i=0; i<list.length; i++) {
            		content += "<tr>";
-           		content += "<td class='center'><a href='./companyDetail?company_no="+list[i].company_no+"'>"+list[i].company_name+"</a></td>";
+           		content += "<td class='center td_content'><a href='./companyDetail?company_no="+list[i].company_no+"'>"+list[i].company_name+"</a></td>";
            		content += "<td class='center'>"+list[i].company_bHit+"</td>";
            		content += "<td class='center'>"+list[i].company_eval+"</td>";
            		content += "</tr>";

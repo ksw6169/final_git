@@ -159,17 +159,59 @@
 			});
 				$("#list").empty();
 				$("#list").append(content);
-	
 		}
 		
-		//다음 버튼 클릭시 
+		// 다음 버튼 클릭시 
 		$("#next").click(function(){
 			 if($("#next").attr('class') != "page-item disabled"){
 				sPage +=10;
 				ePage +=10;
 				listCall();
 			 }
-		});
+			 
+		function listCall(){
+			obj.url = "./UgetmessageList";
+			obj.data = {
+					"sPage":sPage,
+					"ePage":ePage
+			};
+			obj.success=function(data){
+				console.log(data.GmessageList);
+				listPrint(data.GmessageList); 
+				page = data.listAll;
+				if(ePage >= page){
+					$("#next").addClass('disabled');
+				}else{
+					$("#next").removeClass('disabled');
+				}
+				if(sPage==1){
+					$("#pre").addClass('disabled');
+				}else{
+					$("#pre").removeClass('disabled');
+				}
+			};
+			ajaxCall(obj);
+		}
+	
+		//리스트 그리기
+		function listPrint(GmessageList){
+			var content ="";
+			//체크박스,번호, 제목, 작성일
+			GmessageList.forEach(function(GmessageList,message_no){
+				content += "<tr>";
+				content += "<td><input class='Chk' name='RowCheck' type='checkbox' value='"+GmessageList.message_no+"'/></td>";
+				content += "<td>"+GmessageList.message_no+"</td>";	
+				//읽은부분 텍스트 색상 변경 
+				if(GmessageList.message_read=='y'){
+					content += "<td><a style='color:black; text-decoration:none;' id='readChk' href='./UmessageDetail?message_no="+GmessageList.message_no+"''>"+GmessageList.message_content+"</a></td>";
+	   			}else{
+	   			content += "<td ><a id='readChk' href='./UmessageDetail?message_no="+GmessageList.message_no+"''>"+GmessageList.message_content+"</a></td>";
+	   			}
+				//날짜 변경 
+				var date = new Date(GmessageList.message_date);
+				content += "<td>"+dateForm(date)+"</td>";
+				content += "</tr>";
+			});
 		
 		//이전 버튼 클릭시 
 		$("#pre").click(function(){
@@ -214,9 +256,7 @@
 				console.log(checked);
 				obj.data={
 						"Chkdel":checked
-						
 				};
-				
 				obj.success = function(data){	
 					if(data.success){
 							alert("삭제 되었습니다.");
@@ -230,10 +270,9 @@
 			}else{
 				alert("삭제되지 않았습니다.");
 			}
-	
 		});
 		
-		function dateForm(now){
+		function dateForm(now) {
 			year = "" + now.getFullYear();
 			month = "" + (now.getMonth() + 1); if (month.length == 1) { month = "0" + month; }
 			day = "" + now.getDate(); if (day.length == 1) { day = "0" + day; }

@@ -56,7 +56,6 @@
 		        <span class="submenubar_button"><a href="./pageMove?page=sendMlist">보낸 쪽지함</a></span>
 		        <span class="submenubar_button"><a href="./pageMove?page=getMlist">받은 쪽지함</a></span>
 	    </div>
-  
 	  	<div class="container">
 	        <div class="detail_div">
 	            <div class="table_div">
@@ -109,8 +108,13 @@
 				console.log(id +"/"+div);
 			if(id != "admin" && div != "관리자"){
 				$("#AdminWrite").show();
+				$("#user").hide();
+				$("#admin").show();
 			}else{
 				$("#AdminWrite").hide();
+
+				$("#admin").hide();
+				$("#user").show();
 				}
 		}
 	</script>

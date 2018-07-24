@@ -81,4 +81,15 @@
 	        </div>
 	    </div>
 	</body>
+	<script>
+		$(document).ready(function(){ 
+			//글자수 제한
+			$("#message_content").on('keyup',function(){
+				if($(this).val().length > 100) {
+		        	$(this).val($(this).val().substring(0, 100));
+		        	alert("글자수를 초과하셨습니다 !");
+		        }
+			});
+		});
+	</script>
 </html>
