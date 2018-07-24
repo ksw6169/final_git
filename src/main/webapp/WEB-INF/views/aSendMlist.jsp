@@ -19,7 +19,6 @@
 			.submenubar_button{margin-right:10px;}
 			.submenubar_button_last{margin-right:3%;}
 			
-			
 	        body { padding-top: 100px; }
 	        .content { font-family: "bareun"; text-align: center; margin-bottom: 50px; }
 	        th { font-family: "NanumM"; text-align: center; background: #121F27; color: white; border: 1px solid white; height: 25px; line-height: 25px; }
@@ -28,139 +27,129 @@
 	        th>input[type='checkbox'] { position:relative; top:-4px; }
 	        .paging_button { text-align: center;}
 	        .page-link { font-family: "bareun"; }
-	        
-	        .container {
-				margin-top: 120px; 
-			}
+	        .container { margin-top: 120px; }
     	</style>
-  </head>
-<body>
-	<jsp:include page="menubar.jsp" flush="false"/>
-
-	<div class="submenubar_background">
-        <div class="submenubar_header">
-            <table>
-                <tr>
-                    <td class="submenubar_name">쪽지함</td>
-                </tr>
-            </table>
-        </div>
-        <span class="submenubar_button_last">보낸 쪽지함</span>
-        <span class="submenubar_button">받은 쪽지함</span>
-    </div>
-
-    <div class="container">
-        <h1 class="content">보낸 쪽지함</h1>
-        <table class="table table-hover">
-            <thead>
-             <tr>
-               <th><input type="checkbox"/></th>
-               <th>번 호</th>
-               <th>내 용</th>
-               <th>작성일자</th>
-             </tr>
-             </thead>
-             <tbody id="list"></tbody>
-
-        </table>
-        <button class="btn btn-default pull-right">삭제</button>
-        <div class="paging_button">
-          <ul class="pagination">
-            <li class="page-item disabled">
-              <a class="page-link" href="#" tabindex="-1">이전 페이지</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">다음 페이지</a>
-            </li>
-          </ul>
-        </div>
-    </div>
-</body>
+  	</head>
+	<body>
+		<jsp:include page="menubar.jsp" flush="false"/>
+	
+		<div class="submenubar_background">
+	        <div class="submenubar_header">
+	            <table>
+	                <tr>
+	                    <td class="submenubar_name">쪽지함</td>
+	                </tr>
+	            </table>
+	        </div>
+	        <span class="submenubar_button_last">보낸 쪽지함</span>
+	        <span class="submenubar_button">받은 쪽지함</span>
+	    </div>
+	
+	    <div class="container">
+	        <h1 class="content">보낸 쪽지함</h1>
+	        <table class="table table-hover">
+	            <thead>
+	             <tr>
+	               <th><input type="checkbox"/></th>
+	               <th>번 호</th>
+	               <th>내 용</th>
+	               <th>작성일자</th>
+	             </tr>
+	             </thead>
+	             <tbody id="list"></tbody>
+	
+	        </table>
+	        <button class="btn btn-default pull-right">삭제</button>
+	        <div class="paging_button">
+	          <ul class="pagination">
+	            <li class="page-item disabled">
+	              <a class="page-link" href="#" tabindex="-1">이전 페이지</a>
+	            </li>
+	            <li class="page-item">
+	              <a class="page-link" href="#">다음 페이지</a>
+	            </li>
+	          </ul>
+	        </div>
+	    </div>
+	</body>
 	<script>
+		var obj = {};
+		var sPage =1;
+		var ePage = 10;
+		var page = 0;
+		var id = "${sessionScope.loginId}";
+		
+		//리스트 실행
+		listCall();
 	
-	var obj = {};
-	var sPage =1;
-	var ePage = 10;
-	var page = 0;
-	var id = "${sessionScope.loginId}";
-	console.log(id);
-	
-	//리스트 실행
-	listCall();
-	//allChk(obj);
-
-	
-	obj.error=function(e){console.log(e)};
-	obj.dataType="JSON";
-	obj.type="POST";
-	
-	//ajax 실행 
-	function ajaxCall(obj){
-		$.ajax(obj)
-	};
-	
-	function listCall(){
-		obj.url = "./UmessageList";
-		obj.data = {
-				"sPage":sPage,
-				"ePage":ePage
-				};
-		obj.success=function(data){
-			console.log(data);
-			listPrint(data.messageList); //리스트 뿌린후
-			page = data.listAll;
-			if(ePage >= page){
-				$("#next").addClass('disabled');
-			}else{
-				$("#next").removeClass('disabled');
-			}
-			if(sPage==1){
-				$("#pre").addClass('disabled');
-			}else{
-				$("#pre").removeClass('disabled');
-			}
+		obj.error=function(e){console.log(e)};
+		obj.dataType="JSON";
+		obj.type="POST";
+		
+		//ajax 실행 
+		function ajaxCall(obj){
+			$.ajax(obj)
 		};
-		ajaxCall(obj);
-	}
-	
-	
-	//리스트 그리기
-	function listPrint(messageList){
-		var content ="";
-		//체크박스,번호, 제목, 작성일
-		messageList.forEach(function(item,message_no){
-				content += "<tr>";
-				content += "<td><input name='RowCheck' type='checkbox'/></td>";
-				content += "<td>"+item.message_no+"</td>";
-				content += "<td>"+item.message_content+"</a></td>";
-				//날짜 변경 
-				var date = new Date(item.message_date);
-				content += "<td>"+date.toLocaleDateString("ko-KR")+"</td>";
-				content += "</tr>";
-			});
-		$("#list").empty();
-		$("#list").append(content);
-	}
-	
-	
-	
-	//다음 버튼 클릭시 
-	$("#next").click(function(){
-		 if($("#next").attr('class') != "page-item disabled"){
-			sPage +=10;
-			ePage +=10;
-			listCall();
-		 }
-	});
-	//이전 버튼 클릭시 
-	$("#pre").click(function(){
-		 if($("#pre").attr('class') != "page-item disabled"){
-			//이전 목록 활성화 시키기
-			sPage -=10;
-			ePage -=10;
-			listCall();
-		 }
-	});
-	
+		
+		function listCall(){
+			obj.url = "./UmessageList";
+			obj.data = {
+					"sPage":sPage,
+					"ePage":ePage
+					};
+			obj.success=function(data){
+				console.log(data);
+				listPrint(data.messageList); //리스트 뿌린후
+				page = data.listAll;
+				if(ePage >= page){
+					$("#next").addClass('disabled');
+				}else{
+					$("#next").removeClass('disabled');
+				}
+				if(sPage==1){
+					$("#pre").addClass('disabled');
+				}else{
+					$("#pre").removeClass('disabled');
+				}
+			};
+			ajaxCall(obj);
+		}
+		
+		//리스트 그리기
+		function listPrint(messageList){
+			var content ="";
+			//체크박스,번호, 제목, 작성일
+			messageList.forEach(function(item,message_no){
+					content += "<tr>";
+					content += "<td><input name='RowCheck' type='checkbox'/></td>";
+					content += "<td>"+item.message_no+"</td>";
+					content += "<td>"+item.message_content+"</a></td>";
+					//날짜 변경 
+					var date = new Date(item.message_date);
+					content += "<td>"+date.toLocaleDateString("ko-KR")+"</td>";
+					content += "</tr>";
+				});
+			$("#list").empty();
+			$("#list").append(content);
+		}
+		
+		//다음 버튼 클릭시 
+		$("#next").click(function(){
+			 if($("#next").attr('class') != "page-item disabled"){
+				sPage +=10;
+				ePage +=10;
+				listCall();
+			 }
+		});
+		
+		//이전 버튼 클릭시 
+		$("#pre").click(function(){
+			 if($("#pre").attr('class') != "page-item disabled"){
+				//이전 목록 활성화 시키기
+				sPage -=10;
+				ePage -=10;
+				listCall();
+			 }
+		});
 	</script>
 </html>

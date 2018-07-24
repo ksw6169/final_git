@@ -8,7 +8,6 @@
    	 	<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		<style>
-		
 			/* submenubar css */
 			.submenubar_background{position:absolute;width:100%;height:100px;background-color:#E4EEF0;}
 			.submenubar_header{font-family:fallM;margin-left:40px;width:150px;height:50px;display:inline-block;margin-top:35px;float:left;}
@@ -19,7 +18,6 @@
 				margin-top:25px;float:right;background-color:#121F27;cursor:pointer;}
 			.submenubar_button{margin-right:10px;}
 			.submenubar_button_last{margin-right:3%;}
-			
 			
 	        .btn { width: 120px; height: 40px; background-color: #FF8000; border: none; vertical-align: middle; color:#fff; font-family: "fallB"; text-align: center; display: inline-block; font-size: 12px; }    
 	        button:hover { color: #121F27; }
@@ -33,58 +31,46 @@
 			.contents { color: #121F27; background-color: #FFFFFF; height: 350px; line-height: 100px; text-align: left; } 
 	        .detail_div { margin-top: 50px;}
 	        .table_div { background-color: #E4EEF0; padding: 50px; text-align: center;}
-			
-			.button_group {
-				width: 100px;
-				height: 37.5px;
-				background-color: white;
-				color: #121F27;
-				border: 0.25px solid #DDDDDD;
-			}
-			
-			.container {
-				margin-top: 100px; 
-			}
+			.button_group{width:100px;height:37.5px;background-color:#fff;color:#121F27;border:.25px solid #DDD;}
+			.container{margin-top:100px;}
    	 	</style>
   </head>
   <body>
-  <jsp:include page="menubar.jsp" flush="false"/>
-  
-  <div class="submenubar_background">
-        <div class="submenubar_header">
-            <table>
-                <tr>
-                    <td class="submenubar_name">쪽지함</td>
-                </tr>
-            </table>
-        </div>
-        <span class="submenubar_button_last">보낸 쪽지함</span>
-        <span class="submenubar_button">받은 쪽지함</span>
-    </div>
-  
-  <div class="container">
-        <div class="detail_div">
-            <div class="table_div">
-                <table class="table">
-                     <tr>
-                       <th>보낸사람</th>
-                       <td class="subject">user111</td>
-                     </tr>
-                     <tr>
-                       <th colspan="2">내용</th>
-                     </tr>
-                     <tr>
-                       <td class="contents" colspan="2">안녕하세요. 관리자님!!!</td>
-                     </tr>
-                </table>
-            </div>    
-            <div class="button-group">
-                <button class="btn btn-default pull-right">목록</button>
-                <button class="btn btn-default pull-right">답장</button>       
-            </div>
-        </div>
-    </div>
-</body>
-	<script>
-	</script>
+	  <jsp:include page="menubar.jsp" flush="false"/>
+	  
+	  <div class="submenubar_background">
+	        <div class="submenubar_header">
+	            <table>
+	                <tr>
+	                    <td class="submenubar_name">쪽지함</td>
+	                </tr>
+	            </table>
+	        </div>
+	        <span class="submenubar_button_last">보낸 쪽지함</span>
+	        <span class="submenubar_button">받은 쪽지함</span>
+	    </div>
+	  
+	  <div class="container">
+	        <div class="detail_div">
+	            <div class="table_div">
+	                <table class="table">
+	                     <tr>
+	                       <th>보낸사람</th>
+	                       <td class="subject">user111</td>
+	                     </tr>
+	                     <tr>
+	                       <th colspan="2">내용</th>
+	                     </tr>
+	                     <tr>
+	                       <td class="contents" colspan="2">안녕하세요. 관리자님!!!</td>
+	                     </tr>
+	                </table>
+	            </div>    
+	            <div class="button-group">
+	                <button class="btn btn-default pull-right">목록</button>
+	                <button class="btn btn-default pull-right">답장</button>       
+	            </div>
+	        </div>
+	    </div>
+	</body>
 </html>

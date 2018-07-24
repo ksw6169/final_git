@@ -34,82 +34,73 @@
 	        .detail_div { margin-top: 50px;}
 	        .table_div { background-color: #E4EEF0; padding: 50px; text-align: center;}
 			.form-control { padding: 7px 12px; color: #121F27; }
-			.button_group {
-				width: 100px;
-				height: 37.5px;
-				background-color: white;
-				color: #121F27;
-				border: 0.25px solid #DDDDDD;
-			}
-			
-			.container {
-				margin-top: 100px;
-			}
+			.button_group{width:100px;height:37.5px;background-color:#fff;color:#121F27;border:.25px solid #DDD;}
+			.container{margin-top:100px;}
     	</style>
-  </head>
-  <body>
-  <jsp:include page="menubar.jsp"/>
+  	</head>
+  	<body>
+	  <jsp:include page="menubar.jsp"/>
+	  
+	    <div class="submenubar_background">
+	        <div class="submenubar_header">
+	            <table>
+	                <tr>
+	                    <td class="submenubar_name">공지합니다<b class="submenubar_detail">공지사항</b></td>
+	                </tr>
+	            </table>
+	        </div>
+	    </div>
   
-    <div class="submenubar_background">
-        <div class="submenubar_header">
-            <table>
-                <tr>
-                    <td class="submenubar_name">공지합니다<b class="submenubar_detail">공지사항</b></td>
-                </tr>
-            </table>
-        </div>
-    </div>
-  
-  <div class="container">
-        <div class="detail_div">
-          <form action="nBoardUpdate?board_no=${board.board_no}" method="post">
-            <div class="table_div">
-                <table class="table">
-                     <tr>
-                       <th>제목</th>
-                       <td class="subject">
-                       <textarea class="form-control subject" rows="1" style="padding-bottom: 11px;" name="board_title">${board.board_title}</textarea></td>
-                     </tr>
-                     
-                     <tr>
-                       <th colspan="2">내용</th>
-					 </tr>
-					<tr>
-						<td class="write_content" colspan="2">
-						<textarea class="form-control" rows="15" name="board_content">${board.board_content}</textarea></td>
-					</tr>
-                </table>
-                     
-				<button class="btn btn-default pull-right" >수정 완료</button>
-            </div>
-          </form> 
-            <div class="button-group">
-                <button class="btn btn-default pull-right" onclick="location.href='./pageMove?page=noticeList'">목록</button>       
-            </div>
-        </div>
-    </div>
-</body>
+	  	<div class="container">
+	        <div class="detail_div">
+	          <form action="nBoardUpdate?board_no=${board.board_no}" method="post">
+	            <div class="table_div">
+	                <table class="table">
+	                     <tr>
+	                       <th>제목</th>
+	                       <td class="subject">
+	                       <textarea class="form-control subject" rows="1" style="padding-bottom: 11px;" name="board_title">${board.board_title}</textarea></td>
+	                     </tr>
+	                     
+	                     <tr>
+	                       <th colspan="2">내용</th>
+						 </tr>
+						<tr>
+							<td class="write_content" colspan="2">
+							<textarea class="form-control" rows="15" name="board_content">${board.board_content}</textarea></td>
+						</tr>
+	                </table>
+	                     
+					<button class="btn btn-default pull-right" >수정 완료</button>
+	            </div>
+	          </form> 
+	            <div class="button-group">
+	                <button class="btn btn-default pull-right" onclick="location.href='./pageMove?page=noticeList'">목록</button>       
+	            </div>
+	        </div>
+	    </div>
+	</body>
 	<script>
-/* 	
-	var obj = {};
-	var board_title = ${board.board_title};
-	var board_content = ${board.board_content};
-	
-	$("#update").click(function(){
-		obj.url = "./nBoardUpdate?board_no=${board.board_no}";
-		obj.data={ 
-				"board_title" : board_title,
-				"board_content":board_content};
-		obj.success = function(d){
-			console.log(d);
+			/* 	
+			var obj = {};
+			var board_title = ${board.board_title};
+			var board_content = ${board.board_content};
 			
-		}
-		ajaxCall();
-		
-	});
-	
-	function ajaxCall(){
-		$.ajax;
-	} */
+			$("#update").click(function(){
+				obj.url = "./nBoardUpdate?board_no=${board.board_no}";
+				obj.data={ 
+						"board_title" : board_title,
+						"board_content":board_content};
+				obj.success = function(d){
+					console.log(d);
+					
+				}
+				ajaxCall();
+				
+			});
+			
+			function ajaxCall(){
+				$.ajax;
+			} */
 	</script>
 </html>

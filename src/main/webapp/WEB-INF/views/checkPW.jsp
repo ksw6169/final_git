@@ -8,63 +8,13 @@
    	 	<meta name="viewport" content="width=device-width, initial-scale=1">
       
 		<style>
-			body { padding-top: 70px; }
-	        
-	        .container {
-	        	margin-top: 50px;
-	        	margin-bottom: 50px;
-	            padding-top: 25px;
-	            padding-bottom: 25px;
-	            background: #E4EEF0;
-	        }
-	        
-	       	.content {
-	            font-family: "bareun";
-	            text-align: center;
-	            margin-bottom: 50px;
-	        }
-	        
-	        .inputHeader {
-	        	width: 100%;
-				height: 50px;
-	        	line-height: 50px;
-	        	font-family: "bareun";
-	            background: #121F27;
-				margin-top: 5px;
-				color: white;
-				text-align: center;
-				font-size: 13px;
-				padding: 0px;
-				margin-left: 10px;
-	        }
-	        
-	        .inputTag {
-				width: 100%;
-				height: 50px;
-	        	line-height: 50px;
-	        	font-family: "bareun";
-	            background: white;
-	            border: 0px;
-	            outline:none;
-				margin-top: 5px;
-				color: black;
-				text-align: center;
-				font-size: 13px;
-				padding: 0px;
-				margin-left: -10px;
-	        }
-        
-	        .chk_btn{
-	            width: 100%;
-	            height: 50px;
-	            font-size: 16px;
-	            border: 0px;
-	            background-color: #FF8000;
-	            color: white;
-	            font-family: "bareun";
-	            margin-top: 50px;
-	            margin-bottom: 20px;
-	        }
+			body{padding-top:70px;}
+			.container{margin-top:50px;margin-bottom:50px;padding-top:25px;padding-bottom:25px;background:#E4EEF0;}
+			.inputHeader,.inputTag{line-height:50px;margin-top:5px;text-align:center;font-size:13px;padding:0;width:100%;height:50px;font-family:bareun;}
+			.content{font-family:bareun;text-align:center;margin-bottom:50px;}
+			.inputHeader{background:#121F27;color:#fff;margin-left:10px;}
+			.inputTag{background:#fff;border:0;outline:0;color:#000;margin-left:-10px;}
+			.chk_btn{width:100%;height:50px;font-size:16px;border:0;background-color:#FF8000;color:#fff;font-family:bareun;margin-top:50px;margin-bottom:20px;}
 		</style>
 	</head>
 	<body>

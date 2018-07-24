@@ -319,6 +319,6 @@
 	        });
 	    }
 	    
-	 $(document).ready(sortDropDownListByText);
+	 	$(document).ready(sortDropDownListByText);
 	</script>
 </html>

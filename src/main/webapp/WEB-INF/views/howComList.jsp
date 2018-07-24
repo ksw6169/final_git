@@ -29,7 +29,6 @@
 			.page-item{cursor:pointer; }
 			.center{text-align:center; }
 		
-		
 			/* search bar */
 			.search_div{margin-top:50px;margin-bottom:150px;text-align:center;width:450px;}
 			input[type=text]{font-size:13px;padding:10px;width:350px;height:50px;line-height:40px;outline:0;margin:5px 0;display:inline;float:left;}

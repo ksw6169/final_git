@@ -28,19 +28,7 @@
 	        th { font-family: "fallM"; text-align: center; background: #121F27; color: white; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; }
 	        td { font-family: "NanumM"; text-align: center; background: #121F27; color: white; height: 25px; line-height: 25px; }
 	        .table>tbody>tr>th { text-align: center; }
-	        .category { width: 100%; padding-left: 46.4%; height: 50px; background-color: #121F27; /* select -> .category로 수정  */
-			 color: white;
-			 font-family: "fallM"; /* 폰트 상속 */ 
-	         font-weight: bold;
-			 font-size: medium;
-			 border: 1px solid #999; 
-	         border-radius: 0px; /* iOS 둥근모서리 제거 */ 
-	         appearance: none;
-			 outline: none;
-	         display: inline-block;
-	           margin: 3px 3px 3px 0;
-	           float: left;
-	        }
+	        .category{width:100%;padding-left:46.4%;height:50px;background-color:#121F27;color:#fff;font-family:fallM;font-weight:700;font-size:medium;border:1px solid #999;border-radius:0;appearance:none;outline:0;display:inline-block;margin:3px 3px 3px 0;float:left;}
 			option { background-color: #DDDDDD; color: #121F27; border: 1px black; }
 			.button-group { margin-top: 15px; }
 	        .subject, .date { color: #121F27; background-color: #FFFFFF; }
@@ -50,76 +38,63 @@
 	        .detail_div { margin-top: 50px;}
 	        .table_div { background-color: #E4EEF0; padding: 50px; text-align: center;}
 			.form-control { padding: 7px 12px;}
-			.button_group {
-				width: 100px;
-				height: 37.5px;
-				background-color: white;
-				color: #121F27;
-				border: 0.25px solid #DDDDDD;
-			}
-			
-			.container {
-				margin-top: 100px;
-			}
-			
-			#list {
-				margin-bottom: 50px;
-			}
-			
+			.button_group{width:100px;height:37.5px;background-color:#fff;color:#121F27;border:.25px solid #DDD}
+			.container{margin-top:100px}
+			#list{margin-bottom:50px}
     	</style>
   </head>
   <body>
-  	<jsp:include page="menubar.jsp"/>
+  		<jsp:include page="menubar.jsp"/>
   
-    <div class="submenubar_background">
-        <div class="submenubar_header">
-            <table>
-                <tr>
-                    <td class="submenubar_name">김대리의 한마디<b class="submenubar_detail">오늘도 수고한 대리들의 뒷이야기</b></td>
-                </tr>
-                <tr>
-                    <td class="submenubar_description">*대리 회원(직장인 회원)만 글 작성, 열람이 가능합니다.</td>
-                </tr>
-            </table>
-        </div>
-        <span class="submenubar_button">글 작성</span>
-    </div>  
+	    <div class="submenubar_background">
+	        <div class="submenubar_header">
+	            <table>
+	                <tr>
+	                    <td class="submenubar_name">김대리의 한마디<b class="submenubar_detail">오늘도 수고한 대리들의 뒷이야기</b></td>
+	                </tr>
+	                <tr>
+	                    <td class="submenubar_description">*대리 회원(직장인 회원)만 글 작성, 열람이 가능합니다.</td>
+	                </tr>
+	            </table>
+	        </div>
+	        <span class="submenubar_button">글 작성</span>
+	    </div>  
   
-  <div class="container">
-        <div class="detail_div">
-        <form id="sendForm" method="post">
-            <div class="table_div">
-                <table class="table">
-                     <tr>
-						   <select name="category" class="category" style="margin-bottom: 0px;">
-							  <option value="잡담" selected="selected">&nbsp;&nbsp;잡담</option>
-							  <option value="이직">&nbsp;&nbsp;이직</option>
-							  <option value="업무질문">업무질문</option>
-						   </select>
-                     </tr>
-                     <input name="member_id" type="hidden" value="${sessionScope.loginId}"/>
-                     <input name="job_no" type="hidden" value="${param.job_no}"/>
-                     <tr>
-                       <th>제목</th>
-                       <td class="subject"><textarea name="board_title" id="title_textarea" onKeyPress="javascript: if (event.keyCode==13) return false;" class="form-control subject" rows="1" placeholder="제목을 입력해주세요." style="padding-bottom: 11px;" ></textarea></td>
-                     </tr>
-                     <tr>
-                       <th colspan="2">내용</th>
-					 </tr>
-					<tr>
-						<td class="write_content" colspan="2"><textarea name="board_content" id="content_textarea" class="form-control" rows="15" placeholder="내용을 입력해주세요."></textarea></td>
-					</tr>
-                </table>
-                
-				<button id="save" class="btn btn-default pull-right">작성 완료</button>
-            </div>
-            </form>    
-            <div class="button-group">
-                <button id="list" class="btn btn-default pull-right">목록</button>       
-            </div>
-        </div>
-    </div>
-</body>
+	  <div class="container">
+	        <div class="detail_div">
+	        <form id="sendForm" method="post">
+	            <div class="table_div">
+	                <table class="table">
+	                     <tr>
+							   <select name="category" class="category" style="margin-bottom: 0px;">
+								  <option value="잡담" selected="selected">&nbsp;&nbsp;잡담</option>
+								  <option value="이직">&nbsp;&nbsp;이직</option>
+								  <option value="업무질문">업무질문</option>
+							   </select>
+	                     </tr>
+	                     <input name="member_id" type="hidden" value="${sessionScope.loginId}"/>
+	                     <input name="job_no" type="hidden" value="${param.job_no}"/>
+	                     <tr>
+	                       <th>제목</th>
+	                       <td class="subject"><textarea name="board_title" id="title_textarea" onKeyPress="javascript: if (event.keyCode==13) return false;" class="form-control subject" rows="1" placeholder="제목을 입력해주세요." style="padding-bottom: 11px;" ></textarea></td>
+	                     </tr>
+	                     <tr>
+	                       <th colspan="2">내용</th>
+						 </tr>
+						<tr>
+							<td class="write_content" colspan="2"><textarea name="board_content" id="content_textarea" class="form-control" rows="15" placeholder="내용을 입력해주세요."></textarea></td>
+						</tr>
+	                </table>
+	                
+					<button id="save" class="btn btn-default pull-right">작성 완료</button>
+	            </div>
+	            </form>    
+	            <div class="button-group">
+	                <button id="list" class="btn btn-default pull-right">목록</button>       
+	            </div>
+	        </div>
+	    </div>
+	</body>
 	<script>
 		$(document).ready(function() {
 	        var loginId = "${sessionScope.loginId}";
@@ -168,6 +143,5 @@
         		$(this).val().replaceAll("\r\n","<br>");
         	} */
         });
-
 	</script>
 </html>

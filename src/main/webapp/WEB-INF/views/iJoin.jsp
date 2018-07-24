@@ -10,89 +10,16 @@
       	<!-- 반응형 완료(0715) -->
 		<style>
 			body { padding-top: 70px; }
-	        
-	        .container {
-	        	margin-top: 50px;
-	        	margin-bottom: 50px;
-	            padding-top: 25px;
-	            padding-bottom: 25px;
-	            background: #E4EEF0;
-	        }
-	        
-	        .content {
-	            font-family: "bareun";
-	            text-align: center;
-	            margin-bottom: 50px;
-	        }
-	        
-	        .inputHeader {
-	        	width: 100%;
-				height: 50px;
-	        	line-height: 50px;
-	        	font-family: "bareun";
-	            background: #121F27;
-				margin-top: 5px;
-				color: white;
-				text-align: center;
-				font-size: 13px;
-				padding: 0px;
-				margin-left: 10px;
-	        }
-	        
-	        .inputTag {
-				width: 100%;
-				height: 50px;
-	        	line-height: 50px;
-	        	font-family: "bareun";
-	            background: white;
-	            border: 0px;
-	            outline:none;
-				margin-top: 5px;
-				color: black;
-				text-align: center;
-				font-size: 13px;
-				padding: 0px;
-				margin-left: -10px;
-	        }
-	        
-	        .comment{
-	        	font-family: "bareun";
-	        	text-align: left;
-	            font-size: 11px;
-	            margin-top: 10px;
-	        }
-	        
-	        .joinForm {
-	          font-family: "bareun";
-	          color: #fff;
-	          background-color: #121F27;
-	          height: 50px;
-	          font-size: 14px;
-	          margin: 5px 0;
-	          border: 0px;
-	          text-align: center;
-	          padding-top: 15px;
-	        }
-	        
-	        .join_btn {
-	            width: 100%;
-	            height: 50px;
-	            font-size: 16px;
-	            border: 0px;
-	            background-color: #FF8000;
-	            color: white;
-	            font-family: "bareun";
-	            margin-top: 50px;
-	            margin-bottom: 20px;
-	        }
-	        
-	        .warn{
-	        	color : red;
-	        	font-family: "bareun";
-	        	text-align: left;
-	        	margin-top: 15px;
-	        	margin-bottom: 15px;
-	        }
+	        .container{margin-top:50px;margin-bottom:50px;padding-top:25px;padding-bottom:25px;background:#E4EEF0}
+	        .inputHeader,.inputTag{height:50px;line-height:50px;font-family:bareun;margin-top:5px;text-align:center;font-size:13px;padding:0;width:100%}
+	        .content{font-family:bareun;text-align:center;margin-bottom:50px}
+	        .inputHeader{background:#121F27;color:#fff;margin-left:10px}
+	        .inputTag{background:#fff;border:0;outline:0;color:#000;margin-left:-10px}
+	        .joinForm,.join_btn{height:50px;border:0;color:#fff;font-family:bareun}
+	        .comment{font-family:bareun;text-align:left;font-size:11px;margin-top:10px}
+	        .joinForm{background-color:#121F27;font-size:14px;margin:5px 0;text-align:center;padding-top:15px}
+	        .join_btn{width:100%;font-size:16px;background-color:#FF8000;margin-top:50px;margin-bottom:20px}
+	        .warn{color:red;font-family:bareun;text-align:left;margin-top:15px;margin-bottom:15px}
 		</style>
 	</head>
 	<body>

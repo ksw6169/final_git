@@ -27,61 +27,57 @@
 	        .table>thead>tr>th { text-align: center; }
 	        .paging_button { text-align: center;}
 	        .page-link { font-family: "bareun"; }
-	        
-			.container {
-				margin-top: 150px;
-			}
+			.container { margin-top: 150px; }
     	</style>
-  </head>
-<body>
-	<jsp:include page="menubar.jsp"/>
-
-    <div class="submenubar_background">
-        <div class="submenubar_header">
-            <table>
-                <tr>
-                    <td class="submenubar_name">인증신청관리</td>
-                </tr>
-            </table>
-        </div>
-    </div>
-
-    <div class="container">
-    	<h1 class="content">대리(회사원) 인증 목록</h1>
-        <table class="table table-hover">
-            <thead>
-             <tr>
-               <th class="center">번 호</th>
-               <th class="center">ID</th>
-               <th class="center">회사명</th>
-               <th class="center">회사 캡쳐본</th>
-             </tr>
-             </thead>
-             <tbody id="list">
-             </tbody>
-        </table>
-        <div class="paging_button">
-          <ul class="pagination">
-            <li id="preLi" class="page-item">
-              <a id="pre" class="page-link" tabindex="-1">이전 페이지</a>
-            </li>
-            <li id="nextLi" class="page-item">
-              <a id="next" class="page-link">다음 페이지</a>
-            </li>
-          </ul>
-        </div>
-    </div>
-</body>
-	<script>
+  	</head>
+	<body>
+		<jsp:include page="menubar.jsp"/>
 	
-	var sNum = 1; //페이징 할 첫번째 단위
-	var eNum = 10; //페이지 할 마지막 단위
-	var listCnt = 0; //페이징을 위한 글 갯수
-	var obj = {}; //ajax에 담아서 보낼 객체
-	var options = {year: "numeric", month: "numeric",
-			    day: "numeric", hour: "2-digit", minute: "numeric", second: "numeric"}; //날짜 옵션설정
-	var msg = "";
-	   
+	    <div class="submenubar_background">
+	        <div class="submenubar_header">
+	            <table>
+	                <tr>
+	                    <td class="submenubar_name">인증신청관리</td>
+	                </tr>
+	            </table>
+	        </div>
+	    </div>
+	
+	    <div class="container">
+	    	<h1 class="content">대리(회사원) 인증 목록</h1>
+	        <table class="table table-hover">
+	            <thead>
+	             <tr>
+	               <th class="center">번 호</th>
+	               <th class="center">ID</th>
+	               <th class="center">회사명</th>
+	               <th class="center">회사 캡쳐본</th>
+	             </tr>
+	             </thead>
+	             <tbody id="list">
+	             </tbody>
+	        </table>
+	        <div class="paging_button">
+	          <ul class="pagination">
+	            <li id="preLi" class="page-item">
+	              <a id="pre" class="page-link" tabindex="-1">이전 페이지</a>
+	            </li>
+	            <li id="nextLi" class="page-item">
+	              <a id="next" class="page-link">다음 페이지</a>
+	            </li>
+	          </ul>
+	        </div>
+	    </div>
+	</body>
+	<script>
+		var sNum = 1; //페이징 할 첫번째 단위
+		var eNum = 10; //페이지 할 마지막 단위
+		var listCnt = 0; //페이징을 위한 글 갯수
+		var obj = {}; //ajax에 담아서 보낼 객체
+		var options = {year: "numeric", month: "numeric",
+				    day: "numeric", hour: "2-digit", minute: "numeric", second: "numeric"}; //날짜 옵션설정
+		var msg = "";
+		   
 	   obj.error=function(e){console.log(e)}; //ajax 에러날 경우의 함수
 	   obj.type="POST"; //ajax로 보낼 타입
 	   obj.dataType="JSON"; //ajax 실행 후 받을 값 형태

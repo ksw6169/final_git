@@ -21,6 +21,7 @@
 		
 	        .btn { width: 120px; height: 40px; background-color: #FF8000; border: none; vertical-align: middle; color:#fff; font-family: "fallB"; text-align: center; display: inline-block; font-size: 12px; }    
 	        button:hover { color: #121F27; }
+	        
 	        /* board_detail css */
 	        .content { font-family: "bareun"; text-align: center; margin-bottom: 50px; }
 	        th { width: 250px; font-family: "fallM"; text-align: center; background: #121F27; color: white; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; }
@@ -32,63 +33,52 @@
 	        .detail_div { margin-top: 50px;}
 	        .table_div { background-color: #E4EEF0; padding: 50px; text-align: center;}
 			.table>tbody>tr>td.write_content { background-color: #E4EEF0; padding: 0px; }
-			.button_group {
-				width: 100px;
-				height: 37.5px;
-				background-color: white;
-				color: #121F27;
-				border: 0.25px solid #DDDDDD;
-			}
+			.button_group{width:100px;height:37.5px;background-color:#fff;color:#121F27;border:.25px solid #DDD;}
+			.container{margin-top:100px;}
 			
-			.container {
-				margin-top: 100px; 
-			}
-		/* submenuBar 링크 글자 색상 */
-		.submenubar_button a{ color: white;}
-		.submenubar_button_last a{color: white;}
-		.submenubar_button a:hover{color: #FF8000; background-color: #121F27;text-decoration: none;}
-		.submenubar_button_last a:hover{color: #FF8000; background-color: #121F27; text-decoration: none;}
+			/* submenuBar 링크 글자 색상 */
+			.submenubar_button a{ color: white;}
+			.submenubar_button_last a{color: white;}
+			.submenubar_button a:hover{color: #FF8000; background-color: #121F27;text-decoration: none;}
+			.submenubar_button_last a:hover{color: #FF8000; background-color: #121F27; text-decoration: none;}
     	</style>
   	</head>
   	<body>
-  
-  	<jsp:include page="menubar.jsp" flush="false"/>
-  	
-  	<div class="submenubar_background">
-        <div class="submenubar_header">
-            <table>
-                <tr>
-                    <td class="submenubar_name">쪽지함</td>
-                </tr>
-            </table>
-        </div>
-			<span id="sendM" class="submenubar_button_last"><a href="./pageMove?page=sendMlist">보낸 쪽지함</a></span>
-	        <span id="getM" class="submenubar_button"><a href="./pageMove?page=getMlist">받은 쪽지함</a></span>
-    </div>
-  	
-  	<div class="container">
-        <div class="detail_div">
-            <div class="table_div">
-            <form action="mesageReply" method="post">
-                <table class="table">
-                     <tr>
-                       <th colspan="2">내용</th>
-                     </tr>
-                     <tr>
-						<td class="write_content" colspan="2"><textarea class="form-control" rows="15" placeholder="내용을 입력해주세요." name="message_content"></textarea></td>
-					 </tr>
-                </table>
-                <input type="hidden" value="${message.member_id}" name="message_receive"/>           
-                <button class="btn btn-default pull-right">작성 완료</button>
-            </form>
-            </div>    
-            <div class="button-group">
-                <button class="btn btn-default pull-right" onclick="location.href='./pageMove?page=getMlist'">목록</button>       
-            </div>
-        </div>
-    </div>
-</body>
-	<script>
-		
-	</script>
+	  	<jsp:include page="menubar.jsp" flush="false"/>
+	  	
+	  	<div class="submenubar_background">
+	        <div class="submenubar_header">
+	            <table>
+	                <tr>
+	                    <td class="submenubar_name">쪽지함</td>
+	                </tr>
+	            </table>
+	        </div>
+				<span id="sendM" class="submenubar_button_last"><a href="./pageMove?page=sendMlist">보낸 쪽지함</a></span>
+		        <span id="getM" class="submenubar_button"><a href="./pageMove?page=getMlist">받은 쪽지함</a></span>
+	    </div>
+	  	
+	  	<div class="container">
+	        <div class="detail_div">
+	            <div class="table_div">
+	            <form action="mesageReply" method="post">
+	                <table class="table">
+	                     <tr>
+	                       <th colspan="2">내용</th>
+	                     </tr>
+	                     <tr>
+							<td class="write_content" colspan="2"><textarea class="form-control" rows="15" placeholder="내용을 입력해주세요." name="message_content"></textarea></td>
+						 </tr>
+	                </table>
+	                <input type="hidden" value="${message.member_id}" name="message_receive"/>           
+	                <button class="btn btn-default pull-right">작성 완료</button>
+	            </form>
+	            </div>    
+	            
+	            <div class="button-group">
+	                <button class="btn btn-default pull-right" onclick="location.href='./pageMove?page=getMlist'">목록</button>       
+	            </div>
+	        </div>
+	    </div>
+	</body>
 </html>

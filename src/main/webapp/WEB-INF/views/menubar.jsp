@@ -10,7 +10,7 @@
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	    <script src="./resources/js/bootstrap.min.js"></script>
 	    
-   	 	<title>bootstrap</title>
+   	 	<title>대리와 인턴 사이, 은밀하게 시원하게 - 김과장이 왜그럴까</title>
 
     	<!-- Bootstrap -->
     	<link href="./resources/css/bootstrap.min.css" rel="stylesheet">

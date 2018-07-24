@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Random;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -423,5 +424,45 @@ public class MemberService {
 			}
 		}
 		return map;
+	}
+
+	/* 비밀번호 찾기 요청 */
+	@Transactional
+	public HashMap<String, Object> findPw(Map<String, String> params) {
+		inter = sqlSession.getMapper(MemberInter.class);
+		HashMap<String, Object> resultMap = new HashMap<>();
+		String find_id = String.valueOf(params.get("find_id"));
+		String find_email = String.valueOf(params.get("find_email"));
+		
+		System.out.println("아이디~~~: "+find_id);
+		System.out.println("이메일~~~: "+find_email);
+		
+		String email = inter.findPw(find_id);
+		String msg = "등록된 이메일이 아닙니다. 다시 입력해주세요.";
+		if(email != "") {
+			if(email.equals(find_email)) {
+				// 새 비밀번호 생성(10000000 ~ 99999999, 8자리)
+				double randomValue = Math.random();
+				int intValue = (int)(randomValue * 99999999)+10000000;
+				
+				// 메일 전송
+				sendEmail("김과장이 왜 그럴까 새 비밀번호 생성", "새 비밀번호 : "+String.valueOf(intValue), find_email);		
+				
+				BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();	
+				String hash = encoder.encode(String.valueOf(intValue));
+				
+				// 비밀번호 변경
+				int success = inter.pwChange(find_id, hash);
+
+				if(success > 0) {
+					msg = "입력한 이메일로 새로운 비밀번호를 전송하였습니다.";
+				} else {
+					msg = "비밀번호 변경 실패";
+				}
+			}
+		}
+		resultMap.put("msg", msg);
+		
+		return resultMap;
 	}
 }

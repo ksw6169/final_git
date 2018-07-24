@@ -17,7 +17,6 @@
 	        .content { float: left; background: #3C3F41 bottom fixed; background-size:cover; height: 100px; }
 	        
 	        footer { padding: 40px 0; color: #fff; font-family: "NanumL"; font-size: 12px; background-color: #616161; color: white;}
-	        
 		</style>
 	</head>
 	<body>

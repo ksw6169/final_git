@@ -4,12 +4,10 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-		
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	    <script src="./resources/js/bootstrap.min.js"></script>
 	    
-   	 	<title>bootstrap</title>
+   	 	<title>대리와 인턴 사이, 은밀하게 시원하게 - 김과장이 왜그럴까</title>
 
     	<!-- Bootstrap -->
     	<link href="./resources/css/bootstrap.min.css" rel="stylesheet">
@@ -19,26 +17,11 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
    	 	<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-
 		<!-- 반응형 완료(0715) -->
 		<style>
 			 body { padding-top: 70px; text-align: center;}
-			 
-			 .joinBackground {
-           	 	padding-top: 25px;
-           	 	padding-bottom: 50px;
-           	 	margin-top: 50px;
-            	background: #E4EEF0;
-            	
-			 }
-			 
-        	.content{
-        		font-family: "bareun";
-            	text-align: center;
-            	width: 100%;
-            	margin-bottom: 50px;
-            }
-        	
+			 .joinBackground{padding-top:25px;padding-bottom:50px;margin-top:50px;background:#E4EEF0;}
+			 .content{font-family:bareun;text-align:center;width:100%;margin-bottom:50px;}
         	/* 버튼 */
         	.join_btn{width:100%; height: 100px; margin: 5px; background-color: #FF8000; color: white; font-family: "bareun"; border: 0; font-size: 25px;}
 		</style>
@@ -75,8 +58,5 @@
 		function joinMove(page) {
 			location.href = "./"+page;
 		}
-		
-		
-		
 	</script>
 </html>

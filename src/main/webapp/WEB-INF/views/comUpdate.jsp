@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
         <html>
-
         <head>
         	 <script>
 				divCheck();
@@ -23,117 +22,26 @@
 
             <style>
                 /* submenubar css */
-
-                .submenubar_background {
-                    position: absolute;
-                    width: 100%;
-                    height: 100px;
-                    background-color: #E4EEF0;
-                }
-
-                .submenubar_header {
-                    font-family: "fallM";
-                    margin-left: 40px;
-                    width: 500px;
-                    height: 50px;
-                    display: inline-block;
-                    margin-top: 30px;
-                    float: left;
-                }
-
-                td.submenubar_name {
-                    font-family: "fallM";
-                    font-size: 30px;
-                    color: #121F27;
-                    background-color: #E4EEF0;
-                    border: 1px solid #E4EEF0;
-                }
-
-                .submenubar_detail {
-                    font-size: 10px;
-                    margin-left: 5px;
-                }
-
-                .submenubar_description {
-                    font-size: 10px;
-                    height: 15px;
-                    margin-top: 10px;
-                }
-
-                .submenubar_button,
-                .submenubar_button_last {
-                    width: 130px;
-                    height: 50px;
-                    line-height: 50px;
-                    color: #fff;
-                    font-family: fallM;
-                    font-size: 15px;
-                    text-align: center;
-                    margin-top: 25px;
-                    float: right;
-                    background-color: #121F27;
-                    cursor: pointer;
-                }
-
-                .submenubar_button {
-                    margin-right: 10px;
-                }
-
-                .submenubar_button_last {
-                    margin-right: 100px;
-                }
+                .submenubar_header,td.submenubar_name{font-family:fallM}
+                .submenubar_background{position:absolute;width:100%;height:100px;background-color:#E4EEF0}
+                .submenubar_header{margin-left:40px;width:500px;height:50px;display:inline-block;margin-top:30px;float:left}
+                td.submenubar_name{font-size:30px;color:#121F27;background-color:#E4EEF0;border:1px solid #E4EEF0}
+                .submenubar_detail{font-size:10px;margin-left:5px}
+                .submenubar_description{font-size:10px;height:15px;margin-top:10px}
+                .submenubar_button,.submenubar_button_last{width:130px;height:50px;line-height:50px;color:#fff;font-family:fallM;font-size:15px;text-align:center;margin-top:25px;float:right;background-color:#121F27;cursor:pointer}
+                .submenubar_button{margin-right:10px}
+                .submenubar_button_last{margin-right:100px}
 
                 .star-input>.input,
                 .star-input>.input>label:hover,
                 .star-input>.input>input:focus+label,
-                .star-input>.input>input:checked+label {
-                    display: inline-block;
-                    vertical-align: middle;
-                    background: url('./resources/image/grade_img.png') no-repeat;
-                }
-
-                .star-input {
-                    display: inline-block;
-                    white-space: nowrap;
-                    width: 200px;
-                    height: 40px;
-                    padding: 25px;
-                    margin-top: -15px;
-                    line-height: 30px;
-                }
-
-                .star-input>.input {
-                    display: inline-block;
-                    width: 150px;
-                    background-size: 150px;
-                    height: 28px;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    position: relative;
-                }
-
-                .star-input>.input>input {
-                    position: absolute;
-                    width: 1px;
-                    height: 1px;
-                    opacity: 0;
-                }
-
-                star-input>.input.focus {
-                    outline: 1px dotted #ddd;
-                }
-
-                .star-input>.input>label {
-                    width: 30px;
-                    height: 0;
-                    padding: 28px 0 0 0;
-                    overflow: hidden;
-                    float: left;
-                    cursor: pointer;
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                }
+                .star-input,.star-input>.input{display:inline-block;white-space:nowrap;}
+                .star-input>.input>input:checked+label{display:inline-block;vertical-align:middle;background:url(resources/image/grade_img.png) no-repeat;}
+                .star-input{width:200px;height:40px;padding:25px;margin-top:-15px;line-height:30px;}
+                .star-input>.input{width:150px;background-size:150px;height:28px;overflow:hidden;position:relative;}
+                .star-input>.input>input{position:absolute;width:1px;height:1px;opacity:0;}
+                .star-input>.input.focus{outline:#ddd dotted 1px;}
+                .star-input>.input>label{width:30px;height:0;padding:28px 0 0;overflow:hidden;float:left;cursor:pointer;position:absolute;top:0;left:0;}
 
                 .star-input>.input>label:hover,
                 .star-input>.input>input:focus+label,

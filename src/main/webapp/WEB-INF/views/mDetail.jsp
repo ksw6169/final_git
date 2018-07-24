@@ -31,90 +31,79 @@
 			.contents { color: #121F27; background-color: #FFFFFF; height: 350px; line-height: 100px; text-align: left; } 
 	        .detail_div { margin-top: 50px;}
 	        .table_div { background-color: #E4EEF0; padding: 50px; text-align: center;}
-			
-			.button_group {
-				width: 100px;
-				height: 37.5px;
-				background-color: white;
-				color: #121F27;
-				border: 0.25px solid #DDDDDD;
-			}
-			
-			.container {
-				margin-top: 100px;
-			}
+			.button_group{width:100px;height:37.5px;background-color:#fff;color:#121F27;border:.25px solid #DDD;}
+			.container{margin-top:100px;}
 			
 			/* submenuBar 링크 글자 색상 */
-		.submenubar_button a{ color: white;}
-		.submenubar_button_last a{color: white;}
-		.submenubar_button a:hover{color: #FF8000; background-color: #121F27;text-decoration: none;}
-		.submenubar_button_last a:hover{color: #FF8000; background-color: #121F27; text-decoration: none;}
+			.submenubar_button a{ color: white;}
+			.submenubar_button_last a{color: white;}
+			.submenubar_button a:hover{color: #FF8000; background-color: #121F27;text-decoration: none;}
+			.submenubar_button_last a:hover{color: #FF8000; background-color: #121F27; text-decoration: none;}
     	</style>
-  </head>
-  <body>
-  <jsp:include page="menubar.jsp"/>
+  	</head>
+  	<body>
+  		<jsp:include page="menubar.jsp"/>
   
-    <div class="submenubar_background">
-        <div class="submenubar_header">
-            <table>
-                <tr>
-                    <td class="submenubar_name">쪽지함</td>
-                </tr>
-            </table>
-        </div>
-	        <span id="AdminWrite" class="submenubar_button_last"><a href="./pageMove?page=mWrite">쪽지 작성</a></span>
-	        <span class="submenubar_button"><a href="./pageMove?page=sendMlist">보낸 쪽지함</a></span>
-	        <span class="submenubar_button"><a href="./pageMove?page=getMlist">받은 쪽지함</a></span>
-    </div>
+	    <div class="submenubar_background">
+	        <div class="submenubar_header">
+	            <table>
+	                <tr>
+	                    <td class="submenubar_name">쪽지함</td>
+	                </tr>
+	            </table>
+	        </div>
+		        <span id="AdminWrite" class="submenubar_button_last"><a href="./pageMove?page=mWrite">쪽지 작성</a></span>
+		        <span class="submenubar_button"><a href="./pageMove?page=sendMlist">보낸 쪽지함</a></span>
+		        <span class="submenubar_button"><a href="./pageMove?page=getMlist">받은 쪽지함</a></span>
+	    </div>
   
-  <div class="container">
-        <div class="detail_div">
-            <div class="table_div">
-                <table class="table">
-                     <tr>
-                       <th>보낸사람</th>
-                       <td class="subject">관리자</td>
-                     </tr>
-                     <tr>
-                       <th colspan="2">내용</th>
-                     </tr>
-                     <tr>
-                       <td class="contents" colspan="2">${message.message_content}</td>
-                     </tr>
-                </table>
-            </div>    
-            <div class="button-group">
-                <button class="btn btn-default pull-right" onclick="reply()" id="re">답장</button>
-                <button class="btn btn-default pull-right" onclick="list()">목록</button>       
-            </div>
-        </div>
-    </div>
-</body>
+	  	<div class="container">
+	        <div class="detail_div">
+	            <div class="table_div">
+	                <table class="table">
+	                     <tr>
+	                       <th>보낸사람</th>
+	                       <td class="subject">관리자</td>
+	                     </tr>
+	                     <tr>
+	                       <th colspan="2">내용</th>
+	                     </tr>
+	                     <tr>
+	                       <td class="contents" colspan="2">${message.message_content}</td>
+	                     </tr>
+	                </table>
+	            </div>    
+	            <div class="button-group">
+	                <button class="btn btn-default pull-right" onclick="reply()" id="re">답장</button>
+	                <button class="btn btn-default pull-right" onclick="list()">목록</button>       
+	            </div>
+	        </div>
+	    </div>
+	</body>
 	<script>
-	
-	check();
-	adminCK();
-	//답장 버튼 관리자 활성화 
-	function check(){
-		var id = "${sessionScope.loginId}";
-		
-		if(id != 'admin'){
-			$("#re").hide();
-		}else{
-			$("#re").show();
+		check();
+		adminCK();
+		//답장 버튼 관리자 활성화 
+		function check(){
+			var id = "${sessionScope.loginId}";
+			
+			if(id != 'admin'){
+				$("#re").hide();
+			}else{
+				$("#re").show();
+			}
 		}
-
-	}
-	function list(){
-		location.href ="./messageListForm";
-	}
+		
+		function list(){
+			location.href ="./messageListForm";
+		}
 	
-	function reply(){
-		location.href = "./messagereplyForm?message_no=${message.message_no}";
-	}
-	
-	//관리자 접속 체크 및 공지사항 작성 버튼 활성/비활성화 
-	 function adminCK(){
+		function reply(){
+			location.href = "./messagereplyForm?message_no=${message.message_no}";
+		}
+		
+	 	//관리자 접속 체크 및 공지사항 작성 버튼 활성/비활성화 
+	 	function adminCK(){
 		 	var id = "${sessionScope.loginId}"
 			var div = "${sessionScope.membe_div}"
 				console.log(id +"/"+div);
@@ -124,7 +113,5 @@
 				$("#AdminWrite").hide();
 				}
 		}
-	
-	
 	</script>
 </html>

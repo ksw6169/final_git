@@ -9,256 +9,36 @@
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
       
 		<style>
-		body { padding-top: 70px; }
-        
-        .container {
-            margin-top: 50px;
-        	margin-bottom: 50px;
-            padding-top: 25px;
-            padding-bottom: 25px;
-            background: #E4EEF0;
-        }
-        
-        .content {
-            font-family: "bareun";
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        .inputHeader {
-        	width: 100%;
-			height: 50px;
-        	line-height: 50px;
-        	font-family: "bareun";
-            background: #121F27;
-			margin-top: 5px;
-			color: white;
-			text-align: center;
-			font-size: 13px;
-			padding: 0px;
-			margin-left: 10px;
-        }
-        
-        .inputHeader2 {
-        	width: 100%;
-			height: 50px;
-			line-height: 50px;
-        	font-family: "bareun";
-            background: #121F27;
-			margin-top: 5px;
-			color: white;
-			text-align: center;
-			font-size: 8px;
-			padding: 0px;
-			margin-left: 10px;
-        }
-        
-        .inputTag {
-			width: 100%;
-			height: 50px;
-        	line-height: 50px;
-        	font-family: "bareun";
-            background: white;
-            border: 0px;
-            outline:none;
-			margin-top: 5px;
-			color: black;
-			text-align: center;
-			font-size: 13px;
-			padding: 0px;
-			margin-left: -10px;
-        }
-        
-        .comment{
-        	font-family: "bareun";
-        	text-align: left;
-            font-size: 11px;
-            margin-top: 10px;
-        }
-        
-        
-        .company_join{
-	        font-family: "bareun";
-	        color: #fff;
-	        background-color: #121F27;
-	        width: 465px;
-	        font-size: 20px;
-	        height: 50px;
-	        line-height: 50px;
-	        margin: 10px 200px 10px 0;
-         	float:left;
-          	border: 0px;
-          	text-align: center;
-        }
-        
-        .joinForm {
-          font-family: "bareun";
-          color: #fff;
-          background-color: #121F27;
-          width: 100px;
-          height: 50px;
-          font-size: 14px;
-          margin: 5px 0;
-          float:left;
-          border: 0px;
-          text-align: center;
-          padding-top: 15px;
-        }
-        
-        .login_group {
-            width: 650px;
-        }
-        
-        .join_btn {
-            width: 100%;
-            height: 50px;
-            line-height: 50px;
-            font-size: 16px;
-            margin: 30px 0 20px 0px;
-            border: 0px;
-            background-color: #FF8000;
-            color: white;
-            font-family: "bareun";
-        }
-        
-        .company_photo{
-          font-family: "bareun";
-          color: #fff;
-          background-color: #121F27;
-          width: 100px;
-          height: 50px;
-          font-size: 12px;
-          margin: 5px 0;
-          float:left;
-          border: 0px white;
-          text-align: center;
-          padding-top: 10px;
-        }
-        
-        .company_btn {
-            font-family: "bareun";
-         	color: #fff;
-          	background-color: #121F27;
-            float: right;
-            width: 100%;
-            height: 50px;
-            border: 0;
-            cursor: pointer;
-            text-align: center;
-            line-height: 50px;
-            margin: 5px -35px 0 10px;
-        }
-        
-        .file_btn {
-            font-family: "bareun";
-         	color: #fff;
-          	background-color: #121F27;
-            float: right;
-            width: 100%;
-            height: 50px;
-            border: 0;
-            cursor: pointer;
-            text-align: center;
-            line-height: 50px;
-            margin: 5px -35px 0 10px;
-        }
-        
-		.warn{
-	        	color : red;
-	        	font-family: "bareun";
-	        	text-align: left;
-	        	margin-top: 15px;
-	        	margin-bottom: 15px;
-        }
-        
-        
-        input[type='file']{
-        	position : absolute;
-  			clip:rect(0,0,0,0);
-  			overflow: hidden;
-        	border:0;
-        }
-        
-        div.col-md-4.col-md-offset-4 {
-        	margin-top: 50px;
-        }
-        
-        .custom_select {
-        	margin-top: 25px;
-        	margin-bottom: 10px;
-			width: 100%; /* 원하는 너비설정 */ 
-			height: 50px;
-			font-family: "fallM"; /* 폰트 상속 */ 
-			border-radius: 0px; /* iOS 둥근모서리 제거 */ 
-			appearance: none;
-			display: inline-block;
-		  	float: left;
-		  	color: white;
-		  	background-color: #121F27;
-		}
-		
-		.btn_group {
-			margin-bottom: 50px;
-		}
-		
-		/* modal search-bar */
-		#myModalLabel {
-			font-family: "bareun";
-		}
-		
-		#modal-search-bar {
-            font-size:13px;
-            padding:10px;
-            width: 350px;
-            height: 50px;
-            line-height: 40px;
-            outline:none;
-            margin: 5px 0;
-            display: inline;
-            float: left;
-        }
-		
-		.table-hover {
-			visibility: hidden;
-		}
-		
-		.table-hover thead tr th {
-			border: 1px solid white;
-			text-align: center;
-			font-weight: bold;
-		}
-		
-		.table-hover tbody tr td {
-			background-color: #E4EEF0;
-			border: 1px solid white;
-			text-align: center;
-			font-family: "NanumL";
-			font-size: 14px;
-			font-weight:bold;
-		}
-		
-		/* loading */
-        #loading {
-          position: absolute;
-          left: 47%;
-		  display: inline-block;
-		  width: 75px;							/* 원 가로 길이 */
-		  height: 75px;						/* 원 세로 길이 */
-		  border: 5px solid #E4EEF0;	/* 원의 테두리 색 */
-		  border-radius: 50%;			
-		  border-top-color: #FF8000;	/* 원 회전 색 */
-		  animation: spin 1s ease-in-out infinite;
-		  -webkit-animation: spin 1s ease-in-out infinite;
-		}
-	
-		@keyframes spin {
-		  to { -webkit-transform: rotate(360deg); }
-		}
-		@-webkit-keyframes spin {
-		  to { -webkit-transform: rotate(360deg); }
-		}
-		
-    </style>
+			body { padding-top: 70px; }
+	        .container{margin-top:50px;margin-bottom:50px;padding-top:25px;padding-bottom:25px;background:#E4EEF0}
+	        .inputHeader,.inputHeader2{background:#121F27;color:#fff;margin-left:10px;width:100%;margin-top:5px;text-align:center;padding:0;font-family:bareun;height:50px;line-height:50px}.content{font-family:bareun;text-align:center;margin-bottom:50px}
+	        .inputHeader{font-size:13px}.inputHeader2{font-size:8px}
+	        .inputTag{width:100%;height:50px;line-height:50px;font-family:bareun;background:#fff;border:0;outline:0;margin-top:5px;color:#000;text-align:center;font-size:13px;padding:0;margin-left:-10px}
+	        .company_join,.company_photo,.joinForm{background-color:#121F27;float:left}
+	        .comment{font-family:bareun;text-align:left;font-size:11px;margin-top:10px}
+	        .company_btn,.company_join,.company_photo,.file_btn,.joinForm{color:#fff;text-align:center;font-family:bareun}
+	        .company_join{width:465px;font-size:20px;height:50px;line-height:50px;margin:10px 200px 10px 0;border:0}
+	        .joinForm{width:100px;height:50px;font-size:14px;margin:5px 0;border:0;padding-top:15px}
+	        .login_group{width:650px}
+	        .join_btn{width:100%;height:50px;line-height:50px;font-size:16px;margin:30px 0 20px;border:0;background-color:#FF8000;color:#fff;font-family:bareun}
+	        .company_photo{width:100px;height:50px;font-size:12px;margin:5px 0;border:0 #fff;padding-top:10px}
+	        .company_btn,.custom_select,.file_btn{width:100%;background-color:#121F27;height:50px}
+	        .company_btn,.file_btn{float:right;border:0;cursor:pointer;line-height:50px;margin:5px -35px 0 10px}
+	        .warn{color:red;font-family:bareun;text-align:left;margin-top:15px;margin-bottom:15px}
+	        input[type=file]{position:absolute;clip:rect(0,0,0,0);overflow:hidden;border:0}
+	        div.col-md-4.col-md-offset-4{margin-top:50px}
+	        .custom_select{margin-top:25px;margin-bottom:10px;font-family:fallM;border-radius:0;appearance:none;display:inline-block;float:left;color:#fff}
+	        .table-hover tbody tr td,.table-hover thead tr th{border:1px solid #fff;text-align:center;font-weight:700}
+	        .btn_group{margin-bottom:50px}
+	        #myModalLabel{font-family:bareun}
+	        #modal-search-bar{font-size:13px;padding:10px;width:350px;height:50px;line-height:40px;outline:0;margin:5px 0;display:inline;float:left}
+	        .table-hover{visibility:hidden}
+	        .table-hover tbody tr td{background-color:#E4EEF0;font-family:NanumL;font-size:14px}
+	        #loading{position:absolute;left:47%;display:inline-block;width:75px;height:75px;border:5px solid #E4EEF0;border-radius:50%;border-top-color:#FF8000;animation:spin 1s ease-in-out infinite;-webkit-animation:spin 1s ease-in-out infinite}
+	        @keyframes spin{to{-webkit-transform:rotate(360deg)}}
+	        @-webkit-keyframes spin{to{-webkit-transform:rotate(360deg)}}
+    	</style>
+    </head>
     <body>
    	 <jsp:include page="menubar.jsp" flush="false"/>
     

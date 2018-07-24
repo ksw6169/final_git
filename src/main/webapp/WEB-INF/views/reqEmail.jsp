@@ -37,57 +37,48 @@
 	        .detail_div { margin-top: 50px;}
 	        .table_div { background-color: #E4EEF0; padding: 50px; text-align: center;}
 			.form-control { padding: 7px 12px; }
-			.button_group {
-				width: 100px;
-				height: 37.5px;
-				background-color: white;
-				color: #121F27;
-				border: 0.25px solid #DDDDDD;
-			}
-			
-			.container {
-				margin-top: 100px;
-			}
+			.button_group{width:100px;height:37.5px;background-color:#fff;color:#121F27;border:.25px solid #DDD;}
+			.container{margin-top:100px;}
 	    </style>
-  </head>
-  <body>
-  	<jsp:include page="menubar.jsp"/>
-  
-    <div class="submenubar_background">
-        <div class="submenubar_header">
-            <table>
-                <tr>
-                    <td class="submenubar_name">인증신청관리</td>
-                </tr>
-            </table>
-        </div>
-    </div>
-  
-  <div class="container">
-        <div class="detail_div">
-            <div class="table_div">
-                <table class="table">
-                     <tr>
-                       <th>받는 사람 이메일</th>
-                       <td class="email">${member.member_email}</td>
-                     </tr>
-					 <tr>
-                       <th>제목</th>
-                       <td class="subject"><textarea id="subject" class="form-control" rows="1"></textarea></td>
-                     </tr>
-                     <tr>
-                       <th colspan="2">내용</th>
-					 </tr>
-					<tr>
-						<td class="write_content" colspan="2"><textarea id="content" class="form-control" rows="15"></textarea></td>
-					</tr>
-                </table>
-				<button id="submit" class="btn btn-default send">전송</button>
-				<button id="back" class="btn btn-default pull-right">이전</button>
-            </div>
-        </div>
-    </div>
-</body>
+  	</head>
+  	<body>
+	  	<jsp:include page="menubar.jsp"/>
+	  
+	    <div class="submenubar_background">
+	        <div class="submenubar_header">
+	            <table>
+	                <tr>
+	                    <td class="submenubar_name">인증신청관리</td>
+	                </tr>
+	            </table>
+	        </div>
+	    </div>
+	  
+	  	<div class="container">
+	        <div class="detail_div">
+	            <div class="table_div">
+	                <table class="table">
+	                     <tr>
+	                       <th>받는 사람 이메일</th>
+	                       <td class="email">${member.member_email}</td>
+	                     </tr>
+						 <tr>
+	                       <th>제목</th>
+	                       <td class="subject"><textarea id="subject" class="form-control" rows="1"></textarea></td>
+	                     </tr>
+	                     <tr>
+	                       <th colspan="2">내용</th>
+						 </tr>
+						<tr>
+							<td class="write_content" colspan="2"><textarea id="content" class="form-control" rows="15"></textarea></td>
+						</tr>
+	                </table>
+					<button id="submit" class="btn btn-default send">전송</button>
+					<button id="back" class="btn btn-default pull-right">이전</button>
+	            </div>
+	        </div>
+	    </div>
+	</body>
 	<script>
 		$("#back").click(function(){
 			window.history.back();
@@ -120,6 +111,5 @@
 				$.ajax(obj);
 			}
 		});
-	
 	</script>
 </html>

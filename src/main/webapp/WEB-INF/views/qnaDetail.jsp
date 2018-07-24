@@ -28,7 +28,6 @@
 	        .button-group { margin-top: 15px;}
 	
 	        .like { background-color: white; margin: 15px 0 0 15px; }
-	
 	        .reply { background-color: #121F27; color: white; }
 	        .subject, .date { width: 750px; text-align: center; color: #121F27; background-color: #FFFFFF; }
 	        .contents { color: #121F27; background-color: #FFFFFF; height: 200px; line-height: 100px; text-align: left; } 
@@ -41,353 +40,337 @@
 			.table>tbody>tr>td.reply_date { vertical-align: middle; border: 0.25px solid #DDDDDD; }
 			.table>tbody>tr>td.reply_updel { padding: 0px; border-top: 0px; }
 			
-			.button_group {
-				width: 100px;
-				height: 37.5px;
-				background-color: white;
-				color: #121F27;
-				border: 0.25px solid #DDDDDD;
-			}
-			
-			.clear1 {
-				margin-top: 150px;
-			}
-			
-			.clear2 {
-				margin-top: 50px;
-			}
-			
-			#board_content.contents {
-				width: 100%; height: 100%;
-				word-break: break-all;
-			}
+			.button_group{width:100px;height:37.5px;background-color:#fff;color:#121F27;border:.25px solid #DDD;}
+			.clear1{margin-top:150px;}
+			.clear2{margin-top:50px;}
+			#board_content.contents{width:100%;height:100%;word-break:break-all;}
     	</style>
   </head>
   <body>
-  	<jsp:include page="menubar.jsp"/>
-  
-    <div class="submenubar_background">
-        <div class="submenubar_header">
-            <table>
-                <tr>
-                    <td class="submenubar_name">모르면 물어봐<b class="submenubar_detail">정규직을 향한 인턴들의 폭풍 질문</b></td>
-                </tr>
-                <tr>
-                    <td class="submenubar_description">*대리 회원(직장인 회원)과 인턴 회원(비직장인 회원) 전부 글 작성, 열람이 가능합니다.</td>
-                </tr>
-            </table>
-        </div>
-        <span class="submenubar_button" onclick="location.href='./pageMove?page=qnaWrite'">글 작성</span>
-    </div>
-  
-  	<div class="clear1"></div>
+  		<jsp:include page="menubar.jsp"/>
   	
-  <div class="container">
-        <div class="detail_div">
-            <div class="table_div">
-                <table class="table">
-                     <tr>
-                       <th>제목</th>
-                       <td id="board_title" class="subject"></td>
-                     </tr>
-                     <tr>
-                       <th>작성일자</th>
-                       <td id="board_date" class="date"></td>
-                     </tr>
-                     <tr>
-                       <th colspan="2">내용</th>
-                     </tr>
-                     <tr>
-                       <td id="board_content" class="contents" colspan="2"></td>
-                     </tr>
-                </table>
-
-                <button id="like" class="btn like_btn" onclick="like()"></button>
-            </div>    
-            <div class="button-group">
-                <button id="delete" class="btn btn-default pull-right">삭제</button>
-                <button id="update" class="btn btn-default pull-right">수정</button>
-                <button class="btn btn-default pull-right" onclick="location.href='./pageMove?page=qnaList'">목록</button>       
-            </div>
-        </div>
-    </div>
-      
-  	<div class="clear2"></div>
-      
-	<div class="container">
-        <div class="detail_div">
-            <div class="table_div">
-                <table class="table replyTable">
-                     <tr>
-                       <th class="reply" colspan="4"></th>
-                     </tr>
-                     <tr>
-                       <th colspan="2">내용</th>
-					   <th>작성일자</th>
-					   <th style="width: 100px;">수정/삭제</th>
-                     </tr>
-                </table>
-				<textarea id="write_replyContent" class="form-control replyContent" rows="5" name="replyContent"></textarea>
-				<div class="button-group">
-                <button id="replySave" class="btn btn-default pull-right replyWrite">댓글 작성</button>
-				</div>
-            </div>
-        </div>
-    </div>
-</body>
+	    <div class="submenubar_background">
+	        <div class="submenubar_header">
+	            <table>
+	                <tr>
+	                    <td class="submenubar_name">모르면 물어봐<b class="submenubar_detail">정규직을 향한 인턴들의 폭풍 질문</b></td>
+	                </tr>
+	                <tr>
+	                    <td class="submenubar_description">*대리 회원(직장인 회원)과 인턴 회원(비직장인 회원) 전부 글 작성, 열람이 가능합니다.</td>
+	                </tr>
+	            </table>
+	        </div>
+	        <span class="submenubar_button" onclick="location.href='./pageMove?page=qnaWrite'">글 작성</span>
+	    </div>
+	  
+	  	<div class="clear1"></div>
+	  	
+	  	<div class="container">
+	        <div class="detail_div">
+	            <div class="table_div">
+	                <table class="table">
+	                     <tr>
+	                       <th>제목</th>
+	                       <td id="board_title" class="subject"></td>
+	                     </tr>
+	                     <tr>
+	                       <th>작성일자</th>
+	                       <td id="board_date" class="date"></td>
+	                     </tr>
+	                     <tr>
+	                       <th colspan="2">내용</th>
+	                     </tr>
+	                     <tr>
+	                       <td id="board_content" class="contents" colspan="2"></td>
+	                     </tr>
+	                </table>
+	
+	                <button id="like" class="btn like_btn" onclick="like()"></button>
+	            </div>    
+	            <div class="button-group">
+	                <button id="delete" class="btn btn-default pull-right">삭제</button>
+	                <button id="update" class="btn btn-default pull-right">수정</button>
+	                <button class="btn btn-default pull-right" onclick="location.href='./pageMove?page=qnaList'">목록</button>       
+	            </div>
+	        </div>
+	    </div>
+	      
+	  	<div class="clear2"></div>
+	      
+		<div class="container">
+	        <div class="detail_div">
+	            <div class="table_div">
+	                <table class="table replyTable">
+	                     <tr>
+	                       <th class="reply" colspan="4"></th>
+	                     </tr>
+	                     <tr>
+	                       <th colspan="2">내용</th>
+						   <th>작성일자</th>
+						   <th style="width: 100px;">수정/삭제</th>
+	                     </tr>
+	                </table>
+					<textarea id="write_replyContent" class="form-control replyContent" rows="5" name="replyContent"></textarea>
+					<div class="button-group">
+	                <button id="replySave" class="btn btn-default pull-right replyWrite">댓글 작성</button>
+					</div>
+	            </div>
+	        </div>
+	    </div>
+	</body>
 	<script>
-	var loginId = "${sessionScope.loginId}";
-	var board_no = "${param.board_no}";
-	var myLike;
-	var replyId;
-	
-	/* 게시물의 추천수 + 내가 추천했는지 여부 */
-	$(document).ready(function() {
-		$.ajax({
-			type : "post",
-			url : "./likeCount",
-			data : { 
-				loginId : loginId,
-				board_no : board_no
-			},
-			dataType : "json",
-			success : function(data) {
-				console.log(data.likeCount);
-				// 추천 여부 - data.myLike
-				myLike = data.myLike;
-				
-				if(loginId != "${board.member_id}"){
-					$("#update").css("display", "none");
-					$("#delete").css("display", "none");
-				}
-				
-				if(member_div == "관리자"){
-					$(".submenubar_button").css("display", "none");
-					$("#replySave").css("display", "none");
-					$("#write_replyContent").css("display", "none");
-				}
-				
-				if(data.myLike == true) {
-					$("#like.btn.like_btn").css("background", "#FF8000");
-					$("#like.btn.like_btn").css("color", "white");
-				} else {
-					$("#like.btn.like_btn").css("background", "white");
-					$("#like.btn.like_btn").css("color", "black");
-				}
-				
-				 $("#like.btn.like_btn").html("추천 "+data.likeCount);
-			},
-			error : function(error) {
-				console.log(error);
-			}
-		});
+		var loginId = "${sessionScope.loginId}";
+		var board_no = "${param.board_no}";
+		var myLike;
+		var replyId;
 		
-		/* 댓글 리스트 불러오기 */
-		$.ajax({
-			type : "post",
-			url : "./replyList",
-			data : { 
-				board_no : board_no
-			},
-			dataType : "json",
-			success : function(data) {
-				console.log(data);
-				$(".reply").html("댓글 "+data.list.length);
-				
-				var content = "";
-				for(var i=0; i<data.list.length; i++) {
-					content += "<tr>";
-					content += "<td class='reply_contents' colspan='2' style='padding: 0px;'><textarea name='replyContent' id='replyContent"+data.list[i].reply_no+"' style='width: 100%; height: 100%;' readonly='readonly'>"+data.list[i].reply_content+"</textarea></td>";
-					var date = new Date(data.list[i].reply_date);
-					content += "<td class='reply_date' style='0.25px solid #DDDDDD;'>"+dateForm(date)+"</td>";
-					if(data.list[i].member_id == loginId) {
-						content += "<td class='reply_updel' style='width: 100px;'>";
-						content += "<button class='btn btn-default pull-right updateBtn"+data.list[i].reply_no+"' onclick='replyUpdate("+data.list[i].reply_no+")' style='border-top-width: 0px;'>수정</button>";
-						content += "<br/>";
-						content += "<button class='btn btn-default pull-right' onclick='replyDelete("+data.list[i].reply_no+")'>삭제</button>";
-						content += "</td>";
+		/* 게시물의 추천수 + 내가 추천했는지 여부 */
+		$(document).ready(function() {
+			$.ajax({
+				type : "post",
+				url : "./likeCount",
+				data : { 
+					loginId : loginId,
+					board_no : board_no
+				},
+				dataType : "json",
+				success : function(data) {
+					console.log(data.likeCount);
+					// 추천 여부 - data.myLike
+					myLike = data.myLike;
+					
+					if(loginId != "${board.member_id}"){
+						$("#update").css("display", "none");
+						$("#delete").css("display", "none");
 					}
-					content += "</tr>";
+					
+					if(member_div == "관리자"){
+						$(".submenubar_button").css("display", "none");
+						$("#replySave").css("display", "none");
+						$("#write_replyContent").css("display", "none");
+					}
+					
+					if(data.myLike == true) {
+						$("#like.btn.like_btn").css("background", "#FF8000");
+						$("#like.btn.like_btn").css("color", "white");
+					} else {
+						$("#like.btn.like_btn").css("background", "white");
+						$("#like.btn.like_btn").css("color", "black");
+					}
+					
+					 $("#like.btn.like_btn").html("추천 "+data.likeCount);
+				},
+				error : function(error) {
+					console.log(error);
 				}
-				
-				$(".replyTable").append(content);
-			},
-			error : function(error) {
-				console.log(error);
-			}
+			});
+			
+			/* 댓글 리스트 불러오기 */
+			$.ajax({
+				type : "post",
+				url : "./replyList",
+				data : { 
+					board_no : board_no
+				},
+				dataType : "json",
+				success : function(data) {
+					console.log(data);
+					$(".reply").html("댓글 "+data.list.length);
+					
+					var content = "";
+					for(var i=0; i<data.list.length; i++) {
+						content += "<tr>";
+						content += "<td class='reply_contents' colspan='2' style='padding: 0px;'><textarea name='replyContent' id='replyContent"+data.list[i].reply_no+"' style='width: 100%; height: 100%;' readonly='readonly'>"+data.list[i].reply_content+"</textarea></td>";
+						var date = new Date(data.list[i].reply_date);
+						content += "<td class='reply_date' style='0.25px solid #DDDDDD;'>"+dateForm(date)+"</td>";
+						if(data.list[i].member_id == loginId) {
+							content += "<td class='reply_updel' style='width: 100px;'>";
+							content += "<button class='btn btn-default pull-right updateBtn"+data.list[i].reply_no+"' onclick='replyUpdate("+data.list[i].reply_no+")' style='border-top-width: 0px;'>수정</button>";
+							content += "<br/>";
+							content += "<button class='btn btn-default pull-right' onclick='replyDelete("+data.list[i].reply_no+")'>삭제</button>";
+							content += "</td>";
+						}
+						content += "</tr>";
+					}
+					
+					$(".replyTable").append(content);
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
 		});
-	});
-	
-	
-	/* 추천수 올리기 */
-	function like() {
-		console.log("myLike : "+myLike);
 		
-		$.ajax({
-			type : "post",
-			url : "./like",
-			data : { 
-				loginId : loginId,
-				board_no : board_no,
-				myLike : myLike
-			},
-			dataType : "json",
-			success : function(data) {
-				console.log("추천 성공성공");
-				if(myLike == true) {
-					myLike = false;
-				} else {
-					myLike = true;
+		
+		/* 추천수 올리기 */
+		function like() {
+			console.log("myLike : "+myLike);
+			
+			$.ajax({
+				type : "post",
+				url : "./like",
+				data : { 
+					loginId : loginId,
+					board_no : board_no,
+					myLike : myLike
+				},
+				dataType : "json",
+				success : function(data) {
+					console.log("추천 성공성공");
+					if(myLike == true) {
+						myLike = false;
+					} else {
+						myLike = true;
+					}
+					
+					if(data.like == true) {
+						$("#like.btn.like_btn").css("background", "#FF8000");
+						$("#like.btn.like_btn").css("color", "white");
+					} else {
+						$("#like.btn.like_btn").css("background", "white");
+						$("#like.btn.like_btn").css("color", "black");
+					}
+					
+					$("#like.btn.like_btn").html("추천 "+data.likeCount);
+				},
+				error : function(error) {
+					console.log(error);
 				}
-				
-				if(data.like == true) {
-					$("#like.btn.like_btn").css("background", "#FF8000");
-					$("#like.btn.like_btn").css("color", "white");
-				} else {
-					$("#like.btn.like_btn").css("background", "white");
-					$("#like.btn.like_btn").css("color", "black");
-				}
-				
-				$("#like.btn.like_btn").html("추천 "+data.likeCount);
-			},
-			error : function(error) {
-				console.log(error);
-			}
-		});
-	}
-
-	var date = "${board.board_date}";	//날짜 뒤 .0 자름
-	var afterStr = date.split('.');
-	var dto={
-	        board_title:"${board.board_title}",
-	        //board_date:"${board.board_date}",
-	        board_date:afterStr[0],
-	        board_content:"${board.board_content}",
-	        board_recom:"${board.board_recom}",
-	        board_category:"${board.board_category}",
-	        board_no:"${board.board_no}",
-            member_id:"${board.member_id}"
-	};
-	
-	BoardPrint(dto);
-	
-	function BoardPrint(board){
-	    console.log(board);
-	    $("#board_category").html(board.board_category);
-	    $("#board_title.subject").html(board.board_title);
-	    $("#board_date.date").html(board.board_date);
-	    $("#board_content.contents").html(board.board_content);
-	}
-	
-	$("#update").click(function(){
-		if(loginId == ("${board.member_id}")){
-			location.href="./qnaUpdateForm?board_no="+${board.board_no};
-		} else{
-			alert("수정 권한이 없습니다.");
+			});
 		}
-	});
 	
-	$("#delete").click(function(){
-		if(loginId == ("${board.member_id}")){
-			location.href="./qnaDelete?board_no="+${board.board_no};
-		} else{
-			alert("삭제 권한이 없습니다.");
+		var date = "${board.board_date}";	//날짜 뒤 .0 자름
+		var afterStr = date.split('.');
+		var dto={
+		        board_title:"${board.board_title}",
+		        //board_date:"${board.board_date}",
+		        board_date:afterStr[0],
+		        board_content:"${board.board_content}",
+		        board_recom:"${board.board_recom}",
+		        board_category:"${board.board_category}",
+		        board_no:"${board.board_no}",
+	            member_id:"${board.member_id}"
+		};
+		
+		BoardPrint(dto);
+		
+		function BoardPrint(board){
+		    console.log(board);
+		    $("#board_category").html(board.board_category);
+		    $("#board_title.subject").html(board.board_title);
+		    $("#board_date.date").html(board.board_date);
+		    $("#board_content.contents").html(board.board_content);
 		}
-	});
-	
-	//글자수 제한
-    $("#write_replyContent").on('keyup',function(){
-        if($(this).val().length > 100) {
-            $(this).val($(this).val().substring(0, 100));
-            alert("글자수를 초과하셨습니다 !");
-        }
-    });
-	
-	// 댓글 작성 버튼 클릭시
-	$(".replyWrite").click(function() {
-		console.log($(".replyContent").val());
 		
-		$.ajax({
-			type : "post",
-			url : "./replyWrite",
-			data : { 
-				loginId : loginId,
-				board_no : board_no,
-				reply_content : $(".replyContent").val()
-			},
-			dataType : "json",
-			success : function(data) {
-				alert(data.msg);
-				location.href = "./qnaDetail?board_no="+board_no;
-			},
-			error : function(error) {
-				console.log(error);
+		$("#update").click(function(){
+			if(loginId == ("${board.member_id}")){
+				location.href="./qnaUpdateForm?board_no="+${board.board_no};
+			} else{
+				alert("수정 권한이 없습니다.");
 			}
 		});
-	});
-	
-	// 댓글 수정 버튼 클릭시
-	function replyUpdate(reply_no) {
-		$("#replyContent"+reply_no).attr("readonly", false);
-		$(".updateBtn"+reply_no).after("<button class='btn btn-default pull-right completeBtn"+reply_no+"' onclick='replyUpdateComplete("+reply_no+")' style='border-top-width: 0px; background: #FF8000; color: white;'>완료</button>");
-		$(".updateBtn"+reply_no).hide();
-	}
-	
-	// 댓글 수정 완료 버튼 클릭시
-	function replyUpdateComplete(reply_no) {
-		$("#replyContent"+reply_no).attr("readonly", true);
-		$(".completeBtn"+reply_no).hide();
-		$(".updateBtn"+reply_no).show();
 		
-		var updateContent = $("#replyContent"+reply_no).val();
-		
-		$.ajax({
-			type : "post",
-			url : "./replyUpdate",
-			data : { 
-				reply_no : reply_no,
-				reply_content : updateContent
-			},
-			dataType : "json",
-			success : function(data) {
-				alert(data.msg);
-			},
-			error : function(error) {
-				console.log(error);
+		$("#delete").click(function(){
+			if(loginId == ("${board.member_id}")){
+				location.href="./qnaDelete?board_no="+${board.board_no};
+			} else{
+				alert("삭제 권한이 없습니다.");
 			}
 		});
-	}
-	
-	/* 댓글 삭제 */
-	function replyDelete(reply_no) {
-		board_no = "${param.board_no}";
 		
-		$.ajax({
-			type : "post",
-			url : "./replyDelete",
-			data : { 
-				reply_no : reply_no,
-				board_no : board_no
-			},
-			dataType : "json",
-			success : function(data) {
-				alert(data.msg);
-				location.href = "./qnaDetail?board_no="+board_no;
-			},
-			error : function(error) {
-				console.log(error);
-			}
+		//글자수 제한
+	    $("#write_replyContent").on('keyup',function(){
+	        if($(this).val().length > 100) {
+	            $(this).val($(this).val().substring(0, 100));
+	            alert("글자수를 초과하셨습니다 !");
+	        }
+	    });
+		
+		// 댓글 작성 버튼 클릭시
+		$(".replyWrite").click(function() {
+			console.log($(".replyContent").val());
+			
+			$.ajax({
+				type : "post",
+				url : "./replyWrite",
+				data : { 
+					loginId : loginId,
+					board_no : board_no,
+					reply_content : $(".replyContent").val()
+				},
+				dataType : "json",
+				success : function(data) {
+					alert(data.msg);
+					location.href = "./qnaDetail?board_no="+board_no;
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
 		});
-	}
-	
-	function dateForm(now){
-		year = "" + now.getFullYear();
-		month = "" + (now.getMonth() + 1); if (month.length == 1) { month = "0" + month; }
-		day = "" + now.getDate(); if (day.length == 1) { day = "0" + day; }
-		hour = "" + now.getHours(); if (hour.length == 1) { hour = "0" + hour; }
-		minute = "" + now.getMinutes(); if (minute.length == 1) { minute = "0" + minute; }
-		second = "" + now.getSeconds(); if (second.length == 1) { second = "0" + second; }
-		return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
-	}
+		
+		// 댓글 수정 버튼 클릭시
+		function replyUpdate(reply_no) {
+			$("#replyContent"+reply_no).attr("readonly", false);
+			$(".updateBtn"+reply_no).after("<button class='btn btn-default pull-right completeBtn"+reply_no+"' onclick='replyUpdateComplete("+reply_no+")' style='border-top-width: 0px; background: #FF8000; color: white;'>완료</button>");
+			$(".updateBtn"+reply_no).hide();
+		}
+		
+		// 댓글 수정 완료 버튼 클릭시
+		function replyUpdateComplete(reply_no) {
+			$("#replyContent"+reply_no).attr("readonly", true);
+			$(".completeBtn"+reply_no).hide();
+			$(".updateBtn"+reply_no).show();
+			
+			var updateContent = $("#replyContent"+reply_no).val();
+			
+			$.ajax({
+				type : "post",
+				url : "./replyUpdate",
+				data : { 
+					reply_no : reply_no,
+					reply_content : updateContent
+				},
+				dataType : "json",
+				success : function(data) {
+					alert(data.msg);
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
+		}
+		
+		/* 댓글 삭제 */
+		function replyDelete(reply_no) {
+			board_no = "${param.board_no}";
+			
+			$.ajax({
+				type : "post",
+				url : "./replyDelete",
+				data : { 
+					reply_no : reply_no,
+					board_no : board_no
+				},
+				dataType : "json",
+				success : function(data) {
+					alert(data.msg);
+					location.href = "./qnaDetail?board_no="+board_no;
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
+		}
+		
+		function dateForm(now){
+			year = "" + now.getFullYear();
+			month = "" + (now.getMonth() + 1); if (month.length == 1) { month = "0" + month; }
+			day = "" + now.getDate(); if (day.length == 1) { day = "0" + day; }
+			hour = "" + now.getHours(); if (hour.length == 1) { hour = "0" + hour; }
+			minute = "" + now.getMinutes(); if (minute.length == 1) { minute = "0" + minute; }
+			second = "" + now.getSeconds(); if (second.length == 1) { second = "0" + second; }
+			return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+		}
 	</script>
 </html>

@@ -278,5 +278,4 @@
 	<select id="myReplyBoardCategory" parameterType="int" resultType="com.spring.dto.BoardDTO">
 		SELECT board_category FROM board WHERE board_no = #{param1}
 	</select>
-	
 </mapper>
