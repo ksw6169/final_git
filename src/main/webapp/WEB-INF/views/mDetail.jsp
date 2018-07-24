@@ -73,7 +73,8 @@
                 <table class="table">
                      <tr>
                        <th>보낸사람</th>
-                       <td class="subject">관리자</td>
+                       <td id="admin" class="subject">관리자</td>
+                       <td id="user" class="subject">회원</td>
                      </tr>
                      <tr>
                        <th colspan="2">내용</th>
@@ -120,8 +121,13 @@
 				console.log(id +"/"+div);
 			if(id != "admin" && div != "관리자"){
 				$("#AdminWrite").show();
+				$("#user").hide();
+				$("#admin").show();
 			}else{
 				$("#AdminWrite").hide();
+
+				$("#admin").hide();
+				$("#user").show();
 				}
 		}
 	

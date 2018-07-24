@@ -129,8 +129,7 @@
 		obj.success=function(data){
 			console.log(data.GmessageList);
 			listPrint(data.GmessageList); 
-
-			page = data.GmessageList.length;
+			page = data.listAll;
 			if(ePage >= page){
 				$("#next").addClass('disabled');
 			}else{
