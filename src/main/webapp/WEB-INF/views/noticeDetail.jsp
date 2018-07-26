@@ -70,7 +70,7 @@
 	            <div class="button-group">
 	                <button id=Adel class="btn btn-default pull-right" onclick="del()">삭제</button>
 	                <button id=Aup class="btn btn-default pull-right" onclick="update()">수정</button>
-	                <button class="btn btn-default pull-right" onclick="list()">목록</button>       
+	                <button class="btn btn-default pull-right" onclick="list()" style="margin-bottom: 50px;">목록</button>       
 	            </div>
         	</div>
    		</div>

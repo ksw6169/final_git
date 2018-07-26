@@ -153,44 +153,67 @@
 	                <button class="comWrite_btn">기업평가 완료</button>
 	            </div>
 	            </form>
+	            
+	            <!-- 기업평가 유의사항 Modal -->
+	            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top: 10%;">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				        <h4 class="modal-title" id="myModalLabel" style="font-family: bareun; padding-left: 10px;"><b style="color: #FF8000;">기업평가</b> 유의사항</h4>
+				      </div>
+				      <div class="modal-body">
+			      		<h3 style="font-family: bareun; font-size: 18px; text-align: center;">별을 높게 책정할수록 긍정적 평가입니다.</h3>
+			      		<h3 style="font-family: bareun; font-size: 18px; text-align: center;">(예: 주당 야근 횟수 <b style="color: red;">★★★★★</b> - 주당 야근 횟수가 적음)</h3>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal" style="font-family: bareun;">닫기</button>
+				      </div>
+				    </div> <!-- 모달 콘텐츠 -->
+				  </div> <!-- 모달 다이얼로그 -->
+				</div> <!-- 모달 전체 윈도우 -->
         </body>
         <script src="./resources/js/star.js"></script>
         <script>
-        $("#comment_content").on('keyup',function(){
-			if($(this).val().length > 300) {
-	        	$(this).val($(this).val().substring(0, 300));
-	        	alert("글자수를 초과하셨습니다 !");
+        	$(document).ready(function() {
+        		$("#myModal").modal();	
+        	});
+        	
+	        $("#comment_content").on('keyup',function(){
+				if($(this).val().length > 300) {
+		        	$(this).val($(this).val().substring(0, 300));
+		        	alert("글자수를 초과하셨습니다 !");
+		        }
+	        });
+				
+	        evalCheck("${company_no}");
+	        
+	        $("#row1p1").attr('checked', true);
+	    	$("#row2p1").attr('checked', true);
+	    	$("#row3p1").attr('checked', true);
+	    	$("#row4p1").attr('checked', true);
+	    	
+	    	function before(){
+	    		location.href=document.referrer;
+	    	}
+	    	
+	    	//${company_no}
+	    	function evalCheck(company_no){
+	        	var chk={};
+	        	chk.url="./evalCheck";
+	        	chk.type="GET";
+	        	chk.dataType="JSON";
+	        	chk.error=function(e){console.log(e)};
+	        	chk.data={"company_no":company_no};
+	        	chk.success=function(data){
+	                   if(data.success){
+	                	   console.log("기업평가 작성 가능");
+	                   }else{
+	                	   alert(data.msg);
+	                	   before();
+	                	   }
+	                };
+	                $.ajax(chk);
 	        }
-        });
-			
-        evalCheck("${company_no}");
-        
-        $("#row1p1").attr('checked', true);
-    	$("#row2p1").attr('checked', true);
-    	$("#row3p1").attr('checked', true);
-    	$("#row4p1").attr('checked', true);
-    	
-    	function before(){
-    		location.href=document.referrer;
-    	}
-    	
-    	//${company_no}
-    	function evalCheck(company_no){
-        	var chk={};
-        	chk.url="./evalCheck";
-        	chk.type="GET";
-        	chk.dataType="JSON";
-        	chk.error=function(e){console.log(e)};
-        	chk.data={"company_no":company_no};
-        	chk.success=function(data){
-                   if(data.success){
-                	   console.log("기업평가 작성 가능");
-                   }else{
-                	   alert(data.msg);
-                	   before();
-                	   }
-                };
-                $.ajax(chk);
-        }
 	</script>
 </html>

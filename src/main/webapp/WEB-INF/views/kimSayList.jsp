@@ -156,8 +156,6 @@
 	    /* 게시글 리스트 호출 */
 		function kimSayList(){
 			search_div = false; 
-			
-			
 	    	console.log("kimsayList: "+startPage+"/"+endPage+"/"+align_div);
 			
 			$.ajax({
@@ -278,6 +276,7 @@
 	    	
 	    	startPage = 1;
 	    	endPage = 15;
+	    	
 	    	kimSayList();
 	    });
 	    

@@ -21,7 +21,7 @@
 			
 	        body {padding-top: 70px;}
 	        .content {font-family: "bareun"; margin-bottom: 50px; text-align: center;}
-	          font-size: 14px; margin: 5px 0; float:left;border: 0px;text-align: center;padding-top: 15px;}
+	          font-size: 14px; margin: 5px 0; float:left; border: 0px; text-align: center;padding-top: 15px;}
 	        input[type=text],input[type=password]{font-size:13px;padding:10px 10px 10px 20px;width:500px;height:50px;line-height:40px;outline:0;margin:5px 0 5px 15px;display:inline;font-family:bareun;}
 	        input{font-family: "NanumM";}
 	        .center-block{ width: 650px;}
@@ -144,6 +144,7 @@
 			} else {
 				$("#companyupdate_btn").html("<a href='./pageMove?page=companyUpdate'>회사정보 수정</a>");
 			}
+			$("#pw").focus();
 		});
 	
 		// 비밀번호 길이 검사

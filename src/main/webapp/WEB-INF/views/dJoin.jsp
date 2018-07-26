@@ -201,6 +201,10 @@
 		var chk = false;			// 아이디 중복값 체크
 		var emailChk = false;	// 이메일 체크 변수
     
+		$(document).ready(function(){
+			$("#userId").focus();
+		}); 
+		
     	/* 기업명 search - 재광 */
     	function company_search() {
     	    $(".table-hover").css("visibility", "hidden");	// 테이블 숨김

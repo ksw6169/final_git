@@ -64,7 +64,7 @@
 					      </div>
 					      <div class="modal-body">
 					      	<div style="width: 100%; height: 80px;">
-						      	<input class="form-control" id="find_id" placeholder="아이디를 입력해주세요." style="display:inline-block; width:100%; height: 50%; margin-bottom: 10px;"/>
+						      	<input class="form-control" id="find_id" placeholder="아이디를 입력해주세요." tabindex="-1" style="display:inline-block; width:100%; height: 50%; margin-bottom: 10px;"/>
 						      	<input class="form-control" id="find_email" placeholder="회원가입 시 입력한 이메일을 입력해주세요." style="display:inline-block; width:100%; height: 50%; "/>
 						        <!-- inputdefault -->
 					      	</div>
@@ -88,6 +88,10 @@
 		if(msg != "") {
 			alert(msg);
 		}
+		
+		$(document).ready(function(){
+			$("input[name='id']").focus();
+		}); 
 		
 		// 로그인
 		function login() {

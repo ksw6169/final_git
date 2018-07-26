@@ -67,6 +67,7 @@
 		var userId = "${sessionScope.loginId}";
 		$(document).ready(function(){
 			$("#userId").val(userId);
+			$("#pw").focus();
 		});
 		
 		$(".chk_btn").click(function(){					// 비밀번호 확인 버튼을 눌렀을 때,	

@@ -157,12 +157,12 @@
 						$("#write_replyContent").css("display", "none");
 					}
 					
-					if(data.myLike == true) {
-						$("#like.btn.like_btn").css("background", "#FF8000");
-						$("#like.btn.like_btn").css("color", "white");
-					} else {
+					if(data.myLike == false) {
 						$("#like.btn.like_btn").css("background", "white");
 						$("#like.btn.like_btn").css("color", "black");
+					} else {
+						$("#like.btn.like_btn").css("background", "#FF8000");
+						$("#like.btn.like_btn").css("color", "white");
 					}
 					
 					 $("#like.btn.like_btn").html("추천 "+data.likeCount);

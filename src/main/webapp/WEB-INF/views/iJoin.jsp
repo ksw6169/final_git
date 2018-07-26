@@ -94,6 +94,10 @@
 		var chk = false;			// 아이디 중복값 체크
 		var emailChk = false;	// 이메일 체크 변수
 		
+		$(document).ready(function() {
+			$("#userId").focus();	
+		});
+		
 		// ID 중복 확인(onkeyup 이벤트)
 		function overlay() {
 			var userId = $("#userId").val();	// ID 입력값
