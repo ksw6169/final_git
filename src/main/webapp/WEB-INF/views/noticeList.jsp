@@ -6,8 +6,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
    	 	<meta name="viewport" content="width=device-width, initial-scale=1">
-		
-      
+   	 	
     <style>
 		/* submenubar css */
         .submenubar_background{position:absolute;width:100%;height:100px;background-color:#E4EEF0;}
@@ -29,73 +28,16 @@
         .paging_button { text-align: center;}
         .page-link { font-family: "bareun"; }
         
-        .search {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        input[type='text'] {
-            font-size:13px;
-            height: 40px;
-            padding:10px;
-            width:400px;
-            display: inline-block;
-            
-        }
-        
-        .search_group {
-            text-align: center;
-            margin-top: 50px;
-            margin-bottom: 50px;
-            margin-top : 30px;
-        }
-        
-        span.input-group-addon {
-          width: 50px;
-          height: 40px;
-          vertical-align: top;
-          line-height: 35px;
-          font-family: "bareun";
-          display: inline-block;
-          border: 0px;
-          color: #fff;
-          background-color: #121F27;
-          font-size: 13px;
-          cursor: pointer;
-          margin-left: -4px;
-          text-align: center;
-        }
-        
-        button.pull-right {
-          width: 75px;
-          height: 30px;
-          vertical-align: top;
-          line-height: 30px;
-          font-family: "bareun";
-          border: 0px;
-          color: #fff;
-          background-color: #121F27;
-          font-size: 13px;
-          cursor: pointer;
-        }
-        
-        .clear {
-        	height: 7px;
-        }
-        
-        .pull-right{
-	        color : white;
-        }
-
-		.container {
-			margin-top: 150px;
-		}
-
-		/*다음, 이전 목록 버튼*/
-		li a{
-			cursor: pointer;
-		}
-
+        .search,.search_group{margin-bottom:50px;text-align:center}
+        button.pull-right,span.input-group-addon{vertical-align:top;font-family:bareun;border:0;background-color:#121F27;font-size:13px;color:#fff;cursor:pointer}
+        input[type=text]{font-size:13px;height:40px;padding:10px;width:400px;display:inline-block}
+        .search_group{margin-top:30px}
+        span.input-group-addon{width:50px;height:40px;line-height:35px;display:inline-block;margin-left:-4px;text-align:center}
+        button.pull-right{width:75px;height:30px;line-height:30px}
+        .clear{height:7px}
+        .pull-right{color:#fff}
+        .container{margin-top:150px}
+        li a{cursor:pointer}
     </style>
   </head>
 	<body>
@@ -144,7 +86,6 @@
 	    </div>
 	</body>
 	<script>
-	
 		var obj = {};
 		var startPage = 1; //페이징 첫
 		var addPage = 10; //페이지 마지막
@@ -159,21 +100,19 @@
 		$(document).ready(function(){
 			listCall(obj,startPage,keyword); 
 			adminCK();
-			
 		});
 		
-		//관리자 접속 체크 및 공지사항 작성 버튼 활성화 
+		 //관리자 접속 체크 및 공지사항 작성 버튼 활성화 
 		 function adminCK(){
-			 	var id = "${sessionScope.loginId}"
-				var div = "${sessionScope.membe_div}"
-					console.log(id +"/"+div);
-				if(id != "admin" && div != "관리자"){
-					$("#aWrite").hide()
-				}else{
-					$("#aWrite").show();
-				}
+		 	var id = "${sessionScope.loginId}"
+			var div = "${sessionScope.membe_div}"
+				console.log(id +"/"+div);
+			if(id != "admin" && div != "관리자"){
+				$("#aWrite").hide()
+			}else{
+				$("#aWrite").show();
 			}
-		
+		}
 		
 		//검색 버튼 클릭시 
 		$("#serchBtn").click(function(){
@@ -208,7 +147,6 @@
 			ajaxCall(obj);
 		}
 
-		
 		//리스트 그리기
 		function listPrint(nBoardList){
 			var content ="";
@@ -260,15 +198,5 @@
 			second = "" + now.getSeconds(); if (second.length == 1) { second = "0" + second; }
 			return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
 		}
-
-	
-	
-
-	
-
- 
-		
-	
-	
 	</script>
 </html>

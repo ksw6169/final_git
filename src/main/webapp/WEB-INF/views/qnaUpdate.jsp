@@ -7,7 +7,6 @@
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
    	 	<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-      
 		<style>
 			/* submenubar css */
 			.submenubar_background{position:absolute;width:100%;height:100px;background-color:#E4EEF0;}
@@ -16,7 +15,7 @@
 			.submenubar_detail{font-size:12px;margin-left:5px;color:#323838;}
 			.submenubar_description{font-family: "fallM"; background-color: #E4EEF0; border: 1px solid #E4EEF0; font-size:12px;height:15px;margin-top:10px;color:#121F27;}
 			.submenubar_button,.submenubar_button_last{width:120px;height:50px;line-height:50px;color:#fff;font-family:fallM;font-size:15px;text-align:center;margin-top:25px;float:right;background-color:#121F27;cursor:pointer;}
-			.submenubar_button{margin-right:10px;}
+			.submenubar_button{margin-right:50px;}
 			.submenubar_button_last{margin-right:100px;}
 			
 	        .btn { width: 120px; height: 40px; background-color: #FF8000; border: none; vertical-align: middle; color:#fff; font-family: "fallB"; text-align: center; display: inline-block; font-size: 12px; }    
@@ -34,110 +33,101 @@
 	        .detail_div { margin-top: 50px;}
 	        .table_div { background-color: #E4EEF0; padding: 50px; text-align: center;}
 			.form-control { padding: 7px 12px; color: #121F27; }
-			.button_group {
-				width: 100px;
-				height: 37.5px;
-				background-color: white;
-				color: #121F27;
-				border: 0.25px solid #DDDDDD;
-			}
-			
-			
-			.container {
-				margin-top: 100px;
-			}
+			.button_group{width:100px;height:37.5px;background-color:#fff;color:#121F27;border:.25px solid #DDD;}
+			.container{margin-top:100px;}
+			#list{margin-bottom:50px;}
     	</style>
-  </head>
-  <body>
-  <jsp:include page="menubar.jsp"/>
+  	</head>
+  	<body>
+	  	<jsp:include page="menubar.jsp"/>
+	  
+	    <div class="submenubar_background">
+	        <div class="submenubar_header">
+	            <table>
+	                <tr>
+	                    <td class="submenubar_name">모르면 물어봐<b class="submenubar_detail">정규직을 향한 인턴들의 폭풍 질문</b></td>
+	                </tr>
+	                <tr>
+	                    <td class="submenubar_description">*대리 회원(직장인 회원)과 인턴 회원(비직장인 회원) 전부 글 작성, 열람이 가능합니다.</td>
+	                </tr>
+	            </table>
+	        </div>
+	    </div>
   
-    <div class="submenubar_background">
-        <div class="submenubar_header">
-            <table>
-                <tr>
-                    <td class="submenubar_name">모르면 물어봐<b class="submenubar_detail">정규직을 향한 인턴들의 폭풍 질문</b></td>
-                </tr>
-                <tr>
-                    <td class="submenubar_description">*대리 회원(직장인 회원)과 인턴 회원(비직장인 회원) 전부 글 작성, 열람이 가능합니다.</td>
-                </tr>
-            </table>
-        </div>
-    </div>
-  
-  <div class="container">
-        <div class="detail_div">
-        <form id="sendForm" action="qnaUpdate" method="post"> 
-            <div class="table_div">
-                <table class="table">
-                     <input name="board_no" type="hidden" value="${param.board_no}"/>
-                     <tr>
-                       <th>제목</th>
-                       <td id="board_title" class="subject"><textarea name="board_title" id="title_textarea" onKeyPress="javascript: if (event.keyCode==13) return false;" class="form-control subject" rows="1" style="padding-bottom: 11px;"></textarea></td>
-                     </tr>
-                     <tr>
-                       <th colspan="2">내용</th>
-					 </tr>
-					<tr>
-						<td id="board_content" class="write_content" colspan="2"><textarea name="board_content" id="content_textarea" class="form-control" rows="15"></textarea></td>
-					</tr>
-                </table>
-                
-				<button id="update" class="btn btn-default pull-right">수정 완료</button>
-            </div>    
-            </form>
-            <div class="button-group">
-                <button class="btn btn-default pull-right" onclick="location.href='./pageMove?page=qnaList'">목록</button>       
-            </div>
-        </div>
-    </div>
-</body>
+	  	<div class="container">
+	        <div class="detail_div">
+	        <form id="sendForm" action="qnaUpdate" method="post"> 
+	            <div class="table_div">
+	                <table class="table">
+	                     <input name="board_no" type="hidden" value="${param.board_no}"/>
+	                     <tr>
+	                       <th>제목</th>
+	                       <td id="board_title" class="subject"><textarea name="board_title" id="title_textarea" onKeyPress="javascript: if (event.keyCode==13) return false;" class="form-control subject" rows="1" style="padding-bottom: 11px;"></textarea></td>
+	                     </tr>
+	                     <tr>
+	                       <th colspan="2">내용</th>
+						 </tr>
+						<tr>
+							<td id="board_content" class="write_content" colspan="2"><textarea name="board_content" id="content_textarea" class="form-control" rows="15"></textarea></td>
+						</tr>
+	                </table>
+	                
+					<button id="update" class="btn btn-default pull-right">수정 완료</button>
+	            </div>    
+	            </form>
+	            <div class="button-group">
+	                <button id="list" class="btn btn-default pull-right" onclick="location.href='./pageMove?page=qnaList'">목록</button>       
+	            </div>
+	        </div>
+	    </div>
+	</body>
 	<script>
-	var dto={
-            board_title:"${board.board_title}",
-            board_content:"${board.board_content}",
-    };
-    
-    BoardPrint(dto);
-    
-    function BoardPrint(board){
-        console.log(board);
-        $("#title_textarea").text(board.board_title);
-        $("#content_textarea").text(board.board_content);
-    }
-    
-    $("#update").click(function(){
-		if($("#title_textarea").val()==""){
-			alert("제목을 입력해주세요.");
-			setTimeout(function(){$("#title_textarea").focus();}, 1);
-			console.log("제목 미입력");
-			return false;
-		}else if($("#content_textarea").val() == ""){
-			alert("내용을 입력해주세요");
-			setTimeout(function(){$("#content_textarea").focus();}, 1);
-			console.log("내용 미입력");
-			return false;
-		}else{
-			$("#sendForm").attr("action", "./qnaUpdate");
-			var word=$("#content_textarea").val();
-        	word=word.replace(/\n/gi,"<br>");
-        	$("#content_textarea").val(word);
-			$("#sendForm").submit();
-		}
-	});
-    
-  	//글자수 제한
-    $("#title_textarea").on('keyup',function(){
-        if($(this).val().length > 20) {
-            $(this).val($(this).val().substring(0, 20));
-            alert("글자수를 초과하셨습니다 !");
-        }
-    });
-    
-    $("#content_textarea").on('keyup',function(){
-        if($(this).val().length > 500) {
-            $(this).val($(this).val().substring(0, 500));
-            alert("글자수를 초과하셨습니다 !");
-        }
-    });
+		var dto={
+	            board_title:"${board.board_title}",
+	            board_content:"${board.board_content}",
+	    };
+	    
+	    BoardPrint(dto);
+	    
+	    function BoardPrint(board){
+	        console.log(board);
+	        $("#title_textarea").text(board.board_title);
+	        $("#content_textarea").text(board.board_content);
+	    }
+	    
+	    $("#update").click(function(){
+			if($("#title_textarea").val()==""){
+				alert("제목을 입력해주세요.");
+				setTimeout(function(){$("#title_textarea").focus();}, 1);
+				console.log("제목 미입력");
+				return false;
+			}else if($("#content_textarea").val() == ""){
+				alert("내용을 입력해주세요");
+				setTimeout(function(){$("#content_textarea").focus();}, 1);
+				console.log("내용 미입력");
+				return false;
+			}else{
+				$("#sendForm").attr("action", "./qnaUpdate");
+				var word=$("#content_textarea").val();
+	        	word=word.replace(/\n/gi,"<br>");
+	        	$("#content_textarea").val(word);
+				$("#sendForm").submit();
+			}
+		});
+	    
+	  	//글자수 제한
+	    $("#title_textarea").on('keyup',function(){
+	        if($(this).val().length > 20) {
+	            $(this).val($(this).val().substring(0, 20));
+	            alert("글자수를 초과하셨습니다 !");
+	        }
+	    });
+	    
+	    $("#content_textarea").on('keyup',function(){
+	        if($(this).val().length > 500) {
+	            $(this).val($(this).val().substring(0, 500));
+	            alert("글자수를 초과하셨습니다 !");
+	        }
+	    });
 	</script>
 </html>

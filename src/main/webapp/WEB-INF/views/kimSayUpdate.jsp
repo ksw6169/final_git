@@ -7,8 +7,6 @@
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
    	 	<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		
-      
 		<style>
 			/* submenubar css */
 	        .submenubar_background { position: absolute; width: 100%; height: 100px; background-color: #E4EEF0; }
@@ -23,7 +21,6 @@
 			select { width: 100%; height: 100%; background-color: #121F27; color: white; font-family: "fallM"; border-radius: 0px; appearance: none; outline: none; 
 				display: inline-block; }
 			
-			
 	        .btn { width: 120px; height: 40px; background-color: #FF8000; border: none; vertical-align: middle; color:#fff; font-family: "fallB"; text-align: center; display: inline-block; font-size: 12px; }    
 	        button:hover { color: #121F27; }
 	        /* board_detail css */
@@ -31,23 +28,7 @@
 	        th { font-family: "fallM"; text-align: center; background: #121F27; color: white; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; }
 	        td { font-family: "NanumM"; text-align: center; background: #121F27; color: white; height: 25px; line-height: 25px; }
 	        .table>tbody>tr>th { text-align: center; }
-	        .category {
-	         width: 100%; /* 원하는 너비설정 */ 
-	         padding-left: 46.5%;
-			 height: 50px;
-	         background-color: #121F27;
-			 color: white;
-			 font-family: "fallM"; /* 폰트 상속 */ 
-	         font-weight: bold;
-			 font-size: medium;
-			 border: 1px solid #999; 
-	         border-radius: 0px; /* iOS 둥근모서리 제거 */ 
-	         appearance: none;
-			 outline: none;
-	         display: inline-block;
-	           margin: 3px 3px 3px 0;
-	           float: left;
-	        }
+	        .category{width:100%;padding-left:46.5%;height:50px;background-color:#121F27;color:#fff;font-family:fallM;font-weight:700;font-size:medium;border:1px solid #999;border-radius:0;appearance:none;outline:0;display:inline-block;margin:3px 3px 3px 0;float:left;}
 			option { background-color: #DDDDDD; color: #121F27; border: 1px black; }
 			.button-group { margin-top: 15px; }
 	        .subject, .date { color: #121F27; background-color: #FFFFFF; }
@@ -56,19 +37,9 @@
 			.table>tbody>tr>td.write_content { background-color: #E4EEF0; padding: 0px; }
 	        .detail_div { margin-top: 50px;}
 	        .table_div { background-color: #E4EEF0; padding: 50px; text-align: center;}
-			.form-control { padding: 7px 12px; color: #121F27; }
-			.button_group {
-				width: 100px;
-				height: 37.5px;
-				background-color: white;
-				color: #121F27;
-				border: 0.25px solid #DDDDDD;
-			}
-			
-			.container {
-				margin-top: 100px;
-				margin-bottom: 50px;
-			}
+			.form-control { padding: 7px 12px; color: #121F27;}
+			.button_group{width:100px;height:37.5px;background-color:#fff;color:#121F27;border:.25px solid #DDD;}
+			.container{margin-top:100px;margin-bottom:50px;}
     	</style>
   </head>
   <body>

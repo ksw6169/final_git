@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
         <html>
-
         <head>
 	        <script>
 				divCheck();
@@ -15,7 +14,6 @@
 			    		location.href=document.referrer;
 			    	}
 			    }
-				
 			</script>
         
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -24,273 +22,47 @@
 
             <style>
                 /* submenubar css */
-
-                .submenubar_background {
-                    position: absolute;
-                    width: 100%;
-                    height: 100px;
-                    background-color: #E4EEF0;
-                }
-
-                .submenubar_header {
-                    font-family: "fallM";
-                    margin-left: 40px;
-                    width: 500px;
-                    height: 50px;
-                    display: inline-block;
-                    margin-top: 30px;
-                    float: left;
-                }
-
-                td.submenubar_name {
-                    font-family: "fallM";
-                    font-size: 30px;
-                    color: #121F27;
-                    background-color: #E4EEF0;
-                    border: 1px solid #E4EEF0;
-                }
-
-                .submenubar_detail {
-                    font-size: 10px;
-                    margin-left: 5px;
-                }
-
-                .submenubar_description {
-                    font-size: 10px;
-                    height: 15px;
-                    margin-top: 10px;
-                }
-
-                .submenubar_button,
-                .submenubar_button_last {
-                    width: 130px;
-                    height: 50px;
-                    line-height: 50px;
-                    color: #fff;
-                    font-family: fallM;
-                    font-size: 15px;
-                    text-align: center;
-                    margin-top: 25px;
-                    float: right;
-                    background-color: #121F27;
-                    cursor: pointer;
-                }
-
-                .submenubar_button {
-                    margin-right: 10px;
-                }
-
-                .submenubar_button_last {
-                    margin-right: 100px;
-                }
-
-                .star-input>.input,
-                .star-input>.input>label:hover,
-                .star-input>.input>input:focus+label,
-                .star-input>.input>input:checked+label {
-                    display: inline-block;
-                    vertical-align: middle;
-                    background: url('./resources/image/grade_img.png') no-repeat;
-                }
-
-                .star-input {
-                    display: inline-block;
-                    white-space: nowrap;
-                    width: 200px;
-                    height: 40px;
-                    padding: 25px;
-                    margin-top: -15px;
-                    line-height: 30px;
-                }
-
-                .star-input>.input {
-                    display: inline-block;
-                    width: 150px;
-                    background-size: 150px;
-                    height: 28px;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    position: relative;
-                }
-
-                .star-input>.input>input {
-                    position: absolute;
-                    width: 1px;
-                    height: 1px;
-                    opacity: 0;
-                }
-
-                star-input>.input.focus {
-                    outline: 1px dotted #ddd;
-                }
-
-                .star-input>.input>label {
-                    width: 30px;
-                    height: 0;
-                    padding: 28px 0 0 0;
-                    overflow: hidden;
-                    float: left;
-                    cursor: pointer;
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                }
-
-                .star-input>.input>label:hover,
-                .star-input>.input>input:focus+label,
-                .star-input>.input>input:checked+label {
-                    background-size: 150px;
-                    background-position: 0 bottom;
-                }
-
-                .star-input>.input>label:hover~label {
-                    background-image: none;
-                }
-
-                .star-input>.input>label[for*="p1"] {
-                    width: 30px;
-                    z-index: 5;
-                }
-
-                .star-input>.input>label[for*="p2"] {
-                    width: 60px;
-                    z-index: 4;
-                }
-
-                .star-input>.input>label[for*="p3"] {
-                    width: 90px;
-                    z-index: 3;
-                }
-
-                .star-input>.input>label[for*="p4"] {
-                    width: 120px;
-                    z-index: 2;
-                }
-
-                .star-input>.input>label[for*="p5"] {
-                    width: 150px;
-                    z-index: 1;
-                }
-
-                .star-input>output {
-                    color: #121F27;
-                    font-size: 18px;
-                    text-align: right;
-                    vertical-align: middle;
-                    display: none;
-                }
-
-                .content {
-                    font-family: "bareun";
-                    text-align: center;
-                    margin-bottom: 30px;
-                    color: white;
-                }
-
-                .comWrite_header {
-                    font-family: "bareun";
-                    color: #121F27;
-                    background-color: white;
-                    width: 200px;
-                    height: 50px;
-                    line-height: 50px;
-                    font-size: 25px;
-                    text-align: center;
-                    margin: 20px 0 0 5px;
-                    border: 0px;
-                    display: inline-block;
-                    vertical-align: middle;
-                }
-
-                .clear {
-                    clear: both;
-                }
-
-                .comWrite {
-                    background: #121F27;
-                    text-align: center;
-                    height: 450px;
-                    margin-top: 20px;
-                }
-
-                .comment {
-                    border: 0.25px solid #A9A9A9;
-                    background: #E4EEF0;
-                    text-align: center;
-                    font-family: fallB;
-                    font-size: 25px;
-                    color: black;
-                    height: 50px;
-                    line-height: 50px;
-                    width=100%;
-                }
-
-                .input_comWrite {
-                    text-align: center;
-                }
-
-                .comment_header {
-                    width: 100%;
-                    text-align: center;
-                    color: black;
-                    font-family: fallB;
-                    font-size: 25px;
-                    background-color: #E4EEF0;
-                }
-
-                input[type='text'] {
-                    height: 150px;
-                }
-
-                button.pull-right {
-                    width: 75px;
-                    height: 30px;
-                    line-height: 30px;
-                    vertical-align: top;
-                    font-family: "bareun";
-                    border: 0px;
-                    color: #fff;
-                    background-color: #121F27;
-                    font-size: 13px;
-                    cursor: pointer;
-                }
+                .submenubar_header,td.submenubar_name{font-family:fallM}
+                .star-input,.star-input>.input{display:inline-block;white-space:nowrap}
+                .submenubar_background{position:absolute;width:100%;height:100px;background-color:#E4EEF0}
+                .submenubar_header{margin-left:40px;width:500px;height:50px;display:inline-block;margin-top:30px;float:left}
+                td.submenubar_name{font-size:30px;color:#121F27;background-color:#E4EEF0;border:1px solid #E4EEF0}
+                .submenubar_detail{font-size:10px;margin-left:5px}
+                .submenubar_description{font-size:10px;height:15px;margin-top:10px}
+                .submenubar_button,.submenubar_button_last{width:130px;height:50px;line-height:50px;color:#fff;font-family:fallM;font-size:15px;text-align:center;margin-top:25px;float:right;background-color:#121F27;cursor:pointer}
+                .comWrite_header,.content{font-family:bareun}
+                .submenubar_button{margin-right:10px}
+                .submenubar_button_last{margin-right:100px}
                 
-                input[type='button'].pull-right {
-                    width: 75px;
-                    height: 30px;
-                    line-height: 30px;
-                    vertical-align: top;
-                    font-family: "bareun";
-                    border: 0px;
-                    color: #fff;
-                    background-color: #121F27;
-                    font-size: 13px;
-                    cursor: pointer;
-                }
-
-                .comWrite_btn {
-                    width: 200px;
-                    height: 30px;
-                    line-height: 30px;
-                    font-size: 16px;
-                    margin: 0px 0 50px 0px;
-                    border: 0px;
-                    background-color: #FF8000;
-                    color: white;
-                    font-family: "bareun";
-                }
-
-                .button_group {
-                    text-align: center;
-                    margin-top: 10px;
-                }
-
-                div.col-md-6.col-md-offset-3.comWrite {
-                    margin-top: 150px;
-                }
+                .star-input>.input,.star-input>.input>input:checked+label,.star-input>.input>input:focus+label,.star-input>.input>label:hover{display:inline-block;vertical-align:middle;background:url(resources/image/grade_img.png) no-repeat}
+                .star-input{width:200px;height:40px;padding:25px;margin-top:-15px;line-height:30px}
+                .star-input>.input{width:150px;background-size:150px;height:28px;overflow:hidden;position:relative}
+                .star-input>.input>input{position:absolute;width:1px;height:1px;opacity:0}
+                .star-input>.input.focus{outline:#ddd dotted 1px}
+                .star-input>.input>label{width:30px;height:0;padding:28px 0 0;overflow:hidden;float:left;cursor:pointer;position:absolute;top:0;left:0}
+                .star-input>.input>input:checked+label,.star-input>.input>input:focus+label,.star-input>.input>label:hover{background-size:150px;background-position:0 bottom}.star-input>.input>label:hover~label{background-image:none}
+                .star-input>.input>label[for*=p1]{width:30px;z-index:5}
+                .star-input>.input>label[for*=p2]{width:60px;z-index:4}
+                .star-input>.input>label[for*=p3]{width:90px;z-index:3}
+                .star-input>.input>label[for*=p4]{width:120px;z-index:2}
+                .star-input>.input>label[for*=p5]{width:150px;z-index:1}
+                .star-input>output{color:#121F27;font-size:18px;text-align:right;vertical-align:middle;display:none}
+                .content{text-align:center;margin-bottom:30px;color:#fff}
+                .comWrite_header{color:#121F27;background-color:#fff;width:200px;height:50px;line-height:50px;font-size:25px;text-align:center;margin:20px 0 0 5px;border:0;display:inline-block;vertical-align:middle}
+                .comment,.comment_header{color:#000;font-family:fallB;font-size:25px;text-align:center}
+                .clear{clear:both}
+                .comWrite{background:#121F27;text-align:center;height:450px;margin-top:20px}
+                .comment{border:.25px solid #A9A9A9;background:#E4EEF0;height:50px;line-height:50px}
+                .input_comWrite{text-align:center}
+                .comment_header{width:100%;background-color:#E4EEF0}
+                input[type=text]{height:150px}
+                .comWrite_btn,button.pull-right,input[type=button].pull-right{height:30px;line-height:30px;border:0;color:#fff;font-family:bareun}
+                button.pull-right,input[type=button].pull-right{width:75px;vertical-align:top;background-color:#121F27;font-size:13px;cursor:pointer}
+                .comWrite_btn{width:200px;font-size:16px;margin:0 0 50px;background-color:#FF8000}
+                .button_group{text-align:center;margin-top:10px}
+                div.col-md-6.col-md-offset-3.comWrite{margin-top:150px}
             </style>
         </head>
-
         <body>
             <jsp:include page="menubar.jsp" flush="false" />
 
@@ -420,5 +192,5 @@
                 };
                 $.ajax(chk);
         }
-        </script>
-        </html>
+	</script>
+</html>

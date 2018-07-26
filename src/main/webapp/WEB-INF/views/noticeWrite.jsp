@@ -34,70 +34,56 @@
 	        .detail_div { margin-top: 50px;}
 	        .table_div { background-color: #E4EEF0; padding: 50px; text-align: center;}
 			.form-control { padding: 7px 12px; }
-			.button_group {
-				width: 100px;
-				height: 37.5px;
-				background-color: white;
-				color: #121F27;
-				border: 0.25px solid #DDDDDD;
-			}
-			
-			.container {
-				margin-top: 100px;
-			}	
+			.button_group{width:100px;height:37.5px;background-color:#fff;color:#121F27;border:.25px solid #DDD;}
+			.container{margin-top:100px;}
     	</style>
-  </head>
-  <body>
-  <jsp:include page="menubar.jsp"/>
-  
-  
-    <div class="submenubar_background">
-        <div class="submenubar_header">
-            <table>
-                <tr>
-                    <td class="submenubar_name">공지합니다<b class="submenubar_detail">공지사항</b></td>
-                </tr>
-            </table>
-        </div>
-    </div>
-  
-  <div class="container">
-        <div class="detail_div">
-            <div class="table_div">
-            <form action="nBoardWrite" method="post">
-                <table class="table">
-                     <tr>
-                       <th>제목</th>
-                       <td class="subject" >
-                       <textarea name="board_title" class="form-control subject" rows="1" placeholder="제목을 입력해주세요." style="padding-bottom: 11px;"></textarea></td>
-                     </tr>
-                     <tr>
-                       <th colspan="2">내용</th>
-					 </tr>
-					<tr>
-						<td class="write_content"  colspan="2">
-						<textarea id="board_content" name="board_content" class="form-control" rows="15" placeholder="내용을 입력해주세요."></textarea></td>
-					</tr>
-                </table>
-                
-				<button class="btn btn-default pull-right">작성 완료</button>
-				</form>
-            </div>    
-            <div class="button-group">
-                <button class="btn btn-default pull-right" onclick="list()">목록</button>       
-            </div>
-        </div>
-    </div>
-</body>
+  	</head>
+  	<body>
+	  	<jsp:include page="menubar.jsp"/>
+	  
+	    <div class="submenubar_background">
+	        <div class="submenubar_header">
+	            <table>
+	                <tr>
+	                    <td class="submenubar_name">공지합니다<b class="submenubar_detail">공지사항</b></td>
+	                </tr>
+	            </table>
+	        </div>
+	    </div>
+	  
+	  <div class="container">
+	        <div class="detail_div">
+	            <div class="table_div">
+	            <form action="nBoardWrite" method="post">
+	                <table class="table">
+	                     <tr>
+	                       <th>제목</th>
+	                       <td class="subject" >
+	                       <textarea name="board_title" class="form-control subject" rows="1" placeholder="제목을 입력해주세요." style="padding-bottom: 11px;"></textarea></td>
+	                     </tr>
+	                     <tr>
+	                       <th colspan="2">내용</th>
+						 </tr>
+						<tr>
+							<td class="write_content"  colspan="2">
+							<textarea id="board_content" name="board_content" class="form-control" rows="15" placeholder="내용을 입력해주세요."></textarea></td>
+						</tr>
+	                </table>
+	                
+					<button class="btn btn-default pull-right">작성 완료</button>
+					</form>
+	            </div>    
+	            <div class="button-group">
+	                <button class="btn btn-default pull-right" onclick="list()">목록</button>       
+	            </div>
+	        </div>
+	    </div>
+	</body>
 	<script>
-	
-	
 		function list(){
 			location.href ="./nBoardListForm";
-			
 		}
-		
-		
+
 		//글자수 제한 
 		$(document).ready(function() {
 			$("#board_content").on('keyup',function(){
@@ -107,10 +93,5 @@
 		        }
 			});  
 		});
-			
-		
-		//글자수 제한 
-		
-	
 	</script>
 </html>

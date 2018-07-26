@@ -8,7 +8,6 @@
    	 	<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		<style>
-		
 			/* submenubar css */
 			.submenubar_background{position:absolute;width:100%;height:100px;background-color:#E4EEF0}
 			.submenubar_header{font-family:fallM;margin-left:40px;width:150px;height:50px;display:inline-block;margin-top:30px;float:left;}
@@ -23,33 +22,16 @@
 	        body {padding-top: 70px;}
 	        .content {font-family: "bareun"; margin-bottom: 50px; text-align: center;}
 	          font-size: 14px; margin: 5px 0; float:left;border: 0px;text-align: center;padding-top: 15px;}
-	        input[type='text'], input[type='password'] {font-size:13px;padding:10px;width: 500px;height: 50px;
-	            line-height: 40px; outline:none;margin: 5px 0;display: inline;padding-left: 20px;margin-left: 15px;
-	            font-family: "bareun";}
+	        input[type=text],input[type=password]{font-size:13px;padding:10px 10px 10px 20px;width:500px;height:50px;line-height:40px;outline:0;margin:5px 0 5px 15px;display:inline;font-family:bareun;}
 	        input{font-family: "NanumM";}
-	        /* add */
 	        .center-block{ width: 650px;}
 	        #group{background: black; color: white; height: 15px; width: 150px;}
-	        /* 비밀번호 확인 */
 	        .warn{ font-family: "bareun"; margin-left: 135px; display: none; text-align: center;}
 	        #blink{height: 1px; background-color: white; border-color: white; width: 150px;}
-	        /* 성 밑에 설명 */
 	        #info{font-family: "bareun"; margin-left: 140px;}
-	        /* 버튼 */
 	        #btnC{text-align: center;}
-	        
-	         .container {
-	        	margin-top: 150px;
-	        	margin-bottom: 50px;
-	            padding-top: 25px;
-	            padding-bottom: 25px;
-	            background: #E4EEF0;
-	        }
-	        
-	        #updateForm_id {
-	        	background-color: gray;
-	        	color: white;
-	        }
+	        .container{margin-top:150px;margin-bottom:50px;padding-top:25px;padding-bottom:25px;background:#E4EEF0;}
+	        #updateForm_id{background-color:gray;color:#fff;}
 	        
 			/* submenuBar 링크 글자 색상 */
 			.submenubar_button a{ color: white;}
@@ -57,58 +39,15 @@
 			.submenubar_button a:hover{color: #FF8000; background-color: #121F27;text-decoration: none;}
 			.submenubar_button_last a:hover{color: #FF8000; background-color: #121F27; text-decoration: none;}
 			
-			.inputHeader {
-	        	width: 100%;
-				height: 50px;
-	        	line-height: 50px;
-	        	font-family: "bareun";
-	            background: #121F27;
-				margin-top: 5px;
-				color: white;
-				text-align: center;
-				font-size: 13px;
-				padding: 0px;
-				margin-left: 10px;
-	        }
-	        
-	        .inputTag {
-				width: 100%;
-				height: 50px;
-	        	line-height: 50px;
-	        	font-family: "bareun";
-	            background: white;
-	            border: 0px;
-	            outline:none;
-				margin-top: 5px;
-				color: black;
-				text-align: center;
-				font-size: 13px;
-				padding: 0px;
-				margin-left: -10px;
-	        }
-
-	        #mUpdate {
-	            width: 100%;
-	            height: 50px;
-	            font-size: 16px;
-	            border: 0px;
-	            background-color: #FF8000;
-	            color: white;
-	            font-family: "bareun";
-	            margin-top: 50px;
-	            margin-bottom: 20px;
-	        }
-	        
-	        .comment{
-	        	font-family: "bareun";
-	        	text-align: left;
-	            font-size: 11px;
-	            margin-top: 10px;
-	        }
-	        
+			.inputHeader,.inputTag{line-height:50px;margin-top:5px;text-align:center;font-size:13px;padding:0;}
+			#mUpdate,.inputTag{width:100%;height:50px;border:0;font-family:bareun;}
+			#mUpdate,.comment,.inputHeader,.inputTag{font-family:bareun;}
+			.inputHeader{width:100%;height:50px;background:#121F27;color:#fff;margin-left:10px;}
+			.inputTag{background:#fff;outline:0;color:#000;margin-left:-10px;}
+			#mUpdate{font-size:16px;background-color:#FF8000;color:#fff;margin-top:50px;margin-bottom:20px;}
+			.comment{text-align:left;font-size:11px;margin-top:10px;}
 		</style>
 	</head>
-
 	<body>
 		<jsp:include page="menubar.jsp"/>
 		

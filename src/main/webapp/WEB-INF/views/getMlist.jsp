@@ -19,7 +19,6 @@
 		.submenubar_button{margin-right:10px;}
 		.submenubar_button_last{margin-right:3%;}
     
-    
         body { padding-top: 100px; }
         .content { font-family: "bareun"; text-align: center; margin-bottom: 50px; }
         th { font-family: "NanumM"; text-align: center; background: #121F27; color: white; border: 1px solid white; height: 25px; line-height: 25px; }
@@ -29,17 +28,13 @@
         .page-link { font-family: "bareun"; }
         th>input[type='checkbox'] { position:relative; top:-4px; }
         
-        .container {
-       		margin-top: 150px;
-       	}
+        .container { margin-top: 150px; }
        	
        	/* submenuBar 링크 글자 색상 */
 		.submenubar_button a{ color: white;}
 		.submenubar_button_last a{color: white;}
 		.submenubar_button a:hover{color: #FF8000; background-color: #121F27;text-decoration: none;}
 		.submenubar_button_last a:hover{color: #FF8000; background-color: #121F27; text-decoration: none;}
-
- 		
     </style>
 	</head>
 	<body>
@@ -84,7 +79,6 @@
 	    </div>		
 	</body>
 	<script>
-	
 	var obj = {};
 	var sPage =1;
 	var ePage = 10;
@@ -93,7 +87,6 @@
 	
 	var id = "${sessionScope.loginId}";
 	console.log(id);
-	
 	
 	listCall();
 	adminCK(); 
@@ -129,7 +122,8 @@
 		obj.success=function(data){
 			console.log(data.GmessageList);
 			listPrint(data.GmessageList); 
-			page = data.listAll;
+			console.log(listPrint);
+			page = data.GmessageList.length;
 			if(ePage >= page){
 				$("#next").addClass('disabled');
 			}else{
@@ -165,32 +159,26 @@
 		});
 			$("#list").empty();
 			$("#list").append(content);
-
 	}
 	
-	
-	
-	
-	//다음 버튼 클릭시 
-	$("#next").click(function(){
-		 if($("#next").attr('class') != "page-item disabled"){
-			sPage +=10;
-			ePage +=10;
-			listCall();
-		 }
-	});
-	
-	//이전 버튼 클릭시 
-	$("#pre").click(function(){
-		 if($("#pre").attr('class') != "page-item disabled"){
-			//이전 목록 활성화 시키기
-			sPage -=10;
-			ePage -=10;
-			listCall();
-		 }
-	});
-	
-	
+		// 다음 버튼 클릭시 
+		$("#next").click(function(){
+			 if($("#next").attr('class') != "page-item disabled"){
+				sPage +=10;
+				ePage +=10;
+				listCall();
+			 };
+		});
+
+		//이전 버튼 클릭시 
+		$("#pre").click(function(){
+			 if($("#pre").attr('class') != "page-item disabled"){
+				//이전 목록 활성화 시키기
+				sPage -=10;
+				ePage -=10;
+				listCall();
+			 }
+		});
 	
 	//체크박스 전체 선택 
 	 function allChk(obj){
@@ -202,7 +190,6 @@
 				for (var i=0; i<=rowCnt; i++){
 					if(chkObj[i].type == "checkbox")
 						chkObj[i].checked = true;
-					
 					}
 			}else{
 				for (var i=0; i<=rowCnt; i++) {
@@ -212,48 +199,45 @@
 					}
 				}
 			} 
-	
-	$("#del").click(function(){
-		var con_check = confirm("정말 삭제하시겠습니까?");
-		if(con_check ==true){
-			obj.url = "./messagedelete";
-			var checked = [];
-			
-			$("input[name='RowCheck']:checked").each(function(){
-				checked.push($(this).val());
-			});
-			console.log(checked);
-			obj.data={
-					"Chkdel":checked
-					
-			};
-			
-			obj.success = function(data){	
-				if(data.success){
-						alert("삭제 되었습니다.");
+		
+		$("#del").click(function(){
+			var con_check = confirm("정말 삭제하시겠습니까?");
+			if(con_check ==true){
+				obj.url = "./messagedelete";
+				var checked = [];
+				
+				$("input[name='RowCheck']:checked").each(function(){
+					checked.push($(this).val());
+				});
+				console.log(checked);
+				obj.data={
+						"Chkdel":checked
+				};
+				obj.success = function(data){	
+					if(data.success){
+							alert("삭제 되었습니다.");
+							location.href = "./pageMove?page=getMlist";
+					}else{
+						alert("삭제되지 않았습니다.");
 						location.href = "./pageMove?page=getMlist";
-				}else{
-					alert("삭제되지 않았습니다.");
-					location.href = "./pageMove?page=getMlist";
+					}
 				}
+				ajaxCall(obj);
+			}else{
+				alert("삭제되지 않았습니다.");
 			}
-			ajaxCall(obj);
-		}else{
-			alert("삭제되지 않았습니다.");
+		});
+	
+		function dateForm(now) {
+			year = "" + now.getFullYear();
+			month = "" + (now.getMonth() + 1); if (month.length == 1) { month = "0" + month; }
+			day = "" + now.getDate(); if (day.length == 1) { day = "0" + day; }
+			hour = "" + now.getHours(); if (hour.length == 1) { hour = "0" + hour; }
+			minute = "" + now.getMinutes(); if (minute.length == 1) { minute = "0" + minute; }
+			second = "" + now.getSeconds(); if (second.length == 1) { second = "0" + second; }
+			return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
 		}
+	
 
-	});
-	
-	
-	function dateForm(now){
-		year = "" + now.getFullYear();
-		month = "" + (now.getMonth() + 1); if (month.length == 1) { month = "0" + month; }
-		day = "" + now.getDate(); if (day.length == 1) { day = "0" + day; }
-		hour = "" + now.getHours(); if (hour.length == 1) { hour = "0" + hour; }
-		minute = "" + now.getMinutes(); if (minute.length == 1) { minute = "0" + minute; }
-		second = "" + now.getSeconds(); if (second.length == 1) { second = "0" + second; }
-		return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
-	}
-	
 	</script>
 </html>

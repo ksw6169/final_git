@@ -15,7 +15,6 @@
 		    	}
 		    }
 		</script>
-	
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
    	 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -46,11 +45,13 @@
 			.button_group, .div_dont{background-color:#121F27;color:#fff;font-family:bareun; }
 			.button_group{width:100%;height:50%;border:.25px solid #fff; }
 			.div_dont, .td_star{width:100px;line-height:75px; }
-			.div_dont{height:75px;border:1px solid #E4EEF0; }
+			.div_dont{height:100%;border:1px solid #E4EEF0;  display: table;}
+			.div_sub{display: table-cell; vertical-align: middle;}		
 			.star_grade{height:15px; }
 			.td_star{color:#121F27;background-color:#FFF;height:75px;text-align:center;vertical-align:middle; }
 			
-			.container{margin-top:150px; }			
+			.container{margin-top:150px; }	
+			
     	</style>
   </head>
   <body>  
@@ -170,7 +171,7 @@
 		        	 }else if("${sessionScope.member_div}"=="관리자"){
 		        		 content+="<button class='div_dont pull-right' onclick='commentDelete("+list[i].evaluation_no+")'''>삭제</button>";
 		        	 }else{
-		        		 content+="<div class='div_dont'>수정 불가</div>";
+		        		 content+="<div class='div_dont'><span class='div_sub'>수정 불가</span></div>";
 		        	 }
 					 content += "</td>";
 					 content += "</tr>";

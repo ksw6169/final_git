@@ -35,7 +35,7 @@
 	 	UPDATE member
 	 	<set>
 	 		<if test="pw!=''">member_pw = #{pw},</if>
-	 		<if test="faily!=''">member_family = #{family},</if>
+	 		<if test="family!=''">member_family = #{family},</if>
 	 		<if test="email!=''">member_email = #{email}</if>
 	 	</set>
 	 	WHERE member_id = #{id}
@@ -72,4 +72,14 @@
 	 <update id="memAcceptNo">
 	 	UPDATE member SET member_capture = null, member_div = '인턴', member_cert = 'N' WHERE member_id = #{param1}
 	 </update>
+	 
+	 <!-- 비밀번호 찾기 -->
+	<select id="findPw" parameterType="String" resultType="String">
+		SELECT member_email FROM member WHERE member_id = #{param1}
+	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="pwChange">
+		UPDATE member SET member_pw = #{param2} WHERE member_id = #{param1}
+	</update>
 </mapper>

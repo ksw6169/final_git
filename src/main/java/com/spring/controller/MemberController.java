@@ -228,4 +228,13 @@ public class MemberController {
 			return map;
 		}
 	}
+	
+	/* 비밀번호 찾기 */
+	@RequestMapping(value = "/findPw")
+	public @ResponseBody HashMap<String, Object> findPw(@RequestParam Map<String, String> params) {
+		logger.info("비밀번호 찾기 요청");
+		System.out.println(params.get("find_id"));
+		System.out.println(params.get("find_email"));
+		return service.findPw(params);
+	}
 }

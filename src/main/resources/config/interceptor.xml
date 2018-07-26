@@ -18,6 +18,7 @@
 			
 			<!-- 제외할 페이지 -->
 			<mvc:exclude-mapping path="/"/>
+			<mvc:exclude-mapping path="/findPw"/>
 			<mvc:exclude-mapping path="/likeCount"/>
 			<mvc:exclude-mapping path="/like"/>
 			<mvc:exclude-mapping path="/kimSayWrite"/>	
@@ -32,6 +33,7 @@
 			<mvc:exclude-mapping path="/iJoinForm"/>
 			<mvc:exclude-mapping path="/dJoinForm"/>
 			<mvc:exclude-mapping path="/resources/**"/>
+			
 			<!-- 인터셉터 한 내용에 대한 클래스 매핑 -->
 			<bean class="com.spring.service.LoginCheck"></bean>
 		</mvc:interceptor>

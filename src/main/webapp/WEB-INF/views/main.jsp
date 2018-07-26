@@ -12,19 +12,18 @@
 	        body { padding-top: 70px; }
 	        img { margin-left: 0px; width: 70px; height: 40px; }
 	     
-	        .main_top { width: 100%; height: 62%; background-size:cover; }
-	        .main_bottom { width: 100%; height: 32%; background-size:cover; }
-	        .content { background: #3C3F41 bottom fixed; background-size:cover; height: 100px; }
+	        .main_top { width: 100%; background-size:cover; }
+	        .main_bottom { width: 100%; background-size:cover; } */
+	        .content { float: left; background: #3C3F41 bottom fixed; background-size:cover; height: 100px; }
 	        
-	        footer { padding: 40px 0; color: #fff; font-family: "NanumL"; font-size: 12px;}
-	        
+	        footer { padding: 40px 0; color: #fff; font-family: "NanumL"; font-size: 12px; background-color: #616161; color: white;}
 		</style>
 	</head>
 	<body>
 	    <jsp:include page="menubar.jsp" flush="false"/>
 	    
-	    <img class="img-fluid main_top" src="./resources/image/main_image.png"/>
-	    <img class="img-fluid main_bottom" src="./resources/image/main_bottom.png"/>
+	    <img class="img-fluid main_top img-responsive" src="./resources/image/main_image.png"/>
+	    <img class="img-fluid main_bottom img-responsive" src="./resources/image/main_bottom.png"/>
 	    
 	    <footer class="content">
 	        <div class="container">

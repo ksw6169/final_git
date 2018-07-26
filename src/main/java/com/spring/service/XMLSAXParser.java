@@ -118,6 +118,14 @@ public class XMLSAXParser extends DefaultHandler {
 			sBuffer.append(new String(str,start,len));
 			System.out.println("API 에러 : "+sBuffer.toString().trim());
 		}
+		if(this.startTagName.equals("returnAuthMsg")) {
+			sBuffer.append(new String(str,start,len));
+			System.out.println("API 에러 내용 : "+sBuffer.toString().trim());
+		}
+		if(this.startTagName.equals("returnReasonCode")) {
+			sBuffer.append(new String(str,start,len));
+			System.out.println("API 에러 코드 : "+sBuffer.toString().trim());
+		}
 	}
 
 	// parse

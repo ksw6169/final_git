@@ -10,43 +10,43 @@
       <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
       <script src="./resources/js/bootstrap.min.js"></script>
        
-      <title>bootstrap</title>
+      <title>대리와 인턴 사이, 은밀하게 시원하게 - 김과장이 왜그럴까</title>
 
        <!-- Bootstrap -->
        <link href="./resources/css/bootstrap.min.css" rel="stylesheet">
        <link href="./resources/css/kfonts2.css" rel="stylesheet">
        <link href="./resources/css/custom.css" rel="stylesheet">
       
-    <style>
-      	/* submenubar css */
-       .submenubar_background{position:absolute;width:100%;height:100px;background-color:#E4EEF0}
-       .submenubar_header{font-family:fallM;margin-left:40px;width:150px;height:50px;display:inline-block;margin-top:30px;float:left;}
-       td.submenubar_name{font-family:"fallM"; font-size:30px;color:#121F27; background-color: #E4EEF0; border: 1px solid #E4EEF0; }
-       .submenubar_detail{font-size:10px;margin-left:5px;}
-       .submenubar_description{font-size:10px;height:15px;margin-top:10px;}
-       .submenubar_button,.submenubar_button_last{width:130px;height:50px;line-height:50px;color:#fff;font-family:fallM;font-size:15px;text-align:center;
-         margin-top:25px;float:right;background-color:#121F27;cursor:pointer;}
-       .submenubar_button{margin-right:10px;}
-       .submenubar_button_last{margin-right:3%};
-    	
-    	/* main css */
-        body { padding-top: 70px; text-align: center;}
-    	.container{margin-top:150px;margin-bottom:50px;padding-top:25px;padding-bottom:25px;background:#E4EEF0;}
-    	.inputHeader,.inputTag{font-family:bareun;margin-top:5px;text-align:center;font-size:13px;padding:0;width:100%;height:50px;line-height:50px;}
-    	.content{font-family:bareun;text-align:center;margin-bottom:50px;}
-    	.inputHeader{background:#121F27;color:#fff;margin-left:10px;}
-    	.inputTag{background:#fff;border:0;outline:0;color:#000;margin-left:-10px;}
-    	.bord{font-family:fallB;}
-    	.out_btn{width:100%;height:50px;line-height:50px;font-size:16px;margin:30px 0 20px;border:0;background-color:#121F27;color:#fff;font-family:bareun;}
-		
-		/* submenuBar 링크 글자 색상 */
-		.submenubar_button a{ color: white;}
-		.submenubar_button_last a{color: white;}
-		.submenubar_button a:hover{color: #FF8000; background-color: #121F27;text-decoration: none;}
-		.submenubar_button_last a:hover{color: #FF8000; background-color: #121F27; text-decoration: none;}
-		.submenubar_button a:active{color: #FF8000; background-color: #121F27;text-decoration: none;}
-		.submenubar_button_last a:active{color: #FF8000; background-color: #121F27;text-decoration: none;}
-    </style>
+	    <style>
+	      	/* submenubar css */
+	       .submenubar_background{position:absolute;width:100%;height:100px;background-color:#E4EEF0}
+	       .submenubar_header{font-family:fallM;margin-left:40px;width:150px;height:50px;display:inline-block;margin-top:30px;float:left;}
+	       td.submenubar_name{font-family:"fallM"; font-size:30px;color:#121F27; background-color: #E4EEF0; border: 1px solid #E4EEF0; }
+	       .submenubar_detail{font-size:10px;margin-left:5px;}
+	       .submenubar_description{font-size:10px;height:15px;margin-top:10px;}
+	       .submenubar_button,.submenubar_button_last{width:130px;height:50px;line-height:50px;color:#fff;font-family:fallM;font-size:15px;text-align:center;
+	         margin-top:25px;float:right;background-color:#121F27;cursor:pointer;}
+	       .submenubar_button{margin-right:10px;}
+	       .submenubar_button_last{margin-right:3%};
+	    	
+	    	/* main css */
+	        body { padding-top: 70px; text-align: center;}
+	    	.container{margin-top:150px;margin-bottom:50px;padding-top:25px;padding-bottom:25px;background:#E4EEF0;}
+	    	.inputHeader,.inputTag{font-family:bareun;margin-top:5px;text-align:center;font-size:13px;padding:0;width:100%;height:50px;line-height:50px;}
+	    	.content{font-family:bareun;text-align:center;margin-bottom:50px;}
+	    	.inputHeader{background:#121F27;color:#fff;margin-left:10px;}
+	    	.inputTag{background:#fff;border:0;outline:0;color:#000;margin-left:-10px;}
+	    	.bord{font-family:fallB;}
+	    	.out_btn{width:100%;height:50px;line-height:50px;font-size:16px;margin:30px 0 20px;border:0;background-color:#121F27;color:#fff;font-family:bareun;}
+			
+			/* submenuBar 링크 글자 색상 */
+			.submenubar_button a{ color: white;}
+			.submenubar_button_last a{color: white;}
+			.submenubar_button a:hover{color: #FF8000; background-color: #121F27;text-decoration: none;}
+			.submenubar_button_last a:hover{color: #FF8000; background-color: #121F27; text-decoration: none;}
+			.submenubar_button a:active{color: #FF8000; background-color: #121F27;text-decoration: none;}
+			.submenubar_button_last a:active{color: #FF8000; background-color: #121F27;text-decoration: none;}
+	    </style>
    </head>
    <body>
       <jsp:include page="menubar.jsp" flush="false"/>

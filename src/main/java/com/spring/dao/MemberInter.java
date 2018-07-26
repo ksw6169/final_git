@@ -19,4 +19,6 @@ public interface MemberInter {
 	int memAcceptListCnt();	//회사 승인 리스트 전체 갯수
 	int memAcceptOk(String id);	//회사 인증 승인
 	int memAcceptNo(String string); //회사 인증 거부
+	String findPw(String id);	// 비밀번호 찾기
+	int pwChange(String find_id, String hash);
 }

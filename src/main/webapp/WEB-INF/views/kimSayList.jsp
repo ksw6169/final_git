@@ -33,213 +33,91 @@
 	 		a:visited { color: #121F27; text-decoration: none;}
 	 		a:hover { color: #121F27; text-decoration: none;}
 			
-			.thumbnail_header {
-				text-align: center;
-				vertical-align: middle;
-				width: 100%;
-				height: 250px;
-				font-size: 15px;
-				font-family: "bareun";
-				border: 0.25px solid #DDDDDD;
-				background-color: #121F27;
-				color: white;
-			}
-			
-			
-			.caption_detail {
-				margin: 0 auto;
-				float: left;
-				width: 33.3%;
-				height: 50px;
-				text-align: center;
-				font-family: "fallM";
-				font-size: 12px;
-				background-color: #E4EEF0;
-				white-space: pre-line;
-				padding-top: 7px;
-				border: 0.25px solid #DDDDDD;
-			}
-			
-			.thumbnail {
-				height: 335px;
-			}
-			
-			.thumbnail_contents {
-				width: 100%;
-				height: 200px;
-				margin-top: 105px;
-				text-align: center;
-				white-space: pre-line;
-			}
-			
-			.search_div {
-				margin-top: 50px;
-				margin-bottom: 150px;
-				text-align: center;
-				width: 530px;
-			}
-			
-			input[type='text'] {
-	            font-size:13px;
-	            padding:10px;
-	            width: 350px;
-	            height: 50px;
-	            line-height: 40px;
-	            outline:none;
-	            margin: 5px 0;
-	            display: inline;
-	            float: left;
-	        }
-			
-			.search_btn {
-	          font-family: "bareun";
-	          color: #fff;
-	          background-color: #121F27;
-	          width: 75px;
-	          height: 50px;
-	          font-size: 14px;
-			  float: left;
-			  margin: 5px 0 5px 0;
-	          border: 0px;
-	        }
-			
-			/* 정렬 버튼 */
-			.align_btn {
-	          font-family: "bareun";
-	          color: black;
-	          background-color: #E4EEF0;
-			  width: 45%;
-	          height: 50px;
-	          line-height: 50px;
-	          font-size: 14px;
-			  margin-right: 5px;
-			  margin-left: 3%;
-	          border: 0px;
-	          margin-bottom: 50px;
-	          text-align: center;
-	          font-size: 16px;
-	          display: inline-block;
-	          cursor: pointer;
-			}
-			
-			.page-link {
-				width: 200px;
-			}
-			
-			.custom_select {
-				width: 100%; /* 원하는 너비설정 */ 
-				height: 50px;
-				line-height: 50px;
-				font-family: "fallM"; /* 폰트 상속 */ 
-				border: 0px;
-				border-radius: 0px; /* iOS 둥근모서리 제거 */
-				appearance: none;
-				display: inline-block;
-			  	margin: 0px 5px 0px 0;
-			  	float: left;
-			  	font-size: 14px;
-			  	color: white;
-			}
-			
-			.custom_select2 {
-				width: 100px; /* 원하는 너비설정 */ 
-				height: 50px;
-				font-family: "fallM"; /* 폰트 상속 */ 
-				border: 0px;
-				border-radius: 0px; /* iOS 둥근모서리 제거 */ 
-				appearance: none;
-				display: inline-block;
-			  	margin: 5px 5px 5px 0;
-			  	float: left;
-			  	color: white;
-			}
-			
-			
-			.caption_date {
-				margin: 0 auto;
-				float: left;
-				width: 100%;
-				height: 25px;
-				line-height: 25px;
-				text-align: center;
-				font-family: "fallM";
-				font-size: 12px;
-				background-color: #E4EEF0;
-				white-space: pre-line;
-				border: 0.25px solid #DDDDDD;
-			}
-			
-			.container {
-				margin-top: 100px;
-			}
+			.caption_detail,.thumbnail_header{border:.25px solid #DDD;text-align:center;}
+			.thumbnail_header{vertical-align:middle;width:100%;height:250px;font-size:15px;font-family:bareun;background-color:#121F27;color:#fff;}
+			.caption_detail{margin:0 auto;float:left;width:33.3%;height:50px;font-family:fallM;font-size:12px;background-color:#E4EEF0;white-space:pre-line;padding-top:7px;}
+			.align_btn,.search_btn{font-family:bareun;}
+			.thumbnail{height:335px;}
+			.thumbnail_contents{width:100%;height:200px;margin-top:105px;text-align:center;white-space:pre-line;}
+			.search_div{margin-top:50px;margin-bottom:150px;text-align:center;width:530px;}
+			input[type=text]{font-size:13px;padding:10px;width:350px;height:50px;line-height:40px;outline:0;margin:5px 0;display:inline;float:left;}
+			.align_btn,.custom_select{line-height:50px;border:0;}
+			.search_btn{color:#fff;background-color:#121F27;width:75px;height:50px;font-size:14px;float:left;margin:5px 0;border:0;}
+			.align_btn,.caption_date{text-align:center;background-color:#E4EEF0;}
+			.align_btn{color:#000;width:45%;height:50px;margin-right:5px;margin-left:3%;margin-bottom:50px;font-size:16px;display:inline-block;cursor:pointer;}
+			.custom_select,.custom_select2{height:50px;appearance:none;display:inline-block;color:#fff;float:left;font-family:fallM;}
+			.page-link{width:200px}.custom_select{width:100%;border-radius:0;margin:0 5px 0 0;font-size:14px;}
+			.custom_select2{width:100px;border:0;border-radius:0;margin:5px 5px 5px 0;}
+			.caption_date{margin:0 auto;float:left;width:100%;height:25px;line-height:25px;font-family:fallM;font-size:12px;white-space:pre-line;border:.25px solid #DDD;}
+			.container{margin-top:100px;}
     	</style>
-  </head>
-<body>
-	<jsp:include page="menubar.jsp"/>
+  	</head>
+	<body>
+		<jsp:include page="menubar.jsp"/>
 
-    <div class="submenubar_background">
-        <div class="submenubar_header">
-            <table>
-                <tr>
-                    <td class="submenubar_name">김대리의 한마디<b class="submenubar_detail">오늘도 수고한 대리들의 뒷이야기</b></td>
-                </tr>
-                <tr>
-                    <td class="submenubar_description">*대리 회원(직장인 회원)만 글 작성, 열람이 가능합니다.</td>
-                </tr>
-            </table>
-        </div>
-		<span class="submenubar_button_last">
-			<select id="job_no" name="category" class="custom_select"> 
-				<option value="1" style="text-align: center;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;경영, 사무, 금융, 보험직</option> 
-				<option value="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;연구직 및 공학기술직</option> 
-				<option value="3">&nbsp;&nbsp;교육, 법률, 사회복지, 경찰, 소방직 및 군인</option> 
-				<option value="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;보건, 의료직</option>
-				<option value="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예술, 디자인, 방송, 스포츠직</option>
-				<option value="6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;미용, 여행, 숙박, 음식, 경비, 청소직</option>
-				<option value="7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;영업, 판매, 운전, 운송직</option>
-				<option value="8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;건설, 채굴직</option>
-				<option value="9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;설치, 정비, 생산직</option>
-				<option value="10">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;농림어업직</option>
-			</select>
-		</span>
-        <span id="write" class="submenubar_button" onclick="writeForm()">글 작성</span>
-    </div>
-
-	<div class="container">
-		<div class="center-block search_div">
+	    <div class="submenubar_background">
+	        <div class="submenubar_header">
+	            <table>
+	                <tr>
+	                    <td class="submenubar_name">김대리의 한마디<b class="submenubar_detail">오늘도 수고한 대리들의 뒷이야기</b></td>
+	                </tr>
+	                <tr>
+	                    <td class="submenubar_description">*대리 회원(직장인 회원)만 글 작성, 열람이 가능합니다.</td>
+	                </tr>
+	            </table>
+	        </div>
+			<span class="submenubar_button_last">
+				<select id="job_no" name="category" class="custom_select"> 
+					<option value="1" style="text-align: center;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;경영, 사무, 금융, 보험직</option> 
+					<option value="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;연구직 및 공학기술직</option> 
+					<option value="3">&nbsp;&nbsp;교육, 법률, 사회복지, 경찰, 소방직 및 군인</option> 
+					<option value="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;보건, 의료직</option>
+					<option value="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예술, 디자인, 방송, 스포츠직</option>
+					<option value="6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;미용, 여행, 숙박, 음식, 경비, 청소직</option>
+					<option value="7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;영업, 판매, 운전, 운송직</option>
+					<option value="8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;건설, 채굴직</option>
+					<option value="9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;설치, 정비, 생산직</option>
+					<option value="10">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;농림어업직</option>
+				</select>
+			</span>
+	        <span id="write" class="submenubar_button" onclick="writeForm()">글 작성</span>
+	    </div>
+	
+		<div class="container">
+			<div class="center-block search_div">
+				
+				<select id="category" class="custom_select2"> 
+					<option value="잡담" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;잡담</option> 
+					<option value="이직">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이직</option> 
+					<option value="업무질문">&nbsp;&nbsp;업무 질문</option>
+				</select>
+				
+				<input id="search_text" type="text" placeholder="검색어를 입력해주세요.">
+				<button class="search_btn" onclick="kimSaySearch()">검색</button>
+			</div>
 			
-			<select id="category" class="custom_select2"> 
-				<option value="잡담" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;잡담</option> 
-				<option value="이직">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이직</option> 
-				<option value="업무질문">&nbsp;&nbsp;업무 질문</option>
-			</select>
-			
-			<input id="search_text" type="text" placeholder="검색어를 입력해주세요.">
-			<button class="search_btn" onclick="kimSaySearch()">검색</button>
-		</div>
-		
-		<!-- 추천순, 조회순 정렬 버튼 -->
-		<div class="row">
-			<div class="col-md-6 col-md-push-3">
-				<div class="col-md-12">
-					<div id="likeBtn" class="align_btn">추천순</div>
-					<div id="hitBtn" class="align_btn">조회순</div>
+			<!-- 추천순, 조회순 정렬 버튼 -->
+			<div class="row">
+				<div class="col-md-6 col-md-push-3">
+					<div class="col-md-12">
+						<div id="likeBtn" class="align_btn">추천순</div>
+						<div id="hitBtn" class="align_btn">조회순</div>
+					</div>
 				</div>
 			</div>
+			
+			<div id="pagingAdd"></div>
+	    </div>
+	    <div class="container-fluid">
+			<div class="paging_button">
+			  <ul class="pagination pagination-lg">
+			    <li class="page-item disabled">
+			      <a id="more" class="page-link" href="#" tabindex="-1">더보기</a>
+			    </li>
+			  </ul>
+			</div>
 		</div>
-		
-		<div id="pagingAdd"></div>
-    </div>
-    <div class="container-fluid">
-		<div class="paging_button">
-		  <ul class="pagination pagination-lg">
-		    <li class="page-item disabled">
-		      <a id="more" class="page-link" href="#" tabindex="-1">더보기</a>
-		    </li>
-		  </ul>
-		</div>
-	</div>
-</body>
+	</body>
 	<script>
 		/* 회원 권한 & 페이징 변수 */
 	    var member_div = "${sessionScope.member_div}";		

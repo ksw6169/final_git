@@ -237,7 +237,7 @@ public class CompanyService {
 	      long startTime= System.currentTimeMillis();
 	      //파라메터 - company_name -> saxParser(약 17초)
 	    //파라메터 - company_name, null -> domParser(약 20초)
-	      ArrayList<CompanyDTO> companyList = openAPIList(company_name,null);
+	      ArrayList<CompanyDTO> companyList = openAPIList(company_name);
 	      long endTime=System.currentTimeMillis();
 	      logger.info("openAPIList 종료!");
 	      logger.info("경과시간 : "+(endTime-startTime)/1000.0+" 초");

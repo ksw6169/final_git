@@ -7,7 +7,6 @@
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
    	 	<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-      
 		<style>
 			/* submenubar css */
 			.submenubar_background{position:absolute;width:100%;height:100px;background-color:#E4EEF0;}
@@ -21,13 +20,7 @@
 			.submenubar_button_last{margin-right:100px;}
 			
 			/* CSS 수정(0719_성원) */
-			.container {
-	        	margin-top: 150px;
-	        	margin-bottom: 50px;
-	            padding-top: 25px;
-	            padding-bottom: 25px;
-	            background: #E4EEF0;
-	        }
+			.container{margin-top:150px;margin-bottom:50px;padding-top:25px;padding-bottom:25px;background:#E4EEF0;}
 	        .table { width: 100%; }
 	        .table>tbody>tr>th { font-family: "fallM"; text-align: center; background: #121F27; color: white; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; }
 			.table>tbody>tr>td { font-family: "fallM"; text-align: center; background: white; color: #121F27; border: 1px solid #E4EEF0; height: 25px; line-height: 25px; }
@@ -36,8 +29,8 @@
 	        button:hover { color: #121F27; }
 			#capture{ margin: 0px; width: 100%; height: auto; }
     	</style>
-  </head>
-  <body>
+  	</head>
+  	<body>
 		<jsp:include page="menubar.jsp"/>
   
 	    <div class="submenubar_background">
@@ -71,23 +64,23 @@
 					</table>
                 </div>
 			</div>
-		<div class="row">
-			<div class="col-md-10 col-md-push-1">
-				<div class="col-md-2 pull-right">
-					<button id="back" class="btn btn-default">목록</button>
+			<div class="row">
+				<div class="col-md-10 col-md-push-1">
+					<div class="col-md-2 pull-right">
+						<button id="back" class="btn btn-default">목록</button>
+					</div>
+					<div class="col-md-4 col-md-push-4">
+						<div class="col-md-6">
+	                		<button id="ok" class="btn btn-default">승인</button>
+	                	</div>
+	                	<div class="col-md-6">
+	                		<button id="no" class="btn btn-default">거절</button> 
+	                	</div>
+	                </div>
 				</div>
-				<div class="col-md-4 col-md-push-4">
-					<div class="col-md-6">
-                		<button id="ok" class="btn btn-default">승인</button>
-                	</div>
-                	<div class="col-md-6">
-                		<button id="no" class="btn btn-default">거절</button> 
-                	</div>
-                </div>
 			</div>
 		</div>
-	</div>
-</body>
+	</body>
 	<script>
 		$("#capture").click(function(){
 			window.open("${path}", "이미지", "width=800, height=700, toolbar=no, menubar=no, scrollbars=yes, resizable=yes" ); 

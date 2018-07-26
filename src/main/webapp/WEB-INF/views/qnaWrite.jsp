@@ -7,7 +7,6 @@
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
    	 	<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-      
 		<style>
 			/* submenubar css */
 			.submenubar_background{position:absolute;width:100%;height:100px;background-color:#E4EEF0;}
@@ -16,7 +15,7 @@
 			.submenubar_detail{font-size:12px;margin-left:5px;color:#323838;}
 			.submenubar_description{font-family: "fallM"; background-color: #E4EEF0; border: 1px solid #E4EEF0; font-size:12px;height:15px;margin-top:10px;color:#121F27;}
 			.submenubar_button,.submenubar_button_last{width:120px;height:50px;line-height:50px;color:#fff;font-family:fallM;font-size:15px;text-align:center;margin-top:25px;float:right;background-color:#121F27;cursor:pointer;}
-			.submenubar_button{margin-right:10px;}
+			.submenubar_button{margin-right:50px;}
 			.submenubar_button_last{margin-right:100px;}
 			
 	        .btn { width: 120px; height: 40px; background-color: #FF8000; border: none; vertical-align: middle; color:#fff; font-family: "fallB"; text-align: center; display: inline-block; font-size: 12px; }    
@@ -33,65 +32,57 @@
 			.table>tbody>tr>td.write_content { background-color: #E4EEF0; padding: 0px; }
 	        .detail_div { margin-top: 50px;}
 	        .table_div { background-color: #E4EEF0; padding: 50px; text-align: center;}
-			.form-control { padding: 7px 12px; }
-			.button_group {
-				width: 100px;
-				height: 37.5px;
-				background-color: white;
-				color: #121F27;
-				border: 0.25px solid #DDDDDD;
-			}
-			
-			.container {
-				margin-top: 100px;
-			}
+			.form-control { padding: 7px 12px;}
+			.button_group{width:100px;height:37.5px;background-color:#fff;color:#121F27;border:.25px solid #DDD;}
+			.container{margin-top:100px;}
+			#list{margin-bottom:50px;}
     	</style>
-  </head>
-  <body>
-  <jsp:include page="menubar.jsp"/>
+  	</head>
+  	<body>
+	  	<jsp:include page="menubar.jsp"/>
+	  
+	    <div class="submenubar_background">
+	        <div class="submenubar_header">
+	            <table>
+	                <tr>
+	                    <td class="submenubar_name">모르면 물어봐<b class="submenubar_detail">정규직을 향한 인턴들의 폭풍 질문</b></td>
+	                </tr>
+	                <tr>
+	                    <td class="submenubar_description">*대리 회원(직장인 회원)과 인턴 회원(비직장인 회원) 전부 글 작성, 열람이 가능합니다.</td>
+	                </tr>
+	            </table>
+	        </div>
+	        <span class="submenubar_button_last">글 작성</span>
+	    </div>
   
-    <div class="submenubar_background">
-        <div class="submenubar_header">
-            <table>
-                <tr>
-                    <td class="submenubar_name">모르면 물어봐<b class="submenubar_detail">정규직을 향한 인턴들의 폭풍 질문</b></td>
-                </tr>
-                <tr>
-                    <td class="submenubar_description">*대리 회원(직장인 회원)과 인턴 회원(비직장인 회원) 전부 글 작성, 열람이 가능합니다.</td>
-                </tr>
-            </table>
-        </div>
-        <span class="submenubar_button_last">글 작성</span>
-    </div>
-  
-  <div class="container">
-        <div class="detail_div">
-        <form id="sendForm" method="post">
-            <div class="table_div">
-                <table class="table">
-                     <input name="member_id" type="hidden" value="${sessionScope.loginId}"/>
-                     <input name="board_category" type="hidden" value="물어봐"/>
-                     <tr>
-                       <th>제목</th>
-                       <td class="subject"><textarea name="board_title" id="title_textarea" onKeyPress="javascript: if (event.keyCode==13) return false;" class="form-control subject" rows="1" placeholder="제목을 입력해주세요." style="padding-bottom: 11px;"></textarea></td>
-                     </tr>
-                     <tr>
-                       <th colspan="2">내용</th>
-					 </tr>
-					<tr>
-						<td class="write_content" colspan="2"><textarea name="board_content" id="content_textarea" class="form-control" rows="15" placeholder="내용을 입력해주세요."></textarea></td>
-					</tr>
-                </table>
-                
-				<button id="save" class="btn btn-default pull-right">작성 완료</button>
-            </div> 
-            </form>   
-            <div class="button-group">
-                <button id="list" class="btn btn-default pull-right">목록</button>       
-            </div>
-        </div>
-    </div>
-</body>
+	  	<div class="container">
+	        <div class="detail_div">
+	        <form id="sendForm" method="post">
+	            <div class="table_div">
+	                <table class="table">
+	                     <input name="member_id" type="hidden" value="${sessionScope.loginId}"/>
+	                     <input name="board_category" type="hidden" value="물어봐"/>
+	                     <tr>
+	                       <th>제목</th>
+	                       <td class="subject"><textarea name="board_title" id="title_textarea" onKeyPress="javascript: if (event.keyCode==13) return false;" class="form-control subject" rows="1" placeholder="제목을 입력해주세요." style="padding-bottom: 11px;"></textarea></td>
+	                     </tr>
+	                     <tr>
+	                       <th colspan="2">내용</th>
+						 </tr>
+						<tr>
+							<td class="write_content" colspan="2"><textarea name="board_content" id="content_textarea" class="form-control" rows="15" placeholder="내용을 입력해주세요."></textarea></td>
+						</tr>
+	                </table>
+	                
+					<button id="save" class="btn btn-default pull-right">작성 완료</button>
+	            </div> 
+	            </form>   
+	            <div class="button-group">
+	                <button id="list" class="btn btn-default pull-right">목록</button>       
+	            </div>
+	        </div>
+	    </div>
+	</body>
 	<script>
 		$(document).ready(function() {
 	        var loginId = "${sessionScope.loginId}";
