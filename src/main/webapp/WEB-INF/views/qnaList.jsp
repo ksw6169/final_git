@@ -143,7 +143,7 @@
 			});
 		}
 		
-	    /* 게시글 리스트 출력 */
+		/* 게시글 리스트 출력 */
 		function boardPrint(list){
 			var str = "";
 			for(var i=0; i<list.length; i++) {
@@ -161,77 +161,6 @@
 			$("#pagingAdd").append(str);
 			// $(".page-link").focus();
 		}
-		$("#pagingAdd").append(str);
-		// $(".page-link").focus();
-	}
-    
-    /* 더보기 버튼 클릭 시 */
-    $("#more").click(function(){
-    	startPage += 15;
-    	endPage += 15;
-
-    	if(search_div) {
-    		qnaSearch();
-    	} else {
-    		qnaList();
-    	}
-    });
-    
-    /* 키워드 검색 */
-    function qnaSearch() {
-    	search_div = true; 
-    	startPage = 1;
-    	
-    	console.log("qnaSearch: "+startPage+"/"+endPage+"/"+align_div);
-    	
-    	if($("#search_text").val() == "") {
-    		alert("검색 키워드를 입력하세요.");
-    		setTimeout(function(){$("#search_text").focus();}, 1);
-			console.log("키워드 미입력");
-			return false;
-    	} else {
-    		$(".col-md-4").remove();
-    		$.ajax({
-    			type : "post",	
-    			url : "./qnaSearchList",
-    			data : {
-    				keyword : $("#search_text").val(),
-    				startPage : startPage,
- 					endPage : endPage,
- 					align_div: align_div
-    			},
-    			dataType : "json",
-    			success : function(data) {
-    				boardPrint(data.list);
-    				
-    				if((data.listSearchCnt)-1 >= endPage) {
-    					$(".page-item").removeClass("disabled");
-    				} else {
-    					$(".page-item").addClass("disabled");
-    				}
-    			},
-    			error : function(error) {
-    				console.log(error);
-    			}
-    		});	
-    	}
-    }
-    
-    /* 글쓰기 폼으로 이동 */
-    function writeForm() {
-    	location.href='./pageMove?page=qnaWrite';
-    }
-    
-    /* 추천순, 조회순 정렬 */
-    $(".align_btn").click(function() {
-    	if($(".col-md-4").length > 0) {	// 현재 게시글이 1개 이상일 경우, 추천/조회수 정렬 가능	
-    		if($(this).attr("id") == "likeBtn") {
-	    		$("#likeBtn").css("color", "white");
-	    		$("#likeBtn").css("background", "#FF8000");
-	    		$("#hitBtn").css("color", "black");
-	    		$("#hitBtn").css("background", "#E4EEF0");
-	    		
-	    		align_div = "like";
 	    
 	    /* 더보기 버튼 클릭 시 */
 	    $("#more").click(function(){
@@ -254,6 +183,9 @@
 	    	
 	    	if($("#search_text").val() == "") {
 	    		alert("검색 키워드를 입력하세요.");
+	    		setTimeout(function(){$("#search_text").focus();}, 1);
+				console.log("키워드 미입력");
+				return false;
 	    	} else {
 	    		$(".col-md-4").remove();
 	    		$.ajax({
