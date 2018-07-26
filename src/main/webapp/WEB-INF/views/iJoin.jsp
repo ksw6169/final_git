@@ -192,12 +192,12 @@
 			if($("#userId").val()==""){
 				alert("ID를 입력해주세요.");
 				$("#userId").focus();
+			}else if(!idReg.test(userId)){
+				alert("ID를 5~20자리 영문과 숫자로 입력해주세요.");
+				$("#userId").focus();
 			}else if(chk==false){
 				chk = false;
 				alert("ID가 중복되었습니다.");
-				$("#userId").focus();
-			}else if(!idReg.test(userId)){
-				alert("ID를 5~20자리 영문과 숫자로 입력해주세요.");
 				$("#userId").focus();
 			}else if(userPw==""){
 				alert("비밀번호를 입력해주세요.");

@@ -26,7 +26,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="loginBackground col-md-10 col-md-push-1 center-block">
-					<form action="" method="POST">
+					<form action="./login" method="POST">
 						<div class="row">
 							<div class="col-md-4 col-md-push-4 center-block"><h1 class="content">로그인</h1></div>
 						</div>
@@ -90,19 +90,19 @@
 		}
 		
 		$(document).ready(function(){
-			$("input[name='id']").focus();
+			$("input[name='id']").focus();	
 		}); 
 		
 		// 로그인
 		function login() {
 			var id = $("input[name='id']").val();
 			var pw = $("input[name='pw']").val();
-
-			if(id == "" || pw == "") {
-				alert("ID와 비밀번호를 다시 입력해주세요.");	
+			
+			/* if(id == "" || pw == "") {
+				alert("ID와 비밀번호를 입력해주세요.");	
 			} else {
 				$("form").attr("action", "./login");	
-			}
+			} */
 		}
 		
 		// 회원가입 페이지 이동
