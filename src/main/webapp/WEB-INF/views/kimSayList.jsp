@@ -231,6 +231,9 @@
 	    
 	    	if($("#search_text").val() == "") {
 	    		alert("검색 키워드를 입력하세요.");
+	    		setTimeout(function(){$("#search_text").focus();}, 1);
+				console.log("키워드 미입력");
+				return false;
 	    	} else {
 	    		$(".col-md-4").remove();
 	    		$.ajax({

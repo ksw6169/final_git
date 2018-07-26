@@ -79,140 +79,97 @@
 	    </div>		
 	</body>
 	<script>
-		var obj = {};
-		var sPage =1;
-		var ePage = 10;
-		var page = 0;
-		var readCK = "N";
-		
-		var id = "${sessionScope.loginId}";
-		console.log(id);
-		
-		listCall();
-		adminCK(); 
-		
-		obj.error=function(e){console.log(e)};
-		obj.dataType="JSON";
-		obj.type="POST";
-		
-		//ajax 실행 
-		function ajaxCall(obj){
-			$.ajax(obj)
-		};
-		
-		//관리자 접속 체크 및 공지사항 작성 버튼 활성/비활성화 
-		 function adminCK(){
-			 	var id = "${sessionScope.loginId}"
-				var div = "${sessionScope.membe_div}"
-					console.log(id +"/"+div);
-				if(id != "admin" && div != "관리자"){
-					$("#AdminWrite").show();
-				}else{
-					$("#sendM").removeClass("submenubar_button").addClass('submenubar_button_last');
-					$("#AdminWrite").hide();
-					}
-			}
-		
-		function listCall(){
-			obj.url = "./UgetmessageList";
-			obj.data = {
-					"sPage":sPage,
-					"ePage":ePage
-			};
-			obj.success=function(data){
-				console.log(data.GmessageList);
-				listPrint(data.GmessageList); 
+	var obj = {};
+	var sPage =1;
+	var ePage = 10;
+	var page = 0;
+	var readCK = "N";
 	
-				page = data.GmessageList.length;
-				if(ePage >= page){
-					$("#next").addClass('disabled');
-				}else{
-					$("#next").removeClass('disabled');
+	var id = "${sessionScope.loginId}";
+	console.log(id);
+	
+	listCall();
+	adminCK(); 
+	
+	obj.error=function(e){console.log(e)};
+	obj.dataType="JSON";
+	obj.type="POST";
+	
+	//ajax 실행 
+	function ajaxCall(obj){
+		$.ajax(obj)
+	};
+	
+	//관리자 접속 체크 및 공지사항 작성 버튼 활성/비활성화 
+	 function adminCK(){
+		 	var id = "${sessionScope.loginId}"
+			var div = "${sessionScope.membe_div}"
+				console.log(id +"/"+div);
+			if(id != "admin" && div != "관리자"){
+				$("#AdminWrite").show();
+			}else{
+				$("#sendM").removeClass("submenubar_button").addClass('submenubar_button_last');
+				$("#AdminWrite").hide();
 				}
-				if(sPage==1){
-					$("#pre").addClass('disabled');
-				}else{
-					$("#pre").removeClass('disabled');
-				}
-			};
-			ajaxCall(obj);
 		}
-		
-		//리스트 그리기
-		function listPrint(GmessageList){
-			var content ="";
-			//체크박스,번호, 제목, 작성일
-			GmessageList.forEach(function(GmessageList,message_no){
-						content += "<tr>";
-						content += "<td><input class='Chk' name='RowCheck' type='checkbox' value='"+GmessageList.message_no+"'/></td>";
-						content += "<td>"+GmessageList.message_no+"</td>";	
-						//읽은부분 텍스트 색상 변경 
-						if(GmessageList.message_read=='y'){
-							content += "<td><a style='color:black; text-decoration:none;' id='readChk' href='./UmessageDetail?message_no="+GmessageList.message_no+"''>"+GmessageList.message_content+"</a></td>";
-			   			}else{
-			   			content += "<td ><a id='readChk' href='./UmessageDetail?message_no="+GmessageList.message_no+"''>"+GmessageList.message_content+"</a></td>";
-			   			}
-						//날짜 변경 
-						var date = new Date(GmessageList.message_date);
-						content += "<td>"+dateForm(date)+"</td>";
-						content += "</tr>";
-			});
-				$("#list").empty();
-				$("#list").append(content);
-		}
-		
+	
+	function listCall(){
+		obj.url = "./UgetmessageList";
+		obj.data = {
+				"sPage":sPage,
+				"ePage":ePage
+		};
+		obj.success=function(data){
+			console.log(data.GmessageList);
+			listPrint(data.GmessageList); 
+			console.log(listPrint);
+			page = data.GmessageList.length;
+			if(ePage >= page){
+				$("#next").addClass('disabled');
+			}else{
+				$("#next").removeClass('disabled');
+			}
+			if(sPage==1){
+				$("#pre").addClass('disabled');
+			}else{
+				$("#pre").removeClass('disabled');
+			}
+		};
+		ajaxCall(obj);
+	}
+	
+	//리스트 그리기
+	function listPrint(GmessageList){
+		var content ="";
+		//체크박스,번호, 제목, 작성일
+		GmessageList.forEach(function(GmessageList,message_no){
+					content += "<tr>";
+					content += "<td><input class='Chk' name='RowCheck' type='checkbox' value='"+GmessageList.message_no+"'/></td>";
+					content += "<td>"+GmessageList.message_no+"</td>";	
+					//읽은부분 텍스트 색상 변경 
+					if(GmessageList.message_read=='y'){
+						content += "<td><a style='color:black; text-decoration:none;' id='readChk' href='./UmessageDetail?message_no="+GmessageList.message_no+"''>"+GmessageList.message_content+"</a></td>";
+		   			}else{
+		   			content += "<td ><a id='readChk' href='./UmessageDetail?message_no="+GmessageList.message_no+"''>"+GmessageList.message_content+"</a></td>";
+		   			}
+					//날짜 변경 
+					var date = new Date(GmessageList.message_date);
+					content += "<td>"+dateForm(date)+"</td>";
+					content += "</tr>";
+		});
+			$("#list").empty();
+			$("#list").append(content);
+	}
+	
 		// 다음 버튼 클릭시 
 		$("#next").click(function(){
 			 if($("#next").attr('class') != "page-item disabled"){
 				sPage +=10;
 				ePage +=10;
 				listCall();
-			 }
-			 
-		function listCall(){
-			obj.url = "./UgetmessageList";
-			obj.data = {
-					"sPage":sPage,
-					"ePage":ePage
-			};
-			obj.success=function(data){
-				console.log(data.GmessageList);
-				listPrint(data.GmessageList); 
-				page = data.listAll;
-				if(ePage >= page){
-					$("#next").addClass('disabled');
-				}else{
-					$("#next").removeClass('disabled');
-				}
-				if(sPage==1){
-					$("#pre").addClass('disabled');
-				}else{
-					$("#pre").removeClass('disabled');
-				}
-			};
-			ajaxCall(obj);
-		}
-	
-		//리스트 그리기
-		function listPrint(GmessageList){
-			var content ="";
-			//체크박스,번호, 제목, 작성일
-			GmessageList.forEach(function(GmessageList,message_no){
-				content += "<tr>";
-				content += "<td><input class='Chk' name='RowCheck' type='checkbox' value='"+GmessageList.message_no+"'/></td>";
-				content += "<td>"+GmessageList.message_no+"</td>";	
-				//읽은부분 텍스트 색상 변경 
-				if(GmessageList.message_read=='y'){
-					content += "<td><a style='color:black; text-decoration:none;' id='readChk' href='./UmessageDetail?message_no="+GmessageList.message_no+"''>"+GmessageList.message_content+"</a></td>";
-	   			}else{
-	   			content += "<td ><a id='readChk' href='./UmessageDetail?message_no="+GmessageList.message_no+"''>"+GmessageList.message_content+"</a></td>";
-	   			}
-				//날짜 변경 
-				var date = new Date(GmessageList.message_date);
-				content += "<td>"+dateForm(date)+"</td>";
-				content += "</tr>";
-			});
-		
+			 };
+		});
+
 		//이전 버튼 클릭시 
 		$("#pre").click(function(){
 			 if($("#pre").attr('class') != "page-item disabled"){
@@ -222,27 +179,26 @@
 				listCall();
 			 }
 		});
-		
-		//체크박스 전체 선택 
-		 function allChk(obj){
-		      var chkObj = document.getElementsByName("RowCheck");
-		      var rowCnt = chkObj.length - 1; //상단에 있는 갯수 -1 
-		      var check = obj.checked;
-				console.log(rowCnt);
-				if(check) {﻿
-					for (var i=0; i<=rowCnt; i++){
-						if(chkObj[i].type == "checkbox")
-							chkObj[i].checked = true;
-						
-						}
-				}else{
-					for (var i=0; i<=rowCnt; i++) {
-						if(chkObj[i].type == "checkbox"){
-							chkObj[i].checked = false; 
-							}
+	
+	//체크박스 전체 선택 
+	 function allChk(obj){
+	      var chkObj = document.getElementsByName("RowCheck");
+	      var rowCnt = chkObj.length - 1; //상단에 있는 갯수 -1 
+	      var check = obj.checked;
+			console.log(rowCnt);
+			if(check) {﻿
+				for (var i=0; i<=rowCnt; i++){
+					if(chkObj[i].type == "checkbox")
+						chkObj[i].checked = true;
+					}
+			}else{
+				for (var i=0; i<=rowCnt; i++) {
+					if(chkObj[i].type == "checkbox"){
+						chkObj[i].checked = false; 
 						}
 					}
-				} 
+				}
+			} 
 		
 		$("#del").click(function(){
 			var con_check = confirm("정말 삭제하시겠습니까?");
@@ -271,7 +227,7 @@
 				alert("삭제되지 않았습니다.");
 			}
 		});
-		
+	
 		function dateForm(now) {
 			year = "" + now.getFullYear();
 			month = "" + (now.getMonth() + 1); if (month.length == 1) { month = "0" + month; }
@@ -281,5 +237,7 @@
 			second = "" + now.getSeconds(); if (second.length == 1) { second = "0" + second; }
 			return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
 		}
+	
+
 	</script>
 </html>

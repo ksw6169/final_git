@@ -143,7 +143,7 @@
 			});
 		}
 		
-	    /* 게시글 리스트 출력 */
+		/* 게시글 리스트 출력 */
 		function boardPrint(list){
 			var str = "";
 			for(var i=0; i<list.length; i++) {
@@ -183,6 +183,9 @@
 	    	
 	    	if($("#search_text").val() == "") {
 	    		alert("검색 키워드를 입력하세요.");
+	    		setTimeout(function(){$("#search_text").focus();}, 1);
+				console.log("키워드 미입력");
+				return false;
 	    	} else {
 	    		$(".col-md-4").remove();
 	    		$.ajax({
